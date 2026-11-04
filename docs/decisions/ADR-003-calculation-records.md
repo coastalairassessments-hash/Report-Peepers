@@ -1,4 +1,4 @@
-# ADR-003: Where calculation records live in the contract
+# ADR-003: Contract additions for v0.2 (calculation records and related fields)
 
 Status: proposed (needs Cory's approval; changes the spec contract)
 Date: 2026-11-03
@@ -11,6 +11,14 @@ Spec section 16 says every calculation must record its formula, inputs, units, r
 
 ## Proposal
 Add an optional `calculations` list to the case snapshot in a v0.2 schema, one `CalcRecord` per calculation, each linking to its source evidence ids. Findings may reference calculation ids. Integrity checks would reject a finding that cites a number with no matching record.
+
+## Further fields the Brick 8 checks need
+The checks are built and tested using separate inputs because the v0.1 contract has no place for these. Proposed v0.2 additions:
+- Reference: `publication_status` (published, draft, withdrawn, superseded) and `published_on`.
+- Snapshot: `report_issued_on`, and `expected_area_names` (rooms the client expects the report to cover).
+- Finding: `assumptions[]` (expert-witness review E2).
+- Release: `reviewer_conflict_disclosure` (E5).
+- Scope conflicts: structured accounts (agreement and client) instead of text inside the description.
 
 ## Options
 1. Add `calculations[]` to the schema as v0.2 (recommended).

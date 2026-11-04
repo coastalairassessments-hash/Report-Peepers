@@ -104,4 +104,12 @@ describe("evidence and finding integrity", () => {
       expect(codes(c), bad).toContain("prohibited_language");
     }
   });
+
+  it("a conflicting scope account must be recorded as an open discrepancy", () => {
+    const c = clone(); c.scope.restrictions[0].status = "conflicting";
+    c.scope.unresolved_discrepancies = [];
+    expect(codes(c)).toContain("scope_conflict_unrecorded");
+    c.scope.unresolved_discrepancies = ["time: agreement says X; client says Y"];
+    expect(codes(c)).not.toContain("scope_conflict_unrecorded");
+  });
 });

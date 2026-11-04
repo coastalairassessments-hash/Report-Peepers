@@ -7,7 +7,7 @@ type Change = Snap["release"]["changes"][number];
 export type ChangeType = Change["change_type"];
 
 /** Stable canonical JSON (sorted keys) so the same content always gives the same fingerprint. */
-function canon(v: unknown): string {
+export function canon(v: unknown): string {
   if (Array.isArray(v)) return `[${v.map(canon).join(",")}]`;
   if (v && typeof v === "object")
     return `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon((v as any)[k])}`).join(",")}}`;

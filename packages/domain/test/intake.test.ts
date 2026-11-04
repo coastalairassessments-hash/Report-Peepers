@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { QUESTION_BANK, nextQuestion, buildScope, confirmScope, summarizeScope, type Answers } from "../src/intake.js";
+import { QUESTION_BANK, nextQuestion, buildScope, confirmScope, summarizeScope, recordScopeConflict, resolveScopeConflict, type Answers } from "../src/intake.js";
 import { validateCaseSnapshot } from "@report-peepers/contracts";
 import example from "../../../docs/spec/example_case.json" with { type: "json" };
 
@@ -69,5 +69,56 @@ describe("scope intake", () => {
     expect(validateCaseSnapshot(snap).ok).toBe(true);
     const text = summarizeScope(s.scope).join(" ").toLowerCase();
     for (const bad of ["negligen", "fraud", "incompetent", "failed to", "violation"]) expect(text).not.toContain(bad);
+  });
+
+  describe("conflicting accounts", () => {
+    const base = () => buildScope({ Q01: { text: "g" }, Q02: { choice: "yes" }, Q04: { choice: "no" } });
+    const accounts = { agreement: "Visit limited to one hour", client: "No time limit was mentioned" };
+
+    it("TC003: both accounts are kept word for word when scope accounts conflict", () => {
+      const s = recordScopeConflict(base(), "time", accounts);
+      const r = s.restrictions.find((x) => x.kind === "time")!;
+      expect(r.status).toBe("conflicting");
+      expect(r.description).toContain("Visit limited to one hour");
+      expect(r.description).toContain("No time limit was mentioned");
+      expect(s.unresolved_discrepancies.join(" ")).toContain("Visit limited to one hour");
+    });
+
+    it("does not edit the scope it was given", () => {
+      const s = base(); const before = JSON.stringify(s);
+      recordScopeConflict(s, "time", accounts);
+      expect(JSON.stringify(s)).toBe(before);
+    });
+
+    it("refuses to record a conflict with an empty account", () => {
+      expect(() => recordScopeConflict(base(), "time", { agreement: " ", client: "x" })).toThrow();
+      expect(() => recordScopeConflict(base(), "time", { agreement: "x", client: "" })).toThrow();
+    });
+
+    it("confirmation still needs an explicit conditional choice while the conflict is open", () => {
+      const s = recordScopeConflict(base(), "time", accounts);
+      expect(confirmScope(s)).toMatchObject({ ok: false, reason: "unknown_limits_need_conditional" });
+    });
+
+    it("a resolution needs a note and keeps both accounts", () => {
+      const s = recordScopeConflict(base(), "time", accounts);
+      expect(() => resolveScopeConflict(s, "time", { choice: "agreement", outcome: "present", note: " " })).toThrow();
+      const r = resolveScopeConflict(s, "time", { choice: "agreement", outcome: "present", note: "Client found the signed agreement." });
+      const t = r.restrictions.find((x) => x.kind === "time")!;
+      expect(t.status).toBe("present");
+      expect(t.description).toContain("Visit limited to one hour");
+      expect(t.description).toContain("No time limit was mentioned");
+      expect(t.description).toContain("Client found the signed agreement.");
+    });
+
+    it("both_stand keeps the conflict open", () => {
+      const s = recordScopeConflict(base(), "time", accounts);
+      const r = resolveScopeConflict(s, "time", { choice: "both_stand", outcome: "unknown", note: "Cannot tell which is right." });
+      expect(r.restrictions.find((x) => x.kind === "time")!.status).toBe("conflicting");
+    });
+
+    it("cannot resolve something that is not in conflict", () => {
+      expect(() => resolveScopeConflict(base(), "time", { choice: "client", outcome: "explicitly_none", note: "x" })).toThrow();
+    });
   });
 });

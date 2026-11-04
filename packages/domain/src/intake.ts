@@ -127,3 +127,45 @@ export function confirmScope(scope: Scope, opts: { conditional?: boolean; now?: 
     scope: { ...scope, confirmation_status: unknownKinds.length ? "conditional" : "confirmed", confirmed_at: opts.now ?? new Date().toISOString() },
   };
 }
+
+/**
+ * Record that the agreement and the client's recollection disagree about a limit.
+ * Both accounts are kept word for word; neither is chosen. Returns a new scope.
+ */
+export function recordScopeConflict(scope: Scope, kind: RestrictionKind, accounts: { agreement: string; client: string }): Scope {
+  const agreement = accounts.agreement?.trim(), client = accounts.client?.trim();
+  if (!agreement || !client) throw new Error("Both accounts are needed to record a conflict.");
+  if (!scope.restrictions.some((r) => r.kind === kind)) throw new Error(`No restriction of kind "${kind}" in this scope.`);
+  const next = structuredClone(scope);
+  for (const r of next.restrictions) {
+    if (r.kind !== kind) continue;
+    r.status = "conflicting";
+    r.agreed_status = "conflicting";
+    r.description = `Agreement says: "${agreement}" | Client says: "${client}"`;
+  }
+  next.unresolved_discrepancies.push(`${kind}: agreement says "${agreement}"; client says "${client}"`);
+  return next;
+}
+
+/**
+ * The client decides how a conflict stands. The outcome is stated by the client, never inferred.
+ * Both accounts stay on record; the decision and the reason are added.
+ */
+export function resolveScopeConflict(
+  scope: Scope,
+  kind: RestrictionKind,
+  decision: { choice: "agreement" | "client" | "both_stand"; outcome: "present" | "explicitly_none" | "unknown"; note: string },
+): Scope {
+  if (!decision.note?.trim()) throw new Error("A resolution needs a note saying why.");
+  const targets = scope.restrictions.filter((r) => r.kind === kind && r.status === "conflicting");
+  if (targets.length === 0) throw new Error(`No conflicting restriction of kind "${kind}" to resolve.`);
+  const next = structuredClone(scope);
+  for (const r of next.restrictions) {
+    if (r.kind !== kind || r.status !== "conflicting") continue;
+    r.status = decision.choice === "both_stand" ? "conflicting" : decision.outcome;
+    if (decision.choice !== "both_stand") r.agreed_status = "unknown";
+    r.description = `${r.description} | Decision (${decision.choice}): ${decision.note.trim()}`;
+  }
+  next.unresolved_discrepancies.push(`Resolved ${kind}: relied on ${decision.choice}. ${decision.note.trim()}`);
+  return next;
+}

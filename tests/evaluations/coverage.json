@@ -20,9 +20,18 @@
   "evidence": []
  },
  "TC003": {
-  "status": "needs_logic",
-  "note": "Contract has 'conflicting' and discrepancy fields; conflict handling not built",
-  "evidence": []
+  "status": "covered",
+  "note": "Both scope accounts are kept word for word; nothing is chosen silently",
+  "evidence": [
+   {
+    "file": "packages/domain/test/intake.test.ts",
+    "test": "TC003: both accounts are kept word for word when scope accounts conflict"
+   },
+   {
+    "file": "packages/domain/test/intake.test.ts",
+    "test": "a resolution needs a note and keeps both accounts"
+   }
+  ]
  },
  "TC004": {
   "status": "covered",
@@ -50,17 +59,26 @@
   "evidence": []
  },
  "TC009": {
-  "status": "needs_logic",
-  "note": "Area status values (unassessed vs no indicators) not built",
-  "evidence": []
- },
- "TC010": {
-  "status": "partial",
-  "note": "Wording 'confirmed unaffected' is blocked; area status logic not built",
+  "status": "covered",
+  "note": "A room the report never addresses is 'not addressed', never clean or affected",
   "evidence": [
    {
-    "file": "packages/domain/test/integrity.test.ts",
-    "test": "rejects verdict, score, and accusation wording"
+    "file": "packages/domain/test/areas.test.ts",
+    "test": "TC009: a room the report never addresses is listed as not addressed, never clean or affected"
+   }
+  ]
+ },
+ "TC010": {
+  "status": "covered",
+  "note": "Area wording never says clean, unaffected, safe, or contaminated; no-indicators keeps its scope",
+  "evidence": [
+   {
+    "file": "packages/domain/test/areas.test.ts",
+    "test": "no status wording says clean, unaffected, safe, or contaminated"
+   },
+   {
+    "file": "packages/domain/test/areas.test.ts",
+    "test": "no indicators wording keeps the assessed scope and limits itself to it"
    }
   ]
  },
@@ -258,14 +276,24 @@
   ]
  },
  "TC040": {
-  "status": "needs_logic",
-  "note": "Edition vs report date check",
-  "evidence": []
+  "status": "covered",
+  "note": "An edition published after the report cannot support a claimed departure",
+  "evidence": [
+   {
+    "file": "packages/domain/test/referenceTiming.test.ts",
+    "test": "TC040: an edition published after the report cannot support a verified departure"
+   }
+  ]
  },
  "TC041": {
-  "status": "needs_logic",
-  "note": "Draft/non-citable status check",
-  "evidence": []
+  "status": "covered",
+  "note": "A draft source is never cited as a published requirement",
+  "evidence": [
+   {
+    "file": "packages/domain/test/referenceTiming.test.ts",
+    "test": "TC041: a draft source with a verified binding is not citable"
+   }
+  ]
  },
  "TC042": {
   "status": "covered",
@@ -355,9 +383,18 @@
   ]
  },
  "TC053": {
-  "status": "needs_logic",
-  "note": "Export must come from the same approved result",
-  "evidence": []
+  "status": "covered",
+  "note": "Screen, text, and hash all change together; edited or unpublished releases are refused",
+  "evidence": [
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "TC053: a reviewer correction changes the view, the text, and the hash together"
+   },
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "a snapshot edited after publication is refused"
+   }
+  ]
  },
  "TC054": {
   "status": "partial",
