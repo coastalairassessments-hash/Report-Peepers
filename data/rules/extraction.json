@@ -1,0 +1,7 @@
+{
+  "_note": "Limits and word lists for the evidence extraction stage. Proposed defaults, tune here, not in code. Not scientific thresholds.",
+  "max_page_chars": 12000,
+  "max_evidence_per_page": 25,
+  "max_evidence_total": 400,
+  "hedge_words": ["may", "might", "could", "possible", "possibly", "probable", "probably", "likely", "unlikely", "appears", "appear", "suggest", "suggests", "potential", "potentially", "consistent with", "seems", "indicate", "indicates"]
+}
