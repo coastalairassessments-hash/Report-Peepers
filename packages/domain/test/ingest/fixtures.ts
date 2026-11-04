@@ -1,10 +1,11 @@
-import { PDFDocument, StandardFonts, degrees } from "pdf-lib";
+import { PDFDocument, PDFName, StandardFonts, degrees } from "pdf-lib";
 
 /** Synthetic PDFs for tests. Text is placed at known positions (points from the bottom-left, as PDF does). */
 export interface Put { text: string; x: number; y: number; size?: number }
 export interface PageSpec { puts?: Put[]; rotate?: 0 | 90 | 180 | 270; width?: number; height?: number }
 
-export async function makePdf(pages: PageSpec[]): Promise<Uint8Array> {
+/** `labels`: the first page is labeled i (roman), the rest 1, 2, ... so printed labels differ from page indexes. */
+export async function makePdf(pages: PageSpec[], opts: { labels?: boolean } = {}): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const font = await doc.embedFont(StandardFonts.Helvetica);
   for (const p of pages) {
@@ -12,6 +13,7 @@ export async function makePdf(pages: PageSpec[]): Promise<Uint8Array> {
     for (const t of p.puts ?? []) page.drawText(t.text, { x: t.x, y: t.y, size: t.size ?? 12, font });
     if (p.rotate) page.setRotation(degrees(p.rotate));
   }
+  if (opts.labels) doc.catalog.set(PDFName.of("PageLabels"), doc.context.obj({ Nums: [0, { S: "r" }, 1, { S: "D" }] }));
   return doc.save({ useObjectStreams: false });
 }
 
