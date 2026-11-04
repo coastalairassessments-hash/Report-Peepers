@@ -1,0 +1,4 @@
+{
+  "_note": "Settings for counting saved summary records (ADR-005). min_group_size is NOT set: it is decided by Cory and the attorney (L18). Until it is a whole number of 2 or more, counting refuses to run.",
+  "min_group_size": null
+}
