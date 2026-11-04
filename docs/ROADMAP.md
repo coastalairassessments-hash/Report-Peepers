@@ -16,9 +16,12 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 | 2f | Brick 13: the red-ink markup renderer and closing summary page, the marked-up report is the deliverable (ADR-004) | Done (planner, Typst renderer, verifier, export; proofs in docs/proofs) | Cory to look at the proof sheets |
 | 2g | Brick 14: saved summary record (scrubbed wording plus codes) and flaw-pattern list for analysis (ADR-005) | Done (draft pattern list, scrub, record builder, in-memory store, small-group-hiding counter) | Real pattern list from the field expert (I2); minimum group size in data/rules/analysis.json (L18, counting stays off until set); contract tag field later; purchase-terms wording |
 | 3 | AI slot with a stand-in model | Done (Brick 11) | none |
+| 3a | Brick 15: evidence and claims extraction stage (AI proposes, code verifies every anchor and number) | Next, plan written, awaiting approval | none (synthetic) |
+| 3b | Brick 16: the pipeline end to end on synthetic data: intake, read, propose, reviewer approval port, publish, marked-up export, saved record (spec Milestone 2) | Planned | none |
+| 3c | Brick 17: corrections: supersede a release, corrected marked-up copy, change notice | Planned | none |
 | 4 | Reading real reports: tables, photo captions, scans (OCR), hidden-text detection, isolated parsing worker | Planned | Sample reports (input I1) |
 | 5 | Expert rule packs loaded from files | Planned | IH rules (input I2) |
-| 6 | Storage and access: saved cases, customer isolation, locked releases, deletion | Planned | none |
+| 6 | Brick 18+: storage and access: saved cases, customer isolation, locked releases, deletion | Planned | none |
 | 7 | Reviewer console, then homeowner screens | Planned | Reviewer process (input I3) |
 | 8 | Payments (credits model, ADR-001) | Deferred by Cory | Fee and terms (input I5) |
 | 9 | Pilot: every release human-approved | Later | Attorney review (L-list), insurer, reviewers |
