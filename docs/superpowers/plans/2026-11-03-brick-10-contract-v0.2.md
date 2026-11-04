@@ -21,7 +21,7 @@
 ## Review Focus
 
 - A v0.1 snapshot with `schema_version: "0.1"` still validates; a v0.2 snapshot with `"0.2"` validates; any other version fails with a clear message.
-- A v0.1 snapshot must not be accepted if it contains v0.2-only fields? Decide and test: v0.1 data with extra fields is rejected (the v0.1 schema forbids extras), so version routing must pick the schema by `schema_version`.
+- Version routing picks the schema by `schema_version`. A snapshot labeled "0.1" that carries v0.2-only fields is rejected, because the v0.1 schema forbids extra fields. Test it.
 - A finding citing a number with no matching calculation record is flagged; a finding citing a "not computable" record is fine and must say why.
 - A calculation whose source evidence id does not exist is a dangling reference.
 - Reported, derived, and corrected values stay separate records (spec 16); a correction links to what it corrects and never overwrites it.
