@@ -1,4 +1,4 @@
-import type { Scope, Restriction } from "../../contracts/src/types.js";
+import type { Scope, Restriction } from "@report-peepers/contracts";
 
 export type Choice = "yes" | "no" | "unsure";
 export type RestrictionKind = Restriction["kind"];

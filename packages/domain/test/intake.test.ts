@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { QUESTION_BANK, nextQuestion, buildScope, confirmScope, summarizeScope, type Answers } from "../src/intake.js";
-import { validateCaseSnapshot } from "../../contracts/src/validate.js";
+import { validateCaseSnapshot } from "@report-peepers/contracts";
 import example from "../../../docs/spec/example_case.json" with { type: "json" };
 
 const walk = (answers: Answers, fill: (id: string) => Answers[string]) => {

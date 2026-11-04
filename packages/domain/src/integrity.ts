@@ -1,4 +1,4 @@
-import type { EnvironmentalReviewCaseSnapshotVersion01 as Snap } from "../../contracts/src/types.js";
+import type { EnvironmentalReviewCaseSnapshotVersion01 as Snap } from "@report-peepers/contracts";
 
 export interface Issue { code: string; path: string; message: string }
 
