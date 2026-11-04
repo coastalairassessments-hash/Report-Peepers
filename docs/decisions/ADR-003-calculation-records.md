@@ -1,6 +1,6 @@
 # ADR-003: Contract additions for v0.2 (calculation records and related fields)
 
-Status: accepted by Cory, 2026-11-03 (option 1). Build plan: docs/superpowers/plans/2026-11-03-brick-10-contract-v0.2.md
+Status: accepted by Cory and implemented, 2026-11-03 (option 1; Brick 10). Build plan: docs/superpowers/plans/2026-11-03-brick-10-contract-v0.2.md
 Date: 2026-11-03
 
 ## Problem

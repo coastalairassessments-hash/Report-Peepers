@@ -38,6 +38,12 @@ describe("approved view and export", () => {
     expect(ex.ok && ex.text).toContain("Residential mold reports");
   });
 
+  it("the reviewer conflict disclosure appears in the text, and a v0.1 release prints no empty line for it", () => {
+    const s = published(); s.schema_version = "0.2"; s.release.reviewer_conflict_disclosure = "Reviewer has no financial interest in the inspector.";
+    expect(renderText(buildApprovedView(s))).toContain("Reviewer conflict disclosure: Reviewer has no financial interest in the inspector.");
+    expect(renderText(buildApprovedView(published()))).not.toContain("conflict disclosure");
+  });
+
   it("TC053: a reviewer correction changes the view, the text, and the hash together", () => {
     const a = published(); const b = published();
     b.findings[0].explanation = "Corrected wording after reviewer fact check.";

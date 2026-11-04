@@ -81,8 +81,8 @@ Twelve challenges a skeptical expert or opposing party could raise (docs/EXPERT_
 
 | Status | Scenarios |
 |---|---|
-| Covered by passing tests | 5 |
-| Partly covered | 5 |
+| Covered by passing tests | 6 |
+| Partly covered | 4 |
 | Needs plain code (next) | 0 |
 | Needs the AI reading step and expert rules | 2 |
 | Later (infrastructure, payments, interface) | 0 |
@@ -96,7 +96,7 @@ Twelve challenges a skeptical expert or opposing party could raise (docs/EXPERT_
 | XC005 | References | partial | Later editions cannot support a verified departure; stating the edition and why is still a reviewer duty |
 | XC006 | Provenance | covered | Client-only support cannot carry a strong or moderate finding |
 | XC007 | Provenance | needs_engine | Needs the AI reading step to keep caption and image content separate |
-| XC008 | Governance | partial | Reviewer identity and scope appear in the text; conflict disclosure waits on ADR-003 |
+| XC008 | Governance | covered | Reviewer identity, approval scope, and conflict disclosure appear in the text; a v0.2 release cannot publish without a disclosure |
 | XC009 | Scope of opinion | covered | Every export of a published release states it is a document review, not an inspection or expert opinion |
 | XC010 | Corrections | covered | A retraction is classified, needs a reason and new evidence, and the earlier release stays as superseded |
 | XC011 | Causation | covered | A cause or duration finding without a hypothesis listing alternatives is rejected |

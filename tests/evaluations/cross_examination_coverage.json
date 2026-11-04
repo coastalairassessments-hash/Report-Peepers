@@ -10,6 +10,10 @@
    {
     "file": "packages/domain/test/intake.test.ts",
     "test": "a resolution needs a note and keeps both accounts"
+   },
+   {
+    "file": "packages/domain/test/intake.test.ts",
+    "test": "the conflict is also stored as structured accounts, and a resolution updates them"
    }
   ]
  },
@@ -72,12 +76,20 @@
   "evidence": []
  },
  "XC008": {
-  "status": "partial",
-  "note": "Reviewer identity and scope appear in the text; conflict disclosure waits on ADR-003",
+  "status": "covered",
+  "note": "Reviewer identity, approval scope, and conflict disclosure appear in the text; a v0.2 release cannot publish without a disclosure",
   "evidence": [
    {
     "file": "packages/domain/test/release.test.ts",
     "test": "reviewer identity and approval scope appear in the exported text"
+   },
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "the reviewer conflict disclosure appears in the text"
+   },
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "E5: a published v0.2 release needs a conflict disclosure"
    }
   ]
  },

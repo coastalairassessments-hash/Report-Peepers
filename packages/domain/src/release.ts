@@ -7,7 +7,7 @@ export interface ApprovedView {
   case_revision_id: string;
   status: Snap["release"]["status"];
   overview: string;
-  human_review: { status: Snap["release"]["human_review_status"]; reviewer_id: string | null; reviewer_scope: string | null };
+  human_review: { status: Snap["release"]["human_review_status"]; reviewer_id: string | null; reviewer_scope: string | null; conflict_disclosure?: string };
   leading_questions: string[];
   findings: {
     id: string; title: string; finding_type: string; explanation: string; evidence_strength: string; decision_relevance: string;
@@ -30,7 +30,7 @@ export function buildApprovedView(s: Snap): ApprovedView {
   const order = [...s.release.attention_finding_ids, ...s.release.supported_finding_ids];
   return {
     release_id: s.release.id, case_revision_id: s.release.case_revision_id, status: s.release.status, overview: s.release.overview,
-    human_review: { status: s.release.human_review_status, reviewer_id: s.release.reviewer_id, reviewer_scope: s.release.reviewer_scope },
+    human_review: { status: s.release.human_review_status, reviewer_id: s.release.reviewer_id, reviewer_scope: s.release.reviewer_scope, ...(s.release.reviewer_conflict_disclosure?.trim() ? { conflict_disclosure: s.release.reviewer_conflict_disclosure.trim() } : {}) },
     leading_questions: s.release.leading_question_ids.map((id) => q.get(id) ?? "").filter(Boolean),
     findings: order.flatMap((id) => {
       const x = f.get(id);
@@ -51,6 +51,7 @@ export function renderText(v: ApprovedView): string {
   const L: string[] = [];
   L.push(`Review ${v.release_id} (revision ${v.case_revision_id})`, "", v.overview, "");
   L.push(`Human review: ${v.human_review.status}${v.human_review.reviewer_id ? ` by ${v.human_review.reviewer_id}` : ""}${v.human_review.reviewer_scope ? ` (scope: ${v.human_review.reviewer_scope})` : ""}`, "");
+  if (v.human_review.conflict_disclosure) L.push(`Reviewer conflict disclosure: ${v.human_review.conflict_disclosure}`, "");
   if (v.leading_questions.length) { L.push("Questions to ask the inspector:"); v.leading_questions.forEach((x, i) => L.push(`${i + 1}. ${x}`)); L.push(""); }
   for (const x of v.findings) {
     L.push(`Finding ${x.id}: ${x.title} [${x.finding_type}; evidence ${x.evidence_strength}; ${x.decision_relevance}; ${x.resolution_status}]`, x.explanation, `Uncertainty: ${x.uncertainty}`);
