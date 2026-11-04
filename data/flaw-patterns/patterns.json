@@ -1,0 +1,20 @@
+{
+  "_note": "DRAFT list of common flaw patterns (ADR-005). Seeded from the spec's worked case. Owned by the field expert (input I2); Cory approves changes. Counts only: no names, places, or text (ADR-002). Codes are stable once released; add, never rename.",
+  "version": 1,
+  "status": "draft",
+  "patterns": [
+    { "code": "cause_without_support", "meaning": "A cause is stated without supporting history, data, or investigation shown." },
+    { "code": "duration_without_basis", "meaning": "How long a condition has existed is stated without saying what it rests on." },
+    { "code": "health_statement_beyond_scope", "meaning": "A statement about health or symptoms goes beyond what the assessment covers." },
+    { "code": "sampling_basis_unstated", "meaning": "The reason for the number or location of samples is not given." },
+    { "code": "no_comparison_sample", "meaning": "Results are given without an outdoor or control comparison." },
+    { "code": "limits_not_stated", "meaning": "Areas or conditions that were not accessed are not stated or explained." },
+    { "code": "photos_missing_or_undated", "meaning": "Photographs are missing, unlabeled, or not tied to a date and place." },
+    { "code": "readings_without_method", "meaning": "Readings are given without the instrument, method, or conditions." },
+    { "code": "recommendation_without_support", "meaning": "A recommended action is given without the findings that support it." },
+    { "code": "inconsistent_statements", "meaning": "Two statements in the report do not agree with each other." },
+    { "code": "scope_unclear", "meaning": "What the assessment was meant to cover is unclear or differs from what was done." },
+    { "code": "lab_results_not_explained", "meaning": "Laboratory results are included without explaining what they mean for the property." },
+    { "code": "other", "meaning": "Does not fit another code; queued for a possible new code." }
+  ]
+}
