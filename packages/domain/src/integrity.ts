@@ -56,7 +56,19 @@ export function checkIntegrity(s: Snap): Issue[] {
   };
   dup("documents", s.documents.map((d) => d.id)); dup("evidence", s.evidence.map((e) => e.id));
   dup("claims", s.claims.map((c) => c.id)); dup("findings", s.findings.map((f) => f.id));
+  dup("calculations", (s.calculations ?? []).map((k) => k.id));
   dup("questions", s.questions.map((q) => q.id)); dup("proposed_actions", s.proposed_actions.map((a) => a.id));
+
+  // calculation records (v0.2): sources resolve, "not computable" says why, a correction points at what it corrects
+  const calcIds = new Set((s.calculations ?? []).map((k) => k.id));
+  (s.calculations ?? []).forEach((k, i) => {
+    const p = `calculations[${i}]`;
+    k.source_evidence_ids.forEach((id) => { if (!sets.evidence.has(id)) add("calculation_source_missing", `${p}.source_evidence_ids`, `Evidence ${id} does not exist`); });
+    if (k.status === "not_computable" && !(typeof (k.result as { reason?: unknown }).reason === "string" && (k.result as { reason: string }).reason.length > 0))
+      add("calculation_not_computable_without_reason", `${p}.result`, "A calculation that gives no number must state the reason");
+    if (k.record_type === "corrected" && (!k.corrects_id || k.corrects_id === k.id || !calcIds.has(k.corrects_id)))
+      add("correction_overwrites", p, "A corrected value must point at a different, existing record and leave the original in place");
+  });
 
   const need = (set: Set<string>, ids: readonly string[], path: string, what: string) =>
     ids.forEach((id) => { if (!set.has(id)) add("dangling_reference", path, `${what} ${id} does not exist`); });
@@ -110,6 +122,7 @@ export function checkIntegrity(s: Snap): Issue[] {
   const evById = new Map(s.evidence.map((e) => [e.id, e]));
 
   s.findings.forEach((f, i) => {
+    (f.calculation_ids ?? []).forEach((id) => { if (!calcIds.has(id)) add("finding_number_without_calculation", `findings[${i}].calculation_ids`, `Calculation ${id} does not exist`); });
     const p = `findings[${i}]`;
     need(sets.claims, f.claim_ids, `${p}.claim_ids`, "Claim");
     need(sets.actions, f.action_ids, `${p}.action_ids`, "Action");

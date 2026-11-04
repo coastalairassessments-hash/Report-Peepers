@@ -3,9 +3,11 @@ import { ratioRecord, coverageRecord, moistureRecord, type CalcRecord } from "..
 import { indoorOutdoorRatio } from "../../src/calc/ratio.js";
 import { monitoringCoverage } from "../../src/calc/monitoring.js";
 import { describeMoisture } from "../../src/calc/moisture.js";
+import { validateCaseSnapshot } from "@report-peepers/contracts";
+import example from "../../../../docs/spec/example_case.json" with { type: "json" };
 
 const U = "structures/m3";
-const REQUIRED: (keyof CalcRecord)[] = ["id", "kind", "derived", "status", "formula", "inputs", "units", "rounding", "result", "limitations", "source_evidence_ids"];
+const REQUIRED: (keyof CalcRecord)[] = ["id", "kind", "record_type", "status", "formula", "inputs", "units", "rounding", "result", "limitations", "source_evidence_ids"];
 
 describe("calculation records", () => {
   it("every record carries formula, inputs, units, rounding, limitations, and source evidence", () => {
@@ -17,7 +19,7 @@ describe("calculation records", () => {
     ];
     for (const r of recs) {
       for (const k of REQUIRED) expect(r, `${r.id} missing ${k}`).toHaveProperty(k);
-      expect(r.derived).toBe(true);
+      expect(r.record_type).toBe("derived");
       expect(r.source_evidence_ids.length).toBeGreaterThan(0);
     }
     expect(recs[0]!.result).toEqual({ ratio: 94.8 });
@@ -32,5 +34,13 @@ describe("calculation records", () => {
     expect(m).toMatchObject({ status: "not_computable", result: { reason: "comparative_scale" } });
     const c = coverageRecord("CALC-6", {}, monitoringCoverage([], 15), []);
     expect(c).toMatchObject({ status: "not_computable", result: { reason: "too_few_readings" } });
+  });
+
+  it("a stored record validates inside a v0.2 snapshot and reads back identical", () => {
+    const rec = ratioRecord("CALC-1", { indoor: 60, outdoor: 40 }, indoorOutdoorRatio({ kind: "detected", value: 60, unit: U }, { kind: "detected", value: 40, unit: U }, { indoor: { type: "total" }, outdoor: { type: "total" } }), [(example as any).evidence[0].id]);
+    const snap = { ...structuredClone(example), schema_version: "0.2", calculations: [rec] };
+    const r = validateCaseSnapshot(JSON.parse(JSON.stringify(snap)));
+    expect(r.ok, !r.ok ? r.errors.join("; ") : "").toBe(true);
+    expect(r.ok && r.value.calculations?.[0]).toEqual(rec);
   });
 });

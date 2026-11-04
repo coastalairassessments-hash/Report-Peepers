@@ -203,4 +203,44 @@ describe("evidence and finding integrity", () => {
       expect(codes(c)).not.toContain("client_only_support_too_strong");
     });
   });
+
+  describe("calculation records (v0.2)", () => {
+    const rec = (over: object = {}) => ({
+      id: "CALC-1", kind: "indoor_outdoor_ratio", record_type: "derived", corrects_id: null, status: "ok", formula: "indoor / outdoor",
+      inputs: {}, units: "ratio", rounding: "two decimals", result: { ratio: 1.5 }, limitations: [], source_evidence_ids: ["EV-001"], ...over,
+    });
+    const v02 = (calcs: object[], ids: string[] = []) => { const c = clone(); c.schema_version = "0.2"; c.calculations = calcs; c.findings[0].calculation_ids = ids; return c; };
+
+    it("a v0.2 snapshot with a sound record and a finding that cites it is clean", () => {
+      expect(checkIntegrity(v02([rec()], ["CALC-1"]))).toEqual([]);
+    });
+
+    it("a record whose source evidence does not exist is flagged", () => {
+      expect(codes(v02([rec({ source_evidence_ids: ["EV-404"] })]))).toContain("calculation_source_missing");
+    });
+
+    it("a finding citing a calculation that does not exist is flagged", () => {
+      expect(codes(v02([rec()], ["CALC-9"]))).toContain("finding_number_without_calculation");
+    });
+
+    it("a not-computable record must say why", () => {
+      expect(codes(v02([rec({ status: "not_computable", result: {} })]))).toContain("calculation_not_computable_without_reason");
+      expect(codes(v02([rec({ status: "not_computable", result: { reason: "outdoor_nondetect" } })]))).not.toContain("calculation_not_computable_without_reason");
+    });
+
+    it("a correction must point at an existing record and never overwrite it", () => {
+      expect(codes(v02([rec({ record_type: "corrected", corrects_id: null })]))).toContain("correction_overwrites");
+      expect(codes(v02([rec({ record_type: "corrected", corrects_id: "CALC-404" })]))).toContain("correction_overwrites");
+      expect(codes(v02([rec({ record_type: "corrected", corrects_id: "CALC-1" })]))).toContain("correction_overwrites");
+      expect(codes(v02([rec(), rec({ id: "CALC-2", record_type: "corrected", corrects_id: "CALC-1" })]))).not.toContain("correction_overwrites");
+    });
+
+    it("duplicate calculation ids are flagged", () => {
+      expect(codes(v02([rec(), rec()]))).toContain("duplicate_id");
+    });
+
+    it("a v0.1 snapshot with no calculations is unaffected", () => {
+      expect(checkIntegrity(clone())).toEqual([]);
+    });
+  });
 });
