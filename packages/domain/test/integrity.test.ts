@@ -90,4 +90,18 @@ describe("evidence and finding integrity", () => {
     const c = clone(); c.findings[0].explanation = "It is safe to reoccupy.";
     expect(codes(c)).toContain("prohibited_language");
   });
+
+  it("ordinary building terms are not blocked", () => {
+    for (const ok of ["Moisture was noted at the below grade foundation wall.", "Sloped grade directs water toward the slab.", "Grade level windows were fogged."]) {
+      const c = clone(); c.findings[0].explanation = ok;
+      expect(codes(c), ok).not.toContain("prohibited_language");
+    }
+  });
+
+  it("scoring or ranking of people and reports is still blocked", () => {
+    for (const bad of ["Inspector grade: B", "We assigned a score of 40 to this report.", "The compliance score is low.", "A risk score of 7 applies.", "Please rank the inspector against others.", "This is the contractor ranking."]) {
+      const c = clone(); c.findings[0].explanation = bad;
+      expect(codes(c), bad).toContain("prohibited_language");
+    }
+  });
 });

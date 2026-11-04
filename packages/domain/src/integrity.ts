@@ -4,7 +4,11 @@ export interface Issue { code: string; path: string; message: string }
 
 /** Words the product must never use (no verdicts, scores, or accusations). Spec sections 2 and 13. */
 const PROHIBITED = [
-  /\bpass(?:ed|es)?\b\/?\s*fail/i, /\bfail(?:ed|s)?\s+(?:the\s+)?inspection/i, /\bscore\b/i, /\bgrade\b/i, /\branking\b/i,
+  /\bpass(?:ed|es)?\b\/?\s*fail/i, /\bfail(?:ed|s)?\s+(?:the\s+)?inspection/i,
+  // Scoring, grading, or ranking of people, companies, or reports. Plain building terms ("below grade", "sloped grade") stay allowed.
+  /\b(?:inspector|contractor|company|assessor|report)\s+(?:grade|score|ranking|rating)\b/i,
+  /\b(?:grade|score|rank|rate)[sd]?\s+(?:the\s+|this\s+|that\s+)?(?:inspector|contractor|company|assessor)s?\b/i,
+  /\bgrade\s*:\s*[A-F][+-]?(?![a-z])/i, /\bscore\s*(?:of|:)\s*\d+/i, /\b(?:risk|health|safety|compliance|severity)\s+score\b/i, /\branking\b/i,
   /\bviolat(?:ion|ed|es)\b/i, /\bnegligen/i, /\bfraud/i, /\bincompeten/i, /\bdishonest/i, /\bconfirmed (?:unaffected|clean|safe)\b/i, /\bsafe to reoccupy\b/i,
 ];
 
