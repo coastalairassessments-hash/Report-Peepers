@@ -17,7 +17,7 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 | 2g | Brick 14: saved summary record (scrubbed wording plus codes) and flaw-pattern list for analysis (ADR-005) | Done (draft pattern list, scrub, record builder, in-memory store, small-group-hiding counter) | Real pattern list from the field expert (I2); minimum group size in data/rules/analysis.json (L18, counting stays off until set); contract tag field later; purchase-terms wording |
 | 3 | AI slot with a stand-in model | Done (Brick 11) | none |
 | 3a | Brick 15: evidence and claims extraction stage (AI proposes, code verifies every anchor and number) | Done (stage, firewall, per-page runner, hostile-text tests) | none (synthetic) |
-| 3b | Brick 16: the pipeline end to end on synthetic data: intake, read, extract, propose, reviewer approval port, publish, marked-up export, saved record (spec Milestone 2) | Next, plan to write | none |
+| 3b | Brick 16: the pipeline end to end on synthetic data: intake, read, extract, propose, reviewer approval port, publish, marked-up export, saved record (spec Milestone 2) | Next, plan written, awaiting approval | none |
 | 3c | Brick 17: corrections: supersede a release, corrected marked-up copy, change notice | Planned | none |
 | 4 | Reading real reports: tables, photo captions, scans (OCR), hidden-text detection, isolated parsing worker | Planned | Sample reports (input I1) |
 | 5 | Expert rule packs loaded from files | Planned | IH rules (input I2) |
