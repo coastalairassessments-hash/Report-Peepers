@@ -41,10 +41,13 @@ export interface MarkupPlan {
   overflow: PlanOverflow[];
   issues: PlanIssue[];
   summary_page_number: number;
+  /** What the drawing step needs, carried in the plan so the template holds no numbers of its own. */
+  style: { note_font_pt: number; note_line_height_em: number; note_pad_pt: number; tag_diameter_pt: number };
+  labels: MarkupConfig["labels"];
   summary: {
     title: string; leading_questions: string[];
     groups: { heading: string; items: SummaryItem[] }[];
-    limits: string[]; items_to_clarify_statement: string | null;
+    limits: string[]; items_to_clarify_statement: string | null; method_statement: string;
   };
 }
 
@@ -182,12 +185,15 @@ export function planMarkup(view: ApprovedView, doc: ExtractedDocument, documentV
 
   return {
     document_version_id: documentVersionId, pages, overflow, issues, summary_page_number: summaryPageNumber,
+    style: { note_font_pt: cfg.note_font_pt, note_line_height_em: cfg.note_line_height_em, note_pad_pt: cfg.note_pad_pt, tag_diameter_pt: cfg.tag_diameter_pt },
+    labels: cfg.labels,
     summary: {
       title: cfg.labels.summary_title,
       leading_questions: view.leading_questions.slice(0, cfg.leading_questions_max),
       groups: groups.filter(([, ls]) => ls.length > 0).map(([heading, ls]) => ({ heading, items: ls.map(item) })),
       limits: [...view.coverage_limitations],
       items_to_clarify_statement: view.findings.length === 0 ? cfg.labels.nothing_to_clarify : null,
+      method_statement: view.method.statement,
     },
   };
 }

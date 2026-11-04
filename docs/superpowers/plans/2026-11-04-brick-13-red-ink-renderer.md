@@ -84,9 +84,9 @@
 - `renderMarkup(sourcePdf, plan) => Promise<{ ok: true, pdf } | { ok: false, reason }>`. The template reads the plan with `json()` and each source page with `image(..., page: n)`; sets each output page to the source page's displayed size; draws marks (decorative) and notes (real text, red, Caveat) at plan positions; then the summary pages (real headings and list or table structure) and the notes sheet.
 - Accessible output (Typst tagging on, PDF/UA-1 requested); marks marked as artifacts; the document title and language set.
 
-- [ ] Step 1: Failing tests on synthetic sources: output page count and sizes; rotated and mixed-size pages; Typst control characters in notes stay literal; every note's text is extractable from the output; build fails when the plan names a missing source page.
-- [ ] Step 2: Run, confirm fail. Step 3: Implement. Step 4: Run all tests and typecheck.
-- [ ] Step 5: Commit "Brick 13.3: Typst renderer".
+- [x] Step 1: Failing tests on synthetic sources: output page count and sizes; rotated and mixed-size pages; Typst control characters in notes stay literal; every note's text is extractable from the output; build fails when the plan names a missing source page.
+- [x] Step 2: Run, confirm fail. Step 3: Implement. Step 4: Run all tests and typecheck.
+- [x] Step 5: Commit "Brick 13.3: Typst renderer".
 
 ### Task 4: Verifier, text version, and the release pipeline
 
