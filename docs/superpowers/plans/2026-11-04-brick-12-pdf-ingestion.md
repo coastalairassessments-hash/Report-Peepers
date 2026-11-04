@@ -73,7 +73,7 @@
 
 **Interfaces:**
 - `findAnchor(doc, exactText, opts?) => { status: "found", anchor, matches } | { status: "multiple_matches", candidates } | { status: "not_found" }`. Built anchors use method `native_text`.
-- `verifyAnchor(doc, anchor) => { ok: true } | { ok: false, reason }` with reasons `wrong_page`, `text_not_in_box`, `box_missing`, `page_has_no_text`.
+- `verifyAnchor(doc, anchor, { requireBox? }) => { ok: true } | { ok: false, reason }` with reasons `no_such_page`, `wrong_page`, `text_not_on_page`, `text_not_exact`, `text_not_in_box`, `box_missing`, `page_has_no_text` (built; the plan listed four, tests showed seven distinct failures).
 - A scanned page gives a page-only anchor (`bbox_normalized` null, `exact_text` null, flag `no_text_layer`), never a guessed box.
 
 - [ ] Step 1: Failing tests for every Review Focus item on anchors.
@@ -86,8 +86,8 @@
 - Test: `packages/domain/test/ingest/checkAnchors.test.ts`
 
 **Interfaces:**
-- `checkAnchors(snapshot, extractedDocs) => Issue[]`: `anchor_text_not_on_page`, `anchor_document_unread`. Used when extracted documents are supplied; a snapshot without them is judged as before.
-- An evidence anchor the AI proposed that fails verification is held back by the Brick 11 firewall path.
+- `checkAnchors(snapshot, extractedDocs) => Issue[]`: `anchor_text_not_on_page`, `anchor_document_unread`, and `anchor_box_missing` (words proven on the page but no box, so no mark can be placed). Used when extracted documents are supplied; a snapshot without them is judged as before.
+- Built note: the Brick 11 proposal schema has no anchors (the model only cites evidence ids that already exist), so no AI-proposed anchor reaches the firewall today. Anchors enter a case only through the future extraction stage, which will build them with `findAnchor` and prove them with `verifyAnchor`.
 
 - [ ] Step 1: Failing tests: a good snapshot passes; changed text, wrong page, or missing document is flagged. Step 2: Run, confirm fail. Step 3: Implement. Step 4: Run all tests and typecheck. Commit "Brick 12.4: anchor checks".
 
