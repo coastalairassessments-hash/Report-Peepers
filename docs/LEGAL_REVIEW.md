@@ -25,3 +25,5 @@ Status key: open / with attorney / answered (add the answer and date).
 | L16 | Returning a marked-up copy of the inspector's report to the homeowner (a derivative of the inspector's work; copyright, terms of the report, who may receive it) | Rights to copy and annotate a document the customer received | ADR-004 | open |
 | L17 | Red-ink marks on a third party's report can read as a grade or an accusation; wording and mark vocabulary limits | Defamation and implied-opinion risk | ADR-004 | open |
 | L18 | Saved summary records (item wording after a name and address scrub, plus codes) kept after documents are deleted; minimum group size before any aggregate is shown or shared; consent line wording | Re-identification risk from small groups; privacy terms | ADR-005 | open |
+
+- L19 (added 2026-11-04): subscription side (inspectors paying for pre-delivery review). Independence and disclosure when we review homeowner reports from a subscribing inspector; whether a private per-inspector history is scoring data; marketing wording. See docs/SUBSCRIPTION_SIDE.md.
