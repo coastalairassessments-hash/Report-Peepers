@@ -11,7 +11,8 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 | 2 | Brick 8: remaining plain-code checks (area status, edition and draft dates, scope conflicts, export consistency) | Done | none |
 | 2b | Brick 9: defensibility rules from the expert-witness review (E1, E3, E4) | Done | none |
 | 2c | Brick 10: contract v0.2 (calculation records, stored dates, assumptions, conflict disclosure) per ADR-003 | Done | none |
-| 2d | Brick 11: the AI slot with a fake model (AI proposes, plain code checks) | Next | none |
+| 2d | Brick 11: the AI slot with a fake model (AI proposes, plain code checks) | Done | none |
+| 2e | Brick 12: PDF ingestion with page anchors (synthetic PDFs only) | Next | I1 sample reports help but are not required |
 | 3 | AI slot with a stand-in model: typed stage outputs, scripted fake AI, full pipeline test | Planned | none |
 | 4 | Reading real reports: PDF text with page anchors, tables, photo captions | Planned | Sample reports (input I1) |
 | 5 | Expert rule packs loaded from files | Planned | IH rules (input I2) |

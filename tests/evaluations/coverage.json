@@ -257,11 +257,15 @@
  },
  "TC038": {
   "status": "covered",
-  "note": "A reference that does not exist is rejected",
+  "note": "A source that does not exist cannot be bound; the draft is held back and a real source stays an unverified candidate",
   "evidence": [
    {
-    "file": "packages/domain/test/integrity.test.ts",
-    "test": "rejects a reference that does not exist"
+    "file": "packages/domain/test/engine/proposeFindings.test.ts",
+    "test": "TC038: a binding to a source that does not exist holds the finding back"
+   },
+   {
+    "file": "packages/domain/test/engine/proposeFindings.test.ts",
+    "test": "a real source can only be a candidate: every verification flag is forced off"
    }
   ]
  },
@@ -324,9 +328,18 @@
   ]
  },
  "TC044": {
-  "status": "later",
-  "note": "Security, payment, or infrastructure work after the core is built",
-  "evidence": []
+  "status": "covered",
+  "note": "Report text reaches the model as quoted data only; a reply that obeys an injected order is rejected whole",
+  "evidence": [
+   {
+    "file": "packages/domain/test/engine/proposeFindings.test.ts",
+    "test": "TC044: report text that gives orders is passed as data and cannot reach the instructions"
+   },
+   {
+    "file": "packages/domain/test/engine/proposeFindings.test.ts",
+    "test": "TC044: a model that obeys the injected order is rejected whole, and nothing changes"
+   }
+  ]
  },
  "TC045": {
   "status": "later",

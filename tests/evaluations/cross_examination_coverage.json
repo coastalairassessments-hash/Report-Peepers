@@ -34,7 +34,7 @@
  },
  "XC004": {
   "status": "partial",
-  "note": "Deterministic checks and fingerprints are repeatable and published text cannot be silently replaced; AI wording drift awaits the AI step",
+  "note": "Replays are identical and a different reply is visible in the hashes; behavior of a real model's wording drift awaits a real adapter",
   "evidence": [
    {
     "file": "packages/domain/test/revision.test.ts",
@@ -47,6 +47,14 @@
    {
     "file": "packages/domain/test/release.test.ts",
     "test": "a snapshot edited after publication is refused"
+   },
+   {
+    "file": "packages/domain/test/engine/replay.test.ts",
+    "test": "XC004: the same input and the same reply give identical drafts and identical hashes"
+   },
+   {
+    "file": "packages/domain/test/engine/replay.test.ts",
+    "test": "XC004: different wording changes the output hash only, and never edits the snapshot it started from"
    }
   ]
  },
