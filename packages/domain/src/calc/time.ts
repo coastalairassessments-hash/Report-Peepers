@@ -20,3 +20,18 @@ export function parseStamp(s: unknown): Stamp | null {
   }
   return { wallMs, instantMs: wallMs - offMin * 60_000, offset: off ?? null, day: `${y}-${mo}-${d}` };
 }
+
+/** Whole days since 1970-01-01 for a date or timestamp, or null if unreadable. No timezone is guessed. */
+export function parseDay(s: unknown): number | null {
+  if (typeof s !== "string") return null;
+  const t = s.trim();
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(t);
+  if (m) {
+    const ms = Date.UTC(+m[1]!, +m[2]! - 1, +m[3]!);
+    const d = new Date(ms);
+    if (d.getUTCFullYear() !== +m[1]! || d.getUTCMonth() !== +m[2]! - 1 || d.getUTCDate() !== +m[3]!) return null;
+    return Math.floor(ms / 86_400_000);
+  }
+  const p = parseStamp(t);
+  return p ? Math.floor(p.wallMs / 86_400_000) : null;
+}

@@ -61,6 +61,23 @@ export function checkIntegrity(s: Snap): Issue[] {
     if (a.claim_id) need(sets.claims, [a.claim_id], `proposed_actions[${i}].claim_id`, "Claim");
   });
 
+  // areas: a "no indicators" status needs a basis, and contradicting evidence must be shown as a conflict
+  s.areas.forEach((a, i) => {
+    const p = `areas[${i}]`;
+    need(sets.evidence, a.basis_evidence_ids, `${p}.basis_evidence_ids`, "Evidence");
+    if (a.condition_status === "assessed_no_indicators_reported" && a.basis_evidence_ids.length === 0)
+      add("area_no_indicators_without_basis", p, "A no-indicators status needs the evidence it rests on");
+    const mine = new Set([...a.basis_evidence_ids, ...s.evidence.filter((e) => e.area_ids.includes(a.id)).map((e) => e.id)]);
+    const conflict = s.evidence.some((e) => mine.has(e.id) && e.contradicts_ids.some((id) => mine.has(id)));
+    if (conflict && a.condition_status !== "conflicting_evidence")
+      add("area_conflict_not_marked", p, "Evidence for this area contradicts itself; status must be conflicting_evidence");
+  });
+
+  // scope: a conflicting account must be recorded as an open discrepancy
+  const conflicting = s.scope.restrictions.some((r) => r.status === "conflicting" || r.agreed_status === "conflicting");
+  if (conflicting && s.scope.unresolved_discrepancies.length === 0)
+    add("scope_conflict_unrecorded", "scope", "A conflicting scope account must appear in unresolved_discrepancies");
+
   const refById = new Map(s.references.map((r) => [r.id, r]));
   const evById = new Map(s.evidence.map((e) => [e.id, e]));
 
