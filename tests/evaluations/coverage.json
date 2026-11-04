@@ -80,9 +80,18 @@
   "evidence": []
  },
  "TC014": {
-  "status": "needs_logic",
-  "note": "Deterministic data-gap check",
-  "evidence": []
+  "status": "covered",
+  "note": "Gaps are shown, never filled; a 7-day record with 4 missing days reports 3 complete days",
+  "evidence": [
+   {
+    "file": "packages/domain/test/calc/monitoring.test.ts",
+    "test": "TC014: a 7-day record with 4 days missing reports 3 complete days and the gap"
+   },
+   {
+    "file": "packages/domain/test/calc/monitoring.test.ts",
+    "test": "never adds readings: observed never exceeds the distinct valid timestamps"
+   }
+  ]
  },
  "TC015": {
   "status": "needs_engine",
@@ -95,9 +104,14 @@
   "evidence": []
  },
  "TC017": {
-  "status": "needs_logic",
-  "note": "Deterministic unit/scale check",
-  "evidence": []
+  "status": "covered",
+  "note": "A comparative meter reading is never turned into percent moisture content",
+  "evidence": [
+   {
+    "file": "packages/domain/test/calc/moisture.test.ts",
+    "test": "TC017: 80 on a comparative scale is never published as percent moisture content"
+   }
+  ]
  },
  "TC018": {
   "status": "needs_engine",
@@ -120,19 +134,38 @@
   "evidence": []
  },
  "TC022": {
-  "status": "needs_logic",
-  "note": "Deterministic chronology check",
-  "evidence": []
+  "status": "covered",
+  "note": "Readings from before and after a repair are flagged as mixed",
+  "evidence": [
+   {
+    "file": "packages/domain/test/calc/chronology.test.ts",
+    "test": "TC022: measurements before and after a repair are flagged as mixed"
+   }
+  ]
  },
  "TC023": {
-  "status": "needs_logic",
-  "note": "Ratio calculation with raw counts",
-  "evidence": []
+  "status": "covered",
+  "note": "Ratio is arithmetic only, with units, basis, and limits recorded; no health threshold",
+  "evidence": [
+   {
+    "file": "packages/domain/test/calc/ratio.test.ts",
+    "test": "5027 over 53 is about 95, with formula and rounding recorded"
+   },
+   {
+    "file": "packages/domain/test/calc/ratio.test.ts",
+    "test": "total versus a single group is refused, and the same group matches"
+   }
+  ]
  },
  "TC024": {
-  "status": "needs_logic",
-  "note": "Nondetect-safe ratio calculation",
-  "evidence": []
+  "status": "covered",
+  "note": "A nondetect outdoor result gives 'not computable', never a division or Infinity",
+  "evidence": [
+   {
+    "file": "packages/domain/test/calc/ratio.test.ts",
+    "test": "outdoor nondetect is not computable, never Infinity"
+   }
+  ]
  },
  "TC025": {
   "status": "needs_engine",
