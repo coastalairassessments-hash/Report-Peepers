@@ -1,0 +1,19 @@
+flowchart TB
+  subgraph H["HOMEOWNER"]
+    h1["1 Uploads report<br/>(PDF, photos, lab pages)"]
+    h2["3 Answers opening questions<br/>one at a time, 'unsure' allowed"]
+    h3["4 Confirms scope summary<br/>(or chooses conditional review)"]
+    h4["5 Pays flat fee"]
+    h7["8 Reads review:<br/>what holds up, top questions"]
+    h8["9 Adds new documents<br/>(inspector's reply)"]
+  end
+  subgraph S["SYSTEM"]
+    s1["2 Free preflight:<br/>readable? supported type? what pages?"]
+    s2["6 Reads report, pulls out claims<br/>and evidence with page links"]
+    s3["7 Checks: every finding has a source,<br/>no banned wording, numbers verified"]
+    s4["10 New locked version:<br/>each finding unchanged / resolved /<br/>modified / retracted"]
+  end
+  subgraph R["REVIEWER (IH)"]
+    r1["7b Checks findings,<br/>approves or edits"]
+  end
+  h1 --> s1 --> h2 --> h3 --> h4 --> s2 --> s3 --> r1 --> h7 --> h8 --> s4 --> r1
