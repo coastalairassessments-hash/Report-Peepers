@@ -84,6 +84,15 @@ describe("scope intake", () => {
       expect(s.unresolved_discrepancies.join(" ")).toContain("Visit limited to one hour");
     });
 
+    it("the conflict is also stored as structured accounts, and a resolution updates them", () => {
+      const c = recordScopeConflict(base(), "time", { agreement: "One hour.", client: "No limit." });
+      expect(c.conflict_accounts).toEqual([{ kind: "time", agreement_account: "One hour.", client_account: "No limit.", status: "open", choice: null, note: null }]);
+      const r = resolveScopeConflict(c, "time", { choice: "agreement", outcome: "present", note: "Client confirmed in writing." });
+      expect(r.conflict_accounts?.[0]).toMatchObject({ status: "resolved", choice: "agreement", agreement_account: "One hour.", client_account: "No limit." });
+      const b = resolveScopeConflict(c, "time", { choice: "both_stand", outcome: "unknown", note: "Still disputed." });
+      expect(b.conflict_accounts?.[0]).toMatchObject({ status: "open", choice: "both_stand" });
+    });
+
     it("does not edit the scope it was given", () => {
       const s = base(); const before = JSON.stringify(s);
       recordScopeConflict(s, "time", accounts);

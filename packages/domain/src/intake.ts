@@ -144,6 +144,7 @@ export function recordScopeConflict(scope: Scope, kind: RestrictionKind, account
     r.description = `Agreement says: "${agreement}" | Client says: "${client}"`;
   }
   next.unresolved_discrepancies.push(`${kind}: agreement says "${agreement}"; client says "${client}"`);
+  next.conflict_accounts = [...(next.conflict_accounts ?? []).filter((c) => c.kind !== kind), { kind, agreement_account: agreement, client_account: client, status: "open", choice: null, note: null }];
   return next;
 }
 
@@ -167,5 +168,7 @@ export function resolveScopeConflict(
     r.description = `${r.description} | Decision (${decision.choice}): ${decision.note.trim()}`;
   }
   next.unresolved_discrepancies.push(`Resolved ${kind}: relied on ${decision.choice}. ${decision.note.trim()}`);
+  next.conflict_accounts = (next.conflict_accounts ?? []).map((c) =>
+    c.kind === kind ? { ...c, status: decision.choice === "both_stand" ? "open" : "resolved", choice: decision.choice, note: decision.note.trim() } : c);
   return next;
 }

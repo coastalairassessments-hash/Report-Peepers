@@ -209,7 +209,7 @@ describe("evidence and finding integrity", () => {
       id: "CALC-1", kind: "indoor_outdoor_ratio", record_type: "derived", corrects_id: null, status: "ok", formula: "indoor / outdoor",
       inputs: {}, units: "ratio", rounding: "two decimals", result: { ratio: 1.5 }, limitations: [], source_evidence_ids: ["EV-001"], ...over,
     });
-    const v02 = (calcs: object[], ids: string[] = []) => { const c = clone(); c.schema_version = "0.2"; c.calculations = calcs; c.findings[0].calculation_ids = ids; return c; };
+    const v02 = (calcs: object[], ids: string[] = []) => { const c = clone(); c.schema_version = "0.2"; c.findings[0].assumptions = ["Readings were taken where stated."]; c.calculations = calcs; c.findings[0].calculation_ids = ids; return c; };
 
     it("a v0.2 snapshot with a sound record and a finding that cites it is clean", () => {
       expect(checkIntegrity(v02([rec()], ["CALC-1"]))).toEqual([]);
@@ -241,6 +241,61 @@ describe("evidence and finding integrity", () => {
 
     it("a v0.1 snapshot with no calculations is unaffected", () => {
       expect(checkIntegrity(clone())).toEqual([]);
+    });
+  });
+
+  describe("stored v0.2 fields", () => {
+    const v02 = () => { const c = clone(); c.schema_version = "0.2"; c.findings[0].assumptions = ["Readings were taken where stated."]; return c; };
+    const ref = (over: object = {}) => ({ id: "REF-1", publisher: "P", title: "T", edition: "2024", official_url: "https://example.org", authority_type: "guidance", ai_use_status: "authorized", permission_record_id: "PR-1", allowed_uses: ["output_reference"], effective_context: "Residential reports", reviewed_at: null, ...over });
+    const binding = { reference_id: "REF-1", verified_locator: null, relevance_explanation: "x", support_verified: true, applicability_verified: true, permission_verified: true, verified_by: "r1" };
+
+    it("a v0.2 snapshot with assumptions is clean", () => { expect(checkIntegrity(v02())).toEqual([]); });
+
+    it("E2: a cause finding in a v0.2 snapshot must list its assumptions; v0.1 is not asked", () => {
+      const c = v02(); c.findings[0].assumptions = [];
+      expect(codes(c)).toContain("cause_finding_without_assumptions");
+      const old = clone(); expect(codes(old)).not.toContain("cause_finding_without_assumptions");
+    });
+
+    it("E5: a published v0.2 release needs a conflict disclosure; v0.1 is not asked", () => {
+      const publish = (c: any) => { Object.assign(c.release, { status: "published", human_review_status: "approved", reviewer_id: "REV-1", reviewer_scope: "Residential", published_at: "2026-11-03T00:00:00Z" }); c.findings[0].human_approved = true; c.scope.confirmation_status = "confirmed"; return c; };
+      expect(codes(publish(v02()))).toContain("publish_missing_conflict_disclosure");
+      const ok = publish(v02()); ok.release.reviewer_conflict_disclosure = "None.";
+      expect(codes(ok)).not.toContain("publish_missing_conflict_disclosure");
+      const blank = publish(v02()); blank.release.reviewer_conflict_disclosure = "   ";
+      expect(codes(blank)).toContain("publish_missing_conflict_disclosure");
+      expect(codes(publish(clone()))).not.toContain("publish_missing_conflict_disclosure");
+    });
+
+    it("stored reference dates and status are used: a later edition cannot support a departure", () => {
+      const c = v02(); c.references = [ref({ publication_status: "published", published_on: "2025-06-01" })]; c.report_issued_on = "2024-01-01";
+      c.findings[0].finding_type = "verified_reference_departure"; c.findings[0].reference_bindings = [binding];
+      expect(codes(c)).toContain("reference_postdates_report");
+      c.references = [ref({ publication_status: "draft", published_on: null })];
+      expect(codes(c)).toContain("reference_draft_not_citable");
+    });
+
+    it("a relied-on reference with no stored status is flagged unknown, never a crash", () => {
+      const c = v02(); c.references = [ref()]; c.findings[0].reference_bindings = [binding];
+      expect(codes(c)).toContain("reference_timing_unknown");
+      c.report_issued_on = "not a date"; c.references = [ref({ publication_status: "published", published_on: "also not a date" })]; c.findings[0].finding_type = "verified_reference_departure";
+      expect(codes(c)).toContain("reference_timing_unknown");
+    });
+
+    it("an expected room the report never addresses is flagged, not given a status", () => {
+      const c = v02(); c.expected_area_names = ["Closet", "Master Bath"]; c.areas[0].name = "Closet";
+      const issues = checkIntegrity(c).filter((i) => i.code === "expected_area_unaddressed");
+      expect(issues).toHaveLength(1);
+      expect(issues[0]!.message).toContain("Master Bath");
+      const d = v02(); d.expected_area_names = ["closet"];
+      expect(codes(d)).not.toContain("expected_area_unaddressed");
+    });
+
+    it("a structured open scope conflict counts as recorded", () => {
+      const c = v02(); c.scope.restrictions[0].status = "conflicting"; c.scope.unresolved_discrepancies = [];
+      expect(codes(c)).toContain("scope_conflict_unrecorded");
+      c.scope.conflict_accounts = [{ kind: c.scope.restrictions[0].kind, agreement_account: "One hour.", client_account: "No limit.", status: "open", choice: null, note: null }];
+      expect(codes(c)).not.toContain("scope_conflict_unrecorded");
     });
   });
 });

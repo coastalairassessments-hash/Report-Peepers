@@ -1,3 +1,5 @@
+import { checkReferenceUse, timingsFromReferences } from "./referenceTiming.js";
+import { unaddressedAreas } from "./areas.js";
 import type { CaseSnapshot as Snap } from "@report-peepers/contracts";
 
 export interface Issue { code: string; path: string; message: string }
@@ -104,8 +106,17 @@ export function checkIntegrity(s: Snap): Issue[] {
 
   // scope: a conflicting account must be recorded as an open discrepancy
   const conflicting = s.scope.restrictions.some((r) => r.status === "conflicting" || r.agreed_status === "conflicting");
-  if (conflicting && s.scope.unresolved_discrepancies.length === 0)
+  const structuredOpen = (s.scope.conflict_accounts ?? []).some((c) => c.status === "open");
+  if (conflicting && s.scope.unresolved_discrepancies.length === 0 && !structuredOpen)
     add("scope_conflict_unrecorded", "scope", "A conflicting scope account must appear in unresolved_discrepancies");
+
+  // v0.2 only: rules that read the stored fields. A v0.1 snapshot has none of them, so it is judged as before.
+  if (s.schema_version === "0.2") {
+    const timings = timingsFromReferences(s.references);
+    s.findings.forEach((f) => out.push(...checkReferenceUse(f, s.references, timings, s.report_issued_on ?? null)));
+    if (s.expected_area_names)
+      unaddressedAreas(s.expected_area_names, s.areas).forEach((n) => add("expected_area_unaddressed", "areas", `The report never addresses "${n}"; it gets no status, not clean and not affected`));
+  }
 
   const claimById = new Map(s.claims.map((c) => [c.id, c]));
   const hypByClaim = new Map<string, Snap["hypotheses"]>();
@@ -170,6 +181,8 @@ export function checkIntegrity(s: Snap): Issue[] {
     // cause and duration claims need a hypothesis with competing explanations
     for (const cid of f.claim_ids) {
       const cl = claimById.get(cid);
+      if (s.schema_version === "0.2" && cl && (cl.claim_type === "cause" || cl.claim_type === "duration") && (f.assumptions ?? []).length === 0)
+        add("cause_finding_without_assumptions", `${p}.assumptions`, `Claim ${cid} is a ${cl.claim_type} claim; list the assumptions it depends on`);
       if (cl && (cl.claim_type === "cause" || cl.claim_type === "duration") && !(hypByClaim.get(cid)?.length))
         add("cause_finding_without_hypothesis", `${p}.claim_ids`, `Claim ${cid} is a ${cl.claim_type} claim and needs a hypothesis with competing explanations`);
     }
@@ -183,6 +196,8 @@ export function checkIntegrity(s: Snap): Issue[] {
   for (const re of OVERCERTAIN) if (re.test(stripQuoted(r.overview))) add("overcertain_language", "release.overview", "State evidence strength, not certainty or a numeric confidence");
   if (r.status === "published") {
     if (r.human_review_status !== "approved") add("publish_without_human_approval", "release", "Pilot releases need recorded human approval");
+    if (s.schema_version === "0.2" && !r.reviewer_conflict_disclosure?.trim())
+      add("publish_missing_conflict_disclosure", "release.reviewer_conflict_disclosure", "Published release needs a reviewer conflict disclosure, even if it says none");
     if (!r.reviewer_id) add("publish_without_reviewer", "release.reviewer_id", "Published release needs a reviewer");
     if (!r.published_at) add("publish_without_date", "release.published_at", "Published release needs a date");
     const listed = new Set([...r.supported_finding_ids, ...r.attention_finding_ids]);

@@ -5,7 +5,7 @@ import { parseDay } from "./calc/time.js";
 
 type Finding = Snap["findings"][number];
 
-/** Facts the v0.1 contract does not yet hold (see ADR-003). Supplied separately until the contract adds them. */
+/** Publication facts. v0.2 snapshots store them on each reference; v0.1 callers supply them separately (ADR-003). */
 export interface ReferenceTiming {
   reference_id: string;
   publication_status: "published" | "draft" | "withdrawn" | "superseded";
@@ -39,4 +39,9 @@ export function checkReferenceUse(finding: Finding, refs: Reference[], timings: 
     }
   });
   return out;
+}
+
+/** Timings stored on the references of a v0.2 snapshot. A reference with no stored status gets no timing. */
+export function timingsFromReferences(refs: Reference[]): ReferenceTiming[] {
+  return refs.flatMap((r) => (r.publication_status ? [{ reference_id: r.id, publication_status: r.publication_status, published_on: r.published_on ?? null }] : []));
 }
