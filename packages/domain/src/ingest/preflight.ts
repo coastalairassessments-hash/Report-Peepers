@@ -45,7 +45,7 @@ export async function preflight(bytes: Uint8Array, _name: string, limits: Limits
 
   let pages: number;
   try {
-    const task = getDocument({ data: bytes.slice(), enableXfa: false, useWorkerFetch: false, disableFontFace: true, verbosity: 0 });
+    const task = getDocument({ data: new Uint8Array(bytes), enableXfa: false, useWorkerFetch: false, disableFontFace: true, verbosity: 0 });
     const doc = await task.promise;
     pages = doc.numPages;
     await task.destroy();

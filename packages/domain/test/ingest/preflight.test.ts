@@ -66,4 +66,9 @@ describe("preflight", () => {
     const clean = await preflight(await three(), "report.pdf", limits);
     expect(clean.ok && clean.flags).toEqual([]);
   });
+
+  it("accepts a Node Buffer as well as a plain byte array", async () => {
+    const b = await three();
+    expect(await preflight(Buffer.from(b), "report.pdf", limits)).toMatchObject({ ok: true, page_count: 3 });
+  });
 });

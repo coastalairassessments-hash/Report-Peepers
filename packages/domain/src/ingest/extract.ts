@@ -68,7 +68,7 @@ interface Item { str: string; transform: number[]; width: number; height: number
  * Nothing in the file is executed. Throws if the file cannot be read (preflight should have caught it).
  */
 export async function extractDocument(bytes: Uint8Array): Promise<ExtractedDocument> {
-  const task = getDocument({ data: bytes.slice(), enableXfa: false, useWorkerFetch: false, disableFontFace: true, verbosity: 0 });
+  const task = getDocument({ data: new Uint8Array(bytes), enableXfa: false, useWorkerFetch: false, disableFontFace: true, verbosity: 0 });
   const doc = await task.promise;
   try {
     const labels: string[] | null = await doc.getPageLabels();

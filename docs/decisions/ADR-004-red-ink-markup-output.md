@@ -31,4 +31,12 @@ The main thing the homeowner receives is a copy of the report they uploaded, wit
 
 ## Open
 - Handwriting font choice: Caveat (SIL Open Font License) is the candidate; confirm the license text ships with the app.
-- A PDF writer library is chosen in Brick 13 after a dependency check (the common one, pdf-lib, has had no release since 2022).
+- ~~A PDF writer library is chosen in Brick 13.~~ Settled by Cory, 2026-11-04: all PDFs are made with Typst. Tested the same day (see Tooling).
+
+## Tooling: Typst
+- Typst (Apache-2.0) embeds the customer's own PDF pages natively (Typst 0.14 and later), keeps their text selectable, keeps each page's own size and rotation, and draws the red marks and handwriting over them. Tagged, accessible PDF output is built in.
+- The app runs the official command-line program, pinned to 0.14.2 and verified by checksum (tarball SHA-256 `a6044cbad2a954deb921167e257e120ac0a16b20339ec01121194ff9d394996d`). It runs as a separate process with no network, with system fonts ignored and only our bundled font folder visible.
+- Same inputs and a fixed creation time give byte-identical PDFs (tested), which keeps the output hash meaningful.
+- Typst reports a missing font as a warning and still exits normally, silently swapping in another font. The wrapper therefore fails the build on any warning.
+- What embedding may not carry over from the customer's original: links, form fields, bookmarks, and document metadata. The text and look of every page are kept. So the claim is "the pages are reproduced unchanged and verified by text comparison", not "the file is byte-identical". If a source page cannot be embedded, no deliverable is made.
+- The markup geometry (where marks and notes go) is computed in TypeScript and tested; Typst only draws what the plan says.

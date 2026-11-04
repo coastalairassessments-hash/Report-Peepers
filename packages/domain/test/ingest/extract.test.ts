@@ -72,4 +72,10 @@ describe("extractDocument: text, boxes, labels", () => {
     expect(d.pages.map((p) => p.index)).toEqual([1, 2, 3, 4, 5]);
     expect(d.pages[3]!.text).toContain("Page 4 text");
   });
+
+  it("accepts a Node Buffer, as read straight from disk, the same as a plain byte array", async () => {
+    const bytes = await makePdf([{ puts: [{ text: "Buffer page", x: 72, y: 700 }] }]);
+    const d = await extractDocument(Buffer.from(bytes));
+    expect(d.pages[0]!.text).toContain("Buffer page");
+  });
 });
