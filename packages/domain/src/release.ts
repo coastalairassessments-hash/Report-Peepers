@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import type { EnvironmentalReviewCaseSnapshotVersion01 as Snap } from "@report-peepers/contracts";
+import type { CaseSnapshot as Snap } from "@report-peepers/contracts";
 import { canon, fingerprint } from "./revision.js";
 
 export interface ApprovedView {

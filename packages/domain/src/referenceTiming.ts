@@ -1,5 +1,5 @@
 import type { Reference } from "@report-peepers/contracts";
-import type { EnvironmentalReviewCaseSnapshotVersion01 as Snap } from "@report-peepers/contracts";
+import type { CaseSnapshot as Snap } from "@report-peepers/contracts";
 import type { Issue } from "./integrity.js";
 import { parseDay } from "./calc/time.js";
 

@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import type { EnvironmentalReviewCaseSnapshotVersion01 as Snap } from "@report-peepers/contracts";
+import type { CaseSnapshot as Snap } from "@report-peepers/contracts";
 import type { Issue } from "./integrity.js";
 
 type Finding = Snap["findings"][number];

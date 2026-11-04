@@ -1,4 +1,4 @@
-import type { EnvironmentalReviewCaseSnapshotVersion01 as Snap } from "@report-peepers/contracts";
+import type { CaseSnapshot as Snap } from "@report-peepers/contracts";
 
 export interface Issue { code: string; path: string; message: string }
 

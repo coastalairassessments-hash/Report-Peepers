@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "gen": "json2ts -i ../../docs/spec/review_contract.schema.json -o src/types.ts --additionalProperties false --no-style",
+    "gen": "json2ts -i ../../docs/spec/review_contract.schema.json -o src/types.ts --additionalProperties false --no-style && json2ts -i ../../docs/spec/review_contract.v0.2.schema.json -o src/types02.ts --additionalProperties false --no-style",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
