@@ -20,11 +20,12 @@ The main thing the homeowner receives is a copy of the report they uploaded, wit
 6. The handwriting font is bundled with the app (open license), so rendering needs no network.
 7. A plain text version in reading order always accompanies the PDF, because accessible text is required (spec section 17). Same notes, same numbers.
 8. Red must still read when printed in gray: the handwriting style and the numbered tags carry the meaning, not color alone.
-9. Pro tier later: the same renderer marks up a draft before the inspector issues it. Not built now.
+9. A clean, typed summary page closes the document (Cory, 2026-11-04). It is built from the same approved result as the margin notes and uses the same numbers, so each line points back to its mark and page. Layout: the questions to ask the inspector first, then items grouped by decision relevance (material, then contextual), then what the report supports, then limits on the review. Each line: number, short title, report page, evidence strength label, next step. No counts of problems, no totals, no score, no ranking, and no "pass" or "fail" language. The section is titled "Summary of items to clarify", not "deficiencies": the spec forbids declaring an inspector deficient (evaluation case on missing broader surveys) and the wording check already blocks accusation language. The margin-notes overflow sheet follows the summary.
+10. Pro tier later: the same renderer marks up a draft before the inspector issues it. Not built now.
 
 ## Consequences
 - Brick 12 must give every anchor a real page and box, so the work moves ahead of any markup.
-- Brick 13 builds the markup renderer. Its tasks: verify anchors, place marks and notes without overlap, draw in the handwriting font, add the notes sheet, bind hashes, test with synthetic PDFs.
+- Brick 13 builds the markup renderer. Its tasks: verify anchors, place marks and notes without overlap, draw in the handwriting font, add the summary page and the notes sheet, bind hashes, test with synthetic PDFs.
 - Spec section 17 wording ("downloadable summary and full review") is read as: the marked-up report is the full review; the text version is the accessible summary. No spec file is edited.
 - New attorney items L16 and L17 in `docs/LEGAL_REVIEW.md`.
 
