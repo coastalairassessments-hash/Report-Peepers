@@ -24,3 +24,4 @@ Status key: open / with attorney / answered (add the answer and date).
 | L15 | A released review may be quoted or used in a dispute or lawsuit | Disclaimers must state document review only, not inspection or expert opinion; terms of use | EXPERT_WITNESS_REVIEW | open |
 | L16 | Returning a marked-up copy of the inspector's report to the homeowner (a derivative of the inspector's work; copyright, terms of the report, who may receive it) | Rights to copy and annotate a document the customer received | ADR-004 | open |
 | L17 | Red-ink marks on a third party's report can read as a grade or an accusation; wording and mark vocabulary limits | Defamation and implied-opinion risk | ADR-004 | open |
+| L18 | Saved code-only summary records kept after documents are deleted; minimum group size before any aggregate is shown or shared; consent line wording | Re-identification risk from small groups; privacy terms | ADR-005 | open |
