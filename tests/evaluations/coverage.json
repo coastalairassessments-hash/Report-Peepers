@@ -1,0 +1,374 @@
+{
+ "TC001": {
+  "status": "needs_engine",
+  "note": "Needs the AI reading step and approved rules",
+  "evidence": []
+ },
+ "TC002": {
+  "status": "needs_engine",
+  "note": "Needs the AI reading step and approved rules",
+  "evidence": []
+ },
+ "TC005": {
+  "status": "needs_engine",
+  "note": "Needs the AI reading step and approved rules",
+  "evidence": []
+ },
+ "TC006": {
+  "status": "needs_engine",
+  "note": "Needs the AI reading step and approved rules",
+  "evidence": []
+ },
+ "TC003": {
+  "status": "needs_logic",
+  "note": "Contract has 'conflicting' and discrepancy fields; conflict handling not built",
+  "evidence": []
+ },
+ "TC004": {
+  "status": "covered",
+  "note": "'Unsure' stays unknown, never inferred as no restrictions",
+  "evidence": [
+   {
+    "file": "packages/domain/test/intake.test.ts",
+    "test": "'unsure' stays unknown, never present or none"
+   }
+  ]
+ },
+ "TC007": {
+  "status": "covered",
+  "note": "Nothing requires a minimum number of findings",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "a sound report with no findings is valid"
+   }
+  ]
+ },
+ "TC008": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC009": {
+  "status": "needs_logic",
+  "note": "Area status values (unassessed vs no indicators) not built",
+  "evidence": []
+ },
+ "TC010": {
+  "status": "partial",
+  "note": "Wording 'confirmed unaffected' is blocked; area status logic not built",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "rejects verdict, score, and accusation wording"
+   }
+  ]
+ },
+ "TC011": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC012": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC013": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC014": {
+  "status": "needs_logic",
+  "note": "Deterministic data-gap check",
+  "evidence": []
+ },
+ "TC015": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC016": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC017": {
+  "status": "needs_logic",
+  "note": "Deterministic unit/scale check",
+  "evidence": []
+ },
+ "TC018": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC019": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC020": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC021": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC022": {
+  "status": "needs_logic",
+  "note": "Deterministic chronology check",
+  "evidence": []
+ },
+ "TC023": {
+  "status": "needs_logic",
+  "note": "Ratio calculation with raw counts",
+  "evidence": []
+ },
+ "TC024": {
+  "status": "needs_logic",
+  "note": "Nondetect-safe ratio calculation",
+  "evidence": []
+ },
+ "TC025": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC026": {
+  "status": "partial",
+  "note": "Wording that certifies safe reoccupancy is blocked; diagnosis claims need the engine",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "rejects wording that certifies safe reoccupancy"
+   }
+  ]
+ },
+ "TC027": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC028": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC029": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC030": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC031": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC032": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC033": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC034": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC035": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC036": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC037": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC038": {
+  "status": "covered",
+  "note": "A reference that does not exist is rejected",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "rejects a reference that does not exist"
+   }
+  ]
+ },
+ "TC039": {
+  "status": "covered",
+  "note": "Blocked reference cannot be marked verified",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "blocks 'verified' use of a rights-blocked reference"
+   }
+  ]
+ },
+ "TC040": {
+  "status": "needs_logic",
+  "note": "Edition vs report date check",
+  "evidence": []
+ },
+ "TC041": {
+  "status": "needs_logic",
+  "note": "Draft/non-citable status check",
+  "evidence": []
+ },
+ "TC042": {
+  "status": "covered",
+  "note": "New evidence changes a finding with a recorded reason; history kept",
+  "evidence": [
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "classifies unchanged, resolved, modified, retracted, new"
+   },
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "a finding cannot disappear silently"
+   },
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "earlier evidence cannot be edited or removed"
+   }
+  ]
+ },
+ "TC043": {
+  "status": "partial",
+  "note": "Accusation wording is blocked; not seeking faults is an engine behavior",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "rejects verdict, score, and accusation wording"
+   }
+  ]
+ },
+ "TC044": {
+  "status": "later",
+  "note": "Security, payment, or infrastructure work after the core is built",
+  "evidence": []
+ },
+ "TC045": {
+  "status": "later",
+  "note": "Security, payment, or infrastructure work after the core is built",
+  "evidence": []
+ },
+ "TC046": {
+  "status": "later",
+  "note": "Security, payment, or infrastructure work after the core is built",
+  "evidence": []
+ },
+ "TC047": {
+  "status": "later",
+  "note": "Security, payment, or infrastructure work after the core is built",
+  "evidence": []
+ },
+ "TC048": {
+  "status": "later",
+  "note": "Security, payment, or infrastructure work after the core is built",
+  "evidence": []
+ },
+ "TC049": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC050": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC051": {
+  "status": "covered",
+  "note": "No release without recorded human approval",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "publishing needs human approval, reviewer, date, approved findings, and confirmed scope"
+   },
+   {
+    "file": "packages/domain/test/caseStateMachine.test.ts",
+    "test": "no direct analysis -> released path exists"
+   }
+  ]
+ },
+ "TC052": {
+  "status": "partial",
+  "note": "Rights-recheck is a required fact for release; expiry detection not built",
+  "evidence": [
+   {
+    "file": "packages/domain/test/caseStateMachine.test.ts",
+    "test": "guarded transitions fail without facts and pass with all facts"
+   }
+  ]
+ },
+ "TC053": {
+  "status": "needs_logic",
+  "note": "Export must come from the same approved result",
+  "evidence": []
+ },
+ "TC054": {
+  "status": "partial",
+  "note": "No minimum findings is enforced; not inventing concerns is an engine behavior",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "a sound report with no findings is valid"
+   }
+  ]
+ },
+ "TC055": {
+  "status": "needs_engine",
+  "note": "",
+  "evidence": []
+ },
+ "TC056": {
+  "status": "later",
+  "note": "Interface, operations, privacy, or business work after the core is built",
+  "evidence": []
+ },
+ "TC057": {
+  "status": "later",
+  "note": "Interface, operations, privacy, or business work after the core is built",
+  "evidence": []
+ },
+ "TC059": {
+  "status": "later",
+  "note": "Interface, operations, privacy, or business work after the core is built",
+  "evidence": []
+ },
+ "TC060": {
+  "status": "later",
+  "note": "Interface, operations, privacy, or business work after the core is built",
+  "evidence": []
+ },
+ "TC058": {
+  "status": "partial",
+  "note": "Release requires the active revision to be unchanged",
+  "evidence": [
+   {
+    "file": "packages/domain/test/caseStateMachine.test.ts",
+    "test": "guarded transitions fail without facts and pass with all facts"
+   }
+  ]
+ }
+}

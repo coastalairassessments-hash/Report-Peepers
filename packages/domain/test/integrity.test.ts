@@ -73,4 +73,21 @@ describe("evidence and finding integrity", () => {
     c.scope.confirmation_status = "confirmed";
     expect(checkIntegrity(c)).toEqual([]);
   });
+
+  it("a sound report with no findings is valid", () => {
+    const c = clone();
+    c.findings = []; c.release.attention_finding_ids = []; c.release.leading_question_ids = [];
+    expect(checkIntegrity(c)).toEqual([]);
+  });
+
+  it("rejects a reference that does not exist", () => {
+    const c = clone();
+    c.findings[0].reference_bindings = [{ reference_id: "REF-404", verified_locator: null, relevance_explanation: "x", support_verified: false, applicability_verified: false, permission_verified: false, verified_by: null }];
+    expect(codes(c)).toContain("dangling_reference");
+  });
+
+  it("rejects wording that certifies safe reoccupancy", () => {
+    const c = clone(); c.findings[0].explanation = "It is safe to reoccupy.";
+    expect(codes(c)).toContain("prohibited_language");
+  });
 });
