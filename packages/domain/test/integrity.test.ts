@@ -112,4 +112,95 @@ describe("evidence and finding integrity", () => {
     c.scope.unresolved_discrepancies = ["time: agreement says X; client says Y"];
     expect(codes(c)).not.toContain("scope_conflict_unrecorded");
   });
+
+  describe("defensibility rules", () => {
+    const setExplanation = (text: string) => { const c = clone(); c.findings[0].explanation = text; return c; };
+
+    it("XC003: numeric confidence and certainty claims are rejected", () => {
+      for (const bad of ["We are 90% certain the cause is HVAC failure.", "I am 95 percent sure of this.", "The probability of 0.8 supports this cause.", "Confidence: 90 for this cause.", "This proves the cause.", "The cause is definitely a leak.", "The result is conclusive.", "Undoubtedly the source is the register.", "This was determined with certainty.", "We guarantee this reading."])
+        expect(codes(setExplanation(bad)), bad).toContain("overcertain_language");
+    });
+
+    it("measured values and ordinary words are not caught", () => {
+      for (const ok of ["Closet RH was 73.6 percent at 74.1 F.", "RH reached 100 percent during the visit.", "The result is inconclusive.", "The new filter improves airflow.", "The plan was approved by the owner.", "The duration is indefinite."])
+        expect(codes(setExplanation(ok)), ok).not.toContain("overcertain_language");
+    });
+
+    it("quoted report wording is allowed for over-certain words but not for accusations", () => {
+      expect(codes(setExplanation('The report says the cause is "definitely" HVAC failure.'))).not.toContain("overcertain_language");
+      expect(codes(setExplanation("The report says the cause is \u201Cdefinitely\u201D HVAC failure."))).not.toContain("overcertain_language");
+      expect(codes(setExplanation("This definitely shows HVAC failure.\u0022 and more"))).toContain("overcertain_language");
+      expect(codes(setExplanation('The inspector was "negligent" in this case.'))).toContain("prohibited_language");
+    });
+
+    it("an unbalanced quote does not hide over-certain wording or crash", () => {
+      expect(codes(setExplanation('The report says "definitely and this proves it.'))).toContain("overcertain_language");
+    });
+
+    it("the release overview is checked too", () => {
+      const c = clone(); c.release.overview = "This proves the report is wrong.";
+      expect(codes(c)).toContain("overcertain_language");
+    });
+
+    const addCause = (c: any, id: string, withHypothesis: boolean) => {
+      c.claims.push({ ...structuredClone(c.claims[0]), id, claim_type: "cause", text: `Cause claim ${id}` });
+      if (withHypothesis) c.hypotheses.push({ ...structuredClone(c.hypotheses[0]), id: `HY-${id}`, claim_id: id });
+      c.findings[0].claim_ids.push(id);
+    };
+
+    it("XC011: a cause finding without a hypothesis listing alternatives is rejected", () => {
+      const c = clone(); addCause(c, "CL-9", false);
+      const issues = checkIntegrity(c).filter((i) => i.code === "cause_finding_without_hypothesis");
+      expect(issues).toHaveLength(1);
+      expect(issues[0]!.message).toContain("CL-9");
+      const d = clone(); addCause(d, "CL-9", true);
+      expect(codes(d)).not.toContain("cause_finding_without_hypothesis");
+    });
+
+    it("with two cause claims, only the one missing a hypothesis is named", () => {
+      const c = clone(); addCause(c, "CL-8", true); addCause(c, "CL-9", false);
+      const issues = checkIntegrity(c).filter((i) => i.code === "cause_finding_without_hypothesis");
+      expect(issues.map((i) => i.message).join(" ")).toContain("CL-9");
+      expect(issues.map((i) => i.message).join(" ")).not.toContain("CL-8");
+    });
+
+    it("an observation claim does not need a hypothesis", () => {
+      const c = clone(); c.claims[0].claim_type = "observation"; c.hypotheses = [];
+      expect(codes(c)).not.toContain("cause_finding_without_hypothesis");
+    });
+
+    it("a hypothesis needs alternatives and change conditions", () => {
+      const c = clone(); c.hypotheses[0].alternative_explanations = []; c.hypotheses[0].what_would_change_interpretation = [];
+      expect(codes(c)).toContain("hypothesis_without_alternatives");
+      expect(codes(c)).toContain("hypothesis_without_change_conditions");
+    });
+
+    it("a hypothesis cannot be supported when the timing does not fit", () => {
+      const c = clone(); c.hypotheses[0].time_compatible = "no"; c.hypotheses[0].status = "supported_with_limits";
+      expect(codes(c)).toContain("hypothesis_supported_but_time_incompatible");
+      c.hypotheses[0].status = "plausible_unconfirmed";
+      expect(codes(c)).not.toContain("hypothesis_supported_but_time_incompatible");
+    });
+
+    it("a hypothesis naming a missing claim is a dangling reference", () => {
+      const c = clone(); c.hypotheses[0].claim_id = "CL-404";
+      expect(codes(c)).toContain("dangling_reference");
+    });
+
+    it("XC006: client statements alone cannot carry a strong finding", () => {
+      const c = clone(); c.evidence[0].origin = "client_statement"; c.findings[0].evidence_strength = "strong";
+      expect(codes(c)).toContain("client_only_support_too_strong");
+      c.findings[0].evidence_strength = "moderate";
+      expect(codes(c)).toContain("client_only_support_too_strong");
+      for (const ok of ["limited", "indeterminate"]) { c.findings[0].evidence_strength = ok; expect(codes(c), ok).not.toContain("client_only_support_too_strong"); }
+    });
+
+    it("mixed client and report-author support is not limited by the client-only rule", () => {
+      const c = clone();
+      c.evidence.push({ ...structuredClone(c.evidence[0]), id: "EV-002", origin: "report_author" });
+      c.evidence[0].origin = "client_statement";
+      c.findings[0].support_evidence_ids = ["EV-001", "EV-002"]; c.findings[0].evidence_strength = "strong";
+      expect(codes(c)).not.toContain("client_only_support_too_strong");
+    });
+  });
 });

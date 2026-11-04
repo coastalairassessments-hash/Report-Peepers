@@ -13,6 +13,23 @@ const PROHIBITED = [
 ];
 
 /**
+ * Words that claim certainty. An opinion states evidence strength, never certainty (spec 11.3, 13).
+ * Text inside double quotes is exempt, so a finding can quote what a report says. Accusation wording is not quote-exempt.
+ */
+const OVERCERTAIN = [
+  /\bprove[sd]?\b/i, /\bproven\b/i, /\bconclusive(?:ly)?\b/i, /\bdefinite(?:ly)?\b/i, /\bdefinitive(?:ly)?\b/i,
+  /\bundoubted(?:ly)?\b/i, /\bwithout (?:a |any )?doubt\b/i, /\bcertainly\b/i, /\bwith certainty\b/i, /\bguarantee[sd]?\b/i,
+  // numeric confidence or probability of a cause
+  /\b\d{1,3}(?:\.\d+)?\s?(?:%|percent)\s+(?:certain|certainty|confident|confidence|sure|likely|probable|probability|chance)\b/i,
+  /\b(?:confidence|probability|likelihood|certainty)\s*(?:of|is|was|:|=)\s*(?:about\s+)?\d/i,
+];
+
+/** Removes text inside straight or curly double quotes. An unbalanced quote leaves the rest in place. */
+export function stripQuoted(text: string): string {
+  return text.replace(/\u201C[^\u201D]*\u201D/g, " ").replace(/"[^"]*"/g, " ");
+}
+
+/**
  * Checks the rules a JSON Schema cannot: IDs that must resolve, findings that must trace to source,
  * references used only with permission, prohibited wording, and release gates.
  * Returns every problem found; an empty list means the snapshot is internally sound.
@@ -78,6 +95,17 @@ export function checkIntegrity(s: Snap): Issue[] {
   if (conflicting && s.scope.unresolved_discrepancies.length === 0)
     add("scope_conflict_unrecorded", "scope", "A conflicting scope account must appear in unresolved_discrepancies");
 
+  const claimById = new Map(s.claims.map((c) => [c.id, c]));
+  const hypByClaim = new Map<string, Snap["hypotheses"]>();
+  s.hypotheses.forEach((h, i) => {
+    const p = `hypotheses[${i}]`;
+    if (!sets.claims.has(h.claim_id)) add("dangling_reference", `${p}.claim_id`, `Claim ${h.claim_id} does not exist`);
+    hypByClaim.set(h.claim_id, [...(hypByClaim.get(h.claim_id) ?? []), h]);
+    if (h.alternative_explanations.length === 0) add("hypothesis_without_alternatives", p, "A hypothesis lists the competing explanations considered");
+    if (h.what_would_change_interpretation.length === 0) add("hypothesis_without_change_conditions", p, "A hypothesis states what would change the interpretation");
+    if (h.time_compatible === "no" && h.status === "supported_with_limits") add("hypothesis_supported_but_time_incompatible", p, "A hypothesis whose timing does not fit cannot be supported");
+  });
+
   const refById = new Map(s.references.map((r) => [r.id, r]));
   const evById = new Map(s.evidence.map((e) => [e.id, e]));
 
@@ -115,8 +143,23 @@ export function checkIntegrity(s: Snap): Issue[] {
     }
 
     // wording
-    for (const field of ["title", "explanation", "uncertainty", "resolution_condition"] as const)
+    for (const field of ["title", "explanation", "uncertainty", "resolution_condition"] as const) {
       for (const re of PROHIBITED) if (re.test(f[field])) add("prohibited_language", `${p}.${field}`, `Wording not allowed: ${re.source}`);
+      const unquoted = stripQuoted(f[field]);
+      for (const re of OVERCERTAIN) if (re.test(unquoted)) add("overcertain_language", `${p}.${field}`, "State evidence strength, not certainty or a numeric confidence");
+    }
+
+    // client recollection alone cannot carry a strong or moderate finding
+    const supportEv = f.support_evidence_ids.map((id) => evById.get(id));
+    if (supportEv.length > 0 && supportEv.every((e) => e?.origin === "client_statement") && (f.evidence_strength === "strong" || f.evidence_strength === "moderate"))
+      add("client_only_support_too_strong", p, "Client statements alone cannot support a strong or moderate finding");
+
+    // cause and duration claims need a hypothesis with competing explanations
+    for (const cid of f.claim_ids) {
+      const cl = claimById.get(cid);
+      if (cl && (cl.claim_type === "cause" || cl.claim_type === "duration") && !(hypByClaim.get(cid)?.length))
+        add("cause_finding_without_hypothesis", `${p}.claim_ids`, `Claim ${cid} is a ${cl.claim_type} claim and needs a hypothesis with competing explanations`);
+    }
   });
 
   // release gates
@@ -124,6 +167,7 @@ export function checkIntegrity(s: Snap): Issue[] {
   need(sets.findings, [...r.supported_finding_ids, ...r.attention_finding_ids], "release.finding_ids", "Finding");
   need(sets.questions, r.leading_question_ids, "release.leading_question_ids", "Question");
   for (const re of PROHIBITED) if (re.test(r.overview)) add("prohibited_language", "release.overview", `Wording not allowed: ${re.source}`);
+  for (const re of OVERCERTAIN) if (re.test(stripQuoted(r.overview))) add("overcertain_language", "release.overview", "State evidence strength, not certainty or a numeric confidence");
   if (r.status === "published") {
     if (r.human_review_status !== "approved") add("publish_without_human_approval", "release", "Pilot releases need recorded human approval");
     if (!r.reviewer_id) add("publish_without_reviewer", "release.reviewer_id", "Published release needs a reviewer");
