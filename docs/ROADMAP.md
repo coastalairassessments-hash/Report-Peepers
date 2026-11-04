@@ -14,7 +14,7 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 | 2d | Brick 11: the AI slot with a fake model (AI proposes, plain code checks) | Done | none |
 | 2e | Brick 12: reading a PDF with exact page and box anchors (synthetic PDFs only) | Approved 2026-11-04, building | I1 sample reports help but are not required |
 | 2f | Brick 13: the red-ink markup renderer, the marked-up report is the deliverable (ADR-004) | Next after 12 | Handwriting font license check |
-| 2g | Brick 14: code-only summary record and flaw-pattern list for analysis (ADR-005) | After 13 | Pattern list from the field expert (I2); minimum group size (L18) |
+| 2g | Brick 14: saved summary record (scrubbed wording plus codes) and flaw-pattern list for analysis (ADR-005) | After 13 | Pattern list from the field expert (I2); minimum group size (L18) |
 | 3 | AI slot with a stand-in model | Done (Brick 11) | none |
 | 4 | Reading real reports: tables, photo captions, scans (OCR), hidden-text detection, isolated parsing worker | Planned | Sample reports (input I1) |
 | 5 | Expert rule packs loaded from files | Planned | IH rules (input I2) |

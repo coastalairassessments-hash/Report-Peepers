@@ -10,11 +10,13 @@
   "devDependencies": {
     "@types/node": "^26.6.6",
     "fast-check": "^4.10.2",
+    "pdf-lib": "^1.17.1",
     "typescript": "^7.0.2",
     "vitest": "^5.1.0"
   },
   "dependencies": {
     "@report-peepers/contracts": "*",
-    "ajv": "^8.20.0"
+    "ajv": "^8.20.0",
+    "pdfjs-dist": "^6.5.438"
   }
 }
