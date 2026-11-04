@@ -98,9 +98,9 @@
 - `verifyMarkup(sourcePdf, outputPdf, plan) => { ok } | { ok: false, problems[] }`: original page text equals output page text for every source page; each note's extracted text sits where the plan says (within a stated layout allowance); no note box overlaps source text; page count as planned; no banned vocabulary in any rendered string.
 - `exportMarkup(snapshot, fingerprint, sourcePdf, extractedDoc) => Promise<{ ok: true, pdf, text, hashes } | { ok: false, reason }>`: runs the release gates, plans, renders, verifies, then returns the PDF and the plain-text version (same numbers and wording), with source, view, and plan hashes. Any failure returns a reason and no files.
 
-- [ ] Step 1: Failing tests: a good run passes; a tampered output (a note moved onto text, a page text altered, a banned word added) fails; unpublished or changed releases refused; the text version matches the PDF notes one for one.
-- [ ] Step 2: Run, confirm fail. Step 3: Implement. Step 4: Run all tests and typecheck.
-- [ ] Step 5: Commit "Brick 13.4: verifier and export pipeline".
+- [x] Step 1: Failing tests: a good run passes; a tampered output (a note moved onto text, a page text altered, a banned word added) fails; unpublished or changed releases refused; the text version matches the PDF notes one for one.
+- [x] Step 2: Run, confirm fail. Step 3: Implement. Step 4: Run all tests and typecheck.
+- [x] Step 5: Commit "Brick 13.4: verifier and export pipeline".
 
 ### Task 5: Proof sheets, coverage, notes, roadmap
 
