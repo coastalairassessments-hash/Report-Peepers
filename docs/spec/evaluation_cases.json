@@ -1,0 +1,606 @@
+{
+  "version": "0.1",
+  "note": "Seed scenarios only; no engine or scientific performance has been tested. Add concrete authorized inputs and expert-adjudicated expected outcomes before execution.",
+  "cases": [
+    {
+      "id": "TC001",
+      "category": "Scope",
+      "given": "Client purchased only three air samples and received only lab results.",
+      "expected": "Confirm the agreed service and ask whether an inspection narrative exists; explain unanswered source questions.",
+      "prohibited": "Declare the inspector deficient solely because no broader survey is supplied.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC002",
+      "category": "Scope",
+      "given": "Client capped a visit at one hour; report makes a whole-building causal conclusion.",
+      "expected": "Recognize the time limit while independently questioning support for the broad conclusion.",
+      "prohibited": "Treat the time limit as either misconduct or justification for any conclusion.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC003",
+      "category": "Scope",
+      "given": "Scope agreement and client recollection conflict.",
+      "expected": "Preserve both accounts, ask for clarification, and make dependent findings conditional.",
+      "prohibited": "Silently choose the account that strengthens criticism.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC004",
+      "category": "Scope",
+      "given": "Client cannot remember any restrictions.",
+      "expected": "Allow unsure and use documentary context with stated uncertainty.",
+      "prohibited": "Force a yes/no answer or infer there were no restrictions.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC005",
+      "category": "Scope",
+      "given": "Three-sample package did not explicitly limit visual inspection.",
+      "expected": "Keep sample count and visual scope separate.",
+      "prohibited": "Assume three samples means all other methods were forbidden.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC006",
+      "category": "Scope",
+      "given": "An attic was excluded because no safe access was available.",
+      "expected": "Record the access limit and interpret unexamined conditions as unknown.",
+      "prohibited": "Say attic contamination is absent or the inspector refused necessary work.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC007",
+      "category": "Scope",
+      "given": "Good limited assessment answers its narrow question and acknowledges uncertainty.",
+      "expected": "Recognize supportable work and explain the boundary.",
+      "prohibited": "Generate a minimum number of adverse findings.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC008",
+      "category": "Evidence",
+      "given": "Report documents growth at a register but customer says there are no observations.",
+      "expected": "Identify the actual observation and narrow any criticism to other undocumented areas.",
+      "prohibited": "Repeat the customer characterization as fact.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC009",
+      "category": "Evidence",
+      "given": "A room is absent from the report.",
+      "expected": "Label it unassessed or unclear according to scope evidence.",
+      "prohibited": "Call the room clean or contaminated from silence.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC010",
+      "category": "Evidence",
+      "given": "Adjacent rooms were inspected and no indicators were reported.",
+      "expected": "Retain date, methods, and limitations of the negative observations.",
+      "prohibited": "Issue an absolute unaffected-building assurance.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC011",
+      "category": "Extent",
+      "given": "Several rooms share an HVAC system; only one register has documented impact.",
+      "expected": "Treat service connection as reason for a relevant question, not proof of spread.",
+      "prohibited": "Classify all served rooms as contaminated.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC012",
+      "category": "Extent",
+      "given": "Report documents repeated impact with a supported spatial boundary.",
+      "expected": "Recognize the established extent and relevant limitations.",
+      "prohibited": "Recommend wider work solely because hidden growth is conceivable.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC013",
+      "category": "Diagnostics",
+      "given": "One elevated RH reading supports a categorical sustained humidity claim.",
+      "expected": "Ask for history or monitoring supporting duration.",
+      "prohibited": "Conclude persistence or a particular HVAC defect from one value.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC014",
+      "category": "Diagnostics",
+      "given": "A seven-day logger record contains four days of missing data.",
+      "expected": "Show actual coverage and gaps; limit persistence claims.",
+      "prohibited": "Interpolate silently or describe seven complete days.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC015",
+      "category": "Diagnostics",
+      "given": "Room air humidity logger is used to establish moisture in a specific wall.",
+      "expected": "Separate air conditions from material moisture and ask for wall evidence.",
+      "prohibited": "Convert room RH into wall moisture content.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC016",
+      "category": "Diagnostics",
+      "given": "Many-room moisture survey was conducted in one visit.",
+      "expected": "Recognize spatial coverage while retaining snapshot timing.",
+      "prohibited": "Describe the survey as multi-day monitoring.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC017",
+      "category": "Diagnostics",
+      "given": "Meter display reads 80 on an unknown comparative scale.",
+      "expected": "Preserve reported scale and request mode/material clarification if material.",
+      "prohibited": "Publish 80 percent moisture content.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC018",
+      "category": "Diagnostics",
+      "given": "Report has valid reference readings for comparable materials.",
+      "expected": "Evaluate the comparisons and acknowledge useful diagnostic support.",
+      "prohibited": "Ignore references and criticize absence of a formal moisture map.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC019",
+      "category": "Causation",
+      "given": "High RH is attributed to HVAC failure without performance measurements.",
+      "expected": "Treat failure as a hypothesis and ask what supports it.",
+      "prohibited": "Diagnose the actual defect or assert an alternative cause.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC020",
+      "category": "Causation",
+      "given": "Historical leak is dismissed because selected fungal groups were not detected.",
+      "expected": "Ask for history and physical evidence evaluating leakage.",
+      "prohibited": "Treat nondetection as proof against water intrusion.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC021",
+      "category": "Causation",
+      "given": "Report offers two plausible causes and explains what would distinguish them.",
+      "expected": "Recognize appropriately bounded professional judgment.",
+      "prohibited": "Demand a confirmed cause as mandatory in every limited visit.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC022",
+      "category": "Causation",
+      "given": "Later repair measurements are merged with earlier conditions.",
+      "expected": "Retain chronology and qualify cross-time inferences.",
+      "prohibited": "Treat all evidence as contemporaneous.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC023",
+      "category": "Sampling",
+      "given": "Total indoor/outdoor ratio is approximately 95 with only four outdoor raw spores.",
+      "expected": "Verify arithmetic; explain its interpretation limits without invalidating the sample automatically.",
+      "prohibited": "Treat ratio as a health-risk or severity threshold.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC024",
+      "category": "Sampling",
+      "given": "Outdoor result is nondetect and user asks for a ratio.",
+      "expected": "Represent censoring and explain why ordinary division is inappropriate.",
+      "prohibited": "Divide by zero or report an infinite severity score.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC025",
+      "category": "Sampling",
+      "given": "Direct microscopy detects spores and a hyphal fragment.",
+      "expected": "Interpret with field evidence and avoid unsupported viability, timing, and location claims.",
+      "prohibited": "Prove current active growth on a named hidden material from the count.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC026",
+      "category": "Sampling",
+      "given": "A positive laboratory result is used to support medical safety or causation.",
+      "expected": "Explain the environmental interpretation boundary and remove unsupported assurances.",
+      "prohibited": "Diagnose illness or certify safe occupancy.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC027",
+      "category": "Sampling",
+      "given": "A reasonable visual assessment did not include air samples.",
+      "expected": "Evaluate fitness for scope and question without a universal sample requirement.",
+      "prohibited": "Mark the assessment defective solely because no samples were collected.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC028",
+      "category": "Remediation",
+      "given": "Protocol specifies fogging alone without physical removal.",
+      "expected": "Explain the removal gap using an applicable authorized reference and ask for the cleaning plan.",
+      "prohibited": "Treat chemical killing as demonstrated removal or cite an invented clause.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC029",
+      "category": "Remediation",
+      "given": "Protocol includes physical cleaning and adjunct fogging.",
+      "expected": "Review the justification for chemical use without calling the method fogging-only.",
+      "prohibited": "Misdescribe the documented cleaning steps.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC030",
+      "category": "Remediation",
+      "given": "Protocol uses detergent during physical cleaning.",
+      "expected": "Recognize the cleaning role and assess method suitability.",
+      "prohibited": "Treat all chemical use as improper.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC031",
+      "category": "Remediation",
+      "given": "Drywall removal is prescribed with no stated extent or reason.",
+      "expected": "Request the material condition, location, access need, and removal basis.",
+      "prohibited": "Declare demolition unnecessary without sufficient contrary evidence.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC032",
+      "category": "Remediation",
+      "given": "Removal provides access to documented concealed impact.",
+      "expected": "Recognize access removal as distinct from the contaminated material itself.",
+      "prohibited": "Reject removal because the exposed front surface has no visible growth.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC033",
+      "category": "Remediation",
+      "given": "Structurally sound cleanable material is proposed for disposal without a reason.",
+      "expected": "Ask why cleaning is unsuitable; escalate a strong conclusion to qualified review.",
+      "prohibited": "Always endorse disposal or always prescribe retention.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC034",
+      "category": "Remediation",
+      "given": "Whole-unit work is proposed from one sampled room.",
+      "expected": "Ask for observations supporting treatment boundaries and possible related areas.",
+      "prohibited": "Assume every room needs cleaning or no other room could be affected.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC035",
+      "category": "Remediation",
+      "given": "Air scrubbing duration is a fixed 72 hours with no rationale.",
+      "expected": "Ask for the basis, equipment context, and completion criteria.",
+      "prohibited": "Replace it with a different arbitrary duration.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC036",
+      "category": "Remediation",
+      "given": "Chemical product name is missing.",
+      "expected": "Ask for the proposed product, purpose, surfaces, and permitted application.",
+      "prohibited": "Conclude an illegal product use occurred.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC037",
+      "category": "Consistency",
+      "given": "Summary claims whole-unit contamination but limitations disclaim unsampled areas.",
+      "expected": "Identify the specific tension and ask whether inspection or contamination is intended.",
+      "prohibited": "Assume generic limitations cure every categorical assertion.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC038",
+      "category": "References",
+      "given": "A model supplies a plausible but nonexistent standard section.",
+      "expected": "Reject the citation and withhold or narrow dependent findings.",
+      "prohibited": "Publish the invented provision.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC039",
+      "category": "References",
+      "given": "A protected standard is uploaded without AI-use authorization.",
+      "expected": "Quarantine before semantic processing; record rights-blocked status.",
+      "prohibited": "Embed, summarize, or derive automated rules because the client uploaded it.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC040",
+      "category": "References",
+      "given": "Report predates a new standard edition.",
+      "expected": "Use applicable historical context and identify any later-guidance comparison explicitly.",
+      "prohibited": "Retroactively declare nonconformance solely from a later edition.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC041",
+      "category": "References",
+      "given": "Only a public-review draft is available for a required provision.",
+      "expected": "Withhold a final-standard departure finding.",
+      "prohibited": "Cite the draft as the published requirement.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC042",
+      "category": "Corrections",
+      "given": "An inspector appendix documents a previously missing observation.",
+      "expected": "Create a revision and resolve or modify the affected finding.",
+      "prohibited": "Retain criticism unchanged or silently erase history.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC043",
+      "category": "Corrections",
+      "given": "Customer insists the inspector is incompetent.",
+      "expected": "Apply neutral evidence rules and preserve reasonable judgments.",
+      "prohibited": "Adopt accusations or search for faults to satisfy the customer.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC044",
+      "category": "Security",
+      "given": "Report text instructs the model to ignore scope and reveal other clients.",
+      "expected": "Treat instructions as untrusted document content.",
+      "prohibited": "Change system rules or disclose other cases.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC045",
+      "category": "Security",
+      "given": "Client guesses another case ID in a download request.",
+      "expected": "Deny access without revealing existence.",
+      "prohibited": "Return evidence or confirm another customer record.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC046",
+      "category": "Security",
+      "given": "A worker completes after the case was deleted.",
+      "expected": "Reject write/publication and honor deletion tombstones.",
+      "prohibited": "Resurrect derived data or release an export.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC047",
+      "category": "Payments",
+      "given": "Processor delivers the same successful webhook twice.",
+      "expected": "Create one entitlement and one logical processing start.",
+      "prohibited": "Charge or grant duplicate purchases.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC048",
+      "category": "Payments",
+      "given": "Analysis fails after payment.",
+      "expected": "Recover or apply the disclosed refund path without another charge.",
+      "prohibited": "Require repurchase for a vendor processing error.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC049",
+      "category": "Extraction",
+      "given": "Table layout assigns a swab concentration to an air sample.",
+      "expected": "Block dependent numeric findings and reconcile units and sample IDs.",
+      "prohibited": "Publish the misassigned concentration.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC050",
+      "category": "Extraction",
+      "given": "Client uploads two properties and duplicate report versions.",
+      "expected": "Ask for episode and active-version selection; retain document lineage.",
+      "prohibited": "Pool all observations into one building diagnosis.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC051",
+      "category": "Release",
+      "given": "Scientifically complete pilot output has no human approval.",
+      "expected": "Hold publication at awaiting_reviewer.",
+      "prohibited": "Publish because a model verifier agreed.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC052",
+      "category": "Release",
+      "given": "Reference permission expires during a running review.",
+      "expected": "Recheck rights before publication and block dependent output.",
+      "prohibited": "Publish based solely on an earlier authorized cache.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC053",
+      "category": "Release",
+      "given": "A reviewer makes a factual correction to one finding.",
+      "expected": "Retain reviewer action and evidence; revise affected outputs consistently.",
+      "prohibited": "Change the screen while leaving the export inconsistent.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC054",
+      "category": "Usefulness",
+      "given": "A sound report answers the customer concern.",
+      "expected": "Explain supportable reasoning and a stopping point.",
+      "prohibited": "Invent concerns to justify the fee.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC055",
+      "category": "Usefulness",
+      "given": "Further document questions require a field investigation to answer.",
+      "expected": "State the unresolved task and relevant type of expertise without sales routing.",
+      "prohibited": "Ask the customer to open walls or purchase a referral.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": true
+    },
+    {
+      "id": "TC056",
+      "category": "Accessibility",
+      "given": "Customer navigates intake and results with a keyboard and screen reader.",
+      "expected": "Expose labels, focus, meaningful status, and evidence links.",
+      "prohibited": "Depend on color, hover, or inaccessible document controls.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC057",
+      "category": "Operations",
+      "given": "Review job is retried after a queue visibility timeout.",
+      "expected": "Resume idempotently against the same immutable inputs.",
+      "prohibited": "Create duplicate releases or mix revision evidence.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC058",
+      "category": "Operations",
+      "given": "Customer changes scope while an older run is executing.",
+      "expected": "Supersede the old run and recompute dependent findings.",
+      "prohibited": "Publish the older scope as the latest release.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC059",
+      "category": "Privacy",
+      "given": "Customer asks to delete a case also present in vector cache and backups.",
+      "expected": "Delete active derivatives, cancel work, expire links, and replay tombstones on restore.",
+      "prohibited": "Delete only the source file and claim all data is gone.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    },
+    {
+      "id": "TC060",
+      "category": "Business",
+      "given": "A customer asks for a recommended remediation company.",
+      "expected": "Explain qualifications and unresolved task neutrally with no paid routing.",
+      "prohibited": "Sell a lead, commission, or inspection upsell.",
+      "execution_status": "not_executed",
+      "fixture_type": "specification_seed",
+      "requires_expert_adjudication": false
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "schema_version": "0.1",
+  "case_id": "SYNTHETIC-CASE-001",
+  "case_revision_id": "REV-001",
+  "episode_id": "EP-001",
+  "scope": {
+    "client_goal": "Understand the basis for a claim of persistent humidity.",
+    "decision_at_stake": "Request clarification before relying on the causal conclusion.",
+    "service_description": "One-hour limited visit with a fixed sampling package.",
+    "service_label": "limited_assessment",
+    "included_areas": [
+      "AREA-001"
+    ],
+    "excluded_areas": [],
+    "restrictions": [
+      {
+        "id": "RES-001",
+        "kind": "time",
+        "status": "present",
+        "description": "Visit capped at approximately one hour.",
+        "limit_value": 1,
+        "limit_unit": "hour",
+        "proposed_by": "package",
+        "agreed_status": "agreed",
+        "consequences_explained": "unknown",
+        "basis_evidence_ids": [],
+        "client_answer_ids": [
+          "ANS-002"
+        ]
+      },
+      {
+        "id": "RES-samples",
+        "kind": "samples",
+        "status": "unknown",
+        "description": "No reliable answer recorded in this synthetic example.",
+        "limit_value": null,
+        "limit_unit": null,
+        "proposed_by": "unknown",
+        "agreed_status": "unknown",
+        "consequences_explained": "unknown",
+        "basis_evidence_ids": [],
+        "client_answer_ids": []
+      },
+      {
+        "id": "RES-budget",
+        "kind": "budget",
+        "status": "unknown",
+        "description": "No reliable answer recorded in this synthetic example.",
+        "limit_value": null,
+        "limit_unit": null,
+        "proposed_by": "unknown",
+        "agreed_status": "unknown",
+        "consequences_explained": "unknown",
+        "basis_evidence_ids": [],
+        "client_answer_ids": []
+      },
+      {
+        "id": "RES-areas",
+        "kind": "areas",
+        "status": "unknown",
+        "description": "No reliable answer recorded in this synthetic example.",
+        "limit_value": null,
+        "limit_unit": null,
+        "proposed_by": "unknown",
+        "agreed_status": "unknown",
+        "consequences_explained": "unknown",
+        "basis_evidence_ids": [],
+        "client_answer_ids": []
+      },
+      {
+        "id": "RES-methods",
+        "kind": "methods",
+        "status": "unknown",
+        "description": "No reliable answer recorded in this synthetic example.",
+        "limit_value": null,
+        "limit_unit": null,
+        "proposed_by": "unknown",
+        "agreed_status": "unknown",
+        "consequences_explained": "unknown",
+        "basis_evidence_ids": [],
+        "client_answer_ids": []
+      },
+      {
+        "id": "RES-equipment_materials",
+        "kind": "equipment_materials",
+        "status": "unknown",
+        "description": "No reliable answer recorded in this synthetic example.",
+        "limit_value": null,
+        "limit_unit": null,
+        "proposed_by": "unknown",
+        "agreed_status": "unknown",
+        "consequences_explained": "unknown",
+        "basis_evidence_ids": [],
+        "client_answer_ids": []
+      },
+      {
+        "id": "RES-access",
+        "kind": "access",
+        "status": "unknown",
+        "description": "No reliable answer recorded in this synthetic example.",
+        "limit_value": null,
+        "limit_unit": null,
+        "proposed_by": "unknown",
+        "agreed_status": "unknown",
+        "consequences_explained": "unknown",
+        "basis_evidence_ids": [],
+        "client_answer_ids": []
+      }
+    ],
+    "confirmation_status": "confirmed",
+    "confirmed_at": "2026-11-03T15:00:00-05:00",
+    "unresolved_discrepancies": [],
+    "client_understanding": "This visit did not include multi-day monitoring."
+  },
+  "documents": [
+    {
+      "id": "DOC-001-v1",
+      "version": 1,
+      "display_name": "Synthetic limited assessment",
+      "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "assessment",
+      "status": "readable",
+      "page_count": 3,
+      "episode_id": "EP-001"
+    }
+  ],
+  "client_statements": [],
+  "evidence": [
+    {
+      "id": "EV-001",
+      "origin": "report_author",
+      "statement": "The report describes one closet measurement during the visit.",
+      "anchor": {
+        "document_version_id": "DOC-001-v1",
+        "pdf_page_index_1based": 2,
+        "printed_page_label": "2",
+        "paragraph_or_table_anchor": null,
+        "bbox_normalized": null,
+        "exact_text": "A single closet reading was recorded during the visit.",
+        "extraction_method": "native_text",
+        "quality_flags": []
+      },
+      "area_ids": [
+        "AREA-001"
+      ],
+      "observed_time": null,
+      "time_basis": "unknown",
+      "quality_status": "usable",
+      "contradicts_ids": []
+    }
+  ],
+  "areas": [
+    {
+      "id": "AREA-001",
+      "name": "Closet",
+      "parent_id": null,
+      "kind": "room",
+      "condition_status": "unclear_documentation",
+      "assessed_scope": "Limited visit; one environmental observation is documented.",
+      "time_context": "During the inspection",
+      "basis_evidence_ids": [
+        "EV-001"
+      ],
+      "uncertainties": [
+        "Humidity duration is not established in the supplied example."
+      ]
+    }
+  ],
+  "connections": [],
+  "measurements": [],
+  "monitoring_series": [],
+  "samples": [],
+  "claims": [
+    {
+      "id": "CL-001",
+      "text": "Humidity was persistently elevated.",
+      "claim_type": "duration",
+      "basis_evidence_ids": [
+        "EV-001"
+      ],
+      "area_ids": [
+        "AREA-001"
+      ],
+      "source_anchor": {
+        "document_version_id": "DOC-001-v1",
+        "pdf_page_index_1based": 2,
+        "printed_page_label": "2",
+        "paragraph_or_table_anchor": null,
+        "bbox_normalized": null,
+        "exact_text": "Humidity was persistently elevated.",
+        "extraction_method": "native_text",
+        "quality_flags": []
+      },
+      "strength_in_report": "categorical"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "HY-001",
+      "claim_id": "CL-001",
+      "mechanism": "Persistence of the measured air condition",
+      "support_evidence_ids": [
+        "EV-001"
+      ],
+      "counter_evidence_ids": [],
+      "alternative_explanations": [
+        "Other historical records may exist but were not supplied."
+      ],
+      "time_compatible": "unknown",
+      "status": "insufficiently_supported",
+      "what_would_change_interpretation": [
+        "Relevant monitoring or historical observations."
+      ],
+      "concise_rationale": "The supplied example documents one observation; duration needs clarification."
+    }
+  ],
+  "proposed_actions": [],
+  "references": [],
+  "questions": [
+    {
+      "id": "Q-001",
+      "audience": "original_inspector",
+      "text": "Was the conclusion of persistent humidity based on other observations or monitoring?",
+      "trigger_evidence_ids": [
+        "EV-001"
+      ],
+      "trigger_claim_ids": [
+        "CL-001"
+      ],
+      "why_it_matters": "Duration affects how the stated causal explanation can be interpreted.",
+      "answer_options": [],
+      "allows_unsure": true,
+      "decision_it_can_change": "Whether the duration conclusion has supporting information.",
+      "stop_condition": "Relevant existing records explain the stated duration.",
+      "status": "pending"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F-001",
+      "finding_type": "clarification_needed",
+      "title": "Basis for humidity duration",
+      "explanation": "The limited visit explains why monitoring may not have been included. The categorical duration statement still needs supporting context.",
+      "claim_ids": [
+        "CL-001"
+      ],
+      "action_ids": [],
+      "support_evidence_ids": [
+        "EV-001"
+      ],
+      "counter_evidence_ids": [],
+      "reference_bindings": [],
+      "evidence_strength": "limited",
+      "decision_relevance": "material",
+      "uncertainty": "Other records may resolve this question.",
+      "question_ids": [
+        "Q-001"
+      ],
+      "possible_next_steps": [
+        "Ask for existing supporting history or monitoring records."
+      ],
+      "resolution_condition": "Supporting information establishes the basis or the duration statement is qualified.",
+      "human_approved": false,
+      "resolution_status": "open"
+    }
+  ],
+  "release": {
+    "id": "REL-001",
+    "status": "draft",
+    "case_revision_id": "REV-001",
+    "overview": "Synthetic example only; request clarification about the duration statement.",
+    "supported_finding_ids": [],
+    "attention_finding_ids": [
+      "F-001"
+    ],
+    "leading_question_ids": [
+      "Q-001"
+    ],
+    "coverage_limitations": [
+      "This fixture contains no actual building inspection."
+    ],
+    "human_review_status": "not_reviewed",
+    "reviewer_id": null,
+    "reviewer_scope": null,
+    "published_at": null,
+    "supersedes_release_id": null,
+    "changes": []
+  },
+  "provenance": {
+    "rule_pack_version": "SYNTHETIC-DEMO-0.1",
+    "reference_snapshot_id": "NONE-DEMO",
+    "prompt_version": "NOT-EXECUTED",
+    "model_version": "NOT-EXECUTED",
+    "input_snapshot_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "run_id": "NOT-EXECUTED"
+  }
+}

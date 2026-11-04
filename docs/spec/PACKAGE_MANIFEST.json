@@ -1,0 +1,50 @@
+{
+  "specification_version": "0.1",
+  "date": "2026-11-03",
+  "master_words": 9103,
+  "requirements": 84,
+  "seed_scenarios": 60,
+  "scientific_engine_validated": false,
+  "files": [
+    {
+      "path": "DECISIONS.md",
+      "bytes": 4486,
+      "sha256": "dd807ec159907fb4636f9c39b81dd058ece78a42b463cfb058a12505bf270961"
+    },
+    {
+      "path": "MASTER_SPEC.md",
+      "bytes": 68400,
+      "sha256": "47c1c316c6076f5e20ded27e034538d97ca2afb47226ba42e1f453fb9157dbd6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2565,
+      "sha256": "a0e83f28f87facfba86bd477bcfeaea8ab7de56cbc182bd436dc5aecdde8cc00"
+    },
+    {
+      "path": "evaluation_cases.json",
+      "bytes": 26676,
+      "sha256": "4b6e826ba8906d4cb5f694450aaee5baa0189c19c5cdea1f65001604b71d21e3"
+    },
+    {
+      "path": "example_case.json",
+      "bytes": 9256,
+      "sha256": "9bdd676986f5015028ebccb52b2e87ed30b9c905eee4359f031094ae5e213fe4"
+    },
+    {
+      "path": "requirements.csv",
+      "bytes": 13302,
+      "sha256": "78e89636f5a533e40afe93ccf5d8da434b53521142a80fbc2f943dbf69c9c458"
+    },
+    {
+      "path": "review_contract.schema.json",
+      "bytes": 42619,
+      "sha256": "5f715e13c8492bb959da9d29364b915cd33400d1c066414ebd979005fbb6fbea"
+    },
+    {
+      "path": "workflow_transitions.json",
+      "bytes": 3919,
+      "sha256": "34bc6f32781254ddbdf60d3dbd91e5edee71795842480cfc27fd2bf352191ff3"
+    }
+  ]
+}

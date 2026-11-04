@@ -1,0 +1,85 @@
+requirement_id,area,priority,decision_status,requirement,acceptance_criterion,scenario_ids
+GOV-001,Governance,P0,confirmed,Independent review-only revenue,"No result, question, or next-step routes to paid professional services or referrals.",TC060
+GOV-002,Governance,P0,confirmed,No grading or guaranteed defects,A sound report can produce no adverse findings; no pass/fail or numeric report score appears.,TC007 TC054
+GOV-003,Governance,P0,confirmed,Evidence-limited property interpretation,No output asserts unobserved building conditions as established facts.,TC009 TC011 TC025
+SCP-001,Intake,P0,confirmed,Client restrictions first,No substantive adverse review appears before initial client context and scope confirmation or explicit conditional scope.,TC001 TC002 TC051
+SCP-002,Intake,P0,confirmed,Capture time limits,"One-hour visit limits retain value, unit, source, and uncertainty.",TC002
+SCP-003,Intake,P0,confirmed,Capture sample restrictions,Fixed number/type packages are distinguished from limits on visual investigation.,TC001 TC005
+SCP-004,Intake,P0,confirmed,Capture all restriction classes,"Time, sample, budget, area, method, equipment/material, and access restrictions support unknown and conflicting states.",TC004 TC006
+SCP-005,Intake,P0,confirmed,Record restriction origin,"Client, inspector, package, third-party, access-condition, and unknown origins remain distinct.",TC003 TC006
+SCP-006,Intake,P0,confirmed,Separate goal and purchased service,The scope summary can say the narrow service was fulfilled while the broader concern remains unanswered.,TC001 TC007
+SCP-007,Intake,P0,confirmed,Handle conflicting scope evidence,Conflicting recollection and contract remain attributed and dependent findings are conditional.,TC003
+SCP-008,Intake,P0,confirmed,Allow unsure and decline,Missing optional answers do not become adverse findings.,TC004 TC055
+SCP-009,Intake,P0,confirmed,Question relevance and stopping,Every adaptive question records what decision it can change and when asking should stop.,TC054 TC055
+SCP-010,Intake,P1,proposed,One question at a time default,Intake autosaves and avoids redundant questions already answered in reliable documents.,TC056
+ING-001,Ingestion,P0,proposed,Safe file preflight,Unsupported or unreadable files are identified before charge and scientific analysis.,TC049
+ING-002,Ingestion,P0,confirmed,Immutable document versions,"Original hash, extracted version, PDF index/printed label, and episode are retained.",TC050
+ING-003,Ingestion,P0,confirmed,Exact evidence anchors,Every material finding points to a usable source span or attributed observation.,TC008 TC049
+ING-004,Ingestion,P0,confirmed,Text and image distinction,A caption is separate from observed image content; conflicting claims remain visible.,TC008
+ING-005,Ingestion,P0,confirmed,Numeric ambiguity blocks dependent output,Mixed units or sample IDs cannot reach release until reconciled or explicitly excluded.,TC049
+ING-006,Ingestion,P0,confirmed,Property and revision isolation,Different properties and episodes cannot be merged without confirmed association.,TC050
+ING-007,Ingestion,P0,confirmed,Rights quarantine before semantics,Protected standards without permission are not sent to extraction LLMs or reference indexing.,TC039
+EVD-001,Evidence,P0,confirmed,Attribution throughout reasoning,"Client reports, author claims, lab observations, images, and reviewer inference retain distinct origins.",TC008 TC043
+EVD-002,Evidence,P0,confirmed,Unknown is explicit,Absent room discussion yields unassessed/unclear rather than clean or contaminated.,TC009
+EVD-003,Evidence,P0,confirmed,Negative findings have boundaries,"No-indicator observations retain date, assessed scope, and limitations.",TC010
+EVD-004,Evidence,P0,confirmed,Spatial reasoning without assumed transfer,Physical adjacency and HVAC service edges do not establish contamination transfer.,TC011 TC012
+EVD-005,Evidence,P0,confirmed,Keep chronology,"Inspection, sampling, analysis, report, monitoring, and later repair dates are distinct.",TC022
+DIA-001,Diagnostics,P0,confirmed,Capture method material and scale,Unknown comparative readings are not converted to percent material moisture.,TC017
+DIA-002,Diagnostics,P0,confirmed,Separate spatial and temporal coverage,"Surveys, spot readings, repeated visits, and monitoring have different explicit coverage.",TC013 TC014 TC016
+DIA-003,Diagnostics,P0,confirmed,Air and material evidence remain distinct,Room RH does not become measured wall moisture.,TC015
+DIA-004,Diagnostics,P0,confirmed,No mandatory map instrument or logger,A defensible method is not criticized merely for lacking a preferred tool or formal map.,TC018 TC027
+DIA-005,Diagnostics,P1,proposed,Monitoring data quality,"Gaps, timezone, sensor moves, and actual aggregation are visible in interpretation and charts.",TC014
+CAU-001,Causation,P0,confirmed,Evaluate support and alternatives,"Each material causal finding has support, limits, competing explanations, and a resolving question.",TC019 TC021
+CAU-002,Causation,P0,confirmed,Spot readings do not establish duration alone,Categorical persistence claims receive a targeted support question unless other history exists.,TC013
+CAU-003,Causation,P0,confirmed,Nondetection does not exclude leakage,Selected fungal nondetection is not used as proof against a water event.,TC020
+CAU-004,Causation,P0,confirmed,Recognize reasonable uncertainty,A report may leave cause unresolved while explaining next investigative distinctions.,TC021
+SAM-001,Sampling,P0,confirmed,Sampling is contextual,Interpret sample objective and field findings without universal sample-count rules.,TC001 TC027
+SAM-002,Sampling,P0,confirmed,Deterministic arithmetic,"Ratios and volumes are computed with recorded inputs, units, and nondetect handling.",TC023 TC024
+SAM-003,Sampling,P0,confirmed,No viability or location overreach,Direct microscopy counts alone do not establish current growth or hidden source location.,TC025
+SAM-004,Sampling,P0,confirmed,No health or occupancy certification,Spore counts cannot generate a medical diagnosis or safe-occupancy assurance.,TC026
+REM-001,Remediation,P0,confirmed,Cleaning and chemical roles distinguished,Fogging-only and physical-cleaning-plus-adjunct protocols receive different descriptions.,TC028 TC029
+REM-002,Remediation,P0,confirmed,No blanket chemical rejection,Cleaning detergents and justified adjunct uses are not automatically labeled improper.,TC030
+REM-003,Remediation,P0,confirmed,Justification for removal,"Material condition, cleanability, access, and extent are assessed before an excess-removal conclusion.",TC031 TC032 TC033
+REM-004,Remediation,P0,confirmed,Work boundaries need evidence,Whole-unit treatment is evaluated against documented or investigated extent.,TC034
+REM-005,Remediation,P0,confirmed,Fixed duration needs basis,A 72-hour recommendation is queried for context without inventing another universal duration.,TC035
+REM-006,Remediation,P0,confirmed,Product detail uncertainty,Missing product detail triggers a question rather than an unsupported allegation of illegal use.,TC036
+REM-007,Remediation,P0,confirmed,Verification matches objectives,Completion criteria relate to cleaning/source issues without a health guarantee.,TC026
+REM-008,Remediation,P0,confirmed,No replacement protocol,Output gives explanatory questions and possible next steps rather than a new executable remediation scope.,TC055
+CON-001,Consistency,P0,confirmed,Reconcile body and limitations,Generic disclaimers do not automatically cure categorical conclusions elsewhere.,TC037
+REF-001,References,P0,confirmed,Verified claim-level source support,No invented provision reaches a released finding.,TC038
+REF-002,References,P0,confirmed,Rights enforced at all stages,"Pending, blocked, and expired rights prevent dependent retrieval, inference, and release.",TC039 TC052
+REF-003,References,P0,confirmed,Edition and context applicability,Later editions cannot silently become historical requirements.,TC040
+REF-004,References,P0,confirmed,No draft-as-final citation,Unapproved public-review drafts cannot support a published-standard departure finding.,TC041
+REF-005,References,P0,confirmed,Different authority types remain distinct,"Guidance, standards, regulation, contract, and internal principles are not described interchangeably.",TC038 TC041
+REF-006,References,P0,confirmed,No customer standards quotations,Output uses verified metadata and original relevance explanations within permission limits.,TC039
+FND-001,Findings,P0,confirmed,Allowed finding types and rationale,"Findings include supported reasoning and proportionate clarification, not only criticism.",TC007 TC054
+FND-002,Findings,P0,confirmed,Reference departures gated,Specific applicable verified support and pilot human approval are required for a departure assertion.,TC038 TC051
+FND-003,Findings,P0,confirmed,Counterevidence challenge,"Each material criticism is checked for missing attachments, scope explanations, and reasonable alternatives.",TC003 TC021 TC042
+FND-004,Findings,P0,confirmed,Neutral professional language,"No competence, fraud, motive, or negligence accusations are generated.",TC043
+OUT-001,Output,P0,confirmed,Useful plain-language next steps,"The customer receives prioritized questions, their purpose, and resolution conditions.",TC054 TC055
+OUT-002,Output,P0,confirmed,No diagnosis of unseen conditions,Next steps identify uncertainty rather than announcing an unverified source.,TC019 TC025
+OUT-003,Output,P0,confirmed,Display export consistency,All representations derive from the approved immutable structured release.,TC053
+OUT-004,Output,P1,proposed,Accessible interface,"Keyboard, focus, labels, reading order, and non-color status work in supported screens.",TC056
+REV-001,Revisions,P0,confirmed,Versioned correction,New evidence resolves/modifies/retracts findings with a visible reason and superseded history.,TC042
+REV-002,Revisions,P0,confirmed,Disagreement is not proof,Customer insistence does not replace scientific evaluation.,TC043
+REV-003,Revisions,P0,confirmed,Stale runs cannot publish,Scope changes supersede dependent results and reject late commits.,TC058
+AI-001,AI workflow,P0,proposed,Typed bounded pipeline,Schema-invalid output cannot publish; repair attempts are capped.,TC049 TC051
+AI-002,AI workflow,P0,confirmed,No private reasoning disclosure requirement,"Store concise evidence-based rationale, not private chain-of-thought or self-certified certainty.",TC038
+AI-003,AI workflow,P0,confirmed,Human approval in pilot,No pilot release is published without recorded qualified review.,TC051
+AI-004,AI workflow,P0,confirmed,Injection resistance,Uploaded instructions cannot change policy or access other cases.,TC044
+SEC-001,Security,P0,confirmed,Case ownership everywhere,"API, object grants, jobs, retrieval, exports, and model contexts enforce ownership.",TC045
+SEC-002,Security,P0,proposed,Minimal privileged access,"Support access to document content requires purpose, permission, and audit.",TC045
+SEC-003,Security,P0,confirmed,No implicit training permission,Customer upload authorization never grants model training or evaluation reuse automatically.,TC059
+SEC-004,Security,P0,proposed,Private secure parsing,"Files are scanned and parsed with disabled macros, resource limits, and no arbitrary external fetch.",TC044
+SEC-005,Security,P0,proposed,No sensitive ordinary logs,"Document bodies, addresses, credentials, and signed links are absent from routine logs.",TC045
+DEL-001,Deletion,P0,confirmed,Deletion wins worker races,Deleted or pending-deletion cases cannot be republished by a late job.,TC046
+DEL-002,Deletion,P0,proposed,Delete derivatives and backups safely,Delete active objects/indices/caches and replay tombstones after backup restore under disclosed policy.,TC059
+PAY-001,Payments,P0,proposed,Pay after preflight and context,The exact service quote and confirmed scope precede purchase; no unsupported file is charged.,TC048 TC050
+PAY-002,Payments,P0,confirmed,Idempotent verified entitlement,Replayed signed webhooks produce one entitlement and cannot duplicate charges.,TC047
+PAY-003,Payments,P0,proposed,Failure recovery without repurchase,Post-payment vendor failure has completion/refund recovery under disclosed terms.,TC048
+OPS-001,Operations,P0,proposed,Durable idempotent jobs,Retries preserve inputs and create one logical result.,TC057
+OPS-002,Operations,P0,proposed,Pinned run provenance,"Each release retains document, scope, rule, reference, prompt, and model versions.",TC040 TC058
+OPS-003,Operations,P1,proposed,Measured performance and cost,"Record per-stage latency, failure, usage, support, and reviewer time without claiming untested SLAs.",TC057
+VAL-001,Validation,P0,proposed,Expert adjudication and holdout,Scientific acceptance is evaluated on separately held-out authorized cases and acceptable alternatives.,TC007 TC021
+VAL-002,Validation,P0,confirmed,Fairness measured explicitly,"Measure false criticism, unsupported reassurance, abstention, and useful-question rates.",TC007 TC054
+VAL-003,Validation,P0,proposed,Critical defect gates,"Rights, privacy, fabricated citations, wrong numbers, and pilot-approval defects block release.",TC038 TC045 TC049 TC051

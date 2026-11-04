@@ -1,0 +1,163 @@
+{
+  "version": "0.1",
+  "status": "proposed",
+  "case_transitions": {
+    "draft": [
+      "preflight",
+      "deletion_pending"
+    ],
+    "preflight": [
+      "scope_intake",
+      "failed",
+      "deletion_pending"
+    ],
+    "scope_intake": [
+      "scope_confirmation",
+      "deletion_pending"
+    ],
+    "scope_confirmation": [
+      "scope_intake",
+      "awaiting_payment",
+      "deletion_pending"
+    ],
+    "awaiting_payment": [
+      "ready_for_analysis",
+      "scope_intake",
+      "deletion_pending"
+    ],
+    "ready_for_analysis": [
+      "analysis",
+      "revision_pending",
+      "deletion_pending"
+    ],
+    "analysis": [
+      "awaiting_client",
+      "awaiting_reviewer",
+      "failed",
+      "revision_pending",
+      "deletion_pending"
+    ],
+    "awaiting_client": [
+      "analysis",
+      "awaiting_reviewer",
+      "revision_pending",
+      "deletion_pending"
+    ],
+    "awaiting_reviewer": [
+      "analysis",
+      "released",
+      "failed",
+      "revision_pending",
+      "deletion_pending"
+    ],
+    "released": [
+      "revision_pending",
+      "deletion_pending"
+    ],
+    "revision_pending": [
+      "scope_intake",
+      "scope_confirmation",
+      "ready_for_analysis",
+      "deletion_pending"
+    ],
+    "failed": [
+      "preflight",
+      "analysis",
+      "deletion_pending"
+    ],
+    "deletion_pending": [
+      "deleted"
+    ],
+    "deleted": []
+  },
+  "payment_transitions": {
+    "not_started": [
+      "pending"
+    ],
+    "pending": [
+      "paid",
+      "failed"
+    ],
+    "paid": [
+      "refund_pending",
+      "disputed"
+    ],
+    "failed": [
+      "pending"
+    ],
+    "refund_pending": [
+      "refunded",
+      "paid"
+    ],
+    "refunded": [],
+    "disputed": [
+      "paid",
+      "refund_pending",
+      "refunded"
+    ]
+  },
+  "guards": [
+    {
+      "transition": "awaiting_payment -> ready_for_analysis",
+      "requires": [
+        "server-verified paid entitlement",
+        "scope confirmed or explicit conditional scope",
+        "preflight complete"
+      ]
+    },
+    {
+      "transition": "analysis -> awaiting_reviewer",
+      "requires": [
+        "typed scientific output validated",
+        "material evidence ambiguities addressed or excluded",
+        "authorized references verified",
+        "prohibited claims absent"
+      ]
+    },
+    {
+      "transition": "awaiting_reviewer -> released",
+      "requires": [
+        "pilot human approval recorded",
+        "active case revision unchanged",
+        "payment entitlement valid",
+        "rights rechecked",
+        "release immutable and export source aligned"
+      ]
+    },
+    {
+      "transition": "revision_pending -> ready_for_analysis",
+      "requires": [
+        "new scope confirmed or conditional",
+        "included clarification entitlement valid",
+        "new documents preflighted",
+        "old dependent runs superseded"
+      ]
+    },
+    {
+      "transition": "failed -> analysis",
+      "requires": [
+        "retryable failure",
+        "same active input snapshot or explicit new run",
+        "valid entitlement",
+        "attempt cap not exceeded"
+      ]
+    },
+    {
+      "transition": "deletion_pending -> deleted",
+      "requires": [
+        "queued work cancelled",
+        "active evidence and derived stores deleted",
+        "signed grants invalidated",
+        "backup deletion tombstone stored",
+        "only permitted minimized transaction data retained"
+      ]
+    }
+  ],
+  "notes": [
+    "Application state is independent of payment and run state.",
+    "Only server-side guards authorize transitions.",
+    "Case deletion is irreversible in the customer workflow; retention of backups is separately disclosed.",
+    "Refused publication stays blocked or failed; no direct analysis-to-released path exists in the pilot.",
+    "Unattended release requires a future explicit state-policy revision and validated category approval."
+  ]
+}
