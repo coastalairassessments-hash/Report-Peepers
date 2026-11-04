@@ -21,3 +21,4 @@ Status key: open / with attorney / answered (add the answer and date).
 | L12 | Disclaimer wording: "not a licensed assessor", "environmental completion is not individual health safety" | Avoid implied professional opinion or health advice | Spec sections 5, 12.3 | open |
 | L13 | Human-reviewer status claims in marketing (which results were human reviewed) | Truthful advertising | Spec section 5 | open |
 | L14 | Entity and product name (Report Peepers) trademark check | Name conflicts | Spec section 29 | open |
+| L15 | A released review may be quoted or used in a dispute or lawsuit | Disclaimers must state document review only, not inspection or expert opinion; terms of use | EXPERT_WITNESS_REVIEW | open |

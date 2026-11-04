@@ -9,6 +9,7 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 |---|-------|--------|--------------------|
 | 1 | Core rules in code: contract, case states, scope intake, evidence links, revisions, math checks | Done (Bricks 1-7, 85 tests, CI green) | none |
 | 2 | Brick 8: remaining plain-code checks (area status, edition and draft dates, scope conflicts, export consistency) | Next | none |
+| 2b | Brick 9: defensibility rules from the expert-witness review (E1, E3, E4) | After Brick 8 | none |
 | 3 | AI slot with a stand-in model: typed stage outputs, scripted fake AI, full pipeline test | Planned | none |
 | 4 | Reading real reports: PDF text with page anchors, tables, photo captions | Planned | Sample reports (input I1) |
 | 5 | Expert rule packs loaded from files | Planned | IH rules (input I2) |

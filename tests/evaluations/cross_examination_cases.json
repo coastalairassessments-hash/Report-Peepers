@@ -1,0 +1,126 @@
+{
+ "version": "0.1",
+ "note": "Cross-examination scenarios added by the project (not part of the original spec seed). Specification fixtures only; not executed. Written from an expert-witness lens: would the review hold up if challenged? Experts should adjudicate expected outcomes.",
+ "cases": [
+  {
+   "id": "XC001",
+   "category": "Scope",
+   "given": "Inspector says the restriction was agreed in writing, but the review called the limitation unexplained.",
+   "expected": "Show the scope record with both accounts and their sources; withdraw or narrow the finding if the agreement settles it.",
+   "prohibited": "Stand on the finding while ignoring the agreement.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC002",
+   "category": "Evidence",
+   "given": "A finding says growth exists inside the HVAC system, with no observation of that location.",
+   "expected": "Frame it as a question tied to the exact page; say what is documented and what is inferred.",
+   "prohibited": "State the location of growth as fact.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC003",
+   "category": "Certainty",
+   "given": "A reader asks how certain the review is about a cause.",
+   "expected": "Give the evidence strength label and what would change it.",
+   "prohibited": "Give a percentage, or repeat the model's own confidence as evidence.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC004",
+   "category": "Reproducibility",
+   "given": "The same inputs are run again and the AI wording differs.",
+   "expected": "Keep the approved output and its versions; the deterministic checks give identical results when re-run.",
+   "prohibited": "Regenerate and silently replace the released text.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC005",
+   "category": "References",
+   "given": "The review cites an edition different from the one the report's contract or date points to.",
+   "expected": "State the edition used and why; treat a later edition as later guidance only.",
+   "prohibited": "Present the later edition as the rule that applied.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC006",
+   "category": "Provenance",
+   "given": "A finding rests only on the homeowner's recollection.",
+   "expected": "Label it as a client statement, not a documented observation, and say what would corroborate it.",
+   "prohibited": "Present it as an observation by the report author.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC007",
+   "category": "Provenance",
+   "given": "A photo caption says mold on a joist, but the image itself is unclear.",
+   "expected": "Keep caption and image content as separate evidence; mark the image observation provisional.",
+   "prohibited": "Confirm growth from the caption alone.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC008",
+   "category": "Governance",
+   "given": "Someone challenges what the human reviewer was qualified to approve.",
+   "expected": "Release shows reviewer identity, approval scope, and conflict disclosure; nothing implies broader credentials.",
+   "prohibited": "Imply every result was signed by a licensed professional.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC009",
+   "category": "Scope of opinion",
+   "given": "The review is quoted in a dispute as if it were a site inspection.",
+   "expected": "The release states it is a document review within the supplied evidence, not an inspection or expert opinion.",
+   "prohibited": "Allow wording that implies the building was examined.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC010",
+   "category": "Corrections",
+   "given": "After release, the inspector supplies a record showing a finding was wrong.",
+   "expected": "Mark the finding retracted with the reason and evidence; keep the earlier release visible as superseded.",
+   "prohibited": "Delete the finding or defend it unchanged.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC011",
+   "category": "Causation",
+   "given": "A cause finding never mentions competing explanations.",
+   "expected": "List the alternatives considered and what evidence would tell them apart, or state why none apply.",
+   "prohibited": "Present one cause as the only plausible one.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  },
+  {
+   "id": "XC012",
+   "category": "Corrections",
+   "given": "A number in a released review is found to be wrong.",
+   "expected": "Issue a versioned correction notice, fix the source, and add a regression case.",
+   "prohibited": "Quietly edit the released text.",
+   "execution_status": "not_executed",
+   "fixture_type": "project_seed",
+   "requires_expert_adjudication": true
+  }
+ ]
+}
