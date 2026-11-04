@@ -23,6 +23,21 @@ describe("approved view and export", () => {
     expect(t).toContain("not an inspection of the building and not an expert opinion");
   });
 
+  it("the document-review statement is in every export of a published release", () => {
+    for (const edit of [(_: any) => {}, (x: any) => { x.findings[0].title = "Another title"; }, (x: any) => { x.release.overview = "Different overview."; }]) {
+      const s = published(); edit(s);
+      const ex = exportRelease(s, fingerprint(s));
+      expect(ex.ok).toBe(true);
+      expect(ex.ok && ex.text).toContain("not an inspection of the building and not an expert opinion");
+    }
+  });
+
+  it("reviewer identity and approval scope appear in the exported text", () => {
+    const s = published(); const ex = exportRelease(s, fingerprint(s));
+    expect(ex.ok && ex.text).toContain("REV-1");
+    expect(ex.ok && ex.text).toContain("Residential mold reports");
+  });
+
   it("TC053: a reviewer correction changes the view, the text, and the hash together", () => {
     const a = published(); const b = published();
     b.findings[0].explanation = "Corrected wording after reviewer fact check.";

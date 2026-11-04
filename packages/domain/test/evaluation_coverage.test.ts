@@ -2,6 +2,8 @@ import { describe, it, expect } from "vitest";
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import cases from "../../../docs/spec/evaluation_cases.json" with { type: "json" };
+import xcCases from "../../../tests/evaluations/cross_examination_cases.json" with { type: "json" };
+import xcCoverage from "../../../tests/evaluations/cross_examination_coverage.json" with { type: "json" };
 import coverage from "../../../tests/evaluations/coverage.json" with { type: "json" };
 
 const root = resolve(import.meta.dirname, "../../..");
@@ -35,5 +37,28 @@ describe("evaluation scenario coverage map", () => {
   it("scenarios not yet covered carry no test claims", () => {
     for (const [id, e] of Object.entries(map))
       if (!["covered", "partial"].includes(e.status)) expect(e.evidence, id).toEqual([]);
+  });
+});
+
+describe("cross-examination coverage map", () => {
+  const xc = xcCoverage as Record<string, Entry>;
+  it("maps every XC scenario exactly once, and nothing extra", () => {
+    expect(Object.keys(xc).sort()).toEqual(xcCases.cases.map((c) => c.id).sort());
+  });
+  it("uses only known statuses", () => {
+    for (const [id, e] of Object.entries(xc)) expect(STATUSES, id).toContain(e.status);
+  });
+  it("every 'covered' or 'partial' claim names a test that really exists", () => {
+    for (const [id, e] of Object.entries(xc)) {
+      if (e.status !== "covered" && e.status !== "partial") continue;
+      expect(e.evidence.length, `${id} needs evidence`).toBeGreaterThan(0);
+      for (const ref of e.evidence) {
+        expect(existsSync(resolve(root, ref.file)), `${id}: ${ref.file}`).toBe(true);
+        expect(readFileSync(resolve(root, ref.file), "utf8").includes(ref.test), `${id}: test "${ref.test}" not found in ${ref.file}`).toBe(true);
+      }
+    }
+  });
+  it("scenarios not yet covered carry no test claims", () => {
+    for (const [id, e] of Object.entries(xc)) if (!["covered", "partial"].includes(e.status)) expect(e.evidence, id).toEqual([]);
   });
 });

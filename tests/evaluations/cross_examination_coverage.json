@@ -1,0 +1,148 @@
+{
+ "XC001": {
+  "status": "partial",
+  "note": "Both scope accounts are kept and shown; deciding whether an agreement settles the finding needs a human or the AI step",
+  "evidence": [
+   {
+    "file": "packages/domain/test/intake.test.ts",
+    "test": "TC003: both accounts are kept word for word when scope accounts conflict"
+   },
+   {
+    "file": "packages/domain/test/intake.test.ts",
+    "test": "a resolution needs a note and keeps both accounts"
+   }
+  ]
+ },
+ "XC002": {
+  "status": "needs_engine",
+  "note": "Needs the AI reading step to separate documented from inferred locations",
+  "evidence": []
+ },
+ "XC003": {
+  "status": "covered",
+  "note": "Percent and certainty wording is rejected; strength labels are the only allowed form",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "XC003: numeric confidence and certainty claims are rejected"
+   }
+  ]
+ },
+ "XC004": {
+  "status": "partial",
+  "note": "Deterministic checks and fingerprints are repeatable and published text cannot be silently replaced; AI wording drift awaits the AI step",
+  "evidence": [
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "fingerprint detects any edit to a published snapshot"
+   },
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "the same snapshot always gives the same hash"
+   },
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "a snapshot edited after publication is refused"
+   }
+  ]
+ },
+ "XC005": {
+  "status": "partial",
+  "note": "Later editions cannot support a verified departure; stating the edition and why is still a reviewer duty",
+  "evidence": [
+   {
+    "file": "packages/domain/test/referenceTiming.test.ts",
+    "test": "TC040: an edition published after the report cannot support a verified departure"
+   }
+  ]
+ },
+ "XC006": {
+  "status": "covered",
+  "note": "Client-only support cannot carry a strong or moderate finding",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "XC006: client statements alone cannot carry a strong finding"
+   }
+  ]
+ },
+ "XC007": {
+  "status": "needs_engine",
+  "note": "Needs the AI reading step to keep caption and image content separate",
+  "evidence": []
+ },
+ "XC008": {
+  "status": "partial",
+  "note": "Reviewer identity and scope appear in the text; conflict disclosure waits on ADR-003",
+  "evidence": [
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "reviewer identity and approval scope appear in the exported text"
+   }
+  ]
+ },
+ "XC009": {
+  "status": "covered",
+  "note": "Every export of a published release states it is a document review, not an inspection or expert opinion",
+  "evidence": [
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "the text states this is a document review, not an inspection or expert opinion"
+   },
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "the document-review statement is in every export of a published release"
+   }
+  ]
+ },
+ "XC010": {
+  "status": "covered",
+  "note": "A retraction is classified, needs a reason and new evidence, and the earlier release stays as superseded",
+  "evidence": [
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "classifies unchanged, resolved, modified, retracted, new"
+   },
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "a finding cannot disappear silently"
+   },
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "every change needs a reason and new evidence responsible"
+   },
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "a superseded or withdrawn release returns a notice, not an error or a silent copy"
+   }
+  ]
+ },
+ "XC011": {
+  "status": "covered",
+  "note": "A cause or duration finding without a hypothesis listing alternatives is rejected",
+  "evidence": [
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "XC011: a cause finding without a hypothesis listing alternatives is rejected"
+   },
+   {
+    "file": "packages/domain/test/integrity.test.ts",
+    "test": "a hypothesis needs alternatives and change conditions"
+   }
+  ]
+ },
+ "XC012": {
+  "status": "partial",
+  "note": "Released text cannot be quietly edited; the versioned correction notice and regression case are not built yet",
+  "evidence": [
+   {
+    "file": "packages/domain/test/release.test.ts",
+    "test": "a snapshot edited after publication is refused"
+   },
+   {
+    "file": "packages/domain/test/revision.test.ts",
+    "test": "superseding returns a copy and leaves the published original untouched"
+   }
+  ]
+ }
+}
