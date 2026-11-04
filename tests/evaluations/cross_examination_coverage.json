@@ -103,7 +103,7 @@
  },
  "XC009": {
   "status": "covered",
-  "note": "Every export of a published release states it is a document review, not an inspection or expert opinion",
+  "note": "Every export of a published release states it is a document review, not an inspection or expert opinion; the marked-up PDF's closing page carries the same statement, checked after rendering",
   "evidence": [
    {
     "file": "packages/domain/test/release.test.ts",
@@ -112,6 +112,10 @@
    {
     "file": "packages/domain/test/release.test.ts",
     "test": "the document-review statement is in every export of a published release"
+   },
+   {
+    "file": "packages/domain/test/render/verifyMarkup.test.ts",
+    "test": "a published, unchanged release gives the marked-up PDF, a matching text version, and hashes"
    }
   ]
  },
@@ -162,6 +166,10 @@
    {
     "file": "packages/domain/test/revision.test.ts",
     "test": "superseding returns a copy and leaves the published original untouched"
+   },
+   {
+    "file": "packages/domain/test/render/verifyMarkup.test.ts",
+    "test": "refuses a release that is not published, or that changed after publication, and returns no files"
    }
   ]
  }

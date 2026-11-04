@@ -108,6 +108,6 @@
 - Create: `docs/proofs/` (rendered synthetic example: PDF and page images) for Cory to look at
 - Modify: `tests/evaluations/cross_examination_coverage.json` (XC009, XC008, XC012 as far as proven), `docs/ROADMAP.md`, `docs/EXPERT_WITNESS_REVIEW.md`, regenerate `docs/EVALUATION_SCORECARD.md`
 
-- [ ] Step 1: Render the synthetic example, review the page images myself for overlap and legibility, send them to Cory. Step 2: Update maps only for tests that exist. Step 3: `npm run check`; commit, push, confirm CI green.
+- [x] Step 1: Render the synthetic example, review the page images myself for overlap and legibility, send them to Cory. Step 2: Update maps only for tests that exist. Step 3: `npm run check`; commit, push, confirm CI green. (Done; XC009 and XC012 evidence added, XC008 not claimed because reviewer identity is not in the marked-up PDF.)
 
 **Exit:** a published synthetic review renders to the customer's own pages with red handwritten marks on verified words, numbered notes, a clean summary page, and a matching plain-text version; the verifier proves the original pages are intact; builds are repeatable; CI green. Brick 14 (saved summary record) follows.

@@ -23,13 +23,14 @@
       #let h = (m.box.at(3) - m.box.at(1)) * H
       #pdf.artifact[
         #if m.kind == "circle" {
-          place(top + left, dx: x0 - 3pt, dy: y0 - h * 0.225, rotate((calc.rem(m.number, 3) - 1) * 0.7deg, ellipse(width: w + 6pt, height: h * 1.45, stroke: 1.3pt + ink)))
+          place(top + left, dx: x0 - 3pt, dy: y0 - h * 0.08, rotate((calc.rem(m.number, 3) - 1) * 0.5deg, rect(width: w + 6pt, height: h * 1.16, radius: calc.min(h * 0.58, 12pt), stroke: 1.3pt + ink)))
         } else if m.kind == "underline" {
-          place(top + left, dx: x0, dy: y0 + h, line(length: w, stroke: 1.4pt + ink))
+          place(top + left, dx: x0, dy: y0 + h + 1.5pt, line(length: w, stroke: 1.4pt + ink))
         } else {
-          place(top + left, dx: x0 - 5pt, dy: y0, rect(width: 5pt, height: h, stroke: (left: 1.3pt + ink, top: 1.3pt + ink, bottom: 1.3pt + ink)))
+          place(top + left, dx: x0 - 4pt, dy: y0, rect(width: 4pt, height: h, stroke: (left: 1.3pt + ink, top: 1.3pt + ink, bottom: 1.3pt + ink)))
+          place(top + left, dx: x0 + w, dy: y0, rect(width: 4pt, height: h, stroke: (right: 1.3pt + ink, top: 1.3pt + ink, bottom: 1.3pt + ink)))
         }
-        #place(top + left, dx: x0 - d * 0.8, dy: y0 - d * 0.8, box(width: d, height: d, align(center + horizon, hand(str(m.number), st.note_font_pt * 1pt))))
+        #place(top + left, dx: x0 - d - 1pt, dy: y0 - d * 0.35, box(width: d, height: d, align(right + horizon, hand(str(m.number), d * 0.95))))
       ]
     ]
     #for n in pg.notes [

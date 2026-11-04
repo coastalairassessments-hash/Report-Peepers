@@ -97,7 +97,7 @@ Twelve challenges a skeptical expert or opposing party could raise (docs/EXPERT_
 | XC006 | Provenance | covered | Client-only support cannot carry a strong or moderate finding |
 | XC007 | Provenance | needs_engine | Needs the AI reading step to keep caption and image content separate |
 | XC008 | Governance | covered | Reviewer identity, approval scope, and conflict disclosure appear in the text; a v0.2 release cannot publish without a disclosure |
-| XC009 | Scope of opinion | covered | Every export of a published release states it is a document review, not an inspection or expert opinion |
+| XC009 | Scope of opinion | covered | Every export of a published release states it is a document review, not an inspection or expert opinion; the marked-up PDF's closing page carries the same statement, checked after rendering |
 | XC010 | Corrections | covered | A retraction is classified, needs a reason and new evidence, and the earlier release stays as superseded |
 | XC011 | Causation | covered | A cause or duration finding without a hypothesis listing alternatives is rejected |
 | XC012 | Corrections | partial | Released text cannot be quietly edited; the versioned correction notice and regression case are not built yet |

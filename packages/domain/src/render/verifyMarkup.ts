@@ -55,7 +55,7 @@ export function verifyMarkup(source: ExtractedDocument, output: ExtractedDocumen
     const allow: [number, number] = [REGION_ALLOWANCE_PT / pp.width_pt, REGION_ALLOWANCE_PT / pp.height_pt];
     const noteRegions = pp.notes.map((n) => ({ n, box: grow(n.box, allow) }));
     const tagRegions = pp.marks.map((m) => {
-      const x0 = m.box[0] - (d * 0.8) / pp.width_pt, y0 = m.box[1] - (d * 0.8) / pp.height_pt;
+      const x0 = m.box[0] - (d + 1) / pp.width_pt, y0 = m.box[1] - (d * 0.35) / pp.height_pt;
       return { m, box: grow([x0, y0, x0 + d / pp.width_pt, y0 + d / pp.height_pt] as Box, allow) };
     });
     const noteSpans = new Map<number, Span[]>(), tagSpans = new Map<number, Span[]>();
