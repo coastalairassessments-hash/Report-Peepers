@@ -26,6 +26,15 @@ const OVERCERTAIN = [
   /\b(?:confidence|probability|likelihood|certainty)\s*(?:of|is|was|:|=)\s*(?:about\s+)?\d/i,
 ];
 
+/** Every wording rule a piece of customer-facing text breaks. Used on text that never passes through a finding, such as notes and summary lines. */
+export function wordingProblems(text: string): string[] {
+  const out: string[] = [];
+  for (const re of PROHIBITED) if (re.test(text)) out.push(`prohibited:${re.source}`);
+  const unquoted = stripQuoted(text);
+  for (const re of OVERCERTAIN) if (re.test(unquoted)) out.push(`overcertain:${re.source}`);
+  return out;
+}
+
 /** Removes text inside straight or curly double quotes. An unbalanced quote leaves the rest in place. */
 export function stripQuoted(text: string): string {
   return text.replace(/\u201C[^\u201D]*\u201D/g, " ").replace(/"[^"]*"/g, " ");

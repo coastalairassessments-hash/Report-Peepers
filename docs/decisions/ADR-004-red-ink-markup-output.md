@@ -16,7 +16,8 @@ The main thing the homeowner receives is a copy of the report they uploaded, wit
 2. If a page has no readable text layer (a scan), the note goes on that page without a mark on specific words, and the note says so. No guessing a location.
 3. No grading marks. No check marks, crosses, "wrong", "fail", stars, or scores. Marks are circle, underline, bracket, arrow, question mark, and numbered tag. A question mark means "ask about this".
 4. Notes are short. If a note does not fit its margin, the margin shows the number and the full text goes on an added "margin notes" sheet at the end, in the same handwriting. Notes never cover the report's own text.
-5. The five leading questions (spec section 17) go on page 1 as numbered notes.
+5. The leading questions (spec section 17) are listed first on the closing summary page. Page 1 carries one short handwritten pointer to that page ("Questions to ask the inspector: see page N"), placed in free margin. (Amended 2026-11-04: five numbered notes on page 1 were crowded and could not be placed safely on every report.)
+5a. No leader lines. The number on the mark and the number on its note tie them together. Number tags may sit on the report's words (they are small and the words stay readable); notes never do.
 6. The handwriting font is bundled with the app (open license), so rendering needs no network.
 7. A plain text version in reading order always accompanies the PDF, because accessible text is required (spec section 17). Same notes, same numbers.
 8. Red must still read when printed in gray: the handwriting style and the numbered tags carry the meaning, not color alone.

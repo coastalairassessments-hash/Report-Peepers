@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import type { CaseSnapshot as Snap } from "@report-peepers/contracts";
+import type { Anchor, CaseSnapshot as Snap } from "@report-peepers/contracts";
 import { canon, fingerprint } from "./revision.js";
 
 export interface ApprovedView {
@@ -12,6 +12,8 @@ export interface ApprovedView {
   findings: {
     id: string; title: string; finding_type: string; explanation: string; evidence_strength: string; decision_relevance: string;
     uncertainty: string; questions: string[]; possible_next_steps: string[]; resolution_condition: string; resolution_status: string;
+    /** Where in the report this rests: the anchors of its supporting and counter evidence, so every output can point at the same spots. */
+    sources: { role: "support" | "counter"; anchor: Anchor }[];
   }[];
   coverage_limitations: string[];
   changes: Snap["release"]["changes"];
@@ -27,6 +29,7 @@ const METHOD_STATEMENT = "Document review within the supplied evidence. This is 
 export function buildApprovedView(s: Snap): ApprovedView {
   const q = new Map(s.questions.map((x) => [x.id, x.text]));
   const f = new Map(s.findings.map((x) => [x.id, x]));
+  const ev = new Map(s.evidence.map((e) => [e.id, e]));
   const order = [...s.release.attention_finding_ids, ...s.release.supported_finding_ids];
   return {
     release_id: s.release.id, case_revision_id: s.release.case_revision_id, status: s.release.status, overview: s.release.overview,
@@ -38,12 +41,21 @@ export function buildApprovedView(s: Snap): ApprovedView {
         id: x.id, title: x.title, finding_type: x.finding_type, explanation: x.explanation, evidence_strength: x.evidence_strength,
         decision_relevance: x.decision_relevance, uncertainty: x.uncertainty, questions: x.question_ids.map((qid) => q.get(qid) ?? "").filter(Boolean),
         possible_next_steps: x.possible_next_steps, resolution_condition: x.resolution_condition, resolution_status: x.resolution_status,
+        sources: [...x.support_evidence_ids.map((id) => ["support", id] as const), ...x.counter_evidence_ids.map((id) => ["counter", id] as const)]
+          .flatMap(([role, id]) => { const e = ev.get(id); return e ? [{ role, anchor: structuredClone(e.anchor) }] : []; }),
       }] : [];
     }),
     coverage_limitations: s.release.coverage_limitations,
     changes: s.release.changes,
     method: { statement: METHOD_STATEMENT, ...s.provenance, rule_pack_version: s.provenance.rule_pack_version },
   };
+}
+
+/** A page reference in words: PDF page, plus the printed label when it differs. */
+export function locationText(a: Anchor): string {
+  if (a.pdf_page_index_1based === null) return "location not recorded";
+  const label = a.printed_page_label && a.printed_page_label !== String(a.pdf_page_index_1based) ? ` (printed page ${a.printed_page_label})` : "";
+  return `page ${a.pdf_page_index_1based}${label}`;
 }
 
 /** Plain text. Content is carried as written, never interpreted as markup. */
@@ -55,6 +67,7 @@ export function renderText(v: ApprovedView): string {
   if (v.leading_questions.length) { L.push("Questions to ask the inspector:"); v.leading_questions.forEach((x, i) => L.push(`${i + 1}. ${x}`)); L.push(""); }
   for (const x of v.findings) {
     L.push(`Finding ${x.id}: ${x.title} [${x.finding_type}; evidence ${x.evidence_strength}; ${x.decision_relevance}; ${x.resolution_status}]`, x.explanation, `Uncertainty: ${x.uncertainty}`);
+    for (const src of x.sources) L.push(`Source (${src.role}): ${locationText(src.anchor)}`);
     x.questions.forEach((y) => L.push(`Question: ${y}`));
     x.possible_next_steps.forEach((y) => L.push(`Possible next step: ${y}`));
     L.push(`Resolves when: ${x.resolution_condition}`, "");

@@ -68,9 +68,11 @@
 - Placement: candidate positions in margins first, then free space; obstacles are extracted spans and already placed notes; deterministic tie-breaks; no randomness.
 - The summary page is titled "Summary of items to clarify". Order: the questions to ask the inspector, material items, contextual items, what the report supports, limits on the review. No counts, totals, scores, or rankings.
 
-- [ ] Step 1: Failing tests for every Review Focus item that concerns placement, numbering, overflow, scanned pages, multiple anchors, zero and many findings, banned vocabulary.
-- [ ] Step 2: Run, confirm fail. Step 3: Implement. Step 4: Run all tests and typecheck.
-- [ ] Step 5: Commit "Brick 13.2: markup planner".
+- Decisions made while building (amend ADR-004 rule 5): leading questions are listed first on the summary page; page 1 gets one handwritten pointer to it; no leader lines; tags may sit on words, notes never do; an anchor that does not verify gets no mark; findings with no usable location appear on the summary and the notes sheet only.
+
+- [x] Step 1: Failing tests for every Review Focus item that concerns placement, numbering, overflow, scanned pages, multiple anchors, zero and many findings, banned vocabulary.
+- [x] Step 2: Run, confirm fail. Step 3: Implement. Step 4: Run all tests and typecheck.
+- [x] Step 5: Commit "Brick 13.2: markup planner".
 
 ### Task 3: The Typst template and renderer
 

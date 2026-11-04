@@ -44,6 +44,14 @@ describe("approved view and export", () => {
     expect(renderText(buildApprovedView(published()))).not.toContain("conflict disclosure");
   });
 
+  it("each finding carries the report locations it rests on, and the text says which page", () => {
+    const s = published(); const v = buildApprovedView(s);
+    const ev = s.evidence.find((e: any) => e.id === s.findings[0].support_evidence_ids[0])!;
+    expect(v.findings[0]!.sources).toEqual([{ role: "support", anchor: ev.anchor }]);
+    expect(v.findings[0]!.sources[0]!.anchor).not.toBe(ev.anchor); // a copy, not a live reference
+    expect(renderText(v)).toContain("Source (support): page 2");
+  });
+
   it("TC053: a reviewer correction changes the view, the text, and the hash together", () => {
     const a = published(); const b = published();
     b.findings[0].explanation = "Corrected wording after reviewer fact check.";

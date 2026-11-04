@@ -1,0 +1,43 @@
+{
+  "_note": "Layout and wording defaults for the red-ink markup (ADR-004). Proposed defaults, tune here, not in code. Not scientific thresholds.",
+  "note_font_pt": 11,
+  "note_char_width_em": 0.5,
+  "note_line_height_em": 1.25,
+  "note_width_pt": 130,
+  "min_note_width_pt": 48,
+  "note_max_chars": 140,
+  "note_pad_pt": 3,
+  "edge_inset_pt": 8,
+  "obstacle_pad_pt": 3,
+  "tag_diameter_pt": 12,
+  "mark_pad_pt": 2,
+  "mark_pad_step_pt": 3,
+  "search_step_pt": 6,
+  "max_shift_pt": 150,
+  "leading_questions_max": 5,
+  "default_mark": "circle",
+  "mark_by_finding_type": {
+    "clarification_needed": "circle",
+    "supported_reasoning": "underline",
+    "documentation_limitation": "bracket",
+    "insufficiently_supported_recommendation": "circle",
+    "internal_inconsistency": "circle"
+  },
+  "labels": {
+    "summary_title": "Summary of items to clarify",
+    "questions_heading": "Questions to ask the inspector",
+    "material_heading": "Items that bear on your decision",
+    "contextual_heading": "Other items worth knowing",
+    "supported_heading": "What the report supports",
+    "limits_heading": "Limits of this review",
+    "nothing_to_clarify": "Within the agreed scope and the supplied evidence, no items to clarify were raised.",
+    "notes_sheet_title": "Margin notes",
+    "page_one_pointer": "Questions to ask the inspector: see page {n}",
+    "page_level_suffix": "(see this page; no readable text to mark)",
+    "column_number": "No.",
+    "column_item": "Item",
+    "column_page": "Report page",
+    "column_strength": "Evidence",
+    "column_next": "Possible next step"
+  }
+}
