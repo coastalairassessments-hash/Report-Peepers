@@ -1,4 +1,6 @@
-# Items for attorney review
+# Items for attorney review (side list, parked)
+
+Parked by Cory: does not block building. Review with the attorney before launch.
 
 Running list. Add as ideas come up. Not legal advice; these are questions to bring to counsel.
 Status key: open / with attorney / answered (add the answer and date).
@@ -13,7 +15,7 @@ Status key: open / with attorney / answered (add the answer and date).
 | L06 | Retention and deletion terms (90 days, backups 35 days) and what we disclose | Privacy promises must match what systems really do | Spec section 22 | open |
 | L07 | Refunds, turnaround, and included follow-up round in purchase terms | Consumer protection rules | Spec G05 | open |
 | L08 | Who may buy (minors) and which states we accept | Capacity to contract; state rules differ | Spec section 29 | open |
-| L09 | IndoorIQ and CAA conflict disclosure if pattern counts ever feed them | Independence claim could be challenged | Spec section 25, ADR-002 | open |
+| L09 | IndoorIQ receives trend data only (what common flaws appear), never documents or names. Cory: CAA has no conflicts. | Confirm trend-only sharing needs no extra disclosure | ADR-002 | open |
 | L10 | Pro tier: conflict when a subscriber is the author or a competitor of the reviewed inspector | Fairness and independence | ADR-001 | open |
 | L11 | Insurance (professional liability / E&O) for this service | Insurer must assess the operation | Spec section 29 | open |
 | L12 | Disclaimer wording: "not a licensed assessor", "environmental completion is not individual health safety" | Avoid implied professional opinion or health advice | Spec sections 5, 12.3 | open |

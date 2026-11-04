@@ -15,7 +15,7 @@ Owner: Cory
 4. Purchase terms include a plain line that anonymous flaw patterns are counted to improve reviews.
 
 ## Open items
-- Any IndoorIQ link still needs conflict disclosure (MASTER_SPEC section 25) and an explicit go-ahead.
+- IndoorIQ receives trend data only (aggregated flaw-pattern counts). Cory's determination: CAA has no conflicts. Attorney list item L09 tracks this.
 - Whether the consent line is a checkbox or part of terms: legal review (G02).
 - Optional paid homeowner "vault" for longer storage: deferred.
 
