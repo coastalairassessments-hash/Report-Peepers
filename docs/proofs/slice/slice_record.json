@@ -1,0 +1,22 @@
+{
+  "record_id": "7218d0ff-7b6e-426f-94b1-f70a93a1978d",
+  "release_month": "2026-11",
+  "service_type": "limited_assessment",
+  "document_kinds": [
+    "assessment"
+  ],
+  "items": [
+    {
+      "title": "Basis for the cause statement",
+      "question": "What was the cause statement based on?",
+      "next_step": "Ask for the supporting history.",
+      "wording_withheld": false,
+      "finding_type": "clarification_needed",
+      "decision_relevance": "material",
+      "evidence_strength": "limited",
+      "pattern_code": "other",
+      "resolved_later": false,
+      "reviewer_changed": false
+    }
+  ]
+}

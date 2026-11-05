@@ -1,6 +1,6 @@
 # Brick 16: The Pipeline End to End (Milestone 2 core) Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans. Steps use checkbox (`- [ ]`) syntax.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans. Steps use checkbox (`- [x]`) syntax.
 
 **Goal:** One synthetic report goes in and a released, marked-up review plus a saved anonymous record comes out, with every step moving the case through the real state machine and every gate enforced. This is the spec's Milestone 2 vertical slice (scope confirmation, provenance, revisions).
 
@@ -20,31 +20,31 @@
 ### Task 1: Ports, repository, actors
 Files: `pipeline/ports.ts`, `pipeline/repository.ts` (in-memory), tests.
 - Case record: id, owner, state, snapshot, source file reference and hash, processing issues, published fingerprint. In-memory file store, fake entitlement, injectable clock and ids.
-- [ ] Failing tests: customer isolation (cannot read, list, or change another's case), reviewer sees only assigned cases, released cases are read-only, state only changes through `transition`, a returned case is a copy.
-- [ ] Implement, test, typecheck, commit "Brick 16.1: ports and access".
+- [x] Failing tests: customer isolation (cannot read, list, or change another's case), reviewer sees only assigned cases, released cases are read-only, state only changes through `transition`, a returned case is a copy.
+- [x] Implement, test, typecheck, commit "Brick 16.1: ports and access".
 
 ### Task 2: From upload to ready for analysis
 Files: `pipeline/intake.ts` (start, answer, confirm scope, entitlement), tests.
 - Upload runs `preflight` against the limits file; a rejected file never enters the case. Questions come from the existing bank; scope confirmation uses `confirmScope`; conditional confirmation allowed and recorded.
-- [ ] Failing tests: the full path draft to ready_for_analysis; each wrong order refused with the state machine's reason; unconfirmed scope, missing entitlement, or incomplete preflight each block; a scope conflict blocks until resolved.
-- [ ] Implement, test, typecheck, commit "Brick 16.2: intake to ready".
+- [x] Failing tests: the full path draft to ready_for_analysis; each wrong order refused with the state machine's reason; unconfirmed scope, missing entitlement, or incomplete preflight each block; a scope conflict blocks until resolved.
+- [x] Implement, test, typecheck, commit "Brick 16.2: intake to ready".
 
 ### Task 3: The analysis step
 Files: `pipeline/analyze.ts`, tests.
 - Reads the document, builds the version 0.2 snapshot skeleton (documents row with the file hash, scope, one property-level area, provenance from the audit records), runs extraction (Brick 15), proposal and `applyProposal` (Brick 11), `checkIntegrity` and `checkAnchors`. Held-back items and page issues are stored as processing issues.
-- [ ] Failing tests: skeleton validates against contract v0.2; a clean run reaches awaiting_reviewer; every page failing, or a model error, goes to failed with the reason and no snapshot guess; a scanned page and a hostile page are listed; findings reach the snapshot only as unapproved drafts; rerun after failure follows the retry guard and attempt cap.
-- [ ] Implement, test, typecheck, commit "Brick 16.3: analysis step".
+- [x] Failing tests: skeleton validates against contract v0.2; a clean run reaches awaiting_reviewer; every page failing, or a model error, goes to failed with the reason and no snapshot guess; a scanned page and a hostile page are listed; findings reach the snapshot only as unapproved drafts; rerun after failure follows the retry guard and attempt cap.
+- [x] Implement, test, typecheck, commit "Brick 16.3: analysis step".
 
 ### Task 4: Reviewer decision and release
 Files: `pipeline/release.ts`, tests.
 - The reviewer's decision: which drafts to include, optional wording edits (re-checked with the integrity wording rules, recorded as reviewer-changed), a pattern tag per item (Brick 14), conflict disclosure where required, and an acknowledgment of everything held back. Approval sets the human-review fields, locks the fingerprint, moves to released, then produces the marked-up PDF and text (Brick 13) and the saved record (Brick 14), once.
-- [ ] Failing tests: no human approval means no release; a decision by someone not assigned is refused; an edit that breaks a wording rule is refused; unacknowledged held-back items block; an edit after release makes export fail; the record is made once and holds no case link; the marked-up PDF passes its verifier; partial release states its coverage limits.
-- [ ] Implement, test, typecheck, commit "Brick 16.4: reviewer decision and release".
+- [x] Failing tests: no human approval means no release; a decision by someone not assigned is refused; an edit that breaks a wording rule is refused; unacknowledged held-back items block; an edit after release makes export fail; the record is made once and holds no case link; the marked-up PDF passes its verifier; partial release states its coverage limits.
+- [x] Implement, test, typecheck, commit "Brick 16.4: reviewer decision and release".
 
 ### Task 5: The slice end to end
 Files: `test/pipeline/slice.test.ts`, proof sheets in `docs/proofs/`, roadmap, notes.
-- [ ] One test runs the whole chain on a synthetic report and checks the trace: an original sentence on a page becomes evidence with an anchor, supports a finding, appears as a numbered mark and note on that page of the marked-up copy, and is listed on the summary page.
-- [ ] Adversarial cases in the same file: a stranger's access attempt, a hostile-text report, a scanned page, a model that fails twice, a post-release edit.
-- [ ] Proof sheet of the finished slice for Cory; coverage maps only for tests that exist; `npm run check`; push; confirm CI green.
+- [x] One test runs the whole chain on a synthetic report and checks the trace: an original sentence on a page becomes evidence with an anchor, supports a finding, appears as a numbered mark and note on that page of the marked-up copy, and is listed on the summary page.
+- [x] Adversarial cases in the same file: a stranger's access attempt, a hostile-text report, a scanned page, a model that fails twice, a post-release edit.
+- [x] Proof sheet of the finished slice for Cory; coverage maps only for tests that exist; `npm run check`; push; confirm CI green.
 
 **Exit:** a synthetic report becomes a released marked-up review and an anonymous record, with access controls and every gate proven by tests. Next: Brick 17 (corrections: supersede a release, corrected marked-up copy, change notice), then real storage (Brick 18) after a stack decision and Jonathan's security review.
