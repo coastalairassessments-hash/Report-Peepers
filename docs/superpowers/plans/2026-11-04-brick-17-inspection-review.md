@@ -6,11 +6,12 @@
 
 **Architecture:** The checklist is a data file in `data/rules/`, written in our own words from Cory's expertise (no standard's text). Adding a question later means adding one entry; no code change. The AI only points to the report's exact words for each item; plain code verifies the words are on the page and sets the status. A second layer of plain-code consistency checks needs no AI. Gaps become draft findings (clarification needed) through the existing proposal firewall, so they reach the reviewer as unapproved drafts like everything else.
 
-**Source of content:** `docs/expert/OBSERVATION_CHECKLIST_DRAFT.md` (Cory's list, draft until he confirms wording; input I2). Two real sample reports informed the flaw patterns; they stay outside the repo. Test reports are synthetic.
+**Source of content:** `docs/expert/OBSERVATION_CHECKLIST_DRAFT.md` (Cory's list, draft until he confirms wording; input I2). Cory also supplied a fuller peer-review guideline (about 60 items in 13 sections). Pending his go-ahead, the checklist is built from it, split into items checkable from the report alone and items that need a record (chain of custody, pump calibration, field notes). Severity is only material versus minor; no overall opinion. Two real sample reports informed the flaw patterns; they stay outside the repo. Test reports are synthetic.
 
 ## Global Constraints
 - Synthetic data and the fake model only. Never contact inspectors (the homeowner gets a request to send themselves), no deploy, no payment, no protected standard text. ASTM D7338 is named only as a possible reference (LEGAL_REVIEW L20).
 - Decisions C01-C10 stay. Requirement IDs stay stable. No pass/fail and no scoring of inspectors.
+- Voice rule (`docs/expert/VOICE_RULE.md`, decided by Cory): warm, plain, clearly an issue. A test checks every question and record request against it (starts from what was covered, no "failed"/"missing", phrased as a question, no accusation).
 - The wording of every question goes through the existing wording rules. Gaps are phrased as questions ("What dry standard was used to call this wall wet?"), never accusations.
 - Types check and tests pass before each next task.
 
