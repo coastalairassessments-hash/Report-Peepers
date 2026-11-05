@@ -27,3 +27,5 @@ Status key: open / with attorney / answered (add the answer and date).
 | L18 | Saved summary records (item wording after a name and address scrub, plus codes) kept after documents are deleted; minimum group size before any aggregate is shown or shared; consent line wording | Re-identification risk from small groups; privacy terms | ADR-005 | open |
 
 - L19 (added 2026-11-04): subscription side (inspectors paying for pre-delivery review). Independence and disclosure when we review homeowner reports from a subscribing inspector; whether a private per-inspector history is scoring data; marketing wording. See docs/SUBSCRIPTION_SIDE.md.
+
+- L20: The inspection checklist is written in our own words and names ASTM D7338 only as a possible reference. Confirm that naming it, and mirroring its topics in our own words, is acceptable without a license.
