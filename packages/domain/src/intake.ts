@@ -14,7 +14,7 @@ export interface QuestionDef {
 
 /** Q01-Q12 from the spec, asked one at a time. Wording is neutral: no blame, no inference from price or length. */
 export const QUESTION_BANK: QuestionDef[] = [
-  { id: "Q01", kind: "text", text: "What did you hope to learn from this report, and what decision are you facing?", why: "So the review answers your actual question." },
+  { id: "Q01", kind: "text", text: "What did you hope to learn from this report, and what decision did you need to make?", why: "So the review answers your actual question." },
   { id: "Q02", kind: "yes_no_unsure", text: "Was the inspection limited in any way?", why: "Limits change what a report can reasonably conclude." },
   { id: "Q03", kind: "service", text: "What service were you sold?", why: "Labels vary, so we read what was actually agreed.",
     options: ["Sampling only", "Screening", "Limited assessment", "Broader assessment", "Review of a remediation protocol", "Not sure"] },
@@ -25,8 +25,8 @@ export const QUESTION_BANK: QuestionDef[] = [
   { id: "Q08", kind: "yes_no_unsure", text: "Were any methods, equipment, test materials, moving of belongings, or opening of walls limited or declined?", why: "Some questions can only be answered with certain methods.", restriction: ["methods", "equipment_materials"] },
   { id: "Q09", kind: "yes_no_unsure", text: "Were any areas hard or impossible to reach, for reasons other than your own choice?", why: "Unreachable areas are unknown, not clean or affected.", restriction: ["access"] },
   { id: "Q10", kind: "text", text: "For each limit, who proposed it, and what did you understand the effect to be?", why: "Keeps the review fair to everyone involved." },
-  { id: "Q11", kind: "yes_no_unsure", text: "Do you have other written records or verbal findings from the inspector?", why: "Existing records may already answer open questions." },
-  { id: "Q12", kind: "text", text: "What question do you still feel is unanswered?", why: "So we focus on what matters to you." },
+  { id: "Q11", kind: "yes_no_unsure", text: "Were you given other written records or verbal findings by the inspector?", why: "Existing records may already answer open questions." },
+  { id: "Q12", kind: "text", text: "What question was still unanswered after you read the report?", why: "So we focus on what matters to you." },
   { id: "Q13", kind: "multi", text: "Which of these did you receive along with the report?", why: "If you already have a record, it may answer a question without anyone needing to ask the inspector.",
     options: ["Full lab report", "Chain-of-custody form", "Field notes or field sheets", "Calibration records", "Signed scope of work", "None of these"] },
 ];

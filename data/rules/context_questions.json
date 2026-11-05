@@ -1,0 +1,628 @@
+{
+ "sections": [
+  {
+   "id": "goal",
+   "title": "Your goal"
+  },
+  {
+   "id": "home",
+   "title": "The home"
+  },
+  {
+   "id": "noticed",
+   "title": "What was noticed"
+  },
+  {
+   "id": "water",
+   "title": "Water history"
+  },
+  {
+   "id": "systems",
+   "title": "The building and its systems"
+  },
+  {
+   "id": "day",
+   "title": "The day of the inspection"
+  },
+  {
+   "id": "said",
+   "title": "What the inspector said"
+  },
+  {
+   "id": "after",
+   "title": "What is left"
+  }
+ ],
+ "questions": [
+  {
+   "id": "CX01",
+   "section": "goal",
+   "text": "What did you hope to learn from this report?",
+   "options": [
+    "Whether it is complete",
+    "Whether the cause is right",
+    "Whether the recommended work is needed",
+    "What to do next",
+    "Something else"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX02",
+   "section": "goal",
+   "text": "What decision did you need to make?",
+   "options": [
+    "Buy",
+    "Sell",
+    "Hire a remediation company",
+    "An insurance matter",
+    "Rent or lease",
+    "Keep living there",
+    "Something else"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX03",
+   "section": "goal",
+   "text": "What led to the inspection?",
+   "options": [
+    "Saw visible mold",
+    "Saw staining",
+    "Smelled a musty odor",
+    "A water leak or flood",
+    "A health concern",
+    "Buying or selling",
+    "Insurance asked for it",
+    "Routine check",
+    "Someone recommended it",
+    "Something else"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX04",
+   "section": "home",
+   "text": "Where was the property?",
+   "options": [
+    "Florida",
+    "Another US state",
+    "Outside the US"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX05",
+   "section": "home",
+   "text": "What kind of home was it?",
+   "options": [
+    "Single-family",
+    "Condo or apartment",
+    "Townhome",
+    "Multi-family",
+    "Other"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX06",
+   "section": "home",
+   "text": "About how old was the building?",
+   "options": [
+    "Under 10 years",
+    "10 to 30",
+    "30 to 50",
+    "Over 50",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX07",
+   "section": "home",
+   "text": "What was the foundation?",
+   "options": [
+    "Slab",
+    "Crawlspace",
+    "Basement",
+    "Piers or pilings",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX08",
+   "section": "home",
+   "text": "Who lived in the home at the time?",
+   "options": [
+    "My household",
+    "Tenants",
+    "Nobody (vacant)",
+    "Part-time use",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX09",
+   "section": "home",
+   "text": "How long had it been in that use before the inspection?",
+   "options": [
+    "Under a month",
+    "1 to 6 months",
+    "6 to 12 months",
+    "Over a year",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX10",
+   "section": "noticed",
+   "text": "What had been noticed?",
+   "options": [
+    "Visible growth",
+    "Stains",
+    "A musty odor",
+    "Damp or wet spots",
+    "Peeling or bubbling paint",
+    "Warped or soft materials",
+    "Condensation on windows",
+    "High humidity",
+    "Rust",
+    "Nothing, it was precautionary"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX11",
+   "section": "noticed",
+   "text": "Where had it been noticed?",
+   "options": [
+    "Kitchen",
+    "Bathroom",
+    "Bedroom",
+    "Living areas",
+    "Laundry",
+    "Closet",
+    "Attic",
+    "Garage",
+    "Crawlspace or basement",
+    "Around the AC unit",
+    "Exterior walls",
+    "Whole house"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX12",
+   "section": "noticed",
+   "text": "When was it first noticed?",
+   "options": [
+    "This week",
+    "This month",
+    "Past 3 months",
+    "Past year",
+    "Over a year ago",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX13",
+   "section": "noticed",
+   "text": "How had it changed?",
+   "options": [
+    "Got worse",
+    "Stayed the same",
+    "Came and went",
+    "Got better",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX14",
+   "section": "noticed",
+   "text": "Did it follow a pattern?",
+   "options": [
+    "After rain",
+    "In humid months",
+    "In cool months",
+    "After running the AC",
+    "No pattern",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX15",
+   "section": "noticed",
+   "text": "Was there any other reason behind the inspection?",
+   "options": [
+    "A health concern",
+    "A landlord or tenant matter",
+    "A neighbor's issue",
+    "A previous report",
+    "Nothing else"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX16",
+   "section": "water",
+   "text": "What water events had happened?",
+   "options": [
+    "Roof leak",
+    "Plumbing leak",
+    "Appliance leak",
+    "Window or door leak",
+    "Flooding",
+    "Storm or hurricane damage",
+    "AC condensation or drain overflow",
+    "Sewer backup",
+    "None known",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX17",
+   "section": "water",
+   "text": "When was the most recent one?",
+   "options": [
+    "Past month",
+    "Past 6 months",
+    "Past year",
+    "Over a year ago",
+    "Not sure"
+   ],
+   "select": "single",
+   "skip_if": {
+    "q": "CX16",
+    "only": [
+     "None known",
+     "Not sure"
+    ]
+   }
+  },
+  {
+   "id": "CX18",
+   "section": "water",
+   "text": "Had the water source been stopped by the time of the inspection?",
+   "options": [
+    "Yes",
+    "No",
+    "Not sure"
+   ],
+   "select": "single",
+   "skip_if": {
+    "q": "CX16",
+    "only": [
+     "None known",
+     "Not sure"
+    ]
+   }
+  },
+  {
+   "id": "CX19",
+   "section": "water",
+   "text": "What had been done to the wet materials?",
+   "options": [
+    "Dried",
+    "Cleaned",
+    "Removed",
+    "Nothing",
+    "Not sure"
+   ],
+   "select": "multi",
+   "skip_if": {
+    "q": "CX16",
+    "only": [
+     "None known",
+     "Not sure"
+    ]
+   }
+  },
+  {
+   "id": "CX20",
+   "section": "water",
+   "text": "What had happened with mold in the home before?",
+   "options": [
+    "Found before",
+    "Cleaned before",
+    "Professionally removed before",
+    "Passed a clearance test",
+    "Never",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX21",
+   "section": "water",
+   "text": "Had a water-damage insurance claim been made before?",
+   "options": [
+    "Yes",
+    "No",
+    "Not sure"
+   ],
+   "select": "single",
+   "skip_if": {
+    "q": "CX16",
+    "only": [
+     "None known",
+     "Not sure"
+    ]
+   }
+  },
+  {
+   "id": "CX22",
+   "section": "systems",
+   "text": "What cooling or heating did it have?",
+   "options": [
+    "Central AC",
+    "Heat pump",
+    "Window units",
+    "Mini-split",
+    "None",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX23",
+   "section": "systems",
+   "text": "Where were the air handler and ducts?",
+   "options": [
+    "Attic",
+    "Crawlspace",
+    "Closet or utility room",
+    "Garage",
+    "Not sure"
+   ],
+   "select": "multi",
+   "skip_if": {
+    "q": "CX22",
+    "only": [
+     "None",
+     "Window units"
+    ]
+   }
+  },
+  {
+   "id": "CX24",
+   "section": "systems",
+   "text": "Had the AC been serviced in the past year?",
+   "options": [
+    "Yes",
+    "No",
+    "Not sure"
+   ],
+   "select": "single",
+   "skip_if": {
+    "q": "CX22",
+    "only": [
+     "None",
+     "Window units"
+    ]
+   }
+  },
+  {
+   "id": "CX25",
+   "section": "systems",
+   "text": "What AC or duct problems had there been?",
+   "options": [
+    "Condensation on ducts",
+    "Clogged drain line",
+    "Dirty coils",
+    "Water at the unit",
+    "Weak cooling",
+    "None",
+    "Not sure"
+   ],
+   "select": "multi",
+   "skip_if": {
+    "q": "CX22",
+    "only": [
+     "None"
+    ]
+   }
+  },
+  {
+   "id": "CX26",
+   "section": "systems",
+   "text": "Was a dehumidifier used?",
+   "options": [
+    "Whole-house",
+    "Portable",
+    "No",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX27",
+   "section": "systems",
+   "text": "Were exhaust fans used?",
+   "options": [
+    "Regularly",
+    "Rarely",
+    "Not working",
+    "None installed",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX28",
+   "section": "systems",
+   "text": "How was the AC usually run?",
+   "options": [
+    "Always on",
+    "Turned up when away",
+    "Off for long periods",
+    "Not sure"
+   ],
+   "select": "multi",
+   "skip_if": {
+    "q": "CX22",
+    "only": [
+     "None"
+    ]
+   }
+  },
+  {
+   "id": "CX29",
+   "section": "systems",
+   "text": "What work had been done before the inspection?",
+   "options": [
+    "New flooring",
+    "New drywall or paint",
+    "Roof work",
+    "Plumbing work",
+    "New windows or doors",
+    "An addition",
+    "None",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX30",
+   "section": "day",
+   "text": "Was anyone living in the home that day?",
+   "options": [
+    "Lived in as usual",
+    "Vacant",
+    "Partly used",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX31",
+   "section": "day",
+   "text": "Was the AC or heat running?",
+   "options": [
+    "Yes",
+    "No",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX32",
+   "section": "day",
+   "text": "Were windows or doors open during the visit?",
+   "options": [
+    "Yes",
+    "No",
+    "Partly",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX33",
+   "section": "day",
+   "text": "What was the weather?",
+   "options": [
+    "Rain in the past 3 days",
+    "Dry",
+    "Very humid",
+    "Cool",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX34",
+   "section": "day",
+   "text": "Had the home been cleaned, painted or aired out just before?",
+   "options": [
+    "Yes",
+    "No",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX35",
+   "section": "day",
+   "text": "Was the client present?",
+   "options": [
+    "The whole time",
+    "Part of the time",
+    "No",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX36",
+   "section": "said",
+   "text": "What was explained in person?",
+   "options": [
+    "Findings in detail",
+    "Findings briefly",
+    "Sample results",
+    "Nothing",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX37",
+   "section": "said",
+   "text": "What was recommended?",
+   "options": [
+    "Remove materials",
+    "Clean",
+    "Fix the source",
+    "More testing",
+    "Nothing",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX38",
+   "section": "said",
+   "text": "Had anyone else given an opinion or quote?",
+   "options": [
+    "Another inspector",
+    "A remediation company",
+    "A contractor",
+    "No",
+    "Not sure"
+   ],
+   "select": "multi"
+  },
+  {
+   "id": "CX39",
+   "section": "said",
+   "text": "How soon was the report received after the visit?",
+   "options": [
+    "Same day",
+    "Within a week",
+    "Over a week",
+    "Not sure"
+   ],
+   "select": "single"
+  },
+  {
+   "id": "CX43",
+   "section": "after",
+   "text": "Had a deadline been set?",
+   "options": [
+    "Closing date",
+    "Insurance deadline",
+    "Lease or move date",
+    "No deadline",
+    "Not sure"
+   ],
+   "select": "multi"
+  }
+ ]
+}

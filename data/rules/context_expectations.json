@@ -1,0 +1,280 @@
+{
+ "rows": [
+  {
+   "id": "EX01",
+   "topic": "hidden_areas",
+   "when": [
+    {
+     "q": "CX03",
+     "any": [
+      "Smelled a musty odor"
+     ]
+    },
+    {
+     "q": "CX10",
+     "any": [
+      "A musty odor",
+      "Warped or soft materials"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "wall cavit",
+    "inside (the )?wall",
+    "behind (the )?(wall|drywall|cabinet|baseboard)",
+    "borescope",
+    "inspection port",
+    "opened",
+    "hidden",
+    "concealed"
+   ],
+   "text": "Which hidden areas, such as wall cavities, were opened or checked, and which were not?",
+   "why": "An odor or soft materials can point to places that can't be seen, so it helps to know how far the check went."
+  },
+  {
+   "id": "EX02",
+   "topic": "water_history",
+   "when": [
+    {
+     "q": "CX16",
+     "any": [
+      "Roof leak",
+      "Plumbing leak",
+      "Appliance leak",
+      "Window or door leak",
+      "Flooding",
+      "Storm or hurricane damage",
+      "AC condensation or drain overflow",
+      "Sewer backup"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "water (history|intrusion|damage|loss)",
+    "leak",
+    "flood",
+    "moisture source",
+    "source of (the )?moisture",
+    "previous (water|moisture)"
+   ],
+   "text": "What water history was the stated cause compared against?",
+   "why": "Water events were reported before the inspection, so it helps to see that the cause accounts for them."
+  },
+  {
+   "id": "EX03",
+   "topic": "source_first",
+   "when": [
+    {
+     "q": "CX18",
+     "any": [
+      "No"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "(stop|fix|repair|eliminat|correct|address)\\w* (the )?(water )?(source|leak)",
+    "source (must|should|needs?) (be )?(stopped|fixed|repaired|corrected)"
+   ],
+   "text": "What should fix the water source first, before any cleanup?",
+   "why": "The water was still coming in at the time, and cleanup does not last if the source stays."
+  },
+  {
+   "id": "EX04",
+   "topic": "earlier_mold",
+   "when": [
+    {
+     "q": "CX20",
+     "any": [
+      "Found before",
+      "Cleaned before",
+      "Professionally removed before",
+      "Passed a clearance test"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "previous(ly)? (mold|remediation|cleaning)",
+    "prior (mold|remediation)",
+    "earlier (mold|remediation)",
+    "clearance",
+    "post-remediation"
+   ],
+   "text": "Was the earlier mold work, or its clearance test, considered in the result?",
+   "why": "Mold was found or treated before, and that history can change how the results read."
+  },
+  {
+   "id": "EX05",
+   "topic": "new_materials",
+   "when": [
+    {
+     "q": "CX29",
+     "any": [
+      "New flooring",
+      "New drywall or paint"
+     ]
+    },
+    {
+     "q": "CX34",
+     "any": [
+      "Yes"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "behind (the )?(new )?(drywall|paint|flooring|wall)",
+    "subfloor",
+    "under(neath)? (the )?(new )?(floor|flooring)",
+    "renovat",
+    "recent(ly)? (install|replac|remodel|paint)",
+    "concealed"
+   ],
+   "text": "Were the newer materials checked for growth behind or under them?",
+   "why": "Work or cleaning was done just before the visit, which can cover signs underneath."
+  },
+  {
+   "id": "EX06",
+   "topic": "hvac_examined",
+   "when": [
+    {
+     "q": "CX25",
+     "any": [
+      "Condensation on ducts",
+      "Clogged drain line",
+      "Dirty coils",
+      "Water at the unit"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "hvac",
+    "air handler",
+    "\\ba/?c\\b",
+    "duct",
+    "evaporator",
+    "coil",
+    "drain (line|pan)",
+    "supply (vent|register)"
+   ],
+   "text": "Was the AC system, including the air handler and drain line, examined?",
+   "why": "AC problems had been seen, and the system can move moisture through the home."
+  },
+  {
+   "id": "EX07",
+   "topic": "vacancy",
+   "when": [
+    {
+     "q": "CX08",
+     "any": [
+      "Nobody (vacant)"
+     ]
+    },
+    {
+     "q": "CX30",
+     "any": [
+      "Vacant"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "vacan",
+    "unoccupied",
+    "dehumidif",
+    "relative humidity"
+   ],
+   "text": "How did the home being vacant figure into the result?",
+   "why": "A home that sits empty can hold humidity, so it helps to see that this was considered."
+  },
+  {
+   "id": "EX08",
+   "topic": "sampling_conditions",
+   "when": [
+    {
+     "q": "CX31",
+     "any": [
+      "No"
+     ]
+    },
+    {
+     "q": "CX32",
+     "any": [
+      "Yes",
+      "Partly"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "closed[- ]building",
+    "building (conditions|was closed)",
+    "doors and windows",
+    "(a/?c|hvac) (was|were)",
+    "conditions (during|at the time)"
+   ],
+   "text": "What were the building conditions during sampling, such as the AC on and windows closed?",
+   "why": "The AC or windows were not as usual that day, and that changes what air samples show."
+  },
+  {
+   "id": "EX09",
+   "topic": "weather",
+   "when": [
+    {
+     "q": "CX33",
+     "any": [
+      "Rain in the past 3 days",
+      "Very humid"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "weather",
+    "rain",
+    "precipitation",
+    "outdoor (conditions|temperature|humidity)"
+   ],
+   "text": "How did the recent weather figure into the comparison with the outdoor sample?",
+   "why": "It had rained or was very humid, and the outdoor sample is the comparison."
+  },
+  {
+   "id": "EX10",
+   "topic": "pattern",
+   "when": [
+    {
+     "q": "CX14",
+     "any": [
+      "After rain",
+      "In humid months",
+      "In cool months",
+      "After running the AC"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "pattern",
+    "seasonal",
+    "after rain",
+    "intermittent",
+    "recurring"
+   ],
+   "text": "Does the stated cause explain the pattern you described?",
+   "why": "The problem followed a pattern, and a cause should fit it."
+  },
+  {
+   "id": "EX11",
+   "topic": "results_explained",
+   "when": [
+    {
+     "q": "CX36",
+     "any": [
+      "Nothing",
+      "Findings briefly"
+     ]
+    }
+   ],
+   "report_patterns": [
+    "(results?|counts?|levels?) (indicate|suggest|show|mean|are (elevated|normal|consistent))",
+    "interpretation"
+   ],
+   "text": "What do the results mean for this home?",
+   "why": "The results were not explained in person, so the report is where that explanation should be."
+  }
+ ]
+}

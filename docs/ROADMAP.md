@@ -59,3 +59,7 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 ## Working agreements
 - The AI proposes; the checks decide. Rules live in files and code, so a better model never forces a rebuild.
 - Scorecard (`docs/EVALUATION_SCORECARD.md`) shows what is proven by tests and what is not.
+
+## Intake context bank (2026-11-05)
+Built: 40 new context questions (CX01-CX43 numbering follows the approved draft), buttons plus note, single or multi select, skip rules, section skipping, and 11 "client said X, report silent" rows. Data: data/rules/context_questions.json, context_expectations.json. Code: packages/domain/src/context.ts. Health answers are context only and never used.
+Not yet wired: the screens, storing answers on the case, and feeding the expectation questions into the inspection review list.
