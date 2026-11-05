@@ -24,8 +24,8 @@ Materiality is set by code with one rule: if a conclusion or recommendation in t
 
 ### Task 1: The checklist as data
 Files: `data/rules/inspection_checklist.json`, `packages/domain/src/inspection/checklist.ts`, `test/inspection/checklist.test.ts`.
-- [ ] Failing tests: every item has all fields; ids are unique; wording of every question passes the wording rules; an unknown group or materiality rule is refused; adding an item needs no code change (a test loads a list with an extra item).
-- [ ] Write the file from Cory's draft (17 starting items), the loader, and validation. Typecheck, test, commit "Brick 17.1: inspection checklist as data".
+- [x] Failing tests: every item has all fields; ids are unique; wording of every question passes the wording rules; an unknown group or materiality rule is refused; adding an item needs no code change (a test loads a list with an extra item).
+- [x] Write the file from Cory's peer-review guideline (74 starting items in 13 groups), the loader, and validation. Typecheck, test, commit "Brick 17.1: inspection checklist as data".
 
 ### Task 2: Status per item (AI points, code decides)
 Files: `data/rules/prompts/review_inspection.v1.md`, `src/inspection/reviewItems.ts`, tests.
