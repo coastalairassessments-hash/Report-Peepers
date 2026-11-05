@@ -17,6 +17,37 @@
     "plywood": "plywood",
     "truss": "truss"
   },
-  "narrative_markers": ["odor", "moisture on", "stains on", "water stains"],
-  "narrative_claim_pattern": "moisture (?:on|in|at)\\s+([^.]+)\\."
+  "narrative_markers": [
+    "odor",
+    "moisture on",
+    "stains on",
+    "water stains"
+  ],
+  "narrative_claim_pattern": "moisture (?:on|in|at)\\s+([^.]+)\\.",
+  "inspection_date_patterns": [
+    "date of inspection\\s*:?\\s*([^\\n]+)"
+  ],
+  "sample_date_patterns": [
+    "\\bsampled\\s*:?\\s*(\\d{1,2}[-/]\\d{1,2}[-/]\\d{2,4})",
+    "date sampled\\s*:?\\s*([^\\n]+)"
+  ],
+  "lab_name_patterns": [
+    "laborator(?:y|ies)\\s*\\(([^)]{3,60})\\)",
+    "\\blaborator(?:y|ies)\\s*:\\s*([^\\n]{3,60})"
+  ],
+  "defined_terms": [
+    {
+      "name": "Condition 1, 2, 3",
+      "definition": "\\bcondition\\s*([123])\\s*[-\u2013(]",
+      "any_use": "\\bcondition\\s*([123])\\b"
+    }
+  ],
+  "time_span_topics": [
+    {
+      "name": "air filtration before clearance testing",
+      "step": "air filtration|filtration devices|air scrubbers?",
+      "context": "clearance|post[- ]remediation"
+    }
+  ],
+  "time_span_pattern": "(\\d+)\\s*[-\u2013to]+\\s*(\\d+)\\s*hours?"
 }
