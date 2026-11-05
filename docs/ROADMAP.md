@@ -63,3 +63,7 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 ## Intake context bank (2026-11-05)
 Built: 40 new context questions (CX01-CX43 numbering follows the approved draft), buttons plus note, single or multi select, skip rules, section skipping, and 11 "client said X, report silent" rows. Data: data/rules/context_questions.json, context_expectations.json. Code: packages/domain/src/context.ts. Health answers are context only and never used.
 Wired: answers live on the case (`context`), and unmet expectations become questions in the inspection review (placed with the other material questions). Not yet built: the client screens.
+
+## Brick 17b (2026-11-05): scope-aware questions and quiet tests
+Built: gaps a client-described limit explains are not asked (listed as "not expected"; one scoped question if conclusions lean on them); "referenced but not supplied" check for an attached lab report that is not in the file; a must-stay-quiet sample for every rule, with a meta-test that fails when a new rule has none. Data: data/rules/scope_effects.json (draft topic mapping, for Cory to correct). 559 tests pass.
+Next candidates: reviewer keep/reword/remove marks per question; source-rights gate; draft-read fix; instruction-like-text flag; five remaining contradiction checks.

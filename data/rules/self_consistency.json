@@ -50,5 +50,10 @@
       "context": "clearance|post[- ]remediation"
     }
   ],
-  "time_span_pattern": "(\\d+)\\s*[-\u2013to]+\\s*(\\d+)\\s*hours?"
+  "time_span_pattern": "(\\d+)\\s*[-\u2013to]+\\s*(\\d+)\\s*hours?",
+  "attachment_references": [
+    "\\b(laboratory|lab)\\s+(report|results?|data)\\b[^.\\n]{0,60}\\b(attached|enclosed|included|appended|accompan\\w+)\\b",
+    "\\b(see|refer to|per)\\b[^.\\n]{0,30}\\b(attached|enclosed)\\b[^.\\n]{0,30}\\b(laboratory|lab)\\b"
+  ],
+  "lab_page_markers": ["chain[- ]of[- ]custody", "analytical report", "spores?\\s*/\\s*m|spores per cubic|raw count", "laboratory\\s+report\\s+(no|number|#)", "batch\\s*:"]
 }

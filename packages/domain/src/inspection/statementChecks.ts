@@ -27,6 +27,18 @@ export function checkStatements(doc: ExtractedDocument, c: SelfConsistencyConfig
   const insp = first(c.inspectionDates), samp = first(c.sampleDates);
   if (insp && samp && insp.d !== samp.d) out.push({ check: "dates_disagree", item_topics: ["Numbers and units checked"], quotes: [{ page: insp.page, text: insp.text, role: "report_says" }, { page: samp.page, text: samp.text, role: "but_also_says" }], detail: `The inspection date is ${insp.d} and the sampling date is ${samp.d}.` });
 
+  // A pointer to an attached lab report when no page in the file looks like one. Silent if any page could not be read.
+  const unread = doc.pages.some((p) => p.quality_flags.some((f) => f === "ocr_failed" || f === "ocr_skipped_page_limit" || f === "low_ocr_confidence"));
+  if (!unread && c.attachmentRefs.length && !doc.pages.some((p) => c.labMarkers.some((re) => re.test(p.text)))) {
+    for (const p of doc.pages) {
+      const re = c.attachmentRefs.find((r) => r.test(p.text));
+      if (!re) continue;
+      const m = re.exec(p.text)!;
+      out.push({ check: "referenced_not_supplied", item_topics: ["Original lab report"], quotes: [{ page: p.index, text: lineAt(p.text, m.index), role: "report_says" }], detail: "The report points to an attached lab report, but no page in the file looks like one." });
+      break;
+    }
+  }
+
   // Lab names.
   const labs = new Map<string, { page: number; text: string }>();
   for (const p of doc.pages) for (const re of c.labNames) { const g = new RegExp(re.source, "gi"); for (let m = g.exec(p.text); m; m = g.exec(p.text)) { const k = labKey(m[1]!); if (k && !labs.has(k)) labs.set(k, { page: p.index, text: lineAt(p.text, m.index) }); } }

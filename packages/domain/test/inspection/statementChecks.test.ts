@@ -54,3 +54,25 @@ describe("statements that disagree", () => {
     expect(f.filter((x) => x.check === "time_spans_differ")).toHaveLength(0);
   });
 });
+
+describe("a record the report points to but the file lacks", () => {
+  const ref = "The full laboratory report is attached to this report.";
+  const labPage = ["Analytical Report", "Chain of Custody", "Total spores per cubic meter"];
+  it("flags a pointer to an attached lab report when no page looks like one", async () => {
+    const f = (await run([page([ref]), page(["Photos of the kitchen."])])).filter((x) => x.check === "referenced_not_supplied");
+    expect(f).toHaveLength(1);
+    expect(f[0]!.quotes[0]).toMatchObject({ page: 1, role: "report_says" });
+    expect(f[0]!.item_topics).toEqual(["Original lab report"]);
+  });
+  it("stays quiet when a page looks like the lab report", async () => {
+    expect((await run([page([ref]), page(labPage)])).filter((x) => x.check === "referenced_not_supplied")).toHaveLength(0);
+  });
+  it("stays quiet when the report points to nothing", async () => {
+    expect((await run([page(["Samples were collected."])])).filter((x) => x.check === "referenced_not_supplied")).toHaveLength(0);
+  });
+  it("stays quiet when any page could not be read", async () => {
+    const { doc } = await read([page([ref]), page(["Photos."])]);
+    doc.pages[1]!.quality_flags.push("ocr_failed");
+    expect(checkStatements(doc, cfg).filter((x) => x.check === "referenced_not_supplied")).toHaveLength(0);
+  });
+});

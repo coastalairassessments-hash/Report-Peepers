@@ -19,6 +19,7 @@
     "value_under_other_location": { "text": "A value appears under a different location than the one it describes. Ask: Which location does it belong to?", "why": "Each value should sit with its own location." },
     "wet_without_reading": { "text": "Something is called wet or damp, but no reading is shown. Ask: What was measured, and where?", "why": "A wet or damp call is easier to rely on with a reading beside it." },
     "dates_disagree": { "text": "The report gives two different dates. Ask: Why was sampling on a different day than the inspection?", "why": "Conditions can change between days, and results describe the day sampled." },
+    "referenced_not_supplied": { "text": "The report points to an attached lab report, but it was not in the file you sent. Could you ask the inspector for the full lab report?", "why": "The lab pages are where the sample results and their details live." },
     "two_lab_names": { "text": "The report names more than one laboratory. Ask: Which lab analyzed which sample?", "why": "Each result should trace to the lab that produced it." },
     "defined_never_used": { "text": "The report defines categories but doesn't say which one applies to any area. Ask: Which category does each area fall into?", "why": "The categories only help if they are applied." },
     "time_spans_differ": { "text": "The report gives two different time spans for the same step. Ask: Which one applies?", "why": "A contractor will follow one, and the two lead to different waits." },

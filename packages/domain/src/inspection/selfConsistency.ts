@@ -3,10 +3,10 @@ import { resolve } from "node:path";
 import type { ExtractedDocument } from "../ingest/extract.js";
 import { checkStatements } from "./statementChecks.js";
 
-interface Raw { threshold_statement_patterns: string[]; row_result_pattern: string; baseline_word: string; materials: Record<string, string>; narrative_markers: string[]; narrative_claim_pattern: string; inspection_date_patterns?: string[]; sample_date_patterns?: string[]; lab_name_patterns?: string[]; defined_terms?: { name: string; definition: string; any_use: string }[]; time_span_topics?: { name: string; step: string; context: string }[]; time_span_pattern?: string }
+interface Raw { threshold_statement_patterns: string[]; row_result_pattern: string; baseline_word: string; materials: Record<string, string>; narrative_markers: string[]; narrative_claim_pattern: string; inspection_date_patterns?: string[]; sample_date_patterns?: string[]; lab_name_patterns?: string[]; defined_terms?: { name: string; definition: string; any_use: string }[]; time_span_topics?: { name: string; step: string; context: string }[]; time_span_pattern?: string; attachment_references?: string[]; lab_page_markers?: string[] }
 export interface SelfConsistencyConfig {
   thresholds: RegExp[]; rowResult: RegExp; baselineWord: string; materials: [string, RegExp][]; narrativeMarkers: string[]; narrativeClaim: RegExp;
-  inspectionDates: RegExp[]; sampleDates: RegExp[]; labNames: RegExp[]; definedTerms: { name: string; definition: RegExp; anyUse: RegExp }[]; timeSpanTopics: { name: string; step: RegExp; context: RegExp }[]; timeSpan: RegExp;
+  inspectionDates: RegExp[]; sampleDates: RegExp[]; labNames: RegExp[]; definedTerms: { name: string; definition: RegExp; anyUse: RegExp }[]; timeSpanTopics: { name: string; step: RegExp; context: RegExp }[]; timeSpan: RegExp; attachmentRefs: RegExp[]; labMarkers: RegExp[];
 }
 
 export function loadSelfConsistencyConfig(path = resolve(import.meta.dirname, "../../../../data/rules/self_consistency.json")): SelfConsistencyConfig {
@@ -18,13 +18,14 @@ export function loadSelfConsistencyConfig(path = resolve(import.meta.dirname, ".
       inspectionDates: (r.inspection_date_patterns ?? []).map((x) => new RegExp(x, "i")), sampleDates: (r.sample_date_patterns ?? []).map((x) => new RegExp(x, "i")), labNames: (r.lab_name_patterns ?? []).map((x) => new RegExp(x, "i")),
       definedTerms: (r.defined_terms ?? []).map((d) => ({ name: d.name, definition: new RegExp(d.definition, "i"), anyUse: new RegExp(d.any_use, "gi") })),
       timeSpanTopics: (r.time_span_topics ?? []).map((t) => ({ name: t.name, step: new RegExp(t.step, "i"), context: new RegExp(t.context, "i") })), timeSpan: new RegExp(r.time_span_pattern ?? "(\\d+)\\s*-\\s*(\\d+)\\s*hours?", "i"),
+      attachmentRefs: (r.attachment_references ?? []).map((x) => new RegExp(x, "i")), labMarkers: (r.lab_page_markers ?? []).map((x) => new RegExp(x, "i")),
     };
   } catch (e) { throw new Error(`self_consistency.json: bad pattern: ${e instanceof Error ? e.message : e}`); }
 }
 
 /** A contradiction found inside the report itself. Both sides are quoted word for word, each with its page, so the reviewer can see and verify them. */
 export interface Contradiction {
-  check: "result_contradicts_threshold" | "baseline_labeled_elevated" | "narrative_material_without_reading" | "dates_disagree" | "two_lab_names" | "defined_never_used" | "time_spans_differ";
+  check: "result_contradicts_threshold" | "baseline_labeled_elevated" | "narrative_material_without_reading" | "dates_disagree" | "two_lab_names" | "defined_never_used" | "time_spans_differ" | "referenced_not_supplied";
   item_topics: string[];
   quotes: { page: number; text: string; role: "report_says" | "but_also_says" }[];
   detail: string;
