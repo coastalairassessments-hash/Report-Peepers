@@ -4,6 +4,7 @@ Rules (Cory, 2026-11-05)
 - Every question has buttons. The client may pick more than one. Every question also has an optional text box.
 - Everything is in the past tense: what led up to the inspection and what happened on the day. No blame, no questions about the inspector's character, no pricing.
 - Every question allows "Not sure". Every section can be skipped and finished later.
+- Health answers can be explained in the note box, but nothing in the review ever equates them to the report.
 - Answers are the client's own statements. They are context for the review and never proof of a condition. Notes are untrusted text: capped, never read as instructions.
 - The review uses answers to set what to expect in the report. If the client says X and the report is silent on the matching topic, the review asks about it (see the last table).
 
@@ -26,7 +27,7 @@ Rules (Cory, 2026-11-05)
 12. When was it first noticed? [This week · This month · Past 3 months · Past year · Over a year ago · Not sure]
 13. How had it changed? [Got worse · Stayed the same · Came and went · Got better · Not sure]
 14. Did it follow a pattern? [After rain · In humid months · In cool months · After running the AC · No pattern · Not sure]
-15. Had anyone in the home felt unwell in a way they connected to it? [Yes · No · Prefer not to say] (context only; never used in conclusions)
+15. Had anyone in the home had health concerns they wanted to mention? [Yes · No · Prefer not to say] The note box lets them explain. Health answers are kept as the client's own words only. The review never links them to the report, to a finding, or to a cause, and no expectation row uses them.
 
 ## 4. Water history
 16. What water events had happened? [Roof leak · Plumbing leak · Appliance leak · Window or door leak · Flooding · Storm or hurricane damage · AC condensation or drain overflow · Sewer backup · None known · Not sure]
