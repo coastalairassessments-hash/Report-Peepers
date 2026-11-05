@@ -29,3 +29,11 @@ Status key: open / with attorney / answered (add the answer and date).
 - L19 (added 2026-11-04): subscription side (inspectors paying for pre-delivery review). Independence and disclosure when we review homeowner reports from a subscribing inspector; whether a private per-inspector history is scoring data; marketing wording. See docs/SUBSCRIPTION_SIDE.md.
 
 - L20: The inspection checklist is written in our own words and names ASTM D7338 only as a possible reference. Confirm that naming it, and mirroring its topics in our own words, is acceptable without a license.
+
+- L21 (2026-11-05): Release with no human review (ADR-006): effect on exposure, disclaimers, insurance.
+- L22: "Independent second opinion" claim versus ArcSys/IndoorIQ and CAA relationships; required disclosure.
+- L23: Enforceable consumer limitation of liability, no-reliance, arbitration, venue, governing law.
+- L24: Client background notes that mention health: collect at all? handling and retention.
+- L25: Remedy promised for software error (correction or refund) and its trigger.
+- L26: Whether Cory, as a licensed assessor, should be named anywhere on the product. Drafts for counsel are in docs/legal/.
+
