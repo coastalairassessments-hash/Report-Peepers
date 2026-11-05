@@ -19,13 +19,18 @@ export interface ChecklistItem {
   /** The "can you share it" line the homeowner may send. Empty when there is no record to ask for. */
   record_request: string;
 }
-export interface Checklist { version: number; status: string; groups: string[]; applies_when_values: string[]; retired_ids?: string[]; items: ChecklistItem[] }
+export interface Checklist { version: number; status: string; groups: string[]; applies_when_values: string[]; retired_ids?: string[]; statuses: string[]; gap_kinds: string[]; items: ChecklistItem[] }
 
+/** The result words for an item. "not_verifiable" is for a page or record that cannot be read, never a guess. */
+export const STATUSES = ["supported", "partly_shown", "not_shown", "not_applicable", "not_verifiable"] as const;
+/** Whether the report simply does not explain something, or says the work was not done. The first is asked for as a record before anything else is assumed. */
+export const GAP_KINDS = ["not_explained", "not_performed", "unknown"] as const;
 const MATERIALITY: Materiality[] = ["by_dependence", "always_material", "always_minor"];
 
 /** Loads and validates the checklist. A bad entry stops the program rather than letting a malformed question reach a homeowner. Adding a question later is adding an entry. */
 export function loadChecklist(path = resolve(import.meta.dirname, "../../../../data/rules/inspection_checklist.json")): Checklist {
   const raw = JSON.parse(readFileSync(path, "utf8")) as Checklist;
+  if (JSON.stringify(raw.statuses) !== JSON.stringify(STATUSES) || JSON.stringify(raw.gap_kinds) !== JSON.stringify(GAP_KINDS)) throw new Error("inspection_checklist.json: statuses or gap_kinds do not match the program.");
   const ids = new Set<string>();
   for (const it of raw.items) {
     const at = `inspection_checklist.json ${it.id ?? "(no id)"}`;

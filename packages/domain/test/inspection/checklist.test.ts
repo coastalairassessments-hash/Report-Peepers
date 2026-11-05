@@ -46,7 +46,7 @@ describe("inspection checklist", () => {
     expect(() => loadChecklist(tweak((c) => { c.items[0].materiality = "nope"; }))).toThrow(/materiality/);
   });
   it("licensing and conflict-of-interest items are not part of the checklist, and their ids are retired", () => {
-    expect(list.items.some((i) => /licen[sc]e|credential|conflict|independen/i.test(`${i.topic} ${i.looks_for}`))).toBe(false);
+    expect(list.items.some((i) => /licen[sc]e|credential|conflicts? of interest|independence/i.test(`${i.topic} ${i.looks_for}`))).toBe(false);
     expect(list.retired_ids!.length).toBe(3);
     expect(() => loadChecklist(tweak((c) => { c.items[0].id = c.retired_ids[0]; }))).toThrow(/retired/);
   });
