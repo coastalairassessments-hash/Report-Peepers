@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "status": "draft - patterns for Cory to tune; matched case-insensitively against the report's own text",
+  "threshold_statement_patterns": [
+    "(?:equal to or in excess of|in excess of|greater than|exceed(?:s|ing)?|above)\\s+(\\d+(?:\\.\\d+)?)\\s*%",
+    "utili[sz]es\\s+(\\d+(?:\\.\\d+)?)\\s*%[^.]{0,80}baseline"
+  ],
+  "row_result_pattern": "(\\d+(?:\\.\\d+)?)\\s*%\\s+(Not Elevated|Elevated Levels?|Elevated)\\b",
+  "baseline_word": "baseline",
+  "materials": {
+    "crown molding": "crown\\s*mold",
+    "baseboard": "baseboard",
+    "wallboard": "wall\\s*board|drywall|gypsum",
+    "ceiling": "ceiling",
+    "wood floor": "wood\\s*floor",
+    "door trim": "door\\s*trim",
+    "plywood": "plywood",
+    "truss": "truss"
+  },
+  "narrative_markers": ["odor", "moisture on", "stains on", "water stains"],
+  "narrative_claim_pattern": "moisture (?:on|in|at)\\s+([^.]+)\\."
+}
