@@ -161,3 +161,45 @@ describe("limits the client described change what is asked", () => {
     for (const k of Object.keys(effects.effects)) expect(effects.order).toContain(k);
   });
 });
+
+describe("what the report did well", () => {
+  const q = (page: number, text: string, coverage = "full") => ({ page, anchor: { exact_text: text }, coverage });
+  const ok = (topic: string, quotes = [q(4, "against a dry reading of 9%")]) => ({ item_id: item(topic).id, status: "supported", gap_kind: null, quotes }) as any;
+  const done = (results: any[], extra: Record<string, unknown> = {}) => buildInspectionReview({ ...base, review: review(results), ...extra }).done_well;
+
+  it("stars a fully shown item with its page and the report's own words", () => {
+    const d = done([ok("Dry standard")]);
+    expect(d).toHaveLength(1);
+    expect(d[0]).toMatchObject({ topic: "Dry standard", page: 4, quote: "against a dry reading of 9%" });
+    expect(d[0]!.text).toContain("page 4");
+    expect(d[0]!.text).toContain("against a dry reading of 9%");
+    expect(wordingProblems(d[0]!.text)).toEqual([]);
+  });
+  it("no quote, no star", () => {
+    expect(done([ok("Dry standard", [])])).toEqual([]);
+    expect(done([ok("Dry standard", [q(4, "")])])).toEqual([]);
+  });
+  it("a partly shown item gets no star", () => {
+    expect(done([ok("Dry standard", [q(4, "a dry reading", "partial")])])).toEqual([]);
+  });
+  it("silence-is-fine items are never starred", () => {
+    const quiet = list.items.find((i) => i.silence_is_ok)!;
+    expect(done([{ item_id: quiet.id, status: "supported", gap_kind: null, quotes: [q(2, "none found")] }])).toEqual([]);
+  });
+  it("words read from an image get no star", () => {
+    expect(done([ok("Dry standard")], { imagePages: new Set([4]) })).toEqual([]);
+  });
+  it("a topic the review also asks about gets no star", () => {
+    const d = done([ok("Dry standard"), gap("Dry standard")]);
+    expect(d).toEqual([]);
+  });
+  it("is capped, material topics first", () => {
+    const topics = list.items.filter((i) => !i.silence_is_ok).slice(0, 30).map((i) => i.topic);
+    const d = done(topics.map((t) => ok(t)), { doneWellMax: 5 });
+    expect(d).toHaveLength(5);
+    const rank = (t: string) => ({ always_material: 0, by_dependence: 1, always_minor: 2 } as Record<string, number>)[item(t).materiality]!;
+    const ranks = d.map((x) => rank(x.topic));
+    expect(ranks).toEqual([...ranks].sort((a, b) => a - b));
+  });
+  function gap(topic: string) { return result(topic, "not_shown"); }
+});

@@ -8,7 +8,7 @@ import type { AreaMap } from "./evidenceMap.js";
 import type { ReviewResult } from "./reviewItems.js";
 import type { Contradiction } from "./selfConsistency.js";
 
-export interface GapWording { group_order: string[]; have_record: string; not_performed: string; not_checked: string; checks: Record<string, { text: string; why: string }>; map: Record<string, { text: string; why: string }> }
+export interface GapWording { done_well: string; group_order: string[]; have_record: string; not_performed: string; not_checked: string; checks: Record<string, { text: string; why: string }>; map: Record<string, { text: string; why: string }> }
 export const loadGapWording = (path = resolve(import.meta.dirname, "../../../../data/rules/gap_wording.json")): GapWording => JSON.parse(readFileSync(path, "utf8")) as GapWording;
 
 export interface ScopeEffects { labels: Record<string, string>; order: string[]; effects: Record<string, string[]>; wording: { scoped: string; scoped_why: string; not_expected: string } }
@@ -29,7 +29,8 @@ export interface ReviewQuestion {
   /** Where it goes: the short list on page 1 (the biggest points the report leans on), or the notes. */
   placement: "page_one" | "notes";
 }
-export interface InspectionReview { covered: { group: string; topics: string[] }[]; questions: ReviewQuestion[]; not_checked: string[]; /** Topics a limit the client described explains, so they are not asked as gaps. */ not_expected: string[]; map: AreaMap[]; held_back: { id: string; problems: string[] }[] }
+export interface DoneWell { topic: string; group: string; page: number; quote: string; text: string }
+export interface InspectionReview { done_well: DoneWell[]; covered: { group: string; topics: string[] }[]; questions: ReviewQuestion[]; not_checked: string[]; /** Topics a limit the client described explains, so they are not asked as gaps. */ not_expected: string[]; map: AreaMap[]; held_back: { id: string; problems: string[] }[] }
 
 const IMAGE_NOTE = " This came from an image in the report, so please confirm it against the original.";
 const CONCLUDING = new Set(["remediation", "cause", "health", "extent", "verification", "duration"]);
@@ -39,7 +40,7 @@ const CONCLUDING = new Set(["remediation", "cause", "health", "extent", "verific
  * One materiality rule: an item is material when the report draws a conclusion or recommends work that could lean on it, or when it is always material;
  * always-minor items never are. Questions are drafts for the reviewer. Text that breaks a wording rule is held back and listed.
  */
-export function buildInspectionReview(inp: { checklist: Checklist; review: ReviewResult; flags: ConsistencyFlag[]; contradictions: Contradiction[]; map: AreaMap[]; recordsReceived?: string[] | null; scope?: { restrictions: { kind: string; status: string }[] } | null; scopeEffects?: ScopeEffects; contextQuestions?: { id: string; topic: string; text: string; why: string }[]; leadingMax?: number; claims: Pick<CaseSnapshot["claims"][number], "claim_type">[]; imagePages: Set<number>; wording: GapWording }): InspectionReview {
+export function buildInspectionReview(inp: { checklist: Checklist; review: ReviewResult; flags: ConsistencyFlag[]; contradictions: Contradiction[]; map: AreaMap[]; recordsReceived?: string[] | null; doneWellMax?: number; scope?: { restrictions: { kind: string; status: string }[] } | null; scopeEffects?: ScopeEffects; contextQuestions?: { id: string; topic: string; text: string; why: string }[]; leadingMax?: number; claims: Pick<CaseSnapshot["claims"][number], "claim_type">[]; imagePages: Set<number>; wording: GapWording }): InspectionReview {
   const { checklist, review, wording } = inp;
   const concluding = inp.claims.some((c) => CONCLUDING.has(c.claim_type));
   const byId = new Map(checklist.items.map((i) => [i.id, i]));
@@ -129,6 +130,17 @@ export function buildInspectionReview(inp: { checklist: Checklist; review: Revie
   const not_checked = review.page_issues.map((p) => wording.not_checked.replace("{detail}", `page ${p.page}: ${p.detail}`));
   const unchecked = review.results.filter((r) => r.status === "not_verifiable").length;
   if (unchecked > 0) not_checked.push(`${unchecked} item${unchecked === 1 ? "" : "s"} couldn't be checked because some pages couldn't be read.`);
+  // What the report did well: fully shown items with a quote from real text. Never from images, never for "silence is fine" items, never where we also ask.
+  const asked = new Set(out.map((q) => q.topic));
+  const tier = (m: string) => (m === "always_material" ? 0 : m === "by_dependence" ? 1 : 2);
+  const stars: (DoneWell & { rank: number })[] = [];
+  for (const r of review.results) {
+    const it = byId.get(r.item_id), qt = r.quotes.find((x) => x.coverage === "full" && x.anchor?.exact_text?.trim());
+    if (!it || r.status !== "supported" || it.silence_is_ok || asked.has(it.topic) || !qt || inp.imagePages.has(qt.page)) continue;
+    const quote = (qt.anchor.exact_text ?? "").trim();
+    stars.push({ topic: it.topic, group: it.group, page: qt.page, quote, text: wording.done_well.replace("{topic}", it.topic).replace("{page}", String(qt.page)).replace("{quote}", quote), rank: tier(it.materiality) + groupRank(it.group) });
+  }
+  const done_well: DoneWell[] = stars.filter((s) => !wordingProblems(s.text).length).sort((a, b) => a.rank - b.rank).slice(0, inp.doneWellMax ?? 8).map(({ rank: _r, ...s }) => s);
   const covered = [...coveredBy.entries()].map(([group, topics]) => ({ group, topics }));
-  return { covered, questions: out, not_checked, not_expected, map: inp.map, held_back: held };
+  return { done_well, covered, questions: out, not_checked, not_expected, map: inp.map, held_back: held };
 }

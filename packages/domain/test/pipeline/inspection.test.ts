@@ -143,3 +143,14 @@ describe("described limits in the pipeline", () => {
     expect(rv.not_expected.join(" ")).toMatch(/access limit/);
   });
 });
+
+describe("what the report did well, in the pipeline", () => {
+  it("a complete report earns stars with real quotes; a thin one earns none for what it skipped", async () => {
+    const { rec } = await run(COMPLETE, completeScript);
+    const d = rec.inspection_review!.done_well;
+    expect(d.some((x) => x.topic === "Dry standard" && x.quote.includes("dry reading of 9%"))).toBe(true);
+    for (const x of d) expect(x.quote.length).toBeGreaterThan(0);
+    const thin = (await run(THIN, thinScript)).rec.inspection_review!;
+    expect(thin.done_well.some((x) => x.topic === "Dry standard")).toBe(false);
+  });
+});
