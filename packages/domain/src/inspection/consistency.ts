@@ -107,6 +107,12 @@ export function checkConsistency(snap: Pick<CaseSnapshot, "evidence" | "claims">
     }
   }
   const remed = cl.filter((x) => x.claim_type === "remediation");
+  // Work recommended with sample results as the only support: no visual finding and no moisture reading anywhere in the report.
+  if (allPagesRead && remed.length) {
+    const sampleRows = rows.filter((r) => r.kind === "e" && (ev.find((e) => e.id === r.id)?.origin === "laboratory" || any(c.lex.air_sample_words, text(r)) || any(c.lex.surface_sample_words, text(r))));
+    const looked = rows.some((r) => !sampleRows.some((s) => s.id === r.id) && (any(c.lex.visual_finding_words, text(r)) || any(c.lex.reading_patterns, text(r))) && !remed.some((x) => x.id === r.id));
+    if (sampleRows.length && !looked) flag("remediation_on_samples_alone", ["Recommendation has support"], [...rows.filter((r) => remed.some((x) => x.id === r.id)), ...sampleRows.slice(0, 2)], "Work is recommended, sample results are shown, and no visual finding or moisture reading appears anywhere in the report.");
+  }
   if (remed.length && remed.some((x) => any(c.lex.treatment_only_words, x.text + " " + (x.source_anchor.exact_text ?? ""))) && !remed.some((x) => any(c.lex.removal_words, x.text + " " + (x.source_anchor.exact_text ?? ""))) && allPagesRead)
     flag("treatment_without_removal", ["Physical removal"], rows.filter((r) => remed.some((x) => x.id === r.id)), "Treatment is recommended, and physical removal of growth or debris is not described.");
 

@@ -16,6 +16,7 @@
   "thermal_moisture_words": ["water leak", "moisture", "wet", "damp"],
   "treatment_only_words": ["\\bfog", "fungicide", "\\bspray", "encapsulat", "antimicrobial", "anti-microbial"],
   "removal_words": ["\\bremov", "\\bdiscard", "\\bdispos", "\\bHEPA vacuum", "\\bcut\\b"],
+  "visual_finding_words": ["\\b(visible|visibly|visually|observed|observation|noted|staining|stains?|discolor\\w*|water[- ]damage\\w*|damaged|rot|rust|corrosion|inspected|walk[- ]?through)\\b"],
   "observation_words": ["\\b(growth|staining|stain|damage|rust|rot|mold|moisture|leak|elevated|readings?|spores|sample)\\b"],
   "location_label_patterns": ["^\\s*Location:\\s*(.+?)\\s*$", "^\\s*Client Sample ID:\\s*(.+?)\\s*$"],
   "label_min_chars": 4

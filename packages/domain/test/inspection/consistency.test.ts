@@ -108,3 +108,26 @@ describe("config", () => {
     expect(() => loadConsistencyConfig(p)).toThrow(/bad pattern/);
   });
 });
+
+describe("work recommended on lab results alone", () => {
+  const rec = C("C1", "Remove and replace the drywall in the master bedroom.", "remediation", ["E1"]);
+  const lab = E("E1", "Air sample taken in the master suite. Aspergillus 1,267 spores/m3.");
+  it("flags a recommendation whose only support is sample results, with no visual finding or reading anywhere", () => {
+    expect(checks(run([lab], [rec]))).toContain("remediation_on_samples_alone");
+  });
+  it("is quiet when the report also shows what was seen", () => {
+    expect(checks(run([lab, E("E2", "Visible growth and staining were observed on the bedroom wall.")], [rec]))).not.toContain("remediation_on_samples_alone");
+  });
+  it("is quiet when the report also shows a moisture reading", () => {
+    expect(checks(run([lab, E("E2", "Moisture meter reading of 28 percent on the bedroom wall.")], [rec]))).not.toContain("remediation_on_samples_alone");
+  });
+  it("is quiet when no work is recommended", () => {
+    expect(checks(run([lab], []))).not.toContain("remediation_on_samples_alone");
+  });
+  it("is quiet when no sample results are shown (the other rules handle that)", () => {
+    expect(checks(run([E("E3", "The company has been in business for many years.")], [rec]))).not.toContain("remediation_on_samples_alone");
+  });
+  it("stays silent when a page was not read", () => {
+    expect(checks(run([lab], [rec], false))).not.toContain("remediation_on_samples_alone");
+  });
+});

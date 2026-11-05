@@ -34,9 +34,9 @@ const mapOn = (evidenceIds: string[]) => {
 const mapOnSound = () => mapOn(["e1", "e2", "e4"]);
 
 const QUIET: Record<string, () => string[] | Promise<string[]>> = {};
-for (const id of ["air_without_outdoor_comparison", "enclosed_air_read_as_room_air", "firmer_than_evidence", "health_statement", "number_used_as_standard", "reading_without_dry_standard", "recommendation_without_support", "surface_sample_without_control", "thermal_without_meter", "treatment_without_removal", "value_under_other_location", "wet_without_reading"]) QUIET[id] = flagsOnSound;
+for (const id of ["air_without_outdoor_comparison", "enclosed_air_read_as_room_air", "firmer_than_evidence", "health_statement", "number_used_as_standard", "reading_without_dry_standard", "recommendation_without_support", "surface_sample_without_control", "remediation_on_samples_alone", "thermal_without_meter", "treatment_without_removal", "value_under_other_location", "wet_without_reading"]) QUIET[id] = flagsOnSound;
 for (const id of ["dates_disagree", "two_lab_names", "defined_never_used", "time_spans_differ", "result_contradicts_threshold", "baseline_labeled_elevated", "narrative_material_without_reading", "referenced_not_supplied"]) QUIET[id] = selfOnSound;
-for (const id of ["recommendation_without_measure_or_sample", "cause_without_measure", "conclusion_without_anything_behind_it"]) QUIET[id] = mapOnSound;
+for (const id of ["recommendation_without_measure_or_sample", "recommendation_on_samples_alone", "cause_without_measure", "conclusion_without_anything_behind_it"]) QUIET[id] = mapOnSound;
 
 describe("every rule has a sample where it must stay quiet", () => {
   const wording = loadGapWording();

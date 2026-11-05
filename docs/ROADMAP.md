@@ -70,3 +70,7 @@ Next candidates: reviewer keep/reword/remove marks per question; source-rights g
 
 ## Done well (2026-11-05)
 The review now lists what the report did well (`done_well`): fully shown checklist items with page and the report's own words, up to 8, material topics first. No quote, no star; never from image-read text; never for "silence is fine" items; never where we also ask. Not a score. Not yet placed on the released PDF summary page (layout pending with the page-one list).
+
+## Automatic release and samples-alone rule (2026-11-05)
+Decision ADR-006: no person per report; release mode becomes a setting (next brick). Built: "work recommended on sample results alone" rule, at room level (evidence map) and report level (consistency): the recommendation rests on lab results and no visual finding or reading appears. 583 tests pass.
+Next: release_mode setting with all gates automatic; citation question check; guideline database plan.

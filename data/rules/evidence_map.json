@@ -10,6 +10,7 @@
   ],
   "rules": [
     { "id": "recommendation_without_measure_or_sample", "has": ["recommended"], "lacks": ["measured", "sampled"], "topic": "Recommendation has support", "material": true },
+    { "id": "recommendation_on_samples_alone", "has": ["recommended", "sampled"], "lacks": ["seen", "measured"], "topic": "Recommendation has support", "material": true },
     { "id": "cause_without_measure", "has": ["cause"], "lacks": ["measured"], "topic": "Moisture source", "material_if_has": "recommended" },
     { "id": "conclusion_without_anything_behind_it", "has": ["concluded"], "lacks": ["seen", "measured", "sampled"], "topic": "Traceable to findings", "material": false }
   ]

@@ -17,6 +17,7 @@
     "recommendation_without_support": { "text": "A recommendation doesn't point to the reading, sample or observation behind it. Ask: What supports it?", "why": "Each recommendation should trace to something in the report." },
     "surface_sample_without_control": { "text": "A surface sample is reported without a comparison from a clean, like surface. Ask: Was one taken?", "why": "A surface result is easier to read next to a clean comparison." },
     "thermal_without_meter": { "text": "Thermal imaging is used to suggest moisture without a meter reading confirming it. Ask: Was it confirmed with a meter?", "why": "Thermal images show temperature differences, so a meter confirms moisture." },
+    "remediation_on_samples_alone": { "text": "The recommended work rests on sample results, and the report shows no visual findings or moisture readings. Ask: What did the on-site inspection find that shows this work is needed beyond the lab result?", "why": "Lab results are one piece. What was seen and measured on site shows whether and where work is needed." },
     "treatment_without_removal": { "text": "The recommended work relies on treatment. Ask: How will growth and contaminated material be physically removed and checked?", "why": "Removal is the usual first step, ahead of fogging, spraying or coatings." },
     "value_under_other_location": { "text": "A value appears under a different location than the one it describes. Ask: Which location does it belong to?", "why": "Each value should sit with its own location." },
     "wet_without_reading": { "text": "Something is called wet or damp, but no reading is shown. Ask: What was measured, and where?", "why": "A wet or damp call is easier to rely on with a reading beside it." },
@@ -31,6 +32,7 @@
   },
   "map": {
     "recommendation_without_measure_or_sample": { "text": "In {area}, the report recommends work but doesn't show a reading or sample for that area. Ask: What supports the recommendation there?", "why": "Work that is opened up or removed should rest on something measured or sampled." },
+    "recommendation_on_samples_alone": { "text": "In {area}, the recommended work rests on sample results, and no visual finding or reading is shown for that area. Ask: What did the on-site inspection find there that shows the work is needed?", "why": "A sample result is one piece. What was seen and measured on site shows where the work belongs." },
     "cause_without_measure": { "text": "In {area}, the report states a cause but doesn't show a reading for that area. Ask: What measurement points to that cause?", "why": "A cause is easier to rely on with a reading behind it." },
     "conclusion_without_anything_behind_it": { "text": "In {area}, the report draws a conclusion but doesn't show what was seen, measured or sampled there. Ask: What was the conclusion based on?", "why": "Each conclusion should trace back to something in the report." }
   }

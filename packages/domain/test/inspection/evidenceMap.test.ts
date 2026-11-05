@@ -48,7 +48,7 @@ describe("the evidence map", () => {
   });
 
   it("a room with a measurement or a sample behind its recommendation has no gap", () => {
-    const snap = { areas: [WHOLE, A("R1", "Dining Room")], evidence: [E("e1", "Air sample taken in the room", "R1")], claims: [C("c2", "remediation", "Remove the wall covering", "R1")] };
+    const snap = { areas: [WHOLE, A("R1", "Dining Room")], evidence: [E("e1", "Air sample taken in the room", "R1"), E("e5", "Moisture meter reading 28% at the wall base", "R1")], claims: [C("c2", "remediation", "Remove the wall covering", "R1")] };
     expect(buildEvidenceMap(snap, cfg).find((x) => x.area_id === "R1")!.gaps).toEqual([]);
   });
 
@@ -58,5 +58,18 @@ describe("the evidence map", () => {
     const d = mkdtempSync(join(tmpdir(), "em-")); const p = join(d, "x.json");
     writeFileSync(p, JSON.stringify({ measured_patterns: ["("], sample_patterns: [], rules: [] }));
     expect(() => loadEvidenceMapConfig(p)).toThrow(/evidence_map.json/);
+  });
+});
+
+describe("a room where work rests on sample results alone", () => {
+  it("is a material gap when a room has a recommendation and a sample but nothing seen or measured", () => {
+    const snap = { areas: [WHOLE, A("R1", "Master Bedroom")], evidence: [E("e1", "Air sample taken in the room", "R1")], claims: [C("c1", "remediation", "Remove the drywall", "R1", 9)] };
+    const g = buildEvidenceMap(snap, cfg).find((x) => x.area_id === "R1")!.gaps;
+    expect(g).toMatchObject([{ rule: "recommendation_on_samples_alone", material: true, page: 9 }]);
+  });
+  it("is quiet once something was seen or measured in that room", () => {
+    const base = { areas: [WHOLE, A("R1", "Master Bedroom")], claims: [C("c1", "remediation", "Remove the drywall", "R1")] };
+    expect(buildEvidenceMap({ ...base, evidence: [E("e1", "Air sample taken in the room", "R1"), E("e2", "Staining on the baseboard", "R1")] }, cfg).find((x) => x.area_id === "R1")!.gaps).toEqual([]);
+    expect(buildEvidenceMap({ ...base, evidence: [E("e1", "Air sample taken in the room", "R1"), E("e3", "Moisture meter reading 28% at the wall base", "R1")] }, cfg).find((x) => x.area_id === "R1")!.gaps).toEqual([]);
   });
 });
