@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildInspectionReview, loadGapWording } from "../../src/inspection/gaps.js";
+import { buildInspectionReview, loadGapWording, loadScopeEffects } from "../../src/inspection/gaps.js";
 import { loadChecklist } from "../../src/inspection/checklist.js";
 import { wordingProblems } from "../../src/integrity.js";
 
@@ -108,5 +108,56 @@ describe("gaps become questions in the warm voice", () => {
     const r = buildInspectionReview({ ...base, wording: bad, contradictions: [c], review: review([]) });
     expect(r.questions).toEqual([]);
     expect(r.held_back).toHaveLength(1);
+  });
+});
+
+describe("limits the client described change what is asked", () => {
+  const effects = loadScopeEffects();
+  const lim = (kind: string, status = "present") => ({ restrictions: [{ kind, status }] });
+  const gap = (topic: string) => result(topic, "not_shown");
+  const concluding = [{ claim_type: "remediation" }];
+
+  it("a gap a present limit explains is not asked, and is listed as not expected", () => {
+    const r = buildInspectionReview({ ...base, scope: lim("access"), scopeEffects: effects, review: review([gap("Hidden areas")]) });
+    expect(r.questions.some((q) => q.topic === "Hidden areas")).toBe(false);
+    expect(r.not_expected.join(" ")).toMatch(/Hidden areas.*access limit/);
+  });
+  it("the same gap is asked when no limit was reported", () => {
+    const r = buildInspectionReview({ ...base, scope: { restrictions: [] }, scopeEffects: effects, review: review([gap("Hidden areas")]) });
+    expect(r.questions.some((q) => q.topic === "Hidden areas")).toBe(true);
+    expect(r.not_expected).toEqual([]);
+  });
+  it("unknown, conflicting or absent limits change nothing", () => {
+    for (const s of ["unknown", "conflicting", "explicitly_none"]) {
+      const r = buildInspectionReview({ ...base, scope: lim("access", s), scopeEffects: effects, review: review([gap("Hidden areas")]) });
+      expect(r.questions.some((q) => q.topic === "Hidden areas")).toBe(true);
+    }
+    expect(buildInspectionReview({ ...base, review: review([gap("Hidden areas")]) }).questions.some((q) => q.topic === "Hidden areas")).toBe(true);
+  });
+  it("a topic the limit does not explain is still asked", () => {
+    const r = buildInspectionReview({ ...base, scope: lim("access"), scopeEffects: effects, review: review([gap("Dry standard")]) });
+    expect(r.questions.some((q) => q.topic === "Dry standard")).toBe(true);
+  });
+  it("when the report draws conclusions, one scoped question goes to the notes, in the warm voice", () => {
+    const r = buildInspectionReview({ ...base, claims: concluding, scope: lim("time"), scopeEffects: effects, review: review([gap("Hidden areas"), gap("Beyond the visible spot")]) });
+    const scoped = r.questions.filter((q) => q.kind === "scope");
+    expect(scoped).toHaveLength(1);
+    expect(scoped[0]).toMatchObject({ placement: "notes", material: false });
+    expect(scoped[0]!.text).toContain("the time limit");
+    expect(wordingProblems(scoped[0]!.text)).toEqual([]);
+  });
+  it("no conclusions, no scoped question", () => {
+    const r = buildInspectionReview({ ...base, claims: [], scope: lim("time"), scopeEffects: effects, review: review([gap("Hidden areas")]) });
+    expect(r.questions.filter((q) => q.kind === "scope")).toHaveLength(0);
+  });
+  it("the report's own contradictions are never softened by a limit", () => {
+    const c = { check: "dates_disagree", item_topics: ["Numbers and units checked"], quotes: [{ page: 1, text: "a", role: "report_says" }, { page: 2, text: "b", role: "but_also_says" }], detail: "" };
+    const r = buildInspectionReview({ ...base, scope: lim("time"), scopeEffects: effects, contradictions: [c], review: review([]) });
+    expect(r.questions.some((q) => q.kind === "contradiction")).toBe(true);
+  });
+  it("every topic in the data exists in the checklist", () => {
+    const topics = new Set(list.items.map((i) => i.topic));
+    for (const [k, v] of Object.entries(effects.effects)) for (const t of v) expect(topics.has(t), `${k}: ${t}`).toBe(true);
+    for (const k of Object.keys(effects.effects)) expect(effects.order).toContain(k);
   });
 });

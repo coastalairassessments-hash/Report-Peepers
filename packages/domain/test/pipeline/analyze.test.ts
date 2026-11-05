@@ -61,7 +61,7 @@ describe("runAnalysis", () => {
     expect(rec.inspection_review!.questions.every((q) => q.text.length > 0)).toBe(true);
     expect(rec.inspection_review!.map.length).toBeGreaterThan(0);
     const mine = (await svc.repo.get(alice, id))!;
-    mine.inspection_review = { covered: [], questions: [], not_checked: [], map: [], held_back: [] };
+    mine.inspection_review = { covered: [], questions: [], not_checked: [], not_expected: [], map: [], held_back: [] };
     await expect(svc.repo.save(alice, mine)).rejects.toThrow();
   });
 

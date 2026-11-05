@@ -9,6 +9,7 @@ import { loadSelfConsistencyConfig } from "../../src/inspection/selfConsistency.
 import { loadEvidenceMapConfig } from "../../src/inspection/evidenceMap.js";
 import { loadGapWording } from "../../src/inspection/gaps.js";
 import { loadExpectations } from "../../src/context.js";
+import { loadScopeEffects } from "../../src/inspection/gaps.js";
 
 const checklist = loadChecklist();
 const idOf = (topic: string) => checklist.items.find((i) => i.topic === topic)!.id;
@@ -18,7 +19,7 @@ const ev = (local_id: string, exact_text: string, area_text?: string, origin = "
 const cl = (local_id: string, claim_type: string, exact_text: string, basis: string[], area_text?: string) => ({ local_id, claim_type, text: "Restated.", exact_text, strength_in_report: "categorical", basis_local_ids: basis, ...(area_text ? { area_text } : {}) });
 async function run(pages: PageSpec[], script: string[]) {
   const svc = makeServices(script);
-  svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), expectations: loadExpectations() };
+  svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), expectations: loadExpectations(), scopeEffects: loadScopeEffects() };
   const id = await readyCase(svc, await makePdf(pages));
   const r = await runAnalysis(svc, id);
   return { svc, id, r, rec: (await svc.repo.get(sys, id))! };
@@ -111,7 +112,7 @@ describe("inspection review, end to end", () => {
 describe("client context in the review", () => {
   it("adds a question when the client's account is not met by the report", async () => {
     const svc = makeServices(thinScript);
-    svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), expectations: loadExpectations() };
+    svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), expectations: loadExpectations(), scopeEffects: loadScopeEffects() };
     const id = await readyCase(svc, await makePdf(THIN));
     const rec0 = (await svc.repo.get(sys, id))!;
     rec0.context = { answers: { CX33: { picks: ["Rain in the past 3 days"] }, CX15: { picks: ["A health concern"], note: "Private" } }, skipped_sections: [] };
@@ -125,5 +126,20 @@ describe("client context in the review", () => {
   it("adds nothing when the client gave no context", async () => {
     const { rec } = await run(THIN, thinScript);
     expect(rec.inspection_review!.questions.some((q) => q.kind === "context")).toBe(false);
+  });
+});
+
+describe("described limits in the pipeline", () => {
+  it("a stated access limit moves a hidden-areas gap to the not-expected list", async () => {
+    const svc = makeServices(thinScript);
+    svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), scopeEffects: loadScopeEffects() };
+    const id = await readyCase(svc, await makePdf(THIN));
+    const rec0 = (await svc.repo.get(sys, id))!;
+    for (const r of rec0.scope!.restrictions) if (r.kind === "access") r.status = "present";
+    await svc.repo.save(sys, rec0);
+    await runAnalysis(svc, id);
+    const rv = (await svc.repo.get(sys, id))!.inspection_review!;
+    expect(rv.questions.some((q) => q.topic === "Hidden areas")).toBe(false);
+    expect(rv.not_expected.join(" ")).toMatch(/access limit/);
   });
 });

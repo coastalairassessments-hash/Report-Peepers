@@ -1,0 +1,23 @@
+{
+ "_note": "Draft mapping by the engineer, for Cory to correct. When the client reported a limit of this kind, a gap on these checklist topics is not asked as 'why wasn't this done'. Topics not listed here are always asked.",
+ "labels": {
+  "time": "the time limit", "samples": "the limit on samples", "budget": "the budget limit", "areas": "the limit on areas",
+  "methods": "the limit on methods", "equipment_materials": "the limit on equipment or materials", "access": "the access limit", "other": "the limit"
+ },
+ "order": ["areas", "access", "time", "samples", "methods", "equipment_materials", "budget", "other"],
+ "effects": {
+  "areas": ["Areas included and left out", "Rooms not entered", "What was seen per area", "Areas with nothing found", "Outside of the building", "HVAC looked at", "Hidden areas"],
+  "access": ["Rooms not entered", "Hidden areas", "HVAC looked at", "Outside of the building", "Beyond the visible spot", "Moisture source", "Cavity and cabinet samples kept apart"],
+  "time": ["Systematic approach", "What was seen per area", "Hidden areas", "Beyond the visible spot", "Areas with nothing found", "Rooms not entered", "HVAC looked at", "Outside of the building", "Thermal imaging used properly"],
+  "samples": ["Why each sample", "Why not the room center", "Control for surface samples", "Outdoor comparison", "Cavity and cabinet samples kept apart", "Real-time instruments", "Dust or ERMI-type samples", "Field blanks", "Reason for no sampling"],
+  "methods": ["Hidden areas", "Beyond the visible spot", "Thermal imaging used properly", "Measured, with what", "Real-time instruments", "Method fits the question", "Dust or ERMI-type samples", "Source, path and material"],
+  "equipment_materials": ["Measured, with what", "Thermal imaging used properly", "Pump calibration", "Real-time instruments", "Field blanks", "Control for surface samples", "Duration, flow and volume"],
+  "budget": ["Hidden areas", "Hidden conditions follow-up", "Dust or ERMI-type samples", "Thermal imaging used properly", "Reason for no sampling", "Real-time instruments", "Beyond the visible spot"],
+  "other": []
+ },
+ "wording": {
+  "scoped": "You described {limit}. How did that limit affect what the report concludes?",
+  "scoped_why": "A limit changes how far a conclusion can reach, so it helps to see the report say so.",
+  "not_expected": "{topics} (explained by {limit})"
+ }
+}

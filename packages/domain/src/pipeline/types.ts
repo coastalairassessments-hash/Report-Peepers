@@ -8,6 +8,7 @@ import type { CaseSnapshot, Scope } from "@report-peepers/contracts";
 import type { CaseState } from "../caseStateMachine.js";
 import type { Answers } from "../intake.js";
 import type { ContextState, Expectations } from "../context.js";
+import type { ScopeEffects } from "../inspection/gaps.js";
 import type { Limits } from "../ingest/preflight.js";
 import type { ModelPort } from "../engine/port.js";
 import type { ExtractionConfig } from "../engine/extractEvidence.js";
@@ -91,7 +92,7 @@ export interface Services {
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
   ocr?: { port: OcrPort; renderer: PageRenderer };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */
-  inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations };
+  inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations; scopeEffects?: ScopeEffects };
   markup: MarkupConfig;
   pipeline: PipelineConfig;
 }

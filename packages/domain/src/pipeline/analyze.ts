@@ -110,7 +110,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
     const imagePages = new Set(doc.pages.filter((p) => p.quality_flags.includes("read_from_image")).map((p) => p.index));
     inspectionReview = buildInspectionReview({
       checklist: i.checklist, review: rv, flags: checkConsistency(next, doc, i.consistency, rv.page_issues.length === 0), contradictions: checkSelfConsistency(doc, i.selfConsistency),
-      map: buildEvidenceMap(next, i.evidenceMap), recordsReceived: recordsReceived(rec.answers), contextQuestions: i.expectations && rec.context ? contextExpectations(i.expectations, rec.context, doc.pages.map((p) => p.text).join("\n"), rv.page_issues.length === 0) : [], leadingMax: svc.markup.leading_questions_max, claims: next.claims, imagePages, wording: i.wording,
+      map: buildEvidenceMap(next, i.evidenceMap), recordsReceived: recordsReceived(rec.answers), scope: rec.scope, scopeEffects: i.scopeEffects, contextQuestions: i.expectations && rec.context ? contextExpectations(i.expectations, rec.context, doc.pages.map((p) => p.text).join("\n"), rv.page_issues.length === 0) : [], leadingMax: svc.markup.leading_questions_max, claims: next.claims, imagePages, wording: i.wording,
     });
     for (const h of inspectionReview.held_back) found.push(issue(svc, "inspection_review", "held_back_question", `A question (${h.id}) was held back by the wording rules: ${h.problems.join(", ")}.`));
   }
