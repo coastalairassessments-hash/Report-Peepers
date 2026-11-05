@@ -18,3 +18,9 @@ Examples
 
 ## Scope rule (decided by Cory, 2026-11-04)
 The review is about whether the inspection is complete and whether the report supports its own claims. It does not check licenses, independence, conflicts of interest, or legal compliance. No jurisdiction layer is needed for those; only units and customary standards may vary by place later.
+
+## Cause and repair rule (decided by Cory, 2026-11-04)
+An assessment needs to state the cause (the causation). It does not need to say who repaired it or when. Never ask the homeowner to follow up on repairs; ask only whether a cause is stated and what supports it.
+
+## Comparison sample (decided by Cory, 2026-11-04)
+The outdoor sample is the control (comparison) sample. Do not ask for a separate "comparison" sample when an outdoor reference exists.
