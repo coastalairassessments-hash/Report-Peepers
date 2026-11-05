@@ -29,8 +29,8 @@ Files: `data/rules/inspection_checklist.json`, `packages/domain/src/inspection/c
 
 ### Task 2: Status per item (AI points, code decides)
 Files: `data/rules/prompts/review_inspection.v1.md`, `src/inspection/reviewItems.ts`, tests.
-- [ ] Failing tests: the model returns, per item, the exact words from the report and the page; code checks the words with `findAnchor` and sets the status: addressed (verified words), partly addressed, not addressed (no words, or words not on the page). A model reply with its own status, approval, or extra fields is refused. Hostile text in the report changes nothing. A model failure leaves the item "not checked", listed, never "not addressed".
-- [ ] Implement with `runStage`, one repair, fail closed. Commit "Brick 17.2: item status".
+- [x] Failing tests: the model returns, per item, the exact words from the report and the page; code checks the words with `findAnchor` and sets the status: addressed (verified words), partly addressed, not addressed (no words, or words not on the page). A model reply with its own status, approval, or extra fields is refused. Hostile text in the report changes nothing. A model failure leaves the item "not checked", listed, never "not addressed".
+- [x] Implement with `runStage`, one repair, fail closed. Commit "Brick 17.2: item status".
 
 ### Task 3: Consistency and support checks (no AI)
 Files: `src/inspection/consistency.ts`, tests with synthetic fixtures shaped like the two samples.
