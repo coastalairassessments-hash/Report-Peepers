@@ -27,6 +27,10 @@ describe("statements that disagree", () => {
     const f = await run([page(["Samples are sent to a 3rd party laboratory (AEML Inc.) for analysis."]), page(["Sporelytics Batch: 219308 Spore Trap Analysis", "Laboratory: Sporelytics"])]);
     expect(f.filter((x) => x.check === "two_lab_names")).toHaveLength(1);
   });
+  it("reads the lab name from a lab sheet header", async () => {
+    const f = await run([page(["Samples are sent to a 3rd party laboratory (AEML Inc.) for analysis."]), page(["Sporelytics Batch: 219308 A001 Spore Trap Analysis"])]);
+    expect(f.filter((x) => x.check === "two_lab_names")).toHaveLength(1);
+  });
   it("stays silent when the same lab is named twice, however it is written", async () => {
     const f = await run([page(["Samples are sent to a 3rd party laboratory (AEML Inc.) for analysis."]), page(["Laboratory: AEML, Inc."])]);
     expect(f.filter((x) => x.check === "two_lab_names")).toHaveLength(0);

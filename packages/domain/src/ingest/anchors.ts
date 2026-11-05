@@ -82,9 +82,11 @@ function toAnchor(page: ExtractedPage, documentVersionId: string, m: Match): Anc
   const flags: string[] = [];
   if (exact.includes("\n")) flags.push("split_across_lines");
   if (m.hyphenated) flags.push("hyphenated_line_break");
+  const fromImage = page.spans.some((s) => s.source === "ocr" && s.end > m.rawStart && s.start < m.rawEnd);
+  if (fromImage) flags.push("read_from_image");
   return {
     document_version_id: documentVersionId, pdf_page_index_1based: page.index, printed_page_label: page.label, paragraph_or_table_anchor: null,
-    bbox_normalized: matchBox(page, m), exact_text: exact, extraction_method: "native_text", quality_flags: flags,
+    bbox_normalized: matchBox(page, m), exact_text: exact, extraction_method: fromImage ? "ocr" : "native_text", quality_flags: flags,
   };
 }
 

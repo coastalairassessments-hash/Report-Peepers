@@ -16,6 +16,10 @@ export interface Span {
   origin: [number, number];
   along: [number, number];
   up: [number, number];
+  /** Set only on text read from an image. Native text has neither. */
+  source?: "ocr";
+  /** 0 to 100, from the reader. Only on text read from an image. */
+  confidence?: number;
 }
 
 export interface ExtractedPage {
