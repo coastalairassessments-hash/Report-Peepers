@@ -1,6 +1,8 @@
 import type { CaseSnapshot } from "@report-peepers/contracts";
 
 type Area = CaseSnapshot["areas"][number];
+/** A name written in capitals is shown in ordinary capitalization; anything else keeps its own spelling. */
+const display = (label: string): string => { const t = label.replace(/[:\s]+$/, "").replace(/\s+/g, " ").trim(); return t === t.toUpperCase() && /[A-Z]/.test(t) ? t.toLowerCase().replace(/(^|[\s/(-])([a-z])/g, (_, a, b) => a + b.toUpperCase()) : t; };
 const key = (s: string): string => s.toUpperCase().replace(/[^A-Z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
 
 /**
@@ -16,7 +18,7 @@ export function buildAreas(labels: Record<string, string>, whole: { id: string; 
     let a = byKey.get(k);
     if (!a) {
       if (byKey.size >= cap) continue;
-      a = { id: `AREA-${k.replace(/ /g, "-").slice(0, 60)}`, name: label.replace(/[:\s]+$/, "").replace(/\s+/g, " ").trim(), parent_id: whole.id, kind: "room", condition_status: "unclear_documentation", assessed_scope: "Named in the report; what was examined here is shown by the report's own statements.", time_context: null, basis_evidence_ids: [], uncertainties: [] };
+      a = { id: `AREA-${k.replace(/ /g, "-").slice(0, 60)}`, name: display(label), parent_id: whole.id, kind: "room", condition_status: "unclear_documentation", assessed_scope: "Named in the report; what was examined here is shown by the report's own statements.", time_context: null, basis_evidence_ids: [], uncertainties: [] };
       byKey.set(k, a);
     }
     idOf.set(item, a.id);

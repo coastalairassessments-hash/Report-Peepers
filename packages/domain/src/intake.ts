@@ -7,7 +7,7 @@ export interface QuestionDef {
   id: string;
   text: string;
   why: string; // shown to the client: why we ask
-  kind: "text" | "choice" | "yes_no_unsure" | "service";
+  kind: "text" | "choice" | "yes_no_unsure" | "service" | "multi";
   options?: string[];
   restriction?: RestrictionKind[]; // restriction kinds this question establishes
 }
@@ -27,7 +27,20 @@ export const QUESTION_BANK: QuestionDef[] = [
   { id: "Q10", kind: "text", text: "For each limit, who proposed it, and what did you understand the effect to be?", why: "Keeps the review fair to everyone involved." },
   { id: "Q11", kind: "yes_no_unsure", text: "Do you have other written records or verbal findings from the inspector?", why: "Existing records may already answer open questions." },
   { id: "Q12", kind: "text", text: "What question do you still feel is unanswered?", why: "So we focus on what matters to you." },
+  { id: "Q13", kind: "multi", text: "Which of these did you receive along with the report?", why: "If you already have a record, it may answer a question without anyone needing to ask the inspector.",
+    options: ["Full lab report", "Chain-of-custody form", "Field notes or field sheets", "Calibration records", "Signed scope of work", "None of these"] },
 ];
+
+/** The record each Q13 option stands for. The checklist's `record_kind` uses these words. */
+export const RECORD_KIND_BY_OPTION: Record<string, string> = {
+  "Full lab report": "lab_report", "Chain-of-custody form": "chain_of_custody", "Field notes or field sheets": "field_notes",
+  "Calibration records": "calibration_record", "Signed scope of work": "scope_of_work",
+};
+/** The kinds of record the homeowner says they received; null when the question was not answered. */
+export function recordsReceived(answers: Answers): string[] | null {
+  const r = answers["Q13"]?.records;
+  return r === undefined ? null : r.flatMap((o) => (RECORD_KIND_BY_OPTION[o] ? [RECORD_KIND_BY_OPTION[o]!] : []));
+}
 
 export interface Answer {
   choice?: Choice;
@@ -36,12 +49,14 @@ export interface Answer {
   unit?: string;
   proposedBy?: Restriction["proposed_by"];
   service?: string;
+  /** For a multi-choice question: the options picked. An empty list is an answer ("none of these"). */
+  records?: string[];
 }
 export type Answers = Record<string, Answer>;
 
 const byId = (id: string) => QUESTION_BANK.find((q) => q.id === id)!;
 const RESTRICTION_Q = ["Q04", "Q05", "Q06", "Q07", "Q08", "Q09"];
-const isAnswered = (a?: Answer) => !!a && (a.choice !== undefined || !!a.text?.trim() || a.service !== undefined);
+const isAnswered = (a?: Answer) => !!a && (a.choice !== undefined || !!a.text?.trim() || a.service !== undefined || a.records !== undefined);
 
 /** Skip rules. Q02 = "no" skips the restriction questions. Q10 only if some limit was reported. */
 export function isApplicable(id: string, answers: Answers): boolean {

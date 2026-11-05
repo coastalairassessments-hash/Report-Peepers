@@ -40,14 +40,14 @@ Files: `src/inspection/consistency.ts`, tests with synthetic fixtures shaped lik
 
 ### Task 4: Gaps become drafts, wired into the pipeline
 Files: `src/inspection/gaps.ts`, change `src/pipeline/analyze.ts`, tests.
-- [ ] Failing tests: each gap becomes a draft clarification finding with the leading question and the record request; materiality follows the one rule; wording is re-checked; anything held back is listed; the reviewer sees every gap and can remove or reword it; a completeness list (answered, can be supplied, not established) is carried on the release for the summary page.
-- [ ] Wire into `runAnalysis` between extraction and the proposal step. The summary page shows the completeness list (confirm the layout with Cory using the proof sheet before locking it). Commit "Brick 17.4: gaps to drafts".
+- [x] (Done as questions on the case record, not findings: every finding needs a report statement to trace to, and many gaps are silences.) Failing tests: each gap becomes a draft clarification finding with the leading question and the record request; materiality follows the one rule; wording is re-checked; anything held back is listed; the reviewer sees every gap and can remove or reword it; a completeness list (answered, can be supplied, not established) is carried on the release for the summary page.
+- [x] (Done, behind an optional switch; also added OCR for image pages, room areas, the evidence map, page-one ranking with a cap of 5, and "silence is fine" items.) Wire into `runAnalysis` after the proposal step. The summary page shows the completeness list (confirm the layout with Cory using the proof sheet before locking it). Commit "Brick 17.4: gaps to drafts".
 
 ### Task 5: Intake question, end to end, proof
 Files: `data/rules/` intake question, `test/pipeline/inspection.test.ts`, proof sheet.
-- [ ] Add one intake question: which records the homeowner received (full lab report, field photos, meter readings, field notes, chain of custody). The answer sets which gaps are likely missing paperwork.
-- [ ] End-to-end test on two synthetic reports modelled on the real samples: a thin report with several gaps and a complete one with none. Checks the trace from a sentence to a gap question to the page-1 list. Adversarial: hostile text, a scan, a model failure.
-- [ ] Proof sheet for Cory; update ROADMAP, coverage maps for tests that exist, `npm run check`, push, confirm CI green.
+- [x] Add one intake question: which records the homeowner received (full lab report, field photos, meter readings, field notes, chain of custody). The answer sets which gaps are likely missing paperwork.
+- [x] End-to-end test on two synthetic reports modelled on the real samples: a thin report with several gaps and a complete one with none. Checks the trace from a sentence to a gap question to the page-1 list. Adversarial: hostile text, a scan, a model failure.
+- [x] Proof sheet for Cory (docs/proofs/inspection/README.md); update ROADMAP, coverage maps for tests that exist, `npm run check`, push, confirm CI green.
 
 ## Open items on Cory (do not block the build)
 - Confirm or reword the 17 starting questions (I2).
@@ -55,3 +55,9 @@ Files: `data/rules/` intake question, `test/pipeline/inspection.test.ts`, proof 
 - Attorney: L20 (naming the standard).
 
 **Exit:** a synthetic report comes back with a completeness list and the questions to send the inspector, and a recommendation with nothing behind it is flagged. Next: Brick 18 (corrections to our own errors).
+
+
+## Still open inside Brick 17
+- Five contradiction checks from the Boynton and Atlanta samples: cover count not matching the sections, "confirmed" next to "needs a lab", a rating rule that needs a reading when none is shown, an instrument not in the equipment list, a number compared against its own stated standard. Plus "refers to an attachment that is not in the file".
+- Layout of the page-one list and the completeness list on the released PDF (confirm with Cory from the proof sheet).
+- Reviewer can remove or reword a question (reviewer console, Brick 19+).

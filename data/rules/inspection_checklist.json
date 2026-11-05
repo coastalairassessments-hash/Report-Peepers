@@ -113,7 +113,8 @@
    "applies_when": "always",
    "materiality": "by_dependence",
    "leading_question": "I couldn't compare what was done to what was agreed. Ask: Did the work match the agreed scope, and what changed?",
-   "record_request": "Could you share the signed scope of work?"
+   "record_request": "Could you share the signed scope of work?",
+   "record_kind": "scope_of_work"
   },
   {
    "id": "CK-010",
@@ -443,7 +444,8 @@
    "applies_when": "cavity_samples_taken",
    "materiality": "always_material",
    "leading_question": "Samples from inside a cabinet or wall are compared against room air. Ask: How should those be read?",
-   "record_request": "Could you share your reasoning?"
+   "record_request": "Could you share your reasoning?",
+   "silence_is_ok": true
   },
   {
    "id": "CK-040",
@@ -465,7 +467,8 @@
    "applies_when": "air_samples_taken",
    "materiality": "by_dependence",
    "leading_question": "The report doesn't show how long and how fast each sample was drawn. Ask: What were the time, flow and volume?",
-   "record_request": "Could you share your field sheet?"
+   "record_request": "Could you share your field sheet?",
+   "record_kind": "field_notes"
   },
   {
    "id": "CK-042",
@@ -476,7 +479,8 @@
    "applies_when": "air_samples_taken",
    "materiality": "by_dependence",
    "leading_question": "I couldn't find pump calibration records. Ask: Were the pumps calibrated before and after?",
-   "record_request": "Could you share the calibration record?"
+   "record_request": "Could you share the calibration record?",
+   "record_kind": "calibration_record"
   },
   {
    "id": "CK-043",
@@ -487,7 +491,8 @@
    "applies_when": "air_samples_taken",
    "materiality": "by_dependence",
    "leading_question": "The report doesn't say what the conditions were while sampling. Ask: Was the HVAC running and were doors closed?",
-   "record_request": "Could you share your field notes?"
+   "record_request": "Could you share your field notes?",
+   "record_kind": "field_notes"
   },
   {
    "id": "CK-044",
@@ -498,7 +503,8 @@
    "applies_when": "samples_taken",
    "materiality": "always_minor",
    "leading_question": "The report doesn't mention field blanks. Ask: Were any collected?",
-   "record_request": "Could you share the blank results?"
+   "record_request": "Could you share the blank results?",
+   "record_kind": "lab_report"
   },
   {
    "id": "CK-045",
@@ -509,7 +515,8 @@
    "applies_when": "samples_taken",
    "materiality": "by_dependence",
    "leading_question": "I couldn't find the chain of custody. Ask: Can I see it?",
-   "record_request": "Could you share the chain-of-custody form?"
+   "record_request": "Could you share the chain-of-custody form?",
+   "record_kind": "chain_of_custody"
   },
   {
    "id": "CK-046",
@@ -531,7 +538,8 @@
    "applies_when": "samples_taken",
    "materiality": "always_material",
    "leading_question": "The numbers in the report can be compared to the lab sheet. Ask: Can I see the original lab report?",
-   "record_request": "Could you share the original lab PDF?"
+   "record_request": "Could you share the original lab PDF?",
+   "record_kind": "lab_report"
   },
   {
    "id": "CK-048",
@@ -564,7 +572,8 @@
    "applies_when": "air_samples_taken",
    "materiality": "by_dependence",
    "leading_question": "The debris level on the spore traps isn't mentioned. Ask: How heavy was the debris?",
-   "record_request": "Could you share the lab report?"
+   "record_request": "Could you share the lab report?",
+   "record_kind": "lab_report"
   },
   {
    "id": "CK-051",
@@ -575,7 +584,8 @@
    "applies_when": "samples_taken",
    "materiality": "by_dependence",
    "leading_question": "Lab comments don't seem to carry into the interpretation. Ask: Were there lab notes about these samples?",
-   "record_request": "Could you share the lab report?"
+   "record_request": "Could you share the lab report?",
+   "record_kind": "lab_report"
   },
   {
    "id": "CK-052",
@@ -608,7 +618,8 @@
    "applies_when": "samples_taken",
    "materiality": "always_material",
    "leading_question": "The report uses a number as a dividing line between normal and elevated. Ask: What is the source of that number?",
-   "record_request": "Could you share the reference?"
+   "record_request": "Could you share the reference?",
+   "silence_is_ok": true
   },
   {
    "id": "CK-055",
@@ -619,7 +630,8 @@
    "applies_when": "samples_taken",
    "materiality": "by_dependence",
    "leading_question": "Certain molds are treated as proof of water damage. Ask: What else supports that?",
-   "record_request": "Could you share your reasoning?"
+   "record_request": "Could you share your reasoning?",
+   "silence_is_ok": true
   },
   {
    "id": "CK-056",
@@ -652,7 +664,8 @@
    "applies_when": "always",
    "materiality": "always_material",
    "leading_question": "The report touches on health effects. Ask: What is that based on?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-059",
@@ -707,7 +720,8 @@
    "applies_when": "always",
    "materiality": "always_material",
    "leading_question": "The report says no moisture was found, then describes chronic moisture. Ask the inspector to explain how both are true.",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-064",
@@ -806,7 +820,8 @@
    "applies_when": "always",
    "materiality": "always_material",
    "leading_question": "The summary and the body of the report don't match. Ask: Which is correct?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-074",
@@ -872,7 +887,8 @@
    "applies_when": "always",
    "materiality": "always_minor",
    "leading_question": "Different accounts of the water history aren't compared. Ask: Do the accounts agree, and how was that settled?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-080",
@@ -1015,7 +1031,8 @@
    "applies_when": "always",
    "materiality": "always_material",
    "leading_question": "The report suggests when this started or who is responsible. Ask: What evidence supports that?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-093",
@@ -1048,7 +1065,8 @@
    "applies_when": "realtime_instrument_used",
    "materiality": "always_material",
    "leading_question": "A real-time instrument is used as if it showed mold. Ask: What does this tool show, and what doesn't it?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-096",
@@ -1059,7 +1077,8 @@
    "applies_when": "dust_sample_taken",
    "materiality": "by_dependence",
    "leading_question": "A dust-based score is used for the decision. Ask: What question does it answer, and what are its limits?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-097",
@@ -1070,7 +1089,8 @@
    "applies_when": "samples_taken",
    "materiality": "always_material",
    "leading_question": "I couldn't confirm that sample IDs and times match between the field log, custody form and lab report. Ask: Can I see them side by side?",
-   "record_request": "Could you share the field log, chain of custody and lab report?"
+   "record_request": "Could you share the field log, chain of custody and lab report?",
+   "record_kind": "chain_of_custody"
   },
   {
    "id": "CK-098",
@@ -1092,7 +1112,8 @@
    "applies_when": "samples_taken",
    "materiality": "by_dependence",
    "leading_question": "A grouped spore type is described in ways a count can't show. Ask: What does this result establish?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-100",
@@ -1103,7 +1124,8 @@
    "applies_when": "samples_taken",
    "materiality": "always_minor",
    "leading_question": "Hyphal fragments are treated as showing the source. Ask: What else points to the source?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-101",
@@ -1136,7 +1158,8 @@
    "applies_when": "recommendation_made",
    "materiality": "always_material",
    "leading_question": "The recommended work relies on treatment. Ask: How will the growth and contaminated material be physically removed and checked?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-104",
@@ -1147,7 +1170,8 @@
    "applies_when": "recommendation_made",
    "materiality": "by_dependence",
    "leading_question": "The recommendation removes whole assemblies without showing why. Ask: What shows each material needs removal?",
-   "record_request": ""
+   "record_request": "",
+   "silence_is_ok": true
   },
   {
    "id": "CK-105",
@@ -1199,5 +1223,12 @@
   "not_explained",
   "not_performed",
   "unknown"
+ ],
+ "record_kinds": [
+  "scope_of_work",
+  "field_notes",
+  "calibration_record",
+  "lab_report",
+  "chain_of_custody"
  ]
 }

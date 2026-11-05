@@ -9,6 +9,10 @@ describe("rooms named in the report", () => {
     expect(r.areaIdsFor("E1")).toEqual(r.areaIdsFor("E2"));
     expect(r.areaIdsFor("E1")).not.toEqual(r.areaIdsFor("C1"));
   });
+  it("a name written in capitals is shown in ordinary capitalization; mixed case is left alone", () => {
+    expect(buildAreas({ E1: "LIVING ROOM" }, WHOLE).areas[0]!.name).toBe("Living Room");
+    expect(buildAreas({ E1: "Dining Room NW corner" }, WHOLE).areas[0]!.name).toBe("Dining Room NW corner");
+  });
   it("items with no label stay in the whole-report area", () => {
     const r = buildAreas({ E1: "Kitchen" }, WHOLE);
     expect(r.areaIdsFor("E9")).toEqual(["AREA-ALL"]);

@@ -18,8 +18,12 @@ export interface ChecklistItem {
   leading_question: string;
   /** The "can you share it" line the homeowner may send. Empty when there is no record to ask for. */
   record_request: string;
+  /** For record items: which kind of record would answer the question. Matches the intake question about records received. */
+  record_kind?: string;
+  /** True for "no bad thing" items (no safe/unsafe numbers, no medical claims, summary matches body). Silence in the report is fine; only a specific check can raise them. */
+  silence_is_ok?: boolean;
 }
-export interface Checklist { version: number; status: string; groups: string[]; applies_when_values: string[]; retired_ids?: string[]; statuses: string[]; gap_kinds: string[]; items: ChecklistItem[] }
+export interface Checklist { record_kinds?: string[]; version: number; status: string; groups: string[]; applies_when_values: string[]; retired_ids?: string[]; statuses: string[]; gap_kinds: string[]; items: ChecklistItem[] }
 
 /** The result words for an item. "not_verifiable" is for a page or record that cannot be read, never a guess. */
 export const STATUSES = ["supported", "partly_shown", "not_shown", "not_applicable", "not_verifiable"] as const;
@@ -43,6 +47,9 @@ export function loadChecklist(path = resolve(import.meta.dirname, "../../../../d
     if (it.needs !== "report" && it.needs !== "record") throw new Error(`${at}: needs must be report or record.`);
     if (it.applies_when !== "always" && !raw.applies_when_values.includes(it.applies_when)) throw new Error(`${at}: unknown condition "${it.applies_when}".`);
     for (const f of ["topic", "looks_for", "leading_question"] as const) if (!it[f]?.trim()) throw new Error(`${at}: ${f} is empty.`);
+    if (it.needs === "record" && !raw.record_kinds?.includes(it.record_kind ?? "")) throw new Error(`${at}: a record item needs a known record_kind.`);
+    if (it.needs !== "record" && it.record_kind) throw new Error(`${at}: only record items carry a record_kind.`);
+    if (it.silence_is_ok !== undefined && it.silence_is_ok !== true) throw new Error(`${at}: silence_is_ok is true or left out.`);
     if (it.needs === "record" && !it.record_request?.trim()) throw new Error(`${at}: a record item needs a record request.`);
   }
   return raw;

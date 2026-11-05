@@ -5,6 +5,7 @@ import { reviewInspection } from "../inspection/reviewItems.js";
 import { checkConsistency } from "../inspection/consistency.js";
 import { checkSelfConsistency } from "../inspection/selfConsistency.js";
 import { buildEvidenceMap } from "../inspection/evidenceMap.js";
+import { recordsReceived } from "../intake.js";
 import { buildInspectionReview } from "../inspection/gaps.js";
 import { sha256Hex } from "./hash.js";
 import { extractEvidenceFromDocument } from "../engine/extractEvidence.js";
@@ -108,7 +109,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
     const imagePages = new Set(doc.pages.filter((p) => p.quality_flags.includes("read_from_image")).map((p) => p.index));
     inspectionReview = buildInspectionReview({
       checklist: i.checklist, review: rv, flags: checkConsistency(next, doc, i.consistency, rv.page_issues.length === 0), contradictions: checkSelfConsistency(doc, i.selfConsistency),
-      map: buildEvidenceMap(next, i.evidenceMap), claims: next.claims, imagePages, wording: i.wording,
+      map: buildEvidenceMap(next, i.evidenceMap), recordsReceived: recordsReceived(rec.answers), leadingMax: svc.markup.leading_questions_max, claims: next.claims, imagePages, wording: i.wording,
     });
     for (const h of inspectionReview.held_back) found.push(issue(svc, "inspection_review", "held_back_question", `A question (${h.id}) was held back by the wording rules: ${h.problems.join(", ")}.`));
   }

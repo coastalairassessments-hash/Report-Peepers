@@ -55,3 +55,10 @@ describe("inspection checklist", () => {
     expect(loadChecklist(p).items.at(-1)!.id).toBe("CK-999");
   });
 });
+
+describe("record kinds", () => {
+  it("every record item names a known record kind and no other item does", () => {
+    const l = loadChecklist();
+    for (const i of l.items) { if (i.needs === "record") expect(l.record_kinds).toContain(i.record_kind); else expect(i.record_kind).toBeUndefined(); }
+  });
+});

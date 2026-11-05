@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { QUESTION_BANK, nextQuestion, buildScope, confirmScope, summarizeScope, recordScopeConflict, resolveScopeConflict, type Answers } from "../src/intake.js";
+import { QUESTION_BANK, recordsReceived, nextQuestion, buildScope, confirmScope, summarizeScope, recordScopeConflict, resolveScopeConflict, type Answers } from "../src/intake.js";
 import { validateCaseSnapshot } from "@report-peepers/contracts";
 import example from "../../../docs/spec/example_case.json" with { type: "json" };
 
@@ -11,7 +11,7 @@ const walk = (answers: Answers, fill: (id: string) => Answers[string]) => {
 
 describe("scope intake", () => {
   it("has Q01-Q12 and the first questions are about goal, then limits", () => {
-    expect(QUESTION_BANK.map((q) => q.id)).toEqual(["Q01","Q02","Q03","Q04","Q05","Q06","Q07","Q08","Q09","Q10","Q11","Q12"]);
+    expect(QUESTION_BANK.map((q) => q.id)).toEqual(["Q01","Q02","Q03","Q04","Q05","Q06","Q07","Q08","Q09","Q10","Q11","Q12","Q13"]);
     expect(nextQuestion({})!.id).toBe("Q01");
     expect(nextQuestion({ Q01: { text: "x" } })!.id).toBe("Q02");
   });
@@ -25,7 +25,7 @@ describe("scope intake", () => {
   it("'no limits' skips the limit questions and Q10", () => {
     const a: Answers = {};
     const asked = walk(a, (id) => id === "Q02" ? { choice: "no" } : id === "Q03" ? { service: "Screening" } : { text: "t", choice: "no" });
-    expect(asked).toEqual(["Q01", "Q02", "Q03", "Q11", "Q12"]);
+    expect(asked).toEqual(["Q01", "Q02", "Q03", "Q11", "Q12", "Q13"]);
     const s = buildScope(a);
     expect(s.restrictions.every((r) => r.status === "explicitly_none")).toBe(true);
   });
@@ -130,4 +130,20 @@ describe("scope intake", () => {
       expect(() => resolveScopeConflict(base(), "time", { choice: "client", outcome: "explicitly_none", note: "x" })).toThrow();
     });
   });
+});
+
+describe("which records the homeowner received", () => {
+  it("is the last question and a pick-several question", () => {
+    const q = QUESTION_BANK.find((x) => x.id === "Q13")!;
+    expect(q.kind).toBe("multi");
+    expect(QUESTION_BANK.at(-1)!.id).toBe("Q13");
+  });
+  it("picking nothing is still an answer, and the picks map to record kinds", () => {
+    const base: Answers = {};
+    walk(base, (id) => id === "Q13" ? { records: [] } : id === "Q02" ? { choice: "no" } : id === "Q03" ? { service: "Screening" } : { text: "t", choice: "no" });
+    expect(nextQuestion(base)).toBeNull();
+    expect(recordsReceived(base)).toEqual([]);
+    expect(recordsReceived({ Q13: { records: ["Full lab report", "None of these"] } })).toEqual(["lab_report"]);
+  });
+  it("unanswered is null, never 'none received'", () => { expect(recordsReceived({})).toBeNull(); });
 });

@@ -4,7 +4,7 @@
   "wet_words": ["\\b(wet|damp|saturated|moist)\\b", "elevated moisture", "water damage", "active leak"],
   "negation_before_wet": ["\\b(no|not|without|none)\\b[^.]{0,30}$"],
   "reading_patterns": ["\\b\\d{1,3}(\\.\\d+)?\\s*(%|percent)\\b", "\\b\\d{1,3}(\\.\\d+)?\\s*(WME|MC)\\b", "\\breadings? (of|was|were|at)\\s*\\d"],
-  "dry_reference_words": ["dry standard", "reference reading", "baseline", "unaffected (area|wall|material)", "like material", "same (wall|material) type", "comparison reading", "dry reference"],
+  "dry_reference_words": ["dry standard", "reference reading", "baseline", "unaffected (area|wall|material)", "like material", "same (wall|material) type", "comparison reading", "dry reference", "\\bdry (reading|value|level|baseline)s?\\b"],
   "surface_sample_words": ["\\bsurface sample", "\\btape (lift|sample)", "\\bswab", "\\bbulk sample"],
   "surface_control_patterns": ["(surface|tape|swab|bulk)[^.]{0,60}(control|comparison|reference)", "(control|comparison|reference)[^.]{0,60}(surface|tape|swab|bulk)"],
   "air_sample_words": ["\\bair sample", "\\bspore trap", "\\bair-o-cell", "spores/m3", "spores per cubic meter", "aerosol sample"],

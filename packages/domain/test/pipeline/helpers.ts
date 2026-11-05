@@ -37,6 +37,7 @@ export const NO_LIMITS: Record<string, Answer> = {
   Q03: { service: "Limited assessment" },
   Q11: { choice: "no" },
   Q12: { text: "Is the duration estimate supported?" },
+  Q13: { records: [] },
 };
 
 export async function answerAll(svc: Services, actor: Actor, caseId: string, answers: Record<string, Answer> = NO_LIMITS): Promise<void> {
