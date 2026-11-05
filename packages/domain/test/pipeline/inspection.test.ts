@@ -8,6 +8,7 @@ import { loadConsistencyConfig } from "../../src/inspection/consistency.js";
 import { loadSelfConsistencyConfig } from "../../src/inspection/selfConsistency.js";
 import { loadEvidenceMapConfig } from "../../src/inspection/evidenceMap.js";
 import { loadGapWording } from "../../src/inspection/gaps.js";
+import { loadExpectations } from "../../src/context.js";
 
 const checklist = loadChecklist();
 const idOf = (topic: string) => checklist.items.find((i) => i.topic === topic)!.id;
@@ -17,7 +18,7 @@ const ev = (local_id: string, exact_text: string, area_text?: string, origin = "
 const cl = (local_id: string, claim_type: string, exact_text: string, basis: string[], area_text?: string) => ({ local_id, claim_type, text: "Restated.", exact_text, strength_in_report: "categorical", basis_local_ids: basis, ...(area_text ? { area_text } : {}) });
 async function run(pages: PageSpec[], script: string[]) {
   const svc = makeServices(script);
-  svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording() };
+  svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), expectations: loadExpectations() };
   const id = await readyCase(svc, await makePdf(pages));
   const r = await runAnalysis(svc, id);
   return { svc, id, r, rec: (await svc.repo.get(sys, id))! };
@@ -104,5 +105,25 @@ describe("inspection review, end to end", () => {
     const { wordingProblems } = await import("../../src/integrity.js");
     const { rec } = await run(THIN, thinScript);
     for (const q of rec.inspection_review!.questions) expect([...wordingProblems(q.text), ...wordingProblems(q.why)], q.id).toEqual([]);
+  });
+});
+
+describe("client context in the review", () => {
+  it("adds a question when the client's account is not met by the report", async () => {
+    const svc = makeServices(thinScript);
+    svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), expectations: loadExpectations() };
+    const id = await readyCase(svc, await makePdf(THIN));
+    const rec0 = (await svc.repo.get(sys, id))!;
+    rec0.context = { answers: { CX33: { picks: ["Rain in the past 3 days"] }, CX15: { picks: ["A health concern"], note: "Private" } }, skipped_sections: [] };
+    await svc.repo.save(sys, rec0);
+    await runAnalysis(svc, id);
+    const rv = (await svc.repo.get(sys, id))!.inspection_review!;
+    const ctx = rv.questions.filter((q) => q.kind === "context");
+    expect(ctx.map((q) => q.topic)).toEqual(["weather"]);
+    expect(JSON.stringify(rv)).not.toMatch(/health|Private/i);
+  });
+  it("adds nothing when the client gave no context", async () => {
+    const { rec } = await run(THIN, thinScript);
+    expect(rec.inspection_review!.questions.some((q) => q.kind === "context")).toBe(false);
   });
 });

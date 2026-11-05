@@ -7,6 +7,7 @@ import type { OcrPort, PageRenderer } from "../ingest/ocr.js";
 import type { CaseSnapshot, Scope } from "@report-peepers/contracts";
 import type { CaseState } from "../caseStateMachine.js";
 import type { Answers } from "../intake.js";
+import type { ContextState, Expectations } from "../context.js";
 import type { Limits } from "../ingest/preflight.js";
 import type { ModelPort } from "../engine/port.js";
 import type { ExtractionConfig } from "../engine/extractEvidence.js";
@@ -40,6 +41,8 @@ export interface CaseRecord {
   reviewer_id: string | null;
   state: CaseState;
   answers: Answers;
+  /** The client's context answers (buttons plus notes). Context only: never proof of a condition, never health-linked. */
+  context?: ContextState;
   scope: Scope | null;
   source: { file_ref: string; sha256: string; byte_size: number; page_count: number; display_name: string } | null;
   snapshot: CaseSnapshot | null;
@@ -88,7 +91,7 @@ export interface Services {
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
   ocr?: { port: OcrPort; renderer: PageRenderer };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */
-  inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; evidenceMap: EvidenceMapConfig; wording: GapWording };
+  inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations };
   markup: MarkupConfig;
   pipeline: PipelineConfig;
 }
