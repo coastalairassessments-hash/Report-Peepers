@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "status": "draft - word lists for Cory to tune; matched case-insensitively against the report's own statements",
+  "measured_patterns": [
+    "\\d+(?:\\.\\d+)?\\s*(?:%|°\\s*[FC]\\b|percent|ppm|µg|ug/m|mg/)",
+    "\\b(?:moisture meter|moisture content|moisture reading|readings?|thermal imag\\w*|infrared|psychrometric|dew point|relative humidity|pinless|pin meter|protimeter|wood moisture equivalent)\\b"
+  ],
+  "sample_patterns": [
+    "\\b(?:air sample|spore trap|air-o-cell|swab|tape[- ]?lift|bulk sample|dust sample|ermi|laboratory|lab results?|sampled|samples? (?:was|were|taken|collected))\\b"
+  ],
+  "rules": [
+    { "id": "recommendation_without_measure_or_sample", "has": ["recommended"], "lacks": ["measured", "sampled"], "topic": "Recommendation has support", "material": true },
+    { "id": "cause_without_measure", "has": ["cause"], "lacks": ["measured"], "topic": "Moisture source", "material_if_has": "recommended" },
+    { "id": "conclusion_without_anything_behind_it", "has": ["concluded"], "lacks": ["seen", "measured", "sampled"], "topic": "Traceable to findings", "material": false }
+  ]
+}
