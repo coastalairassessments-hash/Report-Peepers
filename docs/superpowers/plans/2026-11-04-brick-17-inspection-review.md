@@ -34,8 +34,8 @@ Files: `data/rules/prompts/review_inspection.v1.md`, `src/inspection/reviewItems
 
 ### Task 3: Consistency and support checks (no AI)
 Files: `src/inspection/consistency.ts`, tests with synthetic fixtures shaped like the two samples.
-- [ ] Failing tests, one per pattern: something called wet with no reading; a reading with no dry standard (on-site dry spot or a named general standard); a result listed under one location but cited for another (the mislabeled-location pattern); "no moisture detected" next to a chronic-moisture conclusion with no explanation; a recommendation with no evidence behind it; a surface sample with no control; cabinet or cavity samples compared with room air; no outdoor comparison; a claim stated more firmly than its evidence.
-- [ ] Implement as pure functions over evidence and claims. Each returns what it found and the evidence ids. Commit "Brick 17.3: consistency and support checks".
+- [x] Failing tests, one per pattern: something called wet with no reading; a reading with no dry standard (on-site dry spot or a named general standard); a result listed under one location but cited for another (the mislabeled-location pattern); "no moisture detected" next to a chronic-moisture conclusion with no explanation; a recommendation with no evidence behind it; a surface sample with no control; cabinet or cavity samples compared with room air; no outdoor comparison; a claim stated more firmly than its evidence.
+- [x] Implement as pure functions over evidence and claims (lexicons in `data/rules/consistency.json`, for Cory to tune). Each returns what it found and the evidence ids. Commit "Brick 17.3: consistency and support checks".
 
 ### Task 4: Gaps become drafts, wired into the pipeline
 Files: `src/inspection/gaps.ts`, change `src/pipeline/analyze.ts`, tests.

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "status": "draft - lexicons are for Cory to tune; a regex per line, matched case-insensitively",
+  "wet_words": ["\\b(wet|damp|saturated|moist)\\b", "elevated moisture", "water damage", "active leak"],
+  "negation_before_wet": ["\\b(no|not|without|none)\\b[^.]{0,30}$"],
+  "reading_patterns": ["\\b\\d{1,3}(\\.\\d+)?\\s*(%|percent)\\b", "\\b\\d{1,3}(\\.\\d+)?\\s*(WME|MC)\\b", "\\breadings? (of|was|were|at)\\s*\\d"],
+  "dry_reference_words": ["dry standard", "reference reading", "baseline", "unaffected (area|wall|material)", "like material", "same (wall|material) type", "comparison reading", "dry reference"],
+  "surface_sample_words": ["\\bsurface sample", "\\btape (lift|sample)", "\\bswab", "\\bbulk sample"],
+  "surface_control_patterns": ["(surface|tape|swab|bulk)[^.]{0,60}(control|comparison|reference)", "(control|comparison|reference)[^.]{0,60}(surface|tape|swab|bulk)"],
+  "air_sample_words": ["\\bair sample", "\\bspore trap", "\\bair-o-cell", "spores/m3", "spores per cubic meter", "aerosol sample"],
+  "outdoor_words": ["\\b(outside|outdoor|exterior)\\b[^.]{0,40}(sample|control|result|spore)", "(sample|control|result)[^.]{0,40}\\b(outside|outdoor|exterior)\\b"],
+  "enclosed_space_words": ["\\bcabinet", "\\bcavity", "\\bcloset", "\\benclosed"],
+  "room_air_reading_words": ["\\b(interior|residence|room|home|living)\\b"],
+  "threshold_patterns": ["(exceed|above|below|greater than|less than)[^.]{0,40}\\d[\\d,]*\\s*(aggregate\\s+)?(fungal\\s+)?spores", "\\b(safe|unsafe|toxic)\\b"],
+  "thermal_words": ["\\b(thermal|infrared|IR)\\b[^.]{0,40}(imag|camera|readings?)"],
+  "thermal_moisture_words": ["water leak", "moisture", "wet", "damp"],
+  "treatment_only_words": ["\\bfog", "fungicide", "\\bspray", "encapsulat", "antimicrobial", "anti-microbial"],
+  "removal_words": ["\\bremov", "\\bdiscard", "\\bdispos", "\\bHEPA vacuum", "\\bcut\\b"],
+  "observation_words": ["\\b(growth|staining|stain|damage|rust|rot|mold|moisture|leak|elevated|readings?|spores|sample)\\b"],
+  "location_label_patterns": ["^\\s*Location:\\s*(.+?)\\s*$", "^\\s*Client Sample ID:\\s*(.+?)\\s*$"],
+  "label_min_chars": 4
+}
