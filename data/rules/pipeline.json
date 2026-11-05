@@ -1,0 +1,7 @@
+{
+  "_note": "Settings for ordering the pipeline steps. Proposed defaults, tune here, not in code.",
+  "max_analysis_attempts": 3,
+  "rule_pack_version": "SLICE-0 (no expert rule pack loaded yet)",
+  "reference_snapshot_id": "NONE (no references authorized yet)",
+  "whole_report_area": { "id": "AREA-001", "name": "Whole report (not yet divided into rooms)" }
+}
