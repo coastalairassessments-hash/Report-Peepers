@@ -1,3 +1,8 @@
+import type { Checklist } from "../inspection/checklist.js";
+import type { ConsistencyConfig } from "../inspection/consistency.js";
+import type { SelfConsistencyConfig } from "../inspection/selfConsistency.js";
+import type { EvidenceMapConfig } from "../inspection/evidenceMap.js";
+import type { GapWording, InspectionReview } from "../inspection/gaps.js";
 import type { OcrPort, PageRenderer } from "../ingest/ocr.js";
 import type { CaseSnapshot, Scope } from "@report-peepers/contracts";
 import type { CaseState } from "../caseStateMachine.js";
@@ -14,7 +19,7 @@ export type Actor = { role: "customer"; id: string } | { role: "reviewer"; id: s
 
 export interface ProcessingIssue {
   id: string;
-  stage: "upload" | "extraction" | "proposal" | "integrity" | "markup";
+  stage: "upload" | "extraction" | "proposal" | "integrity" | "markup" | "inspection_review";
   code: string;
   detail: string;
   page?: number;
@@ -42,6 +47,8 @@ export interface CaseRecord {
   attempts: number;
   published_fingerprint: string | null;
   released: ReleasedOutputs | null;
+  /** Written only by the system. The completeness list, the questions to ask, and the evidence map. */
+  inspection_review?: InspectionReview | null;
 }
 
 export interface CaseRepository {
@@ -80,6 +87,8 @@ export interface Services {
   extraction: ExtractionConfig;
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
   ocr?: { port: OcrPort; renderer: PageRenderer };
+  /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */
+  inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; evidenceMap: EvidenceMapConfig; wording: GapWording };
   markup: MarkupConfig;
   pipeline: PipelineConfig;
 }

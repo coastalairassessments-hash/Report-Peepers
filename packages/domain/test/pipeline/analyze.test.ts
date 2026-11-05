@@ -4,6 +4,11 @@ import { makePdf, type PageSpec } from "../ingest/fixtures.js";
 import { P1, j, extraction, proposal } from "./slice-fixtures.js";
 import { makeServices, readyCase, alice, sys, rev1 } from "./helpers.js";
 import { runAnalysis, assignReviewer } from "../../src/pipeline/analyze.js";
+import { loadChecklist } from "../../src/inspection/checklist.js";
+import { loadConsistencyConfig } from "../../src/inspection/consistency.js";
+import { loadSelfConsistencyConfig } from "../../src/inspection/selfConsistency.js";
+import { loadEvidenceMapConfig } from "../../src/inspection/evidenceMap.js";
+import { loadGapWording } from "../../src/inspection/gaps.js";
 
 async function setup(script: any[], pages: PageSpec[] = [P1]) {
   const svc = makeServices(script);
@@ -44,6 +49,26 @@ describe("runAnalysis", () => {
     expect(await runAnalysis(svc, id)).toMatchObject({ ok: true });
     const rec = (await svc.repo.get(sys, id))!;
     expect(rec.issues.some((i) => i.code === "no_text_layer")).toBe(false);
+  });
+
+  it("with the inspection review switched on, the case carries the questions, the covered list and the map, and a customer cannot change them", async () => {
+    const svc = makeServices([extraction, proposal, j({ items: [], conditions: [] })]);
+    svc.inspection = { checklist: loadChecklist(), consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording() };
+    const id = await readyCase(svc, await makePdf([P1]));
+    expect(await runAnalysis(svc, id)).toMatchObject({ ok: true });
+    const rec = (await svc.repo.get(sys, id))!;
+    expect(rec.inspection_review!.questions.length).toBeGreaterThan(0);
+    expect(rec.inspection_review!.questions.every((q) => q.text.length > 0)).toBe(true);
+    expect(rec.inspection_review!.map.length).toBeGreaterThan(0);
+    const mine = (await svc.repo.get(alice, id))!;
+    mine.inspection_review = { covered: [], questions: [], not_checked: [], map: [], held_back: [] };
+    await expect(svc.repo.save(alice, mine)).rejects.toThrow();
+  });
+
+  it("without the switch, nothing about the inspection review is stored", async () => {
+    const { svc, id } = await setup([extraction, proposal]);
+    await runAnalysis(svc, id);
+    expect((await svc.repo.get(sys, id))!.inspection_review ?? null).toBeNull();
   });
 
   it("when nothing can be extracted the case fails with a reason and no snapshot", async () => {

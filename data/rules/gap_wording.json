@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "status": "draft - warm wording for Cory to review; follows docs/expert/VOICE_RULE.md. {placeholders} are filled by code from the report's own words.",
+  "not_performed": "The report says this wasn't done: {topic}. Ask: What was the reason, and does it change what the report concludes?",
+  "not_checked": "I couldn't check this part of the report: {detail} Ask the person who sent it for the original file.",
+  "checks": {
+    "dates_disagree": { "text": "The report gives two different dates. Ask: Why was sampling on a different day than the inspection?", "why": "Conditions can change between days, and results describe the day sampled." },
+    "two_lab_names": { "text": "The report names more than one laboratory. Ask: Which lab analyzed which sample?", "why": "Each result should trace to the lab that produced it." },
+    "defined_never_used": { "text": "The report defines categories but doesn't say which one applies to any area. Ask: Which category does each area fall into?", "why": "The categories only help if they are applied." },
+    "time_spans_differ": { "text": "The report gives two different time spans for the same step. Ask: Which one applies?", "why": "A contractor will follow one, and the two lead to different waits." },
+    "result_contradicts_threshold": { "text": "A result is labeled in a way that doesn't match the report's own line. Ask: Which is right, the label or the number?", "why": "The label and the number should agree." },
+    "baseline_labeled_elevated": { "text": "A reference reading is labeled elevated. Ask: Is it a baseline, or was it elevated?", "why": "A baseline is the comparison point for the rest." },
+    "narrative_material_without_reading": { "text": "The report describes moisture on a material in a room, but the room's reading table doesn't list one. Ask: Was that material measured?", "why": "A statement of moisture is easier to rely on with a reading beside it." }
+  },
+  "map": {
+    "recommendation_without_measure_or_sample": { "text": "In {area}, the report recommends work but doesn't show a reading or sample for that area. Ask: What supports the recommendation there?", "why": "Work that is opened up or removed should rest on something measured or sampled." },
+    "cause_without_measure": { "text": "In {area}, the report states a cause but doesn't show a reading for that area. Ask: What measurement points to that cause?", "why": "A cause is easier to rely on with a reading behind it." },
+    "conclusion_without_anything_behind_it": { "text": "In {area}, the report draws a conclusion but doesn't show what was seen, measured or sampled there. Ask: What was the conclusion based on?", "why": "Each conclusion should trace back to something in the report." }
+  }
+}

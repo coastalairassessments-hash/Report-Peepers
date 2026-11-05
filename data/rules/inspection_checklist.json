@@ -134,7 +134,7 @@
    "needs": "report",
    "applies_when": "always",
    "materiality": "by_dependence",
-   "leading_question": "The report doesn't describe the building's water history. Ask: What leaks or repairs were reported, and when?",
+   "leading_question": "The report doesn't describe the building's water history. Ask: What water problems were reported, and when?",
    "record_request": "Could you share the interview notes?"
   },
   {

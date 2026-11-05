@@ -1,6 +1,11 @@
 import type { CaseSnapshot } from "@report-peepers/contracts";
 import { validateCaseSnapshot } from "@report-peepers/contracts";
 import { buildAreas } from "../inspection/areas.js";
+import { reviewInspection } from "../inspection/reviewItems.js";
+import { checkConsistency } from "../inspection/consistency.js";
+import { checkSelfConsistency } from "../inspection/selfConsistency.js";
+import { buildEvidenceMap } from "../inspection/evidenceMap.js";
+import { buildInspectionReview } from "../inspection/gaps.js";
 import { sha256Hex } from "./hash.js";
 import { extractEvidenceFromDocument } from "../engine/extractEvidence.js";
 import { proposeFindings } from "../engine/proposeFindings.js";
@@ -92,7 +97,23 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
   const next = prop.result.snapshot;
   for (const h of prop.result.held_back) found.push(issue(svc, "proposal", `held_back_${h.kind}`, `A proposed ${h.kind} (${h.id}) was held back by the checks: ${[...new Set(h.issues.map((i) => i.code))].join(", ")}.`));
 
-  const audit = [...ex.audit, ...prop.audit];
+  let inspectionReview = null;
+  const reviewAudit = [];
+  if (svc.inspection) {
+    const i = svc.inspection;
+    const rv = await reviewInspection(svc.model, i.checklist, doc, DOCUMENT_VERSION_ID, svc.now);
+    reviewAudit.push(...rv.audit);
+    for (const p of rv.page_issues) found.push(issue(svc, "inspection_review", p.issue, p.detail, p.page));
+    for (const h of rv.held_back) found.push(issue(svc, "inspection_review", `held_back_${h.reason}`, `A proposed ${h.kind} (${h.id}) was not accepted: ${h.reason.replace(/_/g, " ")}.`, h.page));
+    const imagePages = new Set(doc.pages.filter((p) => p.quality_flags.includes("read_from_image")).map((p) => p.index));
+    inspectionReview = buildInspectionReview({
+      checklist: i.checklist, review: rv, flags: checkConsistency(next, doc, i.consistency, rv.page_issues.length === 0), contradictions: checkSelfConsistency(doc, i.selfConsistency),
+      map: buildEvidenceMap(next, i.evidenceMap), claims: next.claims, imagePages, wording: i.wording,
+    });
+    for (const h of inspectionReview.held_back) found.push(issue(svc, "inspection_review", "held_back_question", `A question (${h.id}) was held back by the wording rules: ${h.problems.join(", ")}.`));
+  }
+
+  const audit = [...ex.audit, ...prop.audit, ...reviewAudit];
   next.provenance.model_version = modelOf(audit);
 
   const attention = next.findings.filter((f) => f.finding_type !== "supported_reasoning").map((f) => f.id);
@@ -105,6 +126,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
   if (integrity.length || anchors.length) return fail(svc, rec, "integrity", [...integrity, ...anchors].slice(0, 5).map((i) => `${i.code} at ${i.path}`).join("; "), found);
 
   rec.snapshot = next;
+  if (inspectionReview) rec.inspection_review = inspectionReview;
   rec.issues = [...rec.issues, ...found];
   const m = move(rec, "awaiting_reviewer", { typedOutputValidated: true, ambiguitiesAddressed: true, referencesVerified: next.references.length === 0, prohibitedClaimsAbsent: true });
   if (!m.ok) return fail(svc, rec, m.reason, (m.missing ?? []).join(", "));

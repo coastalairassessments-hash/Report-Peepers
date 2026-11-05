@@ -1,0 +1,90 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import type { CaseSnapshot } from "@report-peepers/contracts";
+import { wordingProblems } from "../integrity.js";
+import type { Checklist, ChecklistItem } from "./checklist.js";
+import type { ConsistencyFlag } from "./consistency.js";
+import type { AreaMap } from "./evidenceMap.js";
+import type { ReviewResult } from "./reviewItems.js";
+import type { Contradiction } from "./selfConsistency.js";
+
+export interface GapWording { not_performed: string; not_checked: string; checks: Record<string, { text: string; why: string }>; map: Record<string, { text: string; why: string }> }
+export const loadGapWording = (path = resolve(import.meta.dirname, "../../../../data/rules/gap_wording.json")): GapWording => JSON.parse(readFileSync(path, "utf8")) as GapWording;
+
+export interface ReviewQuestion {
+  id: string; kind: "checklist" | "consistency" | "contradiction" | "map"; topic: string;
+  /** True when a conclusion or recommendation leans on the gap, or the item is always material. Material questions go to page 1. */
+  material: boolean;
+  text: string; why: string;
+  /** The "can you share it" line, when a record would answer the question. */
+  request: string | null;
+  page: number | null; quotes: { page: number; text: string }[];
+  /** True when any words behind the question were read from an image. The text then asks for confirmation. */
+  from_image: boolean;
+}
+export interface InspectionReview { covered: { group: string; topics: string[] }[]; questions: ReviewQuestion[]; not_checked: string[]; map: AreaMap[]; held_back: { id: string; problems: string[] }[] }
+
+const IMAGE_NOTE = " This came from an image in the report, so please confirm it against the original.";
+const CONCLUDING = new Set(["remediation", "cause", "health", "extent", "verification", "duration"]);
+
+/**
+ * Turns every gap the checks found into one list of questions for the homeowner to ask, in the warm voice, plus the list of what the report covers.
+ * One materiality rule: an item is material when the report draws a conclusion or recommends work that could lean on it, or when it is always material;
+ * always-minor items never are. Questions are drafts for the reviewer. Text that breaks a wording rule is held back and listed.
+ */
+export function buildInspectionReview(inp: { checklist: Checklist; review: ReviewResult; flags: ConsistencyFlag[]; contradictions: Contradiction[]; map: AreaMap[]; claims: Pick<CaseSnapshot["claims"][number], "claim_type">[]; imagePages: Set<number>; wording: GapWording }): InspectionReview {
+  const { checklist, review, wording } = inp;
+  const concluding = inp.claims.some((c) => CONCLUDING.has(c.claim_type));
+  const byId = new Map(checklist.items.map((i) => [i.id, i]));
+  const itemsByTopic = (topics: string[]): ChecklistItem[] => checklist.items.filter((i) => topics.includes(i.topic));
+  const matFor = (items: ChecklistItem[]): boolean => items.some((i) => i.materiality === "always_material" || (i.materiality === "by_dependence" && concluding));
+  const out: ReviewQuestion[] = [], held: { id: string; problems: string[] }[] = [];
+  let n = 0;
+  const push = (q: Omit<ReviewQuestion, "id" | "from_image">) => {
+    const id = `Q-${q.kind}-${++n}`;
+    const from_image = q.quotes.some((x) => inp.imagePages.has(x.page)) || (q.page !== null && inp.imagePages.has(q.page) && q.kind !== "checklist");
+    const text = from_image ? q.text + IMAGE_NOTE : q.text;
+    const problems = [...wordingProblems(text), ...wordingProblems(q.why), ...(q.request ? wordingProblems(q.request) : [])];
+    if (problems.length) { held.push({ id, problems }); return; }
+    out.push({ ...q, id, text, from_image });
+  };
+
+  // What the report covers, and the checklist gaps.
+  const coveredBy = new Map<string, string[]>();
+  for (const r of review.results) {
+    const it = byId.get(r.item_id);
+    if (!it) continue;
+    if (r.status === "supported") { coveredBy.set(it.group, [...(coveredBy.get(it.group) ?? []), it.topic]); continue; }
+    if (r.status !== "not_shown" && r.status !== "partly_shown") continue;
+    const text = r.gap_kind === "not_performed" ? wording.not_performed.replace("{topic}", it.topic.toLowerCase()) : it.leading_question;
+    push({ kind: "checklist", topic: it.topic, material: matFor([it]), text, why: it.looks_for, request: it.record_request?.trim() || null, page: r.quotes[0]?.page ?? null, quotes: r.quotes.map((q) => ({ page: q.page, text: q.anchor?.exact_text ?? "" })).filter((q) => q.text) });
+  }
+
+  // Checks over the evidence and claims.
+  for (const f of inp.flags) {
+    const items = itemsByTopic(f.item_topics), first = items[0];
+    if (!first) continue;
+    push({ kind: "consistency", topic: first.topic, material: matFor(items), text: first.leading_question, why: first.looks_for, request: first.record_request?.trim() || null, page: f.page, quotes: [] });
+  }
+
+  // The report against itself: both sides stay in `quotes`, apart from the wording.
+  for (const c of inp.contradictions) {
+    const w = wording.checks[c.check];
+    if (!w) continue;
+    push({ kind: "contradiction", topic: c.item_topics[0] ?? c.check, material: matFor(itemsByTopic(c.item_topics)), text: w.text, why: w.why, request: null, page: c.quotes[0]?.page ?? null, quotes: c.quotes.map((q) => ({ page: q.page, text: q.text })) });
+  }
+
+  // The evidence map's room-level gaps.
+  for (const a of inp.map) for (const g of a.gaps) {
+    const w = wording.map[g.rule];
+    if (!w) continue;
+    push({ kind: "map", topic: g.topic, material: g.material, text: w.text.replace("{area}", a.name), why: w.why, request: null, page: g.page, quotes: [] });
+  }
+
+  out.sort((a, b) => Number(b.material) - Number(a.material));
+  const not_checked = review.page_issues.map((p) => wording.not_checked.replace("{detail}", `page ${p.page}: ${p.detail}`));
+  const unchecked = review.results.filter((r) => r.status === "not_verifiable").length;
+  if (unchecked > 0) not_checked.push(`${unchecked} item${unchecked === 1 ? "" : "s"} couldn't be checked because some pages couldn't be read.`);
+  const covered = [...coveredBy.entries()].map(([group, topics]) => ({ group, topics }));
+  return { covered, questions: out, not_checked, map: inp.map, held_back: held };
+}
