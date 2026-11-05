@@ -8,7 +8,7 @@ import type { AreaMap } from "./evidenceMap.js";
 import type { ReviewResult } from "./reviewItems.js";
 import type { Contradiction } from "./selfConsistency.js";
 
-export interface GapWording { done_well: string; group_order: string[]; have_record: string; not_performed: string; not_checked: string; checks: Record<string, { text: string; why: string }>; map: Record<string, { text: string; why: string }> }
+export interface GapWording { done_well_heading: string; done_well: string; group_order: string[]; have_record: string; not_performed: string; not_checked: string; checks: Record<string, { text: string; why: string }>; map: Record<string, { text: string; why: string }> }
 export const loadGapWording = (path = resolve(import.meta.dirname, "../../../../data/rules/gap_wording.json")): GapWording => JSON.parse(readFileSync(path, "utf8")) as GapWording;
 
 export interface ScopeEffects { labels: Record<string, string>; order: string[]; effects: Record<string, string[]>; wording: { scoped: string; scoped_why: string; not_expected: string } }

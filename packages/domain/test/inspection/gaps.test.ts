@@ -203,3 +203,14 @@ describe("what the report did well", () => {
   });
   function gap(topic: string) { return result(topic, "not_shown"); }
 });
+
+describe("done-well wording", () => {
+  it("has a plain heading, no icons, and makes no standards or compliance claim", () => {
+    expect(wording.done_well_heading).toBeTruthy();
+    for (const s of [wording.done_well_heading, wording.done_well]) {
+      expect(s).not.toMatch(/[\u2605\u2606\u2B50\u{1F31F}]/u);
+      expect(s).not.toMatch(/complian|conform|meets? (the )?standard|ASTM|IICRC|ASHRAE/i);
+    }
+    expect(wordingProblems(wording.done_well_heading)).toEqual([]);
+  });
+});
