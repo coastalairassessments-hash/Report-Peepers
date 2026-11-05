@@ -62,4 +62,4 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 
 ## Intake context bank (2026-11-05)
 Built: 40 new context questions (CX01-CX43 numbering follows the approved draft), buttons plus note, single or multi select, skip rules, section skipping, and 11 "client said X, report silent" rows. Data: data/rules/context_questions.json, context_expectations.json. Code: packages/domain/src/context.ts. Health answers are context only and never used.
-Not yet wired: the screens, storing answers on the case, and feeding the expectation questions into the inspection review list.
+Wired: answers live on the case (`context`), and unmet expectations become questions in the inspection review (placed with the other material questions). Not yet built: the client screens.
