@@ -18,10 +18,11 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 | 3 | AI slot with a stand-in model | Done (Brick 11) | none |
 | 3a | Brick 15: evidence and claims extraction stage (AI proposes, code verifies every anchor and number) | Done (stage, firewall, per-page runner, hostile-text tests) | none (synthetic) |
 | 3b | Brick 16: the pipeline end to end on synthetic data: intake, read, extract, propose, reviewer approval port, publish, marked-up export, saved record (spec Milestone 2) | Done (access-enforcing repository, intake to ready, analysis, reviewer release, marked-up export, saved record, end-to-end and adversarial tests) | none |
-| 3c | Brick 17: corrections: supersede a release, corrected marked-up copy, change notice | Planned | none |
+| 3c | Brick 17: inspection review: completeness checklist (what was seen, moisture and dry standard, odor, sampling reasoning and controls, scope), recommendation-to-evidence support check, record-gap questions for the homeowner to send | Next, plan to be written | none (synthetic) |
+| 3d | Brick 18: corrections to OUR own errors only: supersede a release, corrected marked-up copy, change notice. Decision 2026-11-04: no paid or free re-check when an inspector supplies a missing record; the questions are the product | Planned | none |
 | 4 | Reading real reports: tables, photo captions, scans (OCR), hidden-text detection, isolated parsing worker | Planned | Sample reports (input I1) |
 | 5 | Expert rule packs loaded from files | Planned | IH rules (input I2) |
-| 6 | Brick 18+: storage and access: saved cases, customer isolation, locked releases, deletion | Planned | none |
+| 6 | Brick 19+: storage and access: saved cases, customer isolation, locked releases, deletion | Planned | none |
 | 7 | Reviewer console, then homeowner screens | Planned | Reviewer process (input I3) |
 | 8 | Payments (credits model, ADR-001) | Deferred by Cory | Fee and terms (input I5) |
 | 9 | Pilot: every release human-approved | Later | Attorney review (L-list), insurer, reviewers |
