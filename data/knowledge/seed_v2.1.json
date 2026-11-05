@@ -1,0 +1,4485 @@
+{
+ "library": "Report Peepers IEP Knowledge Library",
+ "version": "2.1.0-regenerated",
+ "generated": "2026-11-05",
+ "note": "AI-prepared draft. Not reviewed or approved by an IEP. No source has been verified. No test has been executed. Excludes the previously excluded publisher.",
+ "families": [
+  {
+   "id": "F01",
+   "name": "Scope and engagement",
+   "primary_iep_decision": "When the homeowner's expectation, the agreed scope, and the documented work differ, should the program pause scope-dependent criticism and ask for clarification, rather than assume work was omitted?",
+   "entries": [
+    "IEP-K-001",
+    "IEP-K-002",
+    "IEP-K-003",
+    "IEP-K-004",
+    "IEP-K-005",
+    "IEP-K-006"
+   ]
+  },
+  {
+   "id": "F02",
+   "name": "Document completeness and integrity",
+   "primary_iep_decision": "When something referenced in the report cannot be found in the supplied file, should the program always treat it as a request for the missing document, never as evidence the work was not done?",
+   "entries": [
+    "IEP-K-007",
+    "IEP-K-008",
+    "IEP-K-009",
+    "IEP-K-010",
+    "IEP-K-011"
+   ]
+  },
+  {
+   "id": "F03",
+   "name": "Chronology and condition timing",
+   "primary_iep_decision": "Should every observation and measurement be tied to the date it describes, and should the program refuse to use current-day conditions to confirm or rule out past conditions?",
+   "entries": [
+    "IEP-K-012",
+    "IEP-K-013",
+    "IEP-K-014",
+    "IEP-K-015"
+   ]
+  },
+  {
+   "id": "F04",
+   "name": "Moisture measurement interpretation",
+   "primary_iep_decision": "What is the minimum information a moisture reading needs (instrument, mode, material, location, comparison basis) before the program will treat a word like 'elevated' or 'dry' as supported?",
+   "entries": [
+    "IEP-K-016",
+    "IEP-K-017",
+    "IEP-K-018",
+    "IEP-K-019",
+    "IEP-K-020",
+    "IEP-K-021"
+   ]
+  },
+  {
+   "id": "F05",
+   "name": "Visual and thermal observations",
+   "primary_iep_decision": "Should a thermal image or visual observation that has not been checked with a contact measurement be treated only as an area for further investigation?",
+   "entries": [
+    "IEP-K-022",
+    "IEP-K-023",
+    "IEP-K-024",
+    "IEP-K-025"
+   ]
+  },
+  {
+   "id": "F06",
+   "name": "Moisture source and causation",
+   "primary_iep_decision": "How strongly must the evidence support a stated source before the program accepts 'confirmed' wording instead of asking about 'likely' or 'possible'?",
+   "entries": [
+    "IEP-K-026",
+    "IEP-K-027",
+    "IEP-K-028",
+    "IEP-K-029",
+    "IEP-K-030"
+   ]
+  },
+  {
+   "id": "F07",
+   "name": "Sampling purpose, design, and identity",
+   "primary_iep_decision": "Should the program first ask what decision a sample was meant to support, and evaluate sampling only against that stated purpose?",
+   "entries": [
+    "IEP-K-031",
+    "IEP-K-032",
+    "IEP-K-033",
+    "IEP-K-034",
+    "IEP-K-035",
+    "IEP-K-036"
+   ]
+  },
+  {
+   "id": "F08",
+   "name": "Laboratory results and interpretation",
+   "primary_iep_decision": "When a conclusion goes further than the laboratory method can support, should the program ask a clarifying question rather than mark the conclusion wrong?",
+   "entries": [
+    "IEP-K-037",
+    "IEP-K-038",
+    "IEP-K-039",
+    "IEP-K-040"
+   ]
+  },
+  {
+   "id": "F09",
+   "name": "Recommendations and next steps",
+   "primary_iep_decision": "Should every recommendation be traceable to a specific finding and location, with conditional recommendations clearly labeled as conditional?",
+   "entries": [
+    "IEP-K-041",
+    "IEP-K-042",
+    "IEP-K-043",
+    "IEP-K-044",
+    "IEP-K-045"
+   ]
+  },
+  {
+   "id": "F10",
+   "name": "Restoration, remediation, and verification records",
+   "primary_iep_decision": "When a document is a drying record, remediation protocol, or verification report, should the program switch to that document type's expectations instead of assessment-report expectations?",
+   "entries": [
+    "IEP-K-046",
+    "IEP-K-047",
+    "IEP-K-048",
+    "IEP-K-049",
+    "IEP-K-050"
+   ]
+  },
+  {
+   "id": "F11",
+   "name": "Commercial and multi-party buildings",
+   "primary_iep_decision": "In shared or commercial buildings, should the program ask about boundaries (suite versus building, shared systems, responsible party) before asking about completeness?",
+   "entries": [
+    "IEP-K-051",
+    "IEP-K-052",
+    "IEP-K-053"
+   ]
+  },
+  {
+   "id": "F12",
+   "name": "Homeowner communication quality",
+   "primary_iep_decision": "Should the program show what the report already does well, and rank questions by how much they change the homeowner's decision rather than by how many rules fired?",
+   "entries": [
+    "IEP-K-054",
+    "IEP-K-055",
+    "IEP-K-056"
+   ]
+  }
+ ],
+ "shared_controls": [
+  {
+   "id": "SC-01",
+   "name": "Clarify, do not accuse",
+   "text": "Every output is a question or a neutral note. No finding of fault, negligence, violation, or failure."
+  },
+  {
+   "id": "SC-02",
+   "name": "Evidence before questions",
+   "text": "A question is released only with a page-and-location anchor or an explicit evidence state. 'Not located in the supplied documents' never becomes 'not performed'."
+  },
+  {
+   "id": "SC-03",
+   "name": "Scope gate",
+   "text": "Rules tagged scope-dependent are suppressed until scope is confirmed or documented (IEP-K-001)."
+  },
+  {
+   "id": "SC-04",
+   "name": "Privacy and permission",
+   "text": "Client names, addresses, and report contents stay inside the case. Exports strip identifying data unless explicitly approved."
+  },
+  {
+   "id": "SC-05",
+   "name": "Drafts stay private",
+   "text": "Nothing reaches a homeowner until a human reviewer approves the exact final artifact. Approval becomes stale if anything changes."
+  },
+  {
+   "id": "SC-06",
+   "name": "Product boundaries",
+   "text": "No license checks, no legal conclusions, no medical or health advice, no recommendation of specific vendors, no suggestion of additional testing."
+  },
+  {
+   "id": "SC-07",
+   "name": "No outside thresholds",
+   "text": "The program never inserts a numeric moisture, humidity, spore, drying, or clearance limit that the report itself did not state."
+  },
+  {
+   "id": "SC-08",
+   "name": "Human override recorded",
+   "text": "Reviewers may approve, rewrite, suppress, merge, or reorder any question; every action records who, when, and a reason code."
+  }
+ ],
+ "evidence_states": [
+  {
+   "code": "documented",
+   "meaning": "Present and clear, with anchor."
+  },
+  {
+   "code": "documented_ambiguous",
+   "meaning": "Present but unclear (for example, unit unknown)."
+  },
+  {
+   "code": "contradicted",
+   "meaning": "Two places in the package disagree."
+  },
+  {
+   "code": "unavailable_attachment",
+   "meaning": "Referenced but the attachment is not in the file."
+  },
+  {
+   "code": "explicitly_not_performed",
+   "meaning": "Report says it was not done."
+  },
+  {
+   "code": "outside_scope",
+   "meaning": "Outside the stated or agreed scope."
+  },
+  {
+   "code": "not_accessible",
+   "meaning": "Report says the area could not be accessed."
+  },
+  {
+   "code": "not_located",
+   "meaning": "Could not be found in the supplied documents."
+  },
+  {
+   "code": "extraction_uncertain",
+   "meaning": "Unreadable or OCR-only; needs confirmation."
+  },
+  {
+   "code": "not_applicable",
+   "meaning": "Does not apply to this document type or engagement."
+  }
+ ],
+ "reviewer_reason_codes": [
+  "wrong_scope",
+  "evidence_overlooked",
+  "bad_extraction",
+  "unsupported_principle",
+  "duplicate",
+  "wording_too_strong",
+  "low_value",
+  "wrong_document_type",
+  "other"
+ ],
+ "entries": [
+  {
+   "id": "IEP-K-001",
+   "family": "F01",
+   "title": "Separate expectation, agreed scope, and documented work",
+   "category": "technical",
+   "principle": "Treat what the homeowner expected, what the professional agreed to perform, and what the report documents as three separate facts. A gap between them is a clarification opportunity, not a deficiency.",
+   "rationale": "Homeowners often believe an inspection covered more than was contracted. Treating that belief as the scope produces unfair criticism and undermines trust in the product.",
+   "applies_to": [
+    "all assessment reports",
+    "limited-scope visits",
+    "post-remediation verification"
+   ],
+   "not_applies_to": [
+    "documents with no scope statement and no agreement where the client also gives no expectation"
+   ],
+   "evidence_required": [
+    "client intake answer about expected scope",
+    "report scope or purpose statement",
+    "engagement agreement if supplied"
+   ],
+   "decision_steps": [
+    "Record each of the three facts with its source.",
+    "If agreement is missing and expectation differs from the report scope, set evidence state to 'scope unconfirmed'.",
+    "Suppress completeness questions that depend on the disputed scope.",
+    "Release one neutral scope-clarification question instead."
+   ],
+   "exceptions": [
+    "If the report itself promises work it does not document, a completeness question is allowed because the gap is internal to the report."
+   ],
+   "prohibited_inferences": [
+    "Do not state or imply the inspector failed to perform work outside a confirmed scope."
+   ],
+   "homeowner_question": "You expected the inspection to cover [area/service]. The report describes [stated scope]. Could you confirm whether [area/service] was part of the agreed work?",
+   "reviewer_action": "Check that no scope-dependent question was released before scope was confirmed.",
+   "example": "Homeowner expected the attic to be checked; the report states the visit was limited to the primary bathroom; no agreement supplied. Program asks one scope question and suppresses attic-related completeness questions.",
+   "counterexample": "Report scope says 'whole-home visual assessment including attic' but the attic is never mentioned. That is an internal gap; a completeness question is appropriate.",
+   "related": [
+    "IEP-K-002",
+    "IEP-K-003",
+    "IEP-K-006"
+   ],
+   "shared_controls": [
+    "SC-01",
+    "SC-03"
+   ],
+   "source_hints": [
+    "Engagement agreement or proposal (ask the homeowner)",
+    "ASTM D7338-26 scope and planning language (licensed copy required)",
+    "Florida mold assessor licensing rules, Chapter 468 Part XVI, F.S., for written-scope practices (verify current text)"
+   ],
+   "iep_question": "Is this the first rule in the library, and should it pause every scope-dependent question, or only completeness questions?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-001-T1",
+     "type": "positive",
+     "given": "Homeowner expected the attic to be checked; the report states the visit was limited to the primary bathroom; no agreement supplied. Program asks one scope question and suppresses attic-related completeness questions.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-001-T2",
+     "type": "negative",
+     "given": "Report scope says 'whole-home visual assessment including attic' but the attic is never mentioned. That is an internal gap; a completeness question is appropriate.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-001-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (client intake answer about expected scope; report scope or purpose statement) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-001-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is documents with no scope statement and no agreement where the client also gives no expectation.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-002",
+   "family": "F01",
+   "title": "Classify the document type before reviewing it",
+   "category": "technical",
+   "principle": "Identify whether the document is an assessment, laboratory report, remediation protocol, drying record, verification report, or a mixed package before applying any expectations.",
+   "rationale": "Each document type answers a different question. Applying assessment expectations to a laboratory report or drying log generates questions the author was never expected to answer.",
+   "applies_to": [
+    "every uploaded document"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "title page",
+    "stated purpose",
+    "author role",
+    "document structure"
+   ],
+   "decision_steps": [
+    "Classify each document in the package separately.",
+    "If classification confidence is low, route to the reviewer before rules run.",
+    "Load only rule families tagged for that document type."
+   ],
+   "exceptions": [
+    "A mixed package may hold several types; classify per section and keep anchors per section."
+   ],
+   "prohibited_inferences": [
+    "Do not treat a laboratory report alone as a building assessment."
+   ],
+   "homeowner_question": "",
+   "reviewer_action": "Confirm or correct the document-type classification before release.",
+   "example": "Package contains a 4-page lab report and a 20-page assessment. Lab-interpretation rules run on the assessment narrative; completeness rules do not run on the lab report.",
+   "counterexample": "A one-page invoice with a sample list attached is not an assessment report; the program should abstain and ask for the full report.",
+   "related": [
+    "IEP-K-001",
+    "IEP-K-046"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Internal practice (no external source needed)",
+    "IICRC S500 and S520 scope sections for restoration and remediation document roles (licensed)"
+   ],
+   "iep_question": "Are there document types you see in Florida that this list is missing, such as insurance-carrier forms or a 'mold letter'?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-002-T1",
+     "type": "positive",
+     "given": "Package contains a 4-page lab report and a 20-page assessment. Lab-interpretation rules run on the assessment narrative; completeness rules do not run on the lab report.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-002-T2",
+     "type": "negative",
+     "given": "A one-page invoice with a sample list attached is not an assessment report; the program should abstain and ask for the full report.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-002-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (title page; stated purpose) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-002-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-003",
+   "family": "F01",
+   "title": "Respect stated limitations and access restrictions",
+   "category": "technical",
+   "principle": "When a report states that an area was not accessed, a material was not opened, or a condition was not evaluated, treat that as documented scope, not as an omission.",
+   "rationale": "Limitations are a sign of a careful report. Penalizing them would reward reports that hide their boundaries.",
+   "applies_to": [
+    "assessment reports",
+    "verification reports"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "explicit limitation statement with location"
+   ],
+   "decision_steps": [
+    "Extract each limitation and link it to the areas it covers.",
+    "Suppress completeness questions for those areas.",
+    "If the homeowner's concern falls inside a limitation, ask whether follow-up is recommended."
+   ],
+   "exceptions": [
+    "If a limitation is generic boilerplate that contradicts specific findings in the same area, ask a consistency question."
+   ],
+   "prohibited_inferences": [
+    "Do not describe a stated limitation as a failure."
+   ],
+   "homeowner_question": "The report notes that [area] was not accessed. Since your concern involves that area, would you recommend a follow-up evaluation, and what would it involve?",
+   "reviewer_action": "Make sure limitation-covered areas show 'outside stated scope', not 'missing'.",
+   "example": "Report states 'wall cavities were not opened.' Homeowner concern is a stain behind the shower. Program asks whether follow-up is recommended.",
+   "counterexample": "Boilerplate says 'no areas were accessed behind finishes', but page 9 shows a photo of an opened cavity with readings. Ask which statement applies.",
+   "related": [
+    "IEP-K-001",
+    "IEP-K-010"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Report's own limitations section",
+    "ASTM D7338-26 reporting and limitation language (licensed)"
+   ],
+   "iep_question": "Should generic boilerplate limitations count as scope, or only limitations tied to a specific area?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-003-T1",
+     "type": "positive",
+     "given": "Report states 'wall cavities were not opened.' Homeowner concern is a stain behind the shower. Program asks whether follow-up is recommended.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-003-T2",
+     "type": "negative",
+     "given": "Boilerplate says 'no areas were accessed behind finishes', but page 9 shows a photo of an opened cavity with readings. Ask which statement applies.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-003-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (explicit limitation statement with location) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-003-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-004",
+   "family": "F01",
+   "title": "Identify the engagement objective",
+   "category": "technical",
+   "principle": "Determine what question the professional was hired to answer (for example: is there hidden moisture, what is the source, is remediation complete) and evaluate the report against that objective.",
+   "rationale": "A report can be thorough and still not answer the question the client needed answered. Conversely, it should not be judged against questions it was never asked.",
+   "applies_to": [
+    "assessment reports",
+    "verification reports"
+   ],
+   "not_applies_to": [
+    "laboratory reports alone"
+   ],
+   "evidence_required": [
+    "purpose statement",
+    "client intake reason for inspection"
+   ],
+   "decision_steps": [
+    "Extract the stated objective.",
+    "Compare to the client's stated reason.",
+    "If the report's conclusions do not address its own objective, raise one question.",
+    "If no objective is stated, set 'objective not stated' and ask once."
+   ],
+   "exceptions": [
+    "Real-estate transaction inspections may have a narrower objective set by the buyer's agreement."
+   ],
+   "prohibited_inferences": [
+    "Do not assume the objective from the homeowner's worry alone."
+   ],
+   "homeowner_question": "The report's stated purpose is [objective]. Does its conclusion answer that question, or is further work needed to answer it?",
+   "reviewer_action": "Check that questions are tied to the stated objective, not to the homeowner's broader worries.",
+   "example": "Purpose: 'determine source of ceiling stain.' Conclusions discuss air samples but never name a source. Ask whether the source was identified.",
+   "counterexample": "Purpose: 'collect air samples at client request.' No source discussion is expected; no source question.",
+   "related": [
+    "IEP-K-001",
+    "IEP-K-031"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Report purpose section",
+    "ASTM D7338-26 assessment objective concepts (licensed)"
+   ],
+   "iep_question": "Which objectives do you see most often, so the program can offer them as a fixed list?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-004-T1",
+     "type": "positive",
+     "given": "Purpose: 'determine source of ceiling stain.' Conclusions discuss air samples but never name a source. Ask whether the source was identified.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-004-T2",
+     "type": "negative",
+     "given": "Purpose: 'collect air samples at client request.' No source discussion is expected; no source question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-004-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (purpose statement; client intake reason for inspection) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-004-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is laboratory reports alone.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-005",
+   "family": "F01",
+   "title": "Classify the level of access and investigation",
+   "category": "technical",
+   "principle": "Record whether the work was visual only, instrument-assisted, intrusive, or unspecified, and limit expectations to that level.",
+   "rationale": "Expecting cavity readings from a visual-only visit is unfair; expecting none from an intrusive investigation misses real gaps.",
+   "applies_to": [
+    "assessment reports"
+   ],
+   "not_applies_to": [
+    "laboratory reports"
+   ],
+   "evidence_required": [
+    "methods section",
+    "equipment list",
+    "photographs"
+   ],
+   "decision_steps": [
+    "Infer access level from methods, equipment, and photos.",
+    "If signals conflict, mark 'unspecified' and ask.",
+    "Gate measurement and intrusive rules by access level."
+   ],
+   "exceptions": [
+    "A moisture meter listed in equipment without any readings reported is a documentation question, not an access-level decision."
+   ],
+   "prohibited_inferences": [
+    "Do not infer intrusive work from a single photo without a caption."
+   ],
+   "homeowner_question": "Could you clarify whether the inspection included opening or probing materials, or was it limited to non-invasive methods?",
+   "reviewer_action": "Confirm access level before releasing any measurement-gap question.",
+   "example": "Equipment list shows only a flashlight and camera. Measurement-gap rules are suppressed.",
+   "counterexample": "Equipment list includes a pin meter and borescope, report says 'intrusive inspection performed', but no readings appear. Ask where readings are recorded.",
+   "related": [
+    "IEP-K-016",
+    "IEP-K-003"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Report methods and equipment sections",
+    "Internal practice"
+   ],
+   "iep_question": "Are four access levels enough, or do you need 'limited intrusive' as a separate level?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-005-T1",
+     "type": "positive",
+     "given": "Equipment list shows only a flashlight and camera. Measurement-gap rules are suppressed.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-005-T2",
+     "type": "negative",
+     "given": "Equipment list includes a pin meter and borescope, report says 'intrusive inspection performed', but no readings appear. Ask where readings are recorded.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-005-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (methods section; equipment list) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-005-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is laboratory reports.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-006",
+   "family": "F01",
+   "title": "Record who the report was prepared for and its intended use",
+   "category": "document_clarification",
+   "principle": "Note the client of record and intended use (homeowner, buyer, insurer, attorney, contractor). Questions should fit the intended use.",
+   "rationale": "A report prepared for an insurer or contractor may be written to a different audience and purpose than the homeowner assumes.",
+   "applies_to": [
+    "all documents"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "cover page",
+    "client name field",
+    "intended-use statement"
+   ],
+   "decision_steps": [
+    "Extract client of record and intended use.",
+    "If the uploader is not the client of record, flag for reviewer.",
+    "Adjust question wording to the intended use."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not assume the homeowner was the client."
+   ],
+   "homeowner_question": "The report was prepared for [client of record]. Was it intended to guide your repair decisions, or for another purpose?",
+   "reviewer_action": "Check permission and privacy where the uploader differs from the client of record.",
+   "example": "Report prepared for an insurance carrier, uploaded by the homeowner. Reviewer confirms the homeowner may use it and questions avoid implying the inspector served the homeowner.",
+   "counterexample": "Homeowner is the named client; no special handling.",
+   "related": [
+    "IEP-K-001"
+   ],
+   "shared_controls": [
+    "SC-04",
+    "SC-05"
+   ],
+   "source_hints": [
+    "Cover page of report",
+    "Attorney review of terms (internal)"
+   ],
+   "iep_question": "Should insurer-prepared reports get a different tone or be routed to specialist review?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-006-T1",
+     "type": "positive",
+     "given": "Report prepared for an insurance carrier, uploaded by the homeowner. Reviewer confirms the homeowner may use it and questions avoid implying the inspector served the homeowner.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-006-T2",
+     "type": "negative",
+     "given": "Homeowner is the named client; no special handling.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-006-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (cover page; client name field) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-006-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-007",
+   "family": "F02",
+   "title": "Referenced attachment not in the file",
+   "category": "document_clarification",
+   "principle": "When the report refers to an appendix, lab report, photo log, or drawing that is not in the supplied file, request the document. Do not conclude it does not exist.",
+   "rationale": "Reports are often split across emails. Missing attachments are the most common cause of false 'not performed' findings.",
+   "applies_to": [
+    "all documents"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "text reference to the attachment with page anchor",
+    "absence of that attachment after full-file search"
+   ],
+   "decision_steps": [
+    "Search the full package for the referenced item.",
+    "If absent, set evidence state 'referenced in unavailable attachment'.",
+    "Suppress dependent questions until supplied.",
+    "Ask for the document once."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Never state that sampling or testing was not done because the lab report is missing."
+   ],
+   "homeowner_question": "The report refers to [attachment] but it was not in the file you sent. Could you request it from the inspector so the full findings can be reviewed?",
+   "reviewer_action": "Confirm full-file search ran, including image pages.",
+   "example": "Narrative says 'see Appendix B laboratory results'; no Appendix B present. One request; lab-interpretation rules paused.",
+   "counterexample": "Appendix B is present as a scanned image at the end; OCR missed the title. Reviewer corrects; no question.",
+   "related": [
+    "IEP-K-008",
+    "IEP-K-037"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "Should the program also pause the overall review until key attachments arrive, or proceed with the rest?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-007-T1",
+     "type": "positive",
+     "given": "Narrative says 'see Appendix B laboratory results'; no Appendix B present. One request; lab-interpretation rules paused.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-007-T2",
+     "type": "negative",
+     "given": "Appendix B is present as a scanned image at the end; OCR missed the title. Reviewer corrects; no question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-007-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (text reference to the attachment with page anchor; absence of that attachment after full-file search) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-007-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-008",
+   "family": "F02",
+   "title": "Internal counts and section references match",
+   "category": "document_clarification",
+   "principle": "Counts stated in the report (number of samples, rooms, photos) and section cross-references should match the body.",
+   "rationale": "Mismatches often reveal a template carried over from another job, which can affect the reliability of the whole report.",
+   "applies_to": [
+    "all documents"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "stated count with anchor",
+    "actual count with anchors"
+   ],
+   "decision_steps": [
+    "Extract stated counts.",
+    "Count actual items with verified extraction.",
+    "If extraction is uncertain, ask to confirm rather than state a mismatch."
+   ],
+   "exceptions": [
+    "Field blanks or controls may be counted differently; check labels before flagging."
+   ],
+   "prohibited_inferences": [
+    "Do not conclude the report was copied from another job."
+   ],
+   "homeowner_question": "The summary mentions [N] samples, but [M] appear in the results. Could you confirm which is correct?",
+   "reviewer_action": "Verify the count by hand when the source page is scanned.",
+   "example": "Cover says 6 samples; lab table lists 5 plus a blank. Program checks the blank label before asking.",
+   "counterexample": "Cover says 6 samples including outdoor; table lists 6. No question.",
+   "related": [
+    "IEP-K-034",
+    "IEP-K-011"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "Should counting mismatches ever appear on page one, or always in the notes?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-008-T1",
+     "type": "positive",
+     "given": "Cover says 6 samples; lab table lists 5 plus a blank. Program checks the blank label before asking.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-008-T2",
+     "type": "negative",
+     "given": "Cover says 6 samples including outdoor; table lists 6. No question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-008-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (stated count with anchor; actual count with anchors) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-008-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-009",
+   "family": "F02",
+   "title": "Identify the author and their role",
+   "category": "document_clarification",
+   "principle": "Record who prepared and signed the report and their stated role. Do not check licenses or judge qualifications.",
+   "rationale": "Homeowners need to know whom to ask. License checking is out of product scope and carries legal risk.",
+   "applies_to": [
+    "all documents"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "signature block",
+    "company name",
+    "date signed"
+   ],
+   "decision_steps": [
+    "Extract author and role.",
+    "If no author is identifiable, ask who to contact with questions."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not state or imply the author was unqualified or unlicensed."
+   ],
+   "homeowner_question": "The report does not show who prepared it. Who should questions about these findings be directed to?",
+   "reviewer_action": "Confirm no license or credential judgment appears in any question.",
+   "example": "No signature block. One contact question.",
+   "counterexample": "Signed with name and company. No question.",
+   "related": [],
+   "shared_controls": [
+    "SC-06"
+   ],
+   "source_hints": [
+    "Product boundary (overview: 'no licensing or legal checks')"
+   ],
+   "iep_question": "None. This is a product boundary; confirm only.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-009-T1",
+     "type": "positive",
+     "given": "No signature block. One contact question.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-009-T2",
+     "type": "negative",
+     "given": "Signed with name and company. No question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-009-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (signature block; company name) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-009-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-010",
+   "family": "F02",
+   "title": "Every affected area appears in findings and photos",
+   "category": "technical",
+   "principle": "Areas named as affected should have a corresponding observation, and where photos are provided, a photo reference that can be matched.",
+   "rationale": "A finding with no location or no supporting observation is hard for a contractor to act on.",
+   "applies_to": [
+    "assessment reports",
+    "verification reports"
+   ],
+   "not_applies_to": [
+    "laboratory reports"
+   ],
+   "evidence_required": [
+    "area list",
+    "observations per area",
+    "photo captions"
+   ],
+   "decision_steps": [
+    "Build the area evidence map.",
+    "Flag areas named in conclusions with no observation.",
+    "Treat missing photos as a lower-priority clarification."
+   ],
+   "exceptions": [
+    "Areas covered by a stated limitation (IEP-K-003)."
+   ],
+   "prohibited_inferences": [
+    "Do not infer the area was not visited."
+   ],
+   "homeowner_question": "The conclusions mention [area], but I could not find the observations for that area. Could you point to where it is described?",
+   "reviewer_action": "Check that the area map was built from verified extraction.",
+   "example": "Conclusion lists 'hall closet' as affected; no observation or photo for hall closet.",
+   "counterexample": "Hall closet appears in a photo caption on page 14 under a different name ('linen closet'). Reviewer merges names; no question.",
+   "related": [
+    "IEP-K-003",
+    "IEP-K-041"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Internal practice",
+    "ASTM D7338-26 reporting concepts (licensed)"
+   ],
+   "iep_question": "How should the program handle room names that differ between sections (for example 'linen closet' versus 'hall closet')?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-010-T1",
+     "type": "positive",
+     "given": "Conclusion lists 'hall closet' as affected; no observation or photo for hall closet.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-010-T2",
+     "type": "negative",
+     "given": "Hall closet appears in a photo caption on page 14 under a different name ('linen closet'). Reviewer merges names; no question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-010-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (area list; observations per area) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-010-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is laboratory reports.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-011",
+   "family": "F02",
+   "title": "Equipment listed matches measurements reported",
+   "category": "document_clarification",
+   "principle": "Instruments listed in the equipment section should correspond to the measurements reported, and measurements should name an instrument that appears in the list.",
+   "rationale": "Mismatches make readings hard to interpret and are a common template error.",
+   "applies_to": [
+    "assessment reports",
+    "drying records"
+   ],
+   "not_applies_to": [
+    "visual-only visits"
+   ],
+   "evidence_required": [
+    "equipment list",
+    "measurement records with instrument references"
+   ],
+   "decision_steps": [
+    "Match instruments to readings.",
+    "Ask about readings with no matching instrument.",
+    "Treat listed-but-unused instruments as low priority."
+   ],
+   "exceptions": [
+    "Equipment lists that are company-standard and say 'equipment available' rather than 'equipment used'."
+   ],
+   "prohibited_inferences": [
+    "Do not conclude readings were fabricated."
+   ],
+   "homeowner_question": "The report includes [type of reading], but the instrument used is not listed. Could you identify it?",
+   "reviewer_action": "Low priority unless the reading drives a recommendation.",
+   "example": "Relative-humidity readings reported; no hygrometer listed.",
+   "counterexample": "Equipment list titled 'Equipment carried' lists a hygrometer. No question.",
+   "related": [
+    "IEP-K-016"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Instrument manufacturer documentation",
+    "Internal practice"
+   ],
+   "iep_question": "Is a listed-but-unused instrument ever worth raising?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-011-T1",
+     "type": "positive",
+     "given": "Relative-humidity readings reported; no hygrometer listed.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-011-T2",
+     "type": "negative",
+     "given": "Equipment list titled 'Equipment carried' lists a hygrometer. No question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-011-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (equipment list; measurement records with instrument references) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-011-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is visual-only visits.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-012",
+   "family": "F03",
+   "title": "Every observation and measurement carries a date",
+   "category": "technical",
+   "principle": "Tie each observation, reading, and sample to the date it was collected. Multi-visit reports must show which visit produced which data.",
+   "rationale": "Moisture conditions change. Undated data cannot support conclusions about current or past conditions.",
+   "applies_to": [
+    "assessment reports",
+    "drying records",
+    "verification reports"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "inspection dates",
+    "per-visit labels"
+   ],
+   "decision_steps": [
+    "Extract all dates.",
+    "If multiple visits and data are not labeled by visit, ask once."
+   ],
+   "exceptions": [
+    "Single-visit reports with one stated date satisfy this."
+   ],
+   "prohibited_inferences": [
+    "Do not assume data came from the most recent visit."
+   ],
+   "homeowner_question": "The report covers more than one visit. Could you clarify which readings were taken on which date?",
+   "reviewer_action": "Check visit labeling before releasing chronology questions.",
+   "example": "Report lists visits on two dates; readings table has no date column.",
+   "counterexample": "Single visit, single date on cover. No question.",
+   "related": [
+    "IEP-K-013",
+    "IEP-K-047"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Internal practice",
+    "IICRC S500 documentation concepts for drying records (licensed)"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-012-T1",
+     "type": "positive",
+     "given": "Report lists visits on two dates; readings table has no date column.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-012-T2",
+     "type": "negative",
+     "given": "Single visit, single date on cover. No question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-012-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (inspection dates; per-visit labels) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-012-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-013",
+   "family": "F03",
+   "title": "Current readings do not describe past conditions",
+   "category": "technical",
+   "principle": "A reading taken on the inspection date describes that date. It should not be used by itself to confirm or rule out a past moisture event.",
+   "rationale": "Materials can dry after a leak while damage or growth remains. Homeowners often read 'dry' as 'nothing happened'.",
+   "applies_to": [
+    "assessment reports",
+    "verification reports"
+   ],
+   "not_applies_to": [
+    "drying records whose purpose is current condition"
+   ],
+   "evidence_required": [
+    "dated measurement",
+    "statement about a historical event"
+   ],
+   "decision_steps": [
+    "Identify historical-event statements.",
+    "Identify current readings used to address them.",
+    "If the report uses current dry readings to dismiss a past event, ask a chronology question."
+   ],
+   "exceptions": [
+    "If the report explicitly distinguishes current from historical conditions, suppress."
+   ],
+   "prohibited_inferences": [
+    "Do not state that damage exists because a past event occurred."
+   ],
+   "homeowner_question": "Does this reading describe conditions on the inspection date only, and does the report address whether the earlier water event caused damage that is still present?",
+   "reviewer_action": "Make sure the question does not suggest hidden damage exists.",
+   "example": "Client reports a dishwasher leak 4 months ago. Report: 'cabinet base reads dry; no concerns.' Chronology question.",
+   "counterexample": "Report: 'cabinet base dry at time of inspection; prior leak area shows staining; recommend removing toe kick to inspect.' Suppress.",
+   "related": [
+    "IEP-K-012",
+    "IEP-K-014",
+    "IEP-K-026"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "EPA 'Mold Remediation in Schools and Commercial Buildings' (public; verify passage on hidden mold)",
+    "ASTM D7338-26 (licensed)"
+   ],
+   "iep_question": "Should this question appear on page one when the client reports a past event, or only when the report concludes 'no concerns'?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-013-T1",
+     "type": "positive",
+     "given": "Client reports a dishwasher leak 4 months ago. Report: 'cabinet base reads dry; no concerns.' Chronology question.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-013-T2",
+     "type": "negative",
+     "given": "Report: 'cabinet base dry at time of inspection; prior leak area shows staining; recommend removing toe kick to inspect.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-013-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (dated measurement; statement about a historical event) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-013-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is drying records whose purpose is current condition.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-014",
+   "family": "F03",
+   "title": "Reported history versus observed history",
+   "category": "technical",
+   "principle": "Distinguish history reported by an occupant from history the professional observed or documented. Label each.",
+   "rationale": "Occupant history is valuable but unverified. Conclusions that rest on it should say so.",
+   "applies_to": [
+    "assessment reports"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "history section",
+    "source attribution"
+   ],
+   "decision_steps": [
+    "Tag history statements as reported, observed, or documented by record.",
+    "If a conclusion depends only on reported history, ask whether it was confirmed."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not treat occupant history as false."
+   ],
+   "homeowner_question": "The report notes the leak was repaired, based on information provided. Was the repair observed or documented during the inspection?",
+   "reviewer_action": "Check attribution tags.",
+   "example": "'Roof leak was repaired in March per owner.' Conclusion: 'source resolved.'",
+   "counterexample": "Report includes a roofer invoice and photo of new flashing. Suppress.",
+   "related": [
+    "IEP-K-013",
+    "IEP-K-030"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-014-T1",
+     "type": "positive",
+     "given": "'Roof leak was repaired in March per owner.' Conclusion: 'source resolved.'",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-014-T2",
+     "type": "negative",
+     "given": "Report includes a roofer invoice and photo of new flashing. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-014-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (history section; source attribution) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-014-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-015",
+   "family": "F03",
+   "title": "Weather and building operating conditions at the time of inspection",
+   "category": "technical",
+   "principle": "When conclusions depend on conditions that vary (rain, HVAC operation, occupancy), note whether those conditions were recorded.",
+   "rationale": "A roof leak may not show on a dry day; condensation may depend on cooling operation. Without conditions, a negative finding is weaker.",
+   "applies_to": [
+    "assessment reports where source is intermittent or condensation-related"
+   ],
+   "not_applies_to": [
+    "laboratory reports",
+    "visits where conditions do not affect the conclusion"
+   ],
+   "evidence_required": [
+    "weather note",
+    "HVAC status",
+    "occupancy status"
+   ],
+   "decision_steps": [
+    "Only run if the suspected source is intermittent or condition-dependent.",
+    "Ask whether conditions at the time could affect the finding."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not state that the finding is wrong because weather was not recorded."
+   ],
+   "homeowner_question": "The suspected source is rain-related. Were conditions during the visit suitable to observe it, or would a visit during or after rain help?",
+   "reviewer_action": "Keep this question out of page one unless it changes the conclusion.",
+   "example": "Suspected window leak; report says 'no active moisture'; no weather noted.",
+   "counterexample": "Report notes 'inspection performed during heavy rain'. Suppress.",
+   "related": [
+    "IEP-K-027"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Local weather records (NOAA) for the inspection date",
+    "Internal practice"
+   ],
+   "iep_question": "In South Florida, should HVAC run status be expected in every residential report?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-015-T1",
+     "type": "positive",
+     "given": "Suspected window leak; report says 'no active moisture'; no weather noted.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-015-T2",
+     "type": "negative",
+     "given": "Report notes 'inspection performed during heavy rain'. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-015-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (weather note; HVAC status) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-015-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is laboratory reports.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-016",
+   "family": "F04",
+   "title": "Instrument and measurement mode identified",
+   "category": "technical",
+   "principle": "A moisture reading should identify the instrument type and mode (pin, pinless, relative scale, material setting).",
+   "rationale": "Different modes produce numbers that are not comparable. Without the mode, a number cannot be interpreted.",
+   "applies_to": [
+    "reports that rely on moisture readings"
+   ],
+   "not_applies_to": [
+    "visual-only visits"
+   ],
+   "evidence_required": [
+    "reading",
+    "instrument reference",
+    "mode or scale"
+   ],
+   "decision_steps": [
+    "Extract readings.",
+    "If mode or scale is absent and the reading drives a conclusion, ask."
+   ],
+   "exceptions": [
+    "Readings used only as 'for reference' with no conclusion attached are low priority."
+   ],
+   "prohibited_inferences": [
+    "Do not convert between scales."
+   ],
+   "homeowner_question": "Could you identify the meter and the scale or setting used for the reading of [value] at [location]?",
+   "reviewer_action": "Do not release numeric comparisons unless the mode is known.",
+   "example": "'Drywall reads 38.' No unit or mode; conclusion says 'wet'.",
+   "counterexample": "'Drywall 38 (relative scale, pinless, Model X); reference dry wall 12.' Suppress.",
+   "related": [
+    "IEP-K-017",
+    "IEP-K-018",
+    "IEP-K-011"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Instrument manufacturer manuals (scale definitions)",
+    "IICRC S500 measurement concepts (licensed)"
+   ],
+   "iep_question": "Which meter models do you see most, so the lexicon can recognize them?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-016-T1",
+     "type": "positive",
+     "given": "'Drywall reads 38.' No unit or mode; conclusion says 'wet'.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-016-T2",
+     "type": "negative",
+     "given": "'Drywall 38 (relative scale, pinless, Model X); reference dry wall 12.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-016-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (reading; instrument reference) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-016-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is visual-only visits.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-017",
+   "family": "F04",
+   "title": "Units and scale distinguished",
+   "category": "technical",
+   "principle": "Distinguish percent moisture content, wood-moisture equivalent, relative instrument scale, relative humidity, and temperature. Never treat them as interchangeable.",
+   "rationale": "A '%' sign on a relative scale is often mistaken for moisture content. This is one of the most common misreadings.",
+   "applies_to": [
+    "all reports with numbers"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "unit label",
+    "instrument mode"
+   ],
+   "decision_steps": [
+    "Classify each number by unit family.",
+    "If ambiguous, mark 'documented but ambiguous'.",
+    "Block threshold comparisons for ambiguous units."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not apply a moisture-content benchmark to a relative-scale number."
+   ],
+   "homeowner_question": "Is the reading of [value]% a percent moisture content, or a relative meter scale?",
+   "reviewer_action": "Check lexicon classification for every number used in a question.",
+   "example": "'Baseboard 22%' with a pinless meter on drywall mode.",
+   "counterexample": "'Baseboard 22% MC (pin, wood setting)'. Suppress.",
+   "related": [
+    "IEP-K-016",
+    "IEP-K-018"
+   ],
+   "shared_controls": [
+    "SC-02",
+    "SC-07"
+   ],
+   "source_hints": [
+    "Instrument manufacturer manuals",
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-017-T1",
+     "type": "positive",
+     "given": "'Baseboard 22%' with a pinless meter on drywall mode.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-017-T2",
+     "type": "negative",
+     "given": "'Baseboard 22% MC (pin, wood setting)'. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-017-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (unit label; instrument mode) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-017-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-018",
+   "family": "F04",
+   "title": "Comparison basis for 'elevated' or 'dry'",
+   "category": "technical",
+   "principle": "A label like 'elevated', 'wet', 'dry', or 'acceptable' needs a stated basis: a reference reading on similar unaffected material, a dry standard established on site, or a named criterion.",
+   "rationale": "Without a comparison basis the label is an opinion with no way to check it. A reference reading from like material is the most common and transparent basis.",
+   "applies_to": [
+    "reports that label moisture conditions"
+   ],
+   "not_applies_to": [
+    "visual-only visits"
+   ],
+   "evidence_required": [
+    "the label",
+    "reading",
+    "reference location or criterion"
+   ],
+   "decision_steps": [
+    "Find each label.",
+    "Look for a reference reading on similar material, a dry standard, or a named criterion.",
+    "If none, ask for the basis."
+   ],
+   "exceptions": [
+    "If the report says the basis is professional judgment and explains the observation, accept and do not ask."
+   ],
+   "prohibited_inferences": [
+    "Do not supply a numeric threshold from outside the report."
+   ],
+   "homeowner_question": "The report labels the wall reading as elevated. What reference or comparison supports that label?",
+   "reviewer_action": "Never add an external number to justify or challenge the label.",
+   "example": "'North wall elevated at 30.' No reference reading.",
+   "counterexample": "'North wall 30; reference reading on unaffected interior wall 11.' Suppress.",
+   "related": [
+    "IEP-K-016",
+    "IEP-K-017",
+    "IEP-K-019"
+   ],
+   "shared_controls": [
+    "SC-07"
+   ],
+   "source_hints": [
+    "IICRC S500 'dry standard' concept (licensed)",
+    "Instrument manufacturer guidance on reference readings"
+   ],
+   "iep_question": "When a report says 'elevated' with no reference, is that a page-one question or a notes question?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-018-T1",
+     "type": "positive",
+     "given": "'North wall elevated at 30.' No reference reading.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-018-T2",
+     "type": "negative",
+     "given": "'North wall 30; reference reading on unaffected interior wall 11.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-018-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (the label; reading) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-018-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is visual-only visits.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-019",
+   "family": "F04",
+   "title": "Measurement locations are mapped",
+   "category": "technical",
+   "principle": "Readings should be located precisely enough that someone else could find the spot again (room, wall, height, distance from a reference point, or a marked plan).",
+   "rationale": "Remediators and later verifiers need to return to the same locations.",
+   "applies_to": [
+    "reports with readings that drive recommendations"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "location description or plan marking"
+   ],
+   "decision_steps": [
+    "Check each reading for a usable location.",
+    "Ask when recommendations depend on unlocated readings."
+   ],
+   "exceptions": [
+    "Single-area investigations where the photo clearly shows the meter on the material."
+   ],
+   "prohibited_inferences": [],
+   "homeowner_question": "Could you mark on a plan or photo where the elevated readings were taken, so the contractor can find them?",
+   "reviewer_action": "Low priority unless a recommendation depends on location.",
+   "example": "'Elevated readings in bedroom.' Recommendation: 'remove affected drywall.'",
+   "counterexample": "Readings shown on a marked floor plan. Suppress.",
+   "related": [
+    "IEP-K-041"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-019-T1",
+     "type": "positive",
+     "given": "'Elevated readings in bedroom.' Recommendation: 'remove affected drywall.'",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-019-T2",
+     "type": "negative",
+     "given": "Readings shown on a marked floor plan. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-019-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (location description or plan marking) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-019-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-020",
+   "family": "F04",
+   "title": "Measurement limitations and interference",
+   "category": "technical",
+   "principle": "Where conditions could affect readings (metal, foil-backed insulation, tile, conductive coatings, surface condensation), the report should note them or explain how they were accounted for.",
+   "rationale": "False positives on non-invasive meters are common in bathrooms and kitchens.",
+   "applies_to": [
+    "readings on tile, metal, coated, or multi-layer assemblies"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "material description",
+    "reading",
+    "method"
+   ],
+   "decision_steps": [
+    "Identify readings on known-interference materials.",
+    "If the reading drives a conclusion and no confirmation method is noted, ask."
+   ],
+   "exceptions": [
+    "Confirmation by a second method (pin probe, borescope) suppresses the question."
+   ],
+   "prohibited_inferences": [
+    "Do not state the reading is false."
+   ],
+   "homeowner_question": "The elevated reading was taken through tile. Was it confirmed with another method?",
+   "reviewer_action": "Check the material lexicon.",
+   "example": "Pinless reading through ceramic tile at shower wall; conclusion 'moisture behind tile'.",
+   "counterexample": "Same, plus 'confirmed with pin probe at grout line'. Suppress.",
+   "related": [
+    "IEP-K-016",
+    "IEP-K-022"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Instrument manufacturer manuals (interference sections)"
+   ],
+   "iep_question": "Which interference materials are most important to include in the lexicon?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-020-T1",
+     "type": "positive",
+     "given": "Pinless reading through ceramic tile at shower wall; conclusion 'moisture behind tile'.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-020-T2",
+     "type": "negative",
+     "given": "Same, plus 'confirmed with pin probe at grout line'. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-020-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (material description; reading) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-020-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-021",
+   "family": "F04",
+   "title": "Relative humidity and temperature have context",
+   "category": "technical",
+   "principle": "Indoor relative-humidity and temperature readings should have a location, time, and context (HVAC status, outdoor conditions) before being used to support a conclusion.",
+   "rationale": "A single spot RH reading can vary widely within hours; it supports little on its own.",
+   "applies_to": [
+    "reports using RH or temperature in conclusions"
+   ],
+   "not_applies_to": [
+    "reports listing RH for reference only"
+   ],
+   "evidence_required": [
+    "RH reading",
+    "location",
+    "time",
+    "context"
+   ],
+   "decision_steps": [
+    "Find RH readings used in conclusions.",
+    "If context missing, ask what conditions applied."
+   ],
+   "exceptions": [
+    "Data-logger records over time satisfy this."
+   ],
+   "prohibited_inferences": [
+    "Do not apply an external RH limit as a finding."
+   ],
+   "homeowner_question": "The report uses a humidity reading to support its conclusion. Was that a single reading, and what were the air-conditioning conditions at the time?",
+   "reviewer_action": "Never insert an outside humidity limit.",
+   "example": "'RH 68% in closet indicates conducive conditions.' Single reading; no HVAC note.",
+   "counterexample": "'Data logger 7 days, closet RH ranged...' Suppress.",
+   "related": [
+    "IEP-K-015",
+    "IEP-K-028"
+   ],
+   "shared_controls": [
+    "SC-07"
+   ],
+   "source_hints": [
+    "EPA 'A Brief Guide to Mold, Moisture, and Your Home' (public; verify humidity guidance wording before citing)",
+    "Internal practice"
+   ],
+   "iep_question": "Should the program ever mention a humidity range to homeowners, or leave all ranges to the inspector?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-021-T1",
+     "type": "positive",
+     "given": "'RH 68% in closet indicates conducive conditions.' Single reading; no HVAC note.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-021-T2",
+     "type": "negative",
+     "given": "'Data logger 7 days, closet RH ranged...' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-021-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (RH reading; location) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-021-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is reports listing RH for reference only.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-022",
+   "family": "F05",
+   "title": "Thermal anomalies are leads, not findings",
+   "category": "technical",
+   "principle": "A thermal-image anomaly indicates a temperature difference. Unless confirmed by a contact measurement or direct observation, present it as an area for further investigation.",
+   "rationale": "Temperature differences can come from insulation gaps, air leakage, or ducts. Homeowners often read a blue patch as 'mold'.",
+   "applies_to": [
+    "reports with thermal images"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "thermal image",
+    "caption",
+    "confirming measurement if any"
+   ],
+   "decision_steps": [
+    "Find thermal images used in conclusions.",
+    "Check for a confirming reading at the same spot.",
+    "If none, ask whether the anomaly was confirmed."
+   ],
+   "exceptions": [
+    "Captions that already say 'requires confirmation' suppress the question."
+   ],
+   "prohibited_inferences": [
+    "Do not state that a thermal anomaly is moisture or mold."
+   ],
+   "homeowner_question": "Was the thermal anomaly in [location] checked with a moisture meter, or is it shown as an area for further investigation?",
+   "reviewer_action": "Check no question implies the image shows moisture.",
+   "example": "Thermal image of ceiling with cool patch; caption 'moisture intrusion'; no reading.",
+   "counterexample": "Caption: 'cool anomaly; pin reading 40 (relative) vs reference 10.' Suppress.",
+   "related": [
+    "IEP-K-020",
+    "IEP-K-023"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Thermographer training materials (ITC or similar; licensed)",
+    "ASTM thermography standards for building envelopes (licensed; verify applicability)"
+   ],
+   "iep_question": "Should the thermal question name common non-moisture causes, or keep it neutral?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-022-T1",
+     "type": "positive",
+     "given": "Thermal image of ceiling with cool patch; caption 'moisture intrusion'; no reading.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-022-T2",
+     "type": "negative",
+     "given": "Caption: 'cool anomaly; pin reading 40 (relative) vs reference 10.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-022-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (thermal image; caption) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-022-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-023",
+   "family": "F05",
+   "title": "Thermal imaging conditions documented",
+   "category": "technical",
+   "principle": "Where thermal imaging is relied on, the report should note whether conditions allowed a useful temperature difference (indoor-outdoor delta, HVAC operation).",
+   "rationale": "Without a temperature difference, a clean thermal image does not show the absence of moisture.",
+   "applies_to": [
+    "reports using thermal imaging to rule out moisture"
+   ],
+   "not_applies_to": [
+    "reports using thermal imaging only to locate anomalies"
+   ],
+   "evidence_required": [
+    "imaging conditions statement"
+   ],
+   "decision_steps": [
+    "Run only when thermal imaging supports a negative conclusion.",
+    "Ask whether conditions were suitable."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "The report uses thermal imaging to conclude no moisture was found. Were conditions suitable for thermal imaging at the time?",
+   "reviewer_action": "Notes section only, unless it is the only basis for a negative conclusion.",
+   "example": "'Thermal scan showed no anomalies; no moisture concerns.' No conditions noted.",
+   "counterexample": "Thermal scan plus meter sweep of all suspect walls. Suppress.",
+   "related": [
+    "IEP-K-022",
+    "IEP-K-015"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Thermography training references (licensed)"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-023-T1",
+     "type": "positive",
+     "given": "'Thermal scan showed no anomalies; no moisture concerns.' No conditions noted.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-023-T2",
+     "type": "negative",
+     "given": "Thermal scan plus meter sweep of all suspect walls. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-023-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (imaging conditions statement) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-023-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is reports using thermal imaging only to locate anomalies.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-024",
+   "family": "F05",
+   "title": "Visible growth descriptions are specific",
+   "category": "technical",
+   "principle": "Descriptions of suspected growth should give location, approximate extent, material, and whether it was confirmed by sampling or is a visual observation.",
+   "rationale": "'Suspect growth observed' with no extent cannot guide a remediation scope.",
+   "applies_to": [
+    "assessment reports"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "description",
+    "location",
+    "extent",
+    "material"
+   ],
+   "decision_steps": [
+    "Extract each growth description.",
+    "Ask where extent or material is missing and a recommendation depends on it."
+   ],
+   "exceptions": [
+    "Extent may be stated as 'not determined; concealed' — accept with a follow-up question only if no recommendation addresses it."
+   ],
+   "prohibited_inferences": [
+    "Do not call visual observations 'mold' if the report says 'suspect'."
+   ],
+   "homeowner_question": "Could you describe the approximate size of the affected area at [location] and the material involved, so a contractor can scope the work?",
+   "reviewer_action": "Preserve 'suspect' wording exactly.",
+   "example": "'Suspect microbial growth on bedroom wall.' Recommendation: 'remediate.'",
+   "counterexample": "'Suspect growth, approx. 2 sq ft, lower drywall, north wall bedroom 2.' Suppress.",
+   "related": [
+    "IEP-K-041",
+    "IEP-K-042"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "EPA 'Mold Remediation in Schools and Commercial Buildings' (public; size-category concepts, verify wording)",
+    "IICRC S520 (licensed)"
+   ],
+   "iep_question": "Should the program accept 'suspect growth' wording without asking about sampling?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-024-T1",
+     "type": "positive",
+     "given": "'Suspect microbial growth on bedroom wall.' Recommendation: 'remediate.'",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-024-T2",
+     "type": "negative",
+     "given": "'Suspect growth, approx. 2 sq ft, lower drywall, north wall bedroom 2.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-024-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (description; location) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-024-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-025",
+   "family": "F05",
+   "title": "Photos support the statements they are attached to",
+   "category": "document_clarification",
+   "principle": "Photos should be captioned with location and what they show, and should support the statement they illustrate.",
+   "rationale": "Uncaptioned photos are hard to use and can be matched to the wrong area.",
+   "applies_to": [
+    "reports with photos"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "photo",
+    "caption"
+   ],
+   "decision_steps": [
+    "Check captions on photos tied to conclusions.",
+    "Ask only where a conclusion depends on an uncaptioned photo."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not interpret photo contents with AI vision as a finding."
+   ],
+   "homeowner_question": "Could you label which room and wall the photo on page [N] shows?",
+   "reviewer_action": "Never release a question that interprets image content.",
+   "example": "Page 8 photo of stained ceiling, no caption; conclusion cites 'see photo'.",
+   "counterexample": "Caption: 'Photo 4: Kitchen ceiling above sink.' Suppress.",
+   "related": [
+    "IEP-K-010"
+   ],
+   "shared_controls": [
+    "SC-02",
+    "SC-08"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-025-T1",
+     "type": "positive",
+     "given": "Page 8 photo of stained ceiling, no caption; conclusion cites 'see photo'.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-025-T2",
+     "type": "negative",
+     "given": "Caption: 'Photo 4: Kitchen ceiling above sink.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-025-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (photo; caption) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-025-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-026",
+   "family": "F06",
+   "title": "Source certainty levels",
+   "category": "technical",
+   "principle": "Classify the stated source as observed, likely (supported), possible, not determined, or historical-reportedly-repaired. The wording should match the evidence.",
+   "rationale": "'Confirmed roof leak' and 'possible condensation' lead to very different repairs and costs.",
+   "applies_to": [
+    "assessment reports that discuss a source"
+   ],
+   "not_applies_to": [
+    "laboratory reports",
+    "sampling-only engagements"
+   ],
+   "evidence_required": [
+    "source statement",
+    "supporting observation or measurement"
+   ],
+   "decision_steps": [
+    "Assign a certainty level from the report wording.",
+    "Check evidence supporting that level.",
+    "If wording is stronger than evidence, ask about the basis."
+   ],
+   "exceptions": [
+    "If the report says 'source not determined', ask whether further investigation is recommended — not why it was not found."
+   ],
+   "prohibited_inferences": [
+    "Do not suggest an alternative source as fact."
+   ],
+   "homeowner_question": "The report identifies [source] as the cause. What observations or measurements confirmed it?",
+   "reviewer_action": "Check certainty wording is preserved exactly.",
+   "example": "'Confirmed roof leak' with no attic observation or reading.",
+   "counterexample": "'Likely roof leak; attic decking stained above affected ceiling; readings elevated at decking.' Suppress.",
+   "related": [
+    "IEP-K-027",
+    "IEP-K-028",
+    "IEP-K-029"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "ASTM D7338-26 source-identification concepts (licensed)",
+    "Internal practice"
+   ],
+   "iep_question": "Are five certainty levels right, and what evidence would you require for 'observed'?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-026-T1",
+     "type": "positive",
+     "given": "'Confirmed roof leak' with no attic observation or reading.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-026-T2",
+     "type": "negative",
+     "given": "'Likely roof leak; attic decking stained above affected ceiling; readings elevated at decking.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-026-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (source statement; supporting observation or measurement) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-026-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is laboratory reports.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-027",
+   "family": "F06",
+   "title": "Alternative explanations considered",
+   "category": "technical",
+   "principle": "When the evidence fits more than one source, the report should mention the alternatives it considered or ruled out.",
+   "rationale": "A ceiling stain under a bathroom can be a supply leak, drain leak, roof leak, or condensation. Fixing the wrong one wastes money.",
+   "applies_to": [
+    "assessments with a stated source in a location with several plausible sources"
+   ],
+   "not_applies_to": [
+    "sources directly observed in action"
+   ],
+   "evidence_required": [
+    "source statement",
+    "location context"
+   ],
+   "decision_steps": [
+    "Only run when the source is 'likely' or 'possible'.",
+    "Ask whether other sources were considered."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not name a specific alternative as more likely."
+   ],
+   "homeowner_question": "Were other possible sources of moisture at [location] considered, and how were they ruled out?",
+   "reviewer_action": "Notes section unless repair cost depends on it.",
+   "example": "'Likely AC condensation' for a stain below a bathroom; no mention of plumbing.",
+   "counterexample": "'Plumbing pressure-tested by plumber; no leak; condensation on uninsulated duct observed.' Suppress.",
+   "related": [
+    "IEP-K-026"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-027-T1",
+     "type": "positive",
+     "given": "'Likely AC condensation' for a stain below a bathroom; no mention of plumbing.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-027-T2",
+     "type": "negative",
+     "given": "'Plumbing pressure-tested by plumber; no leak; condensation on uninsulated duct observed.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-027-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (source statement; location context) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-027-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is sources directly observed in action.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-028",
+   "family": "F06",
+   "title": "Condensation conclusions need supporting context",
+   "category": "technical",
+   "principle": "A condensation conclusion should be supported by surface temperature, air conditions, or direct observation, not stated by default.",
+   "rationale": "In humid climates condensation is common, but it is also used as a default explanation when the source was not found.",
+   "applies_to": [
+    "assessments concluding condensation"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "surface or air readings",
+    "observation of condensation"
+   ],
+   "decision_steps": [
+    "Find condensation conclusions.",
+    "Look for supporting readings or observation.",
+    "Ask about the basis if none."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not calculate dew point unless readings are verified and complete."
+   ],
+   "homeowner_question": "The report attributes the moisture to condensation. What readings or observations support that?",
+   "reviewer_action": "Block any dew-point math built on unverified extraction.",
+   "example": "'Moisture due to condensation.' No readings.",
+   "counterexample": "'Droplets observed on supply register; surface temperature noted below room dew point (calculated from readings on page 6).' Suppress.",
+   "related": [
+    "IEP-K-021",
+    "IEP-K-026"
+   ],
+   "shared_controls": [
+    "SC-02",
+    "SC-07"
+   ],
+   "source_hints": [
+    "Psychrometric references (licensed or textbook)",
+    "IICRC S500 psychrometry chapter (licensed)"
+   ],
+   "iep_question": "In South Florida, should condensation be treated as a high-frequency default that always gets a basis question?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-028-T1",
+     "type": "positive",
+     "given": "'Moisture due to condensation.' No readings.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-028-T2",
+     "type": "negative",
+     "given": "'Droplets observed on supply register; surface temperature noted below room dew point (calculated from readings on page 6).' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-028-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (surface or air readings; observation of condensation) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-028-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-029",
+   "family": "F06",
+   "title": "Source resolution status",
+   "category": "technical",
+   "principle": "The report should state whether the moisture source is active, repaired, or unresolved, because remediation without source control is likely to fail.",
+   "rationale": "Homeowners may proceed with remediation while a leak continues.",
+   "applies_to": [
+    "assessments with a source and a remediation recommendation"
+   ],
+   "not_applies_to": [
+    "sampling-only engagements"
+   ],
+   "evidence_required": [
+    "source status statement"
+   ],
+   "decision_steps": [
+    "Check for source status.",
+    "If remediation is recommended and status is absent, ask."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "Is the moisture source still active, and should it be repaired before remediation begins?",
+   "reviewer_action": "Candidate for page one when remediation is recommended.",
+   "example": "Recommends removing drywall; never says whether the leak was fixed.",
+   "counterexample": "'Plumber repaired supply line 10/2; recommend remediation after repair confirmed.' Suppress.",
+   "related": [
+    "IEP-K-030",
+    "IEP-K-043"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "IICRC S520 source-control concepts (licensed)",
+    "EPA mold remediation guidance (public; verify wording)"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-029-T1",
+     "type": "positive",
+     "given": "Recommends removing drywall; never says whether the leak was fixed.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-029-T2",
+     "type": "negative",
+     "given": "'Plumber repaired supply line 10/2; recommend remediation after repair confirmed.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-029-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (source status statement) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-029-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is sampling-only engagements.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-030",
+   "family": "F06",
+   "title": "Repairs claimed without verification",
+   "category": "technical",
+   "principle": "When a report says a source was repaired, note whether the repair was observed, tested, or only reported.",
+   "rationale": "Unverified repairs are a common reason for recurring problems.",
+   "applies_to": [
+    "assessments and verification reports referencing repairs"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "repair statement",
+    "verification method"
+   ],
+   "decision_steps": [
+    "Find repair claims.",
+    "Tag as observed, tested, documented, or reported.",
+    "Ask only when 'reported' supports a 'resolved' conclusion."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not imply the repair is inadequate."
+   ],
+   "homeowner_question": "The report says the leak was repaired. Was the repair observed or tested during the visit?",
+   "reviewer_action": "Merge with IEP-K-014 question if both fire.",
+   "example": "'Per contractor, window resealed.' Conclusion: 'source resolved'.",
+   "counterexample": "'Water test performed at window; no intrusion observed.' Suppress.",
+   "related": [
+    "IEP-K-014",
+    "IEP-K-029"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-030-T1",
+     "type": "positive",
+     "given": "'Per contractor, window resealed.' Conclusion: 'source resolved'.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-030-T2",
+     "type": "negative",
+     "given": "'Water test performed at window; no intrusion observed.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-030-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (repair statement; verification method) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-030-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-031",
+   "family": "F07",
+   "title": "Sampling purpose stated",
+   "category": "technical",
+   "principle": "Each sample should serve a stated purpose (for example: identify a visible growth, compare indoor to outdoor, check a concealed area, document post-remediation conditions).",
+   "rationale": "Sampling without a purpose cannot be judged and often produces results that do not answer the client's question.",
+   "applies_to": [
+    "reports with samples"
+   ],
+   "not_applies_to": [
+    "reports with no samples"
+   ],
+   "evidence_required": [
+    "sampling rationale",
+    "sample list"
+   ],
+   "decision_steps": [
+    "Extract purpose per sample or sample set.",
+    "If no purpose stated, ask once."
+   ],
+   "exceptions": [
+    "Sampling performed at the client's specific request may state that as the purpose."
+   ],
+   "prohibited_inferences": [
+    "Do not state that sampling was unnecessary."
+   ],
+   "homeowner_question": "What question was the sampling meant to answer, and does the conclusion answer it?",
+   "reviewer_action": "Gate all sampling questions on this entry.",
+   "example": "Three air samples collected; no rationale; conclusion 'elevated mold'.",
+   "counterexample": "'Air samples collected to compare bedroom with outdoor at client request.' Suppress purpose question.",
+   "related": [
+    "IEP-K-032",
+    "IEP-K-004"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "AIHA 'Recognition, Evaluation, and Control of Indoor Mold' (licensed)",
+    "ASTM D7338-26 (licensed; note its scope excludes sampling-strategy recommendations)"
+   ],
+   "iep_question": "Is this the gate for all sampling rules, so nothing about sampling fires until purpose is known?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-031-T1",
+     "type": "positive",
+     "given": "Three air samples collected; no rationale; conclusion 'elevated mold'.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-031-T2",
+     "type": "negative",
+     "given": "'Air samples collected to compare bedroom with outdoor at client request.' Suppress purpose question.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-031-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (sampling rationale; sample list) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-031-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is reports with no samples.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-032",
+   "family": "F07",
+   "title": "Missing sampling is not automatically a deficiency",
+   "category": "technical",
+   "principle": "The absence of air, surface, or outdoor comparison samples is not a deficiency by itself. It matters only if the report's conclusions depend on information sampling would have provided.",
+   "rationale": "Many sound assessments rely on visual and moisture evidence. Treating 'no samples' as a flaw would push unnecessary testing.",
+   "applies_to": [
+    "reports without samples",
+    "reports without comparison samples"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "conclusions",
+    "absence of samples"
+   ],
+   "decision_steps": [
+    "If no samples, check whether any conclusion depends on sampling-type information (for example, species, airborne levels).",
+    "Ask only in that case."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Never recommend sampling to the homeowner."
+   ],
+   "homeowner_question": "The report concludes [conclusion]. Was that based on visual and moisture evidence, and is any further testing recommended?",
+   "reviewer_action": "Block any wording that says sampling 'should have' been done.",
+   "example": "No samples; conclusion 'airborne mold levels are elevated'. Ask basis.",
+   "counterexample": "No samples; conclusion 'visible growth on drywall from documented leak; remove drywall'. Suppress.",
+   "related": [
+    "IEP-K-031"
+   ],
+   "shared_controls": [
+    "SC-01",
+    "SC-06"
+   ],
+   "source_hints": [
+    "EPA mold guidance on when sampling is needed (public; verify passage)",
+    "AIHA indoor mold guidance (licensed)"
+   ],
+   "iep_question": "Confirm the program must never suggest additional sampling to the homeowner.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-032-T1",
+     "type": "positive",
+     "given": "No samples; conclusion 'airborne mold levels are elevated'. Ask basis.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-032-T2",
+     "type": "negative",
+     "given": "No samples; conclusion 'visible growth on drywall from documented leak; remove drywall'. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-032-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (conclusions; absence of samples) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-032-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-033",
+   "family": "F07",
+   "title": "Sample identity reconciles across documents",
+   "category": "document_clarification",
+   "principle": "Sample IDs, locations, and dates should match among the narrative, plan, chain of custody, and laboratory report.",
+   "rationale": "Mismatched IDs make it impossible to know which result belongs to which room.",
+   "applies_to": [
+    "reports with samples and a lab report"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "sample IDs from each document"
+   ],
+   "decision_steps": [
+    "Extract IDs from each source.",
+    "Reconcile.",
+    "Ask about mismatches only if extraction is verified."
+   ],
+   "exceptions": [
+    "Lab-assigned IDs that map to field IDs on the chain of custody."
+   ],
+   "prohibited_inferences": [
+    "Do not state results were attributed to the wrong room."
+   ],
+   "homeowner_question": "Sample [ID] is listed as [location A] in the report and [location B] in the lab results. Could you confirm which is correct?",
+   "reviewer_action": "Hand-verify IDs from scanned lab tables.",
+   "example": "Narrative: S-3 kitchen. Lab: S-3 master bath.",
+   "counterexample": "Lab ID 2611-03 maps to field S-3 on chain of custody. Suppress.",
+   "related": [
+    "IEP-K-008",
+    "IEP-K-034",
+    "IEP-K-037"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Laboratory chain-of-custody form",
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-033-T1",
+     "type": "positive",
+     "given": "Narrative: S-3 kitchen. Lab: S-3 master bath.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-033-T2",
+     "type": "negative",
+     "given": "Lab ID 2611-03 maps to field S-3 on chain of custody. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-033-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (sample IDs from each document) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-033-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-034",
+   "family": "F07",
+   "title": "Field blanks and quality-control samples",
+   "category": "technical",
+   "principle": "Where the method or report calls for blanks or controls, the report should state whether they were collected and what they showed.",
+   "rationale": "Blanks help show results were not affected by handling. Their absence matters only if the report or method relies on them.",
+   "applies_to": [
+    "sampling reports where method or report references QC"
+   ],
+   "not_applies_to": [
+    "reports where QC is not referenced"
+   ],
+   "evidence_required": [
+    "QC references",
+    "blank results"
+   ],
+   "decision_steps": [
+    "Run only if QC is referenced.",
+    "Ask about referenced but unreported QC."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not state results are invalid."
+   ],
+   "homeowner_question": "The report mentions a field blank. Could you share its result?",
+   "reviewer_action": "Notes section only.",
+   "example": "'Field blank collected' but no blank in lab table.",
+   "counterexample": "No QC referenced anywhere. Suppress entirely.",
+   "related": [
+    "IEP-K-008"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Laboratory method documentation",
+    "AIHA sampling guidance (licensed)"
+   ],
+   "iep_question": "Should blank results ever be raised with homeowners at all?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-034-T1",
+     "type": "positive",
+     "given": "'Field blank collected' but no blank in lab table.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-034-T2",
+     "type": "negative",
+     "given": "No QC referenced anywhere. Suppress entirely.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-034-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (QC references; blank results) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-034-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is reports where QC is not referenced.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-035",
+   "family": "F07",
+   "title": "Sampling method and volume interpretable",
+   "category": "technical",
+   "principle": "Air samples should record method, flow rate or volume, and duration; surface samples should record method. Without these, results cannot be interpreted.",
+   "rationale": "Spore concentration depends on volume. Missing volume makes a reported number uninterpretable.",
+   "applies_to": [
+    "reports with air or surface samples"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "method",
+    "volume or flow and time"
+   ],
+   "decision_steps": [
+    "Check the lab report and field data for these fields.",
+    "Ask only if absent from both."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "Could you provide the sampling volume or flow rate and duration for the air samples?",
+   "reviewer_action": "Notes section.",
+   "example": "Lab table shows counts/m³ but no volume anywhere.",
+   "counterexample": "Lab table lists 75 L per sample. Suppress.",
+   "related": [
+    "IEP-K-038"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Laboratory method documentation",
+    "Sampling cassette manufacturer instructions"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-035-T1",
+     "type": "positive",
+     "given": "Lab table shows counts/m³ but no volume anywhere.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-035-T2",
+     "type": "negative",
+     "given": "Lab table lists 75 L per sample. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-035-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (method; volume or flow and time) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-035-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-036",
+   "family": "F07",
+   "title": "Sampling conditions noted",
+   "category": "technical",
+   "principle": "Conditions that affect sampling results (doors and windows, HVAC status, recent cleaning, occupant activity) should be noted when results drive conclusions.",
+   "rationale": "Airborne results can vary greatly with conditions; without them, comparisons are weak.",
+   "applies_to": [
+    "air sampling used in conclusions"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "conditions statement"
+   ],
+   "decision_steps": [
+    "Run only if air results drive a conclusion.",
+    "Ask what conditions applied."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "What were the conditions in the home during air sampling (air conditioning on or off, doors and windows closed)?",
+   "reviewer_action": "Notes section.",
+   "example": "Air results drive 'elevated' conclusion; no conditions noted.",
+   "counterexample": "'Closed-house conditions 12 hours prior, HVAC operating.' Suppress.",
+   "related": [
+    "IEP-K-015",
+    "IEP-K-031"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "AIHA sampling guidance (licensed)",
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-036-T1",
+     "type": "positive",
+     "given": "Air results drive 'elevated' conclusion; no conditions noted.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-036-T2",
+     "type": "negative",
+     "given": "'Closed-house conditions 12 hours prior, HVAC operating.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-036-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (conditions statement) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-036-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-037",
+   "family": "F08",
+   "title": "Laboratory report is complete and identifiable",
+   "category": "document_clarification",
+   "principle": "The laboratory report should be present, with lab name, report date, sample IDs, method, and analyst or approval.",
+   "rationale": "Conclusions based on a summarized table without the lab report cannot be checked.",
+   "applies_to": [
+    "reports citing lab results"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "lab report pages"
+   ],
+   "decision_steps": [
+    "Check for lab report.",
+    "If only a summary table, ask for the original lab report."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not judge lab accreditation."
+   ],
+   "homeowner_question": "Could you request the original laboratory report so the results can be reviewed in full?",
+   "reviewer_action": "Do not comment on accreditation; record it only if stated.",
+   "example": "Report includes a typed results table; no lab report.",
+   "counterexample": "Full lab report appended. Suppress.",
+   "related": [
+    "IEP-K-007",
+    "IEP-K-033"
+   ],
+   "shared_controls": [
+    "SC-02",
+    "SC-06"
+   ],
+   "source_hints": [
+    "Laboratory report",
+    "AIHA-LAP accreditation directory (public; record only)"
+   ],
+   "iep_question": "Should the program record lab accreditation if stated, or skip it entirely?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-037-T1",
+     "type": "positive",
+     "given": "Report includes a typed results table; no lab report.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-037-T2",
+     "type": "negative",
+     "given": "Full lab report appended. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-037-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (lab report pages) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-037-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-038",
+   "family": "F08",
+   "title": "Numbers read from images need confirmation",
+   "category": "technical",
+   "principle": "Any number extracted by OCR from an image page must be marked 'please confirm' and must not drive math or comparison checks until verified.",
+   "rationale": "The overview reports OCR numbers in tables are not reliable. A wrong digit can produce a false question.",
+   "applies_to": [
+    "scanned lab reports and tables"
+   ],
+   "not_applies_to": [
+    "native text PDFs"
+   ],
+   "evidence_required": [
+    "extraction method flag"
+   ],
+   "decision_steps": [
+    "Tag numbers by extraction method.",
+    "Block math on OCR numbers until a second read or reviewer confirms."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Never quote an unverified OCR number to the homeowner as fact."
+   ],
+   "homeowner_question": "Some numbers in the scanned lab report could not be read reliably. Could you request the original electronic file?",
+   "reviewer_action": "Verify every OCR number used in a released question.",
+   "example": "Scanned table; OCR reads '1,800' that may be '7,800'.",
+   "counterexample": "Native PDF table. Normal processing.",
+   "related": [
+    "IEP-K-039"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "Product overview (OCR limitation)"
+   ],
+   "iep_question": "None. Engineering control; confirm only.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-038-T1",
+     "type": "positive",
+     "given": "Scanned table; OCR reads '1,800' that may be '7,800'.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-038-T2",
+     "type": "negative",
+     "given": "Native PDF table. Normal processing.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-038-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (extraction method flag) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-038-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is native text PDFs.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-039",
+   "family": "F08",
+   "title": "Conclusions stay within method capability",
+   "category": "technical",
+   "principle": "Conclusions should not go beyond what the laboratory method can show (for example, a spore trap cannot establish viability or species-level identity of every genus; a tape lift shows a surface, not a room).",
+   "rationale": "Over-reach in interpretation is a common source of homeowner fear and unnecessary work.",
+   "applies_to": [
+    "reports interpreting lab results"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "method",
+    "conclusion"
+   ],
+   "decision_steps": [
+    "Match conclusion claims to method type.",
+    "Ask when a claim exceeds the method."
+   ],
+   "exceptions": [
+    "Where the lab report itself provides the interpretation, attribute it to the lab."
+   ],
+   "prohibited_inferences": [
+    "Do not state the conclusion is wrong."
+   ],
+   "homeowner_question": "The report concludes [claim] from [method]. Can that method show [claim], or is this an interpretation?",
+   "reviewer_action": "IEP must confirm method-capability lexicon before activation.",
+   "example": "Tape lift from one wall; conclusion 'whole home contaminated'.",
+   "counterexample": "Tape lift; conclusion 'growth confirmed on sampled wall surface'. Suppress.",
+   "related": [
+    "IEP-K-040"
+   ],
+   "shared_controls": [
+    "SC-01",
+    "SC-07"
+   ],
+   "source_hints": [
+    "Laboratory method documentation",
+    "AIHA indoor mold guidance (licensed)"
+   ],
+   "iep_question": "Which method-capability limits should be in the lexicon (spore trap, tape, swab, bulk, culture, PCR)?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-039-T1",
+     "type": "positive",
+     "given": "Tape lift from one wall; conclusion 'whole home contaminated'.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-039-T2",
+     "type": "negative",
+     "given": "Tape lift; conclusion 'growth confirmed on sampled wall surface'. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-039-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (method; conclusion) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-039-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-040",
+   "family": "F08",
+   "title": "Results integrated with observations",
+   "category": "technical",
+   "principle": "Laboratory results should be interpreted together with the visual and moisture evidence, not as the sole basis for conclusions.",
+   "rationale": "Results in isolation can be misleading; a low result does not clear a wet wall, and a high result needs a location context.",
+   "applies_to": [
+    "reports with samples and observations"
+   ],
+   "not_applies_to": [
+    "lab-only engagements"
+   ],
+   "evidence_required": [
+    "results",
+    "observations in the same area"
+   ],
+   "decision_steps": [
+    "Check whether conclusions reference both.",
+    "Ask when results and observations point in different directions without explanation."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not use any spore ratio or count as a pass/fail criterion."
+   ],
+   "homeowner_question": "The air results were described as normal, but the report also notes elevated moisture in [location]. How do these fit together?",
+   "reviewer_action": "Block ratio-based questions.",
+   "example": "'Air results normal; no action.' Same report: wet drywall in closet.",
+   "counterexample": "'Air normal; wet drywall in closet from active leak; repair and dry.' Suppress.",
+   "related": [
+    "IEP-K-039",
+    "IEP-K-013"
+   ],
+   "shared_controls": [
+    "SC-01",
+    "SC-07"
+   ],
+   "source_hints": [
+    "ASTM D7338-26 interpretation concepts (licensed)",
+    "AIHA indoor mold guidance (licensed)"
+   ],
+   "iep_question": "Candidate for page one when results and observations conflict?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-040-T1",
+     "type": "positive",
+     "given": "'Air results normal; no action.' Same report: wet drywall in closet.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-040-T2",
+     "type": "negative",
+     "given": "'Air normal; wet drywall in closet from active leak; repair and dry.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-040-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (results; observations in the same area) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-040-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is lab-only engagements.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-041",
+   "family": "F09",
+   "title": "Each recommendation traces to a finding and a location",
+   "category": "technical",
+   "principle": "Every recommendation should point to the finding that supports it and the location it applies to.",
+   "rationale": "Untraced recommendations ('remediate as needed') cannot be scoped or priced.",
+   "applies_to": [
+    "reports with recommendations"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "recommendation",
+    "linked finding",
+    "location"
+   ],
+   "decision_steps": [
+    "Link recommendations to findings.",
+    "Ask about recommendations with no finding or location."
+   ],
+   "exceptions": [
+    "General maintenance advice (for example, 'maintain gutters') is low priority."
+   ],
+   "prohibited_inferences": [
+    "Do not add recommendations."
+   ],
+   "homeowner_question": "The report recommends [action]. Which finding and which area does that apply to?",
+   "reviewer_action": "Candidate for page one when the recommendation involves removal or cost.",
+   "example": "'Remove affected materials.' No area named.",
+   "counterexample": "'Remove lower 2 ft of drywall, north wall bedroom 2 (Finding 3).' Suppress.",
+   "related": [
+    "IEP-K-010",
+    "IEP-K-019",
+    "IEP-K-042"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice",
+    "IICRC S520 (licensed) for remediation-scope concepts"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-041-T1",
+     "type": "positive",
+     "given": "'Remove affected materials.' No area named.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-041-T2",
+     "type": "negative",
+     "given": "'Remove lower 2 ft of drywall, north wall bedroom 2 (Finding 3).' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-041-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (recommendation; linked finding) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-041-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-042",
+   "family": "F09",
+   "title": "Conditional recommendations are labeled",
+   "category": "technical",
+   "principle": "Recommendations that depend on further investigation ('if growth is found behind the wall...') should be clearly conditional.",
+   "rationale": "Homeowners and contractors often treat conditional advice as a firm scope.",
+   "applies_to": [
+    "reports with recommendations"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "recommendation text"
+   ],
+   "decision_steps": [
+    "Detect conditional language.",
+    "If a firm recommendation depends on concealed conditions not observed, ask whether it is conditional."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "Is the recommendation to [action] firm, or does it depend on what is found once the wall is opened?",
+   "reviewer_action": "Notes section unless the action is costly.",
+   "example": "'Replace subfloor' with no observation of the subfloor.",
+   "counterexample": "'If subfloor is damaged when flooring is removed, replace.' Suppress.",
+   "related": [
+    "IEP-K-041",
+    "IEP-K-003"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-042-T1",
+     "type": "positive",
+     "given": "'Replace subfloor' with no observation of the subfloor.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-042-T2",
+     "type": "negative",
+     "given": "'If subfloor is damaged when flooring is removed, replace.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-042-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (recommendation text) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-042-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-043",
+   "family": "F09",
+   "title": "Sequence of work is clear",
+   "category": "technical",
+   "principle": "When several actions are recommended, the order (source repair, drying, remediation, rebuild, verification) should be clear.",
+   "rationale": "Out-of-order work is a common cause of recurrence and repeat cost.",
+   "applies_to": [
+    "reports with multiple recommendations"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "recommendations list"
+   ],
+   "decision_steps": [
+    "Detect multiple related recommendations.",
+    "Ask if order is not stated and the order matters."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not prescribe an order."
+   ],
+   "homeowner_question": "In what order should the recommended steps be done?",
+   "reviewer_action": "Merge with IEP-K-029 if both fire.",
+   "example": "Recommends remediation and plumbing repair; no sequence.",
+   "counterexample": "Numbered sequence given. Suppress.",
+   "related": [
+    "IEP-K-029",
+    "IEP-K-045"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "IICRC S520 workflow concepts (licensed)"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-043-T1",
+     "type": "positive",
+     "given": "Recommends remediation and plumbing repair; no sequence.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-043-T2",
+     "type": "negative",
+     "given": "Numbered sequence given. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-043-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (recommendations list) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-043-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-044",
+   "family": "F09",
+   "title": "Removal, cleaning, further assessment, and repair are distinguished",
+   "category": "technical",
+   "principle": "The report should make clear whether each action is removal, cleaning, further assessment, or building repair, since each has a different contractor and cost.",
+   "rationale": "'Address the area' could mean any of them.",
+   "applies_to": [
+    "reports with recommendations"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "recommendation verbs"
+   ],
+   "decision_steps": [
+    "Classify recommendation verbs.",
+    "Ask when vague."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "When the report says to 'address' [area], does that mean cleaning, removing material, further evaluation, or a building repair?",
+   "reviewer_action": "Wording lexicon review by IEP.",
+   "example": "'Address affected area in hall bath.'",
+   "counterexample": "'HEPA-vacuum and damp-wipe vanity interior; remove and replace toe kick.' Suppress.",
+   "related": [
+    "IEP-K-041"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "Which vague verbs should trigger this ('address', 'treat', 'mitigate', others)?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-044-T1",
+     "type": "positive",
+     "given": "'Address affected area in hall bath.'",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-044-T2",
+     "type": "negative",
+     "given": "'HEPA-vacuum and damp-wipe vanity interior; remove and replace toe kick.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-044-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (recommendation verbs) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-044-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-045",
+   "family": "F09",
+   "title": "Verification plan referenced when remediation is recommended",
+   "category": "technical",
+   "principle": "If remediation is recommended, the report should say whether and how completion will be verified, or state that verification is outside its scope.",
+   "rationale": "Without a verification step, the homeowner has no independent way to know the work was finished.",
+   "applies_to": [
+    "assessments recommending remediation"
+   ],
+   "not_applies_to": [
+    "verification reports themselves"
+   ],
+   "evidence_required": [
+    "verification statement"
+   ],
+   "decision_steps": [
+    "If remediation is recommended and no verification statement exists, ask."
+   ],
+   "exceptions": [
+    "Small cleaning-only recommendations."
+   ],
+   "prohibited_inferences": [
+    "Do not recommend a particular verifier."
+   ],
+   "homeowner_question": "After the recommended work is done, how will it be confirmed that it was completed successfully?",
+   "reviewer_action": "Page-one candidate when remediation is recommended.",
+   "example": "Recommends remediation; no mention of verification.",
+   "counterexample": "'Recommend post-remediation verification by an independent assessor.' Suppress.",
+   "related": [
+    "IEP-K-049",
+    "IEP-K-050"
+   ],
+   "shared_controls": [
+    "SC-01",
+    "SC-06"
+   ],
+   "source_hints": [
+    "IICRC S520 post-remediation verification concepts (licensed)",
+    "Florida mold assessor/remediator separation rules, Chapter 468 Part XVI, F.S. (verify)"
+   ],
+   "iep_question": "Is this a page-one question in every remediation case?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-045-T1",
+     "type": "positive",
+     "given": "Recommends remediation; no mention of verification.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-045-T2",
+     "type": "negative",
+     "given": "'Recommend post-remediation verification by an independent assessor.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-045-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (verification statement) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-045-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is verification reports themselves.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-046",
+   "family": "F10",
+   "title": "Switch expectations by document type",
+   "category": "technical",
+   "principle": "Drying records, remediation protocols, and verification reports have different purposes from assessments. Apply only the expectations for that type.",
+   "rationale": "Asking a drying log for a source investigation, or a protocol for sampling, is unfair and unhelpful.",
+   "applies_to": [
+    "drying records",
+    "remediation protocols",
+    "verification reports"
+   ],
+   "not_applies_to": [
+    "assessment reports"
+   ],
+   "evidence_required": [
+    "document-type classification (IEP-K-002)"
+   ],
+   "decision_steps": [
+    "Load the module for the type.",
+    "Disable assessment-only rules."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "",
+   "reviewer_action": "Confirm module selection.",
+   "example": "Drying log uploaded: source and sampling rules disabled.",
+   "counterexample": "Assessment uploaded: drying module disabled.",
+   "related": [
+    "IEP-K-002"
+   ],
+   "shared_controls": [
+    "SC-02"
+   ],
+   "source_hints": [
+    "IICRC S500 (drying) and S520 (remediation) scopes (licensed)"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-046-T1",
+     "type": "positive",
+     "given": "Drying log uploaded: source and sampling rules disabled.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-046-T2",
+     "type": "negative",
+     "given": "Assessment uploaded: drying module disabled.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-046-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (document-type classification (IEP-K-002)) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-046-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is assessment reports.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-047",
+   "family": "F10",
+   "title": "Drying records show progress over time",
+   "category": "technical",
+   "principle": "A drying record should show repeated readings at the same locations over time and the target used to decide drying was complete.",
+   "rationale": "A single 'dry' reading at the end does not show how or whether drying goals were met.",
+   "applies_to": [
+    "drying records"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "dated readings by location",
+    "drying goal"
+   ],
+   "decision_steps": [
+    "Check for repeated readings.",
+    "Check for a stated goal.",
+    "Ask when either is missing."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not supply a drying goal."
+   ],
+   "homeowner_question": "What target did the restoration contractor use to decide the materials were dry, and were readings taken at the same spots each day?",
+   "reviewer_action": "IEP review required.",
+   "example": "Final-day readings only; no goal stated.",
+   "counterexample": "Daily readings at mapped points; goal 'within reference reading of unaffected material'. Suppress.",
+   "related": [
+    "IEP-K-012",
+    "IEP-K-018"
+   ],
+   "shared_controls": [
+    "SC-07"
+   ],
+   "source_hints": [
+    "IICRC S500 drying documentation (licensed)"
+   ],
+   "iep_question": "Should the drying module be in the first release, or later?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-047-T1",
+     "type": "positive",
+     "given": "Final-day readings only; no goal stated.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-047-T2",
+     "type": "negative",
+     "given": "Daily readings at mapped points; goal 'within reference reading of unaffected material'. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-047-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (dated readings by location; drying goal) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-047-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-048",
+   "family": "F10",
+   "title": "Remediation protocol defines scope and containment",
+   "category": "technical",
+   "principle": "A remediation protocol should define the work areas, materials to remove or clean, containment approach, and conditions for completion.",
+   "rationale": "Vague protocols lead to incomplete work and disputes.",
+   "applies_to": [
+    "remediation protocols"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "work areas",
+    "materials",
+    "containment",
+    "completion conditions"
+   ],
+   "decision_steps": [
+    "Check each element.",
+    "Ask about missing elements that affect cost or safety of the work."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not prescribe containment type."
+   ],
+   "homeowner_question": "Does the protocol describe how the work area will be contained and what conditions must be met before the work is considered complete?",
+   "reviewer_action": "IEP review required.",
+   "example": "Protocol lists rooms but no completion conditions.",
+   "counterexample": "Protocol includes all four elements. Suppress.",
+   "related": [
+    "IEP-K-049"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "IICRC S520 (licensed)",
+    "EPA 'Mold Remediation in Schools and Commercial Buildings' (public; verify)"
+   ],
+   "iep_question": "Which protocol elements are essential for a residential job?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-048-T1",
+     "type": "positive",
+     "given": "Protocol lists rooms but no completion conditions.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-048-T2",
+     "type": "negative",
+     "given": "Protocol includes all four elements. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-048-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (work areas; materials) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-048-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-049",
+   "family": "F10",
+   "title": "Verification report states objective, method, and acceptance basis",
+   "category": "technical",
+   "principle": "A verification report should state what it was verifying, how, the basis for passing, and its limitations.",
+   "rationale": "'Clearance passed' without a basis tells the homeowner little.",
+   "applies_to": [
+    "verification reports"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "objective",
+    "methods",
+    "acceptance basis",
+    "limitations"
+   ],
+   "decision_steps": [
+    "Check each element.",
+    "Ask about a missing acceptance basis first."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not supply a numeric clearance criterion."
+   ],
+   "homeowner_question": "What basis did the verification use to conclude the work was complete?",
+   "reviewer_action": "IEP review required; page-one candidate.",
+   "example": "'Area passed clearance.' No basis.",
+   "counterexample": "Visual, moisture, and stated acceptance basis documented. Suppress.",
+   "related": [
+    "IEP-K-045",
+    "IEP-K-050"
+   ],
+   "shared_controls": [
+    "SC-07"
+   ],
+   "source_hints": [
+    "IICRC S520 post-remediation verification (licensed)",
+    "Linked IndoorIQ Pre-PRV work (internal)"
+   ],
+   "iep_question": "Should 'acceptance basis' accept professional judgment as a basis if explained?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-049-T1",
+     "type": "positive",
+     "given": "'Area passed clearance.' No basis.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-049-T2",
+     "type": "negative",
+     "given": "Visual, moisture, and stated acceptance basis documented. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-049-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (objective; methods) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-049-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-050",
+   "family": "F10",
+   "title": "Verification covers the remediated scope",
+   "category": "technical",
+   "principle": "The verification should cover the areas in the remediation scope, or explain any areas not verified.",
+   "rationale": "Partial verification presented as complete can mislead.",
+   "applies_to": [
+    "verification reports with a known remediation scope"
+   ],
+   "not_applies_to": [
+    "verification reports without access to the protocol"
+   ],
+   "evidence_required": [
+    "protocol areas",
+    "verified areas"
+   ],
+   "decision_steps": [
+    "Compare areas.",
+    "Ask about unverified areas."
+   ],
+   "exceptions": [
+    "If the protocol is not supplied, request it (IEP-K-007) instead."
+   ],
+   "prohibited_inferences": [],
+   "homeowner_question": "The remediation covered [areas]. The verification report mentions [subset]. Were the other areas verified?",
+   "reviewer_action": "Notes section unless the omitted area is the original concern.",
+   "example": "Protocol: 3 rooms. Verification: 2 rooms.",
+   "counterexample": "Verification lists all 3. Suppress.",
+   "related": [
+    "IEP-K-049",
+    "IEP-K-007"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-050-T1",
+     "type": "positive",
+     "given": "Protocol: 3 rooms. Verification: 2 rooms.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-050-T2",
+     "type": "negative",
+     "given": "Verification lists all 3. Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-050-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (protocol areas; verified areas) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-050-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is verification reports without access to the protocol.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-051",
+   "family": "F11",
+   "title": "Suite versus building boundary",
+   "category": "technical",
+   "principle": "In commercial or multi-unit buildings, establish whether the assessment covered a suite, a floor, a system, or the whole building.",
+   "rationale": "Findings in one suite may originate elsewhere; the report's reach must be clear.",
+   "applies_to": [
+    "commercial",
+    "condominium",
+    "multi-unit residential"
+   ],
+   "not_applies_to": [
+    "single-family"
+   ],
+   "evidence_required": [
+    "scope statement",
+    "building description"
+   ],
+   "decision_steps": [
+    "Determine boundary.",
+    "Suppress building-wide completeness questions for suite-only scopes."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [],
+   "homeowner_question": "Did the assessment cover only your unit, or also shared areas and systems that could affect it?",
+   "reviewer_action": "Route complex commercial cases to specialist review.",
+   "example": "Condo unit assessment; stain from unit above suspected.",
+   "counterexample": "Whole-building assessment commissioned by association. Normal processing.",
+   "related": [
+    "IEP-K-001",
+    "IEP-K-052",
+    "IEP-K-053"
+   ],
+   "shared_controls": [
+    "SC-01",
+    "SC-03"
+   ],
+   "source_hints": [
+    "Condominium declarations and association rules (ask client)",
+    "Internal practice"
+   ],
+   "iep_question": "Should condominium units be treated as commercial or residential profiles?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-051-T1",
+     "type": "positive",
+     "given": "Condo unit assessment; stain from unit above suspected.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-051-T2",
+     "type": "negative",
+     "given": "Whole-building assessment commissioned by association. Normal processing.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-051-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (scope statement; building description) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-051-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is single-family.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-052",
+   "family": "F11",
+   "title": "Shared systems identified",
+   "category": "technical",
+   "principle": "Note shared air handlers, shafts, plenums, plumbing stacks, and roofs that could carry moisture or air between spaces.",
+   "rationale": "Shared systems are often the source in multi-unit buildings and are outside a unit owner's control.",
+   "applies_to": [
+    "commercial",
+    "multi-unit"
+   ],
+   "not_applies_to": [
+    "single-family"
+   ],
+   "evidence_required": [
+    "building systems description"
+   ],
+   "decision_steps": [
+    "Ask only if the source is possibly in a shared system and the report does not address it."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not assign responsibility."
+   ],
+   "homeowner_question": "Could a shared system, such as the building plumbing stack or air handler, be involved, and was it evaluated?",
+   "reviewer_action": "Notes section.",
+   "example": "Unit ceiling stain below a shared stack; report silent on stack.",
+   "counterexample": "Report: 'stack inspected via access panel; no leak.' Suppress.",
+   "related": [
+    "IEP-K-051"
+   ],
+   "shared_controls": [
+    "SC-01"
+   ],
+   "source_hints": [
+    "Internal practice"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-052-T1",
+     "type": "positive",
+     "given": "Unit ceiling stain below a shared stack; report silent on stack.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-052-T2",
+     "type": "negative",
+     "given": "Report: 'stack inspected via access panel; no leak.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-052-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (building systems description) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-052-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is single-family.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-053",
+   "family": "F11",
+   "title": "Responsible party for follow-up",
+   "category": "document_clarification",
+   "principle": "Where several parties control parts of the building (owner, tenant, association, management), the report should state who it expects to act on each recommendation, or say that it does not assign responsibility.",
+   "rationale": "Recommendations with no owner often go undone.",
+   "applies_to": [
+    "commercial",
+    "multi-unit"
+   ],
+   "not_applies_to": [
+    "single-family owner-occupied"
+   ],
+   "evidence_required": [
+    "recommendations",
+    "party references"
+   ],
+   "decision_steps": [
+    "Ask once if no party is identified and the recommendation involves shared areas."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Never make a legal responsibility statement."
+   ],
+   "homeowner_question": "Who would typically arrange the recommended work in the shared area: you, the association, or building management?",
+   "reviewer_action": "Attorney review of wording before activation.",
+   "example": "Recommendation to repair roof membrane; condo unit owner client.",
+   "counterexample": "Report: 'refer to association for roof repair.' Suppress.",
+   "related": [
+    "IEP-K-051"
+   ],
+   "shared_controls": [
+    "SC-06"
+   ],
+   "source_hints": [
+    "Attorney review (internal)"
+   ],
+   "iep_question": "Should this question exist at all given legal sensitivity?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-053-T1",
+     "type": "positive",
+     "given": "Recommendation to repair roof membrane; condo unit owner client.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-053-T2",
+     "type": "negative",
+     "given": "Report: 'refer to association for roof repair.' Suppress.",
+     "expect": "No question; suppression reason recorded.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-053-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (recommendations; party references) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-053-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is single-family owner-occupied.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-054",
+   "family": "F12",
+   "title": "Show what the report does well",
+   "category": "output",
+   "principle": "The output should state where the report already addresses the homeowner's concerns, not only where questions remain.",
+   "rationale": "A fault-only output erodes trust in good inspectors and in the product.",
+   "applies_to": [
+    "all outputs"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "addressed concerns with anchors"
+   ],
+   "decision_steps": [
+    "For each client concern, check if addressed.",
+    "List addressed concerns with page references."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "Do not praise or grade the inspector."
+   ],
+   "homeowner_question": "",
+   "reviewer_action": "Check the 'already addressed' list is accurate.",
+   "example": "Report clearly addresses bathroom leak with readings, source, and plan. Output says so.",
+   "counterexample": "",
+   "related": [
+    "IEP-K-055"
+   ],
+   "shared_controls": [
+    "SC-08"
+   ],
+   "source_hints": [
+    "Product overview (no scoring)"
+   ],
+   "iep_question": "None beyond confirmation.",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-054-T1",
+     "type": "positive",
+     "given": "Report clearly addresses bathroom leak with readings, source, and plan. Output says so.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-054-T2",
+     "type": "negative",
+     "given": "Output where this control is already satisfied.",
+     "expect": "No change; no warning.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-054-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (addressed concerns with anchors) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-054-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-055",
+   "family": "F12",
+   "title": "Rank questions by decision impact",
+   "category": "output",
+   "principle": "Order questions by how much the answer could change the homeowner's next decision: uncertainty that changes the meaning, unresolved source, recommendations before work, missing documents, then minor clarifications.",
+   "rationale": "The five page-one slots should go to questions that matter, not to whatever rule fired most.",
+   "applies_to": [
+    "all outputs"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "question list with families"
+   ],
+   "decision_steps": [
+    "Assign impact tier.",
+    "Fill page one from the top tier.",
+    "Merge duplicates."
+   ],
+   "exceptions": [
+    "Reviewer may override."
+   ],
+   "prohibited_inferences": [],
+   "homeowner_question": "",
+   "reviewer_action": "Record override reasons.",
+   "example": "Source-unresolved and remediation-sequence questions take page one; photo-caption question goes to notes.",
+   "counterexample": "",
+   "related": [
+    "IEP-K-054",
+    "IEP-K-056"
+   ],
+   "shared_controls": [
+    "SC-08"
+   ],
+   "source_hints": [
+    "Product overview (5 questions on page one)"
+   ],
+   "iep_question": "Is the five-tier order right?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-055-T1",
+     "type": "positive",
+     "given": "Source-unresolved and remediation-sequence questions take page one; photo-caption question goes to notes.",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-055-T2",
+     "type": "negative",
+     "given": "Output where this control is already satisfied.",
+     "expect": "No change; no warning.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-055-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (question list with families) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-055-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  },
+  {
+   "id": "IEP-K-056",
+   "family": "F12",
+   "title": "Neutral, plain, non-accusatory wording",
+   "category": "output",
+   "principle": "Every question is phrased as a request for clarification, in plain language, with no blame, no health claims, and no legal language.",
+   "rationale": "The product's value depends on homeowners and inspectors both trusting the questions.",
+   "applies_to": [
+    "all outputs"
+   ],
+   "not_applies_to": [],
+   "evidence_required": [
+    "question text"
+   ],
+   "decision_steps": [
+    "Run the wording filter.",
+    "Block terms such as 'failed', 'violation', 'negligent', 'unsafe', 'toxic'."
+   ],
+   "exceptions": [],
+   "prohibited_inferences": [
+    "No health claims; health information is context only."
+   ],
+   "homeowner_question": "",
+   "reviewer_action": "Reviewer may rewrite; record reason.",
+   "example": "'Did the inspector fail to test the attic?' rewritten to 'Was the attic part of the agreed inspection?'",
+   "counterexample": "",
+   "related": [
+    "IEP-K-055"
+   ],
+   "shared_controls": [
+    "SC-06",
+    "SC-08"
+   ],
+   "source_hints": [
+    "Product voice rule (docs/expert/VOICE_RULE.md)"
+   ],
+   "iep_question": "Any words you want added to the blocked list?",
+   "status": "ai_draft",
+   "version": "0.2.1",
+   "production_enabled": false,
+   "source_status": "research_hint_unverified",
+   "fixtures": [
+    {
+     "id": "IEP-K-056-T1",
+     "type": "positive",
+     "given": "'Did the inspector fail to test the attic?' rewritten to 'Was the attic part of the agreed inspection?'",
+     "expect": "Question fires with anchor; wording follows the entry's homeowner question or reviewer action.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-056-T2",
+     "type": "negative",
+     "given": "Output where this control is already satisfied.",
+     "expect": "No change; no warning.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-056-T3",
+     "type": "missing_evidence",
+     "given": "Required evidence (question text) cannot be located or is OCR-uncertain.",
+     "expect": "Abstain or ask to confirm; evidence state set; never phrased as 'not performed'.",
+     "executed": false
+    },
+    {
+     "id": "IEP-K-056-T4",
+     "type": "scope_mismatch",
+     "given": "Same facts, but the document is an engagement outside this entry's stated applicability.",
+     "expect": "Rule does not run; status 'not_applicable' or 'outside_scope'.",
+     "executed": false
+    }
+   ]
+  }
+ ]
+}
