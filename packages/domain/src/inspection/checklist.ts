@@ -19,7 +19,7 @@ export interface ChecklistItem {
   /** The "can you share it" line the homeowner may send. Empty when there is no record to ask for. */
   record_request: string;
 }
-export interface Checklist { version: number; status: string; groups: string[]; applies_when_values: string[]; items: ChecklistItem[] }
+export interface Checklist { version: number; status: string; groups: string[]; applies_when_values: string[]; retired_ids?: string[]; items: ChecklistItem[] }
 
 const MATERIALITY: Materiality[] = ["by_dependence", "always_material", "always_minor"];
 
@@ -31,6 +31,7 @@ export function loadChecklist(path = resolve(import.meta.dirname, "../../../../d
     const at = `inspection_checklist.json ${it.id ?? "(no id)"}`;
     if (!/^CK-\d{3,}$/.test(it.id)) throw new Error(`${at}: bad id.`);
     if (ids.has(it.id)) throw new Error(`${at}: duplicate id.`);
+    if (raw.retired_ids?.includes(it.id)) throw new Error(`${at}: this id is retired and cannot be reused.`);
     ids.add(it.id);
     if (!raw.groups.includes(it.group)) throw new Error(`${at}: unknown group "${it.group}".`);
     if (!MATERIALITY.includes(it.materiality)) throw new Error(`${at}: unknown materiality "${it.materiality}".`);

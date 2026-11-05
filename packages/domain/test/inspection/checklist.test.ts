@@ -45,6 +45,11 @@ describe("inspection checklist", () => {
     expect(() => loadChecklist(tweak((c) => { c.items[0].applies_when = "nope"; }))).toThrow(/condition/);
     expect(() => loadChecklist(tweak((c) => { c.items[0].materiality = "nope"; }))).toThrow(/materiality/);
   });
+  it("licensing and conflict-of-interest items are not part of the checklist, and their ids are retired", () => {
+    expect(list.items.some((i) => /licen[sc]e|credential|conflict|independen/i.test(`${i.topic} ${i.looks_for}`))).toBe(false);
+    expect(list.retired_ids!.length).toBe(3);
+    expect(() => loadChecklist(tweak((c) => { c.items[0].id = c.retired_ids[0]; }))).toThrow(/retired/);
+  });
   it("adding a question later is adding one entry, no code change", () => {
     const p = tweak((c) => { c.items.push({ id: "CK-999", group: "visual", topic: "Extra", looks_for: "x", needs: "report", applies_when: "always", materiality: "always_minor", leading_question: "Ask: was this looked at?", record_request: "" }); });
     expect(loadChecklist(p).items.at(-1)!.id).toBe("CK-999");

@@ -15,3 +15,6 @@ Examples
 - "The summary and the lab table don't agree on where the highest result came from. Worth asking which is right."
 - "The report recommends removing this wall. It doesn't yet show the measurement or sample behind that. Ask what supports it."
 - "The report says no moisture was found, then describes chronic moisture. Ask the inspector to explain how both are true."
+
+## Scope rule (decided by Cory, 2026-11-04)
+The review is about whether the inspection is complete and whether the report supports its own claims. It does not check licenses, independence, conflicts of interest, or legal compliance. No jurisdiction layer is needed for those; only units and customary standards may vary by place later.

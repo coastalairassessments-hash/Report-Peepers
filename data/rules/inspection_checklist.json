@@ -1,6 +1,6 @@
 {
  "version": 1,
- "status": "draft - from Cory's peer-review guideline; wording awaiting his review",
+ "status": "draft - from Cory's peer-review guideline; wording awaiting his review; licensing and conflict-of-interest items removed 2026-11-04 (not our wheelhouse). Ids of removed items are retired, not reused.",
  "groups": [
   "admin",
   "scope",
@@ -44,28 +44,6 @@
    "materiality": "by_dependence",
    "leading_question": "The report's dates and identifying details are worth a quick match-up, since they don't all line up. Ask: Which dates and address are correct?",
    "record_request": "Could you send the corrected page or your inspection log?"
-  },
-  {
-   "id": "CK-002",
-   "group": "admin",
-   "topic": "Assessor credentials",
-   "looks_for": "Assessor name, license number and signature are present.",
-   "needs": "report",
-   "applies_when": "always",
-   "materiality": "always_minor",
-   "leading_question": "The report doesn't show a license number or signature that I could find. Ask: Can you confirm your license number?",
-   "record_request": "Could you send a signed copy?"
-  },
-  {
-   "id": "CK-003",
-   "group": "admin",
-   "topic": "Remediation conflict",
-   "looks_for": "The report says whether the assessor or a related company is doing the remediation (Florida limits this within 12 months).",
-   "needs": "report",
-   "applies_when": "always",
-   "materiality": "always_material",
-   "leading_question": "The report doesn't say whether the assessor has any tie to the remediation work it recommends. Ask: Do you or a related company stand to do the remediation?",
-   "record_request": "Could you confirm this in writing?"
   },
   {
    "id": "CK-004",
@@ -783,17 +761,6 @@
    "record_request": ""
   },
   {
-   "id": "CK-069",
-   "group": "recommendations",
-   "topic": "No promotion of a remediator",
-   "looks_for": "Recommendations don't promote a related company.",
-   "needs": "report",
-   "applies_when": "recommendation_made",
-   "materiality": "always_material",
-   "leading_question": "Ask whether the assessor has a relationship with any company named or implied for the work.",
-   "record_request": "Could you confirm this in writing?"
-  },
-  {
    "id": "CK-070",
    "group": "limitations",
    "topic": "Specific limits listed",
@@ -848,5 +815,10 @@
    "leading_question": "A few numbers or units look inconsistent. Ask: Which values are correct?",
    "record_request": ""
   }
+ ],
+ "retired_ids": [
+  "CK-002",
+  "CK-003",
+  "CK-069"
  ]
 }
