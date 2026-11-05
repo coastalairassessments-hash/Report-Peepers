@@ -97,3 +97,17 @@ describe("file store", () => {
     await expect(f.get("file:none")).rejects.toThrow(/No such file/);
   });
 });
+
+describe("reviewer and issues", () => {
+  it("a reviewer may acknowledge issues but not change, add, or un-acknowledge them", async () => {
+    const repo = new InMemoryCaseRepository();
+    const rec = { ...blank("C1", "alice"), state: "awaiting_reviewer" as const, reviewer_id: "rev1", issues: [{ id: "I1", stage: "extraction" as const, code: "x", detail: "d", acknowledged: false }] };
+    await (repo as any).rows.set(rec.id, structuredClone(rec));
+    const rev = { role: "reviewer" as const, id: "rev1" };
+    await expect(repo.save(rev, { ...rec, issues: [{ ...rec.issues[0]!, detail: "other" }] })).rejects.toThrow(/only acknowledge/);
+    await expect(repo.save(rev, { ...rec, issues: [] })).rejects.toThrow(/only acknowledge/);
+    await repo.save(rev, { ...rec, issues: [{ ...rec.issues[0]!, acknowledged: true }] });
+    const done = (await repo.get(rev, "C1"))!;
+    await expect(repo.save(rev, { ...done, issues: [{ ...done.issues[0]!, acknowledged: false }] })).rejects.toThrow(/only acknowledge/);
+  });
+});

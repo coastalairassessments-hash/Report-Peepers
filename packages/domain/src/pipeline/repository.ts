@@ -7,7 +7,9 @@ import type { Actor, CaseRecord, CaseRepository, FileStore } from "./types.js";
 const CUSTOMER_STATES = ["draft", "preflight", "scope_intake", "scope_confirmation", "awaiting_payment"];
 /** Fields only the system or the release step may change. A customer's save must leave them as stored. */
 const SYSTEM_FIELDS = ["reviewer_id", "snapshot", "issues", "attempts", "published_fingerprint", "released", "source"] as const;
-const REVIEWER_FIELDS = ["answers", "scope", "source", "attempts", "issues"] as const;
+const REVIEWER_FIELDS = ["answers", "scope", "source", "attempts"] as const;
+/** A reviewer may tick issues off as acknowledged and change nothing else about them. */
+const issuesIgnoringAck = (r: CaseRecord) => r.issues.map((i) => ({ ...i, acknowledged: false }));
 
 const canSee = (a: Actor, r: CaseRecord) => a.role === "system" || (a.role === "customer" && r.owner_id === a.id) || (a.role === "reviewer" && r.reviewer_id === a.id);
 const same = (x: unknown, y: unknown) => canon(x) === canon(y);
@@ -45,6 +47,7 @@ export class InMemoryCaseRepository implements CaseRepository {
       if (stored.state !== "awaiting_reviewer") throw new Error("Refused: the reviewer can only act on a case awaiting review.");
       if (next.reviewer_id !== stored.reviewer_id) throw new Error("Refused: the reviewer cannot reassign the case.");
       for (const f of REVIEWER_FIELDS) if (!same(next[f], stored[f])) throw new Error(`Refused: the reviewer cannot change ${f}.`);
+      if (!same(issuesIgnoringAck(next), issuesIgnoringAck(stored)) || stored.issues.some((i, k) => i.acknowledged && !next.issues[k]!.acknowledged)) throw new Error("Refused: the reviewer can only acknowledge issues, not change or remove them.");
     }
     this.rows.set(next.id, structuredClone(next));
   }
