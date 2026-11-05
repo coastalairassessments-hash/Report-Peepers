@@ -24,3 +24,10 @@ An assessment needs to state the cause (the causation). It does not need to say 
 
 ## Comparison sample (decided by Cory, 2026-11-04)
 The outdoor sample is the control (comparison) sample. Do not ask for a separate "comparison" sample when an outdoor reference exists.
+
+## Common practice, no citations (Cory, 2026-11-05)
+- Customer-facing words say "common practice" or "customary practice". They never name a standard, publisher, edition or clause, and never say "compliant", "conforms", "meets the standard" or "industry guideline".
+- We build our own guideline database (principles in our own words, each with its source recorded internally). It makes the questions better. It is not shown as citations.
+- Only content whose publisher permission is cleared may go into the database. Sources that bar AI use (for example ASHRAE) stay out until written permission and counsel review.
+- A "see: document, edition, section" line may be added later for an item whose source is cleared and checked. It is a separate decision, not part of this rule.
+- Guard: packages/domain/test/noCitations.test.ts fails if any customer-facing data file breaks this rule.
