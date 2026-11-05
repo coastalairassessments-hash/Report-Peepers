@@ -1,0 +1,525 @@
+{
+ "_note": "Engineer's draft mapping, for Cory to correct during review.",
+ "rows": [
+  {
+   "entry": "IEP-K-001",
+   "coverage": "covered",
+   "checklist": [
+    "CK-006",
+    "CK-009",
+    "CK-075"
+   ],
+   "code_rules": "scope intake Q02-Q10; scope_effects.json",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-002",
+   "coverage": "partial",
+   "checklist": [
+    "CK-075"
+   ],
+   "code_rules": "",
+   "note": "We assume an assessment report; classify first when other document types arrive (F10 is parked)."
+  },
+  {
+   "entry": "IEP-K-003",
+   "coverage": "covered",
+   "checklist": [
+    "CK-070",
+    "CK-076",
+    "CK-077",
+    "CK-093"
+   ],
+   "code_rules": "scope_effects.json (Brick 17b)",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-004",
+   "coverage": "covered",
+   "checklist": [
+    "CK-006",
+    "CK-008",
+    "CK-060"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-005",
+   "coverage": "partial",
+   "checklist": [
+    "CK-007",
+    "CK-022",
+    "CK-025"
+   ],
+   "code_rules": "scope intake Q08, Q09",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-006",
+   "coverage": "partial",
+   "checklist": [
+    "CK-001"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-007",
+   "coverage": "covered",
+   "checklist": [
+    "CK-047"
+   ],
+   "code_rules": "referenced_not_supplied",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-008",
+   "coverage": "new",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Open contradiction check: cover count vs sections."
+  },
+  {
+   "entry": "IEP-K-009",
+   "coverage": "partial",
+   "checklist": [
+    "CK-001"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-010",
+   "coverage": "partial",
+   "checklist": [
+    "CK-015",
+    "CK-071"
+   ],
+   "code_rules": "",
+   "note": "Cross-check of areas vs findings vs photos is new."
+  },
+  {
+   "entry": "IEP-K-011",
+   "coverage": "new",
+   "checklist": [
+    "CK-027"
+   ],
+   "code_rules": "",
+   "note": "Open contradiction check: instrument not in equipment list."
+  },
+  {
+   "entry": "IEP-K-012",
+   "coverage": "partial",
+   "checklist": [
+    "CK-001"
+   ],
+   "code_rules": "dates_disagree",
+   "note": "A date on every observation is new."
+  },
+  {
+   "entry": "IEP-K-013",
+   "coverage": "covered",
+   "checklist": [
+    "CK-033"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-014",
+   "coverage": "covered",
+   "checklist": [
+    "CK-011",
+    "CK-012",
+    "CK-078",
+    "CK-079"
+   ],
+   "code_rules": "context expectations EX02, EX04",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-015",
+   "coverage": "covered",
+   "checklist": [
+    "CK-004",
+    "CK-005",
+    "CK-031",
+    "CK-043"
+   ],
+   "code_rules": "context expectations EX08, EX09",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-016",
+   "coverage": "covered",
+   "checklist": [
+    "CK-027",
+    "CK-085"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-017",
+   "coverage": "covered",
+   "checklist": [
+    "CK-074"
+   ],
+   "code_rules": "consistency: units",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-018",
+   "coverage": "covered",
+   "checklist": [
+    "CK-028"
+   ],
+   "code_rules": "reading_without_dry_standard; baseline_labeled_elevated",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-019",
+   "coverage": "partial",
+   "checklist": [
+    "CK-029",
+    "CK-040",
+    "CK-072"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-020",
+   "coverage": "covered",
+   "checklist": [
+    "CK-086"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-021",
+   "coverage": "covered",
+   "checklist": [
+    "CK-087",
+    "CK-088",
+    "CK-031"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-022",
+   "coverage": "covered",
+   "checklist": [
+    "CK-030"
+   ],
+   "code_rules": "thermal_without_meter",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-023",
+   "coverage": "covered",
+   "checklist": [
+    "CK-030"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-024",
+   "coverage": "covered",
+   "checklist": [
+    "CK-016",
+    "CK-017",
+    "CK-018",
+    "CK-084"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-025",
+   "coverage": "partial",
+   "checklist": [
+    "CK-071"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-026",
+   "coverage": "covered",
+   "checklist": [
+    "CK-062",
+    "CK-091"
+   ],
+   "code_rules": "firmer_than_evidence",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-027",
+   "coverage": "covered",
+   "checklist": [
+    "CK-057",
+    "CK-090"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-028",
+   "coverage": "partial",
+   "checklist": [
+    "CK-087",
+    "CK-088",
+    "CK-090"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-029",
+   "coverage": "covered",
+   "checklist": [
+    "CK-064",
+    "CK-033"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-030",
+   "coverage": "partial",
+   "checklist": [
+    "CK-080",
+    "CK-068"
+   ],
+   "code_rules": "",
+   "note": "CONFLICT: Cory's cause-and-repair rule says never ask who repaired it or when. Decide in review."
+  },
+  {
+   "entry": "IEP-K-031",
+   "coverage": "covered",
+   "checklist": [
+    "CK-034",
+    "CK-036",
+    "CK-094"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-032",
+   "coverage": "covered",
+   "checklist": [
+    "CK-094"
+   ],
+   "code_rules": "silence rules (checks stay silent unless a conclusion depends on it)",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-033",
+   "coverage": "covered",
+   "checklist": [
+    "CK-097",
+    "CK-048"
+   ],
+   "code_rules": "value_under_other_location",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-034",
+   "coverage": "covered",
+   "checklist": [
+    "CK-044"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-035",
+   "coverage": "covered",
+   "checklist": [
+    "CK-036",
+    "CK-041",
+    "CK-042"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-036",
+   "coverage": "covered",
+   "checklist": [
+    "CK-043"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-037",
+   "coverage": "covered",
+   "checklist": [
+    "CK-045",
+    "CK-046",
+    "CK-047",
+    "CK-049"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-038",
+   "coverage": "covered",
+   "checklist": [],
+   "code_rules": "OCR rule: image-read numbers become 'please confirm'",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-039",
+   "coverage": "covered",
+   "checklist": [
+    "CK-054",
+    "CK-055",
+    "CK-063",
+    "CK-100"
+   ],
+   "code_rules": "number_used_as_standard",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-040",
+   "coverage": "covered",
+   "checklist": [
+    "CK-052",
+    "CK-101"
+   ],
+   "code_rules": "evidence map",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-041",
+   "coverage": "covered",
+   "checklist": [
+    "CK-065"
+   ],
+   "code_rules": "recommendation_without_support; recommendation_on_samples_alone; map rules",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-042",
+   "coverage": "new",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Conditional recommendations labeled as conditional."
+  },
+  {
+   "entry": "IEP-K-043",
+   "coverage": "partial",
+   "checklist": [
+    "CK-064",
+    "CK-106"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-044",
+   "coverage": "partial",
+   "checklist": [
+    "CK-103",
+    "CK-104"
+   ],
+   "code_rules": "treatment_without_removal",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-045",
+   "coverage": "covered",
+   "checklist": [
+    "CK-068"
+   ],
+   "code_rules": "",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-046",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-047",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-048",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-049",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-050",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-051",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-052",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-053",
+   "coverage": "parked",
+   "checklist": [],
+   "code_rules": "",
+   "note": "Parked: residential MVP only."
+  },
+  {
+   "entry": "IEP-K-054",
+   "coverage": "covered",
+   "checklist": [],
+   "code_rules": "done_well (Brick 17b follow-up)",
+   "note": ""
+  },
+  {
+   "entry": "IEP-K-055",
+   "coverage": "partial",
+   "checklist": [],
+   "code_rules": "ranking in buildInspectionReview",
+   "note": "Ranking is by materiality, not yet by decision impact."
+  },
+  {
+   "entry": "IEP-K-056",
+   "coverage": "covered",
+   "checklist": [],
+   "code_rules": "VOICE_RULE; wording filter; noCitations guard",
+   "note": ""
+  }
+ ]
+}
