@@ -1,3 +1,4 @@
+import type { OcrPort, PageRenderer } from "../ingest/ocr.js";
 import type { CaseSnapshot, Scope } from "@report-peepers/contracts";
 import type { CaseState } from "../caseStateMachine.js";
 import type { Answers } from "../intake.js";
@@ -77,6 +78,8 @@ export interface Services {
   limits: Limits;
   patterns: PatternList;
   extraction: ExtractionConfig;
+  /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
+  ocr?: { port: OcrPort; renderer: PageRenderer };
   markup: MarkupConfig;
   pipeline: PipelineConfig;
 }

@@ -37,6 +37,15 @@ describe("runAnalysis", () => {
     expect(rec.snapshot!.release.coverage_limitations.join(" ")).toContain("Page 2");
   });
 
+  it("with reading from images switched on, an image-only page is read and sent through extraction", async () => {
+    const svc = makeServices([extraction, j({ evidence: [], claims: [] }), proposal]);
+    svc.ocr = { port: { async recognize() { return [{ text: "Aspergillus/Penicillium-Like 85 1,267", confidence: 90, box: [0.1, 0.2, 0.9, 0.22] }, { text: "Chaetomium 9 120 Total Spores 97 1,293", confidence: 90, box: [0.1, 0.3, 0.9, 0.32] }] } }, renderer: { async render() { return new Uint8Array([1]); } } };
+    const id = await readyCase(svc, await makePdf([P1, { puts: [] }]));
+    expect(await runAnalysis(svc, id)).toMatchObject({ ok: true });
+    const rec = (await svc.repo.get(sys, id))!;
+    expect(rec.issues.some((i) => i.code === "no_text_layer")).toBe(false);
+  });
+
   it("when nothing can be extracted the case fails with a reason and no snapshot", async () => {
     const { svc, id } = await setup([new Error("model unavailable")]);
     const r = await runAnalysis(svc, id);

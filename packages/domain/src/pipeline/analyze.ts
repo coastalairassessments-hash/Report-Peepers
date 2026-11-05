@@ -1,9 +1,11 @@
 import type { CaseSnapshot } from "@report-peepers/contracts";
 import { validateCaseSnapshot } from "@report-peepers/contracts";
+import { buildAreas } from "../inspection/areas.js";
 import { sha256Hex } from "./hash.js";
 import { extractEvidenceFromDocument } from "../engine/extractEvidence.js";
 import { proposeFindings } from "../engine/proposeFindings.js";
 import { extractDocument } from "../ingest/extract.js";
+import { ocrDocument } from "../ingest/ocr.js";
 import { checkAnchors } from "../ingest/checkAnchors.js";
 import { checkIntegrity } from "../integrity.js";
 import { fingerprint } from "../revision.js";
@@ -34,7 +36,7 @@ function skeleton(svc: Services, rec: CaseRecord, pages: number, status: "readab
     areas: [{ id: area.id, name: area.name, parent_id: null, kind: "building", condition_status: "unclear_documentation", assessed_scope: "The report has not yet been divided into rooms or areas; the whole report is treated as one area.", time_context: null, basis_evidence_ids: [], uncertainties: ["Rooms and areas have not been identified."] }],
     connections: [], measurements: [], monitoring_series: [], samples: [], claims: [], hypotheses: [], proposed_actions: [], references: [], questions: [], findings: [],
     release: { id: "REL-001", status: "awaiting_approval", case_revision_id: `REV-${rec.id}`, overview: "Draft review awaiting a human reviewer.", supported_finding_ids: [], attention_finding_ids: [], leading_question_ids: [], coverage_limitations: [], human_review_status: "pending", reviewer_id: null, reviewer_scope: null, published_at: null, supersedes_release_id: null, changes: [], reviewer_conflict_disclosure: null },
-    provenance: { rule_pack_version: svc.pipeline.rule_pack_version, reference_snapshot_id: svc.pipeline.reference_snapshot_id, prompt_version: "extract_evidence.v1 + propose_findings.v1", model_version: "", input_snapshot_sha256: "", run_id: "" },
+    provenance: { rule_pack_version: svc.pipeline.rule_pack_version, reference_snapshot_id: svc.pipeline.reference_snapshot_id, prompt_version: "extract_evidence.v2 + propose_findings.v1", model_version: "", input_snapshot_sha256: "", run_id: "" },
   } as CaseSnapshot;
 }
 
@@ -61,6 +63,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
 
   let doc;
   try { doc = await extractDocument(bytes); } catch (e) { return fail(svc, rec, "unreadable", e instanceof Error ? e.message : "The file could not be read."); }
+  if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer);
 
   const ex = await extractEvidenceFromDocument(svc.model, doc, DOCUMENT_VERSION_ID, svc.extraction, svc.now);
   const found: ProcessingIssue[] = [
@@ -71,9 +74,12 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
 
   const snap = skeleton(svc, rec, doc.page_count, doc.status === "readable" ? "readable" : "partially_readable");
   const areaId = svc.pipeline.whole_report_area.id;
-  snap.evidence = ex.evidence.map((e) => ({ ...e, area_ids: [areaId] }));
-  snap.claims = ex.claims.map((c) => ({ ...c, area_ids: [areaId] }));
+  const rooms = buildAreas(ex.area_labels, svc.pipeline.whole_report_area);
+  snap.evidence = ex.evidence.map((e) => ({ ...e, area_ids: rooms.areaIdsFor(e.id) }));
+  snap.claims = ex.claims.map((c) => ({ ...c, area_ids: rooms.areaIdsFor(c.id) }));
   snap.areas[0]!.basis_evidence_ids = snap.evidence.map((e) => e.id);
+  for (const a of rooms.areas) a.basis_evidence_ids = snap.evidence.filter((e) => e.area_ids.includes(a.id)).map((e) => e.id);
+  snap.areas.push(...rooms.areas);
   const modelOf = (a: { model_name: string; model_version: string }[]) => [...new Set(a.map((x) => `${x.model_name}@${x.model_version}`))].join(", ") || "none";
   snap.provenance.model_version = modelOf(ex.audit);
   snap.provenance.input_snapshot_sha256 = fingerprint(snap);
