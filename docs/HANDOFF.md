@@ -28,7 +28,7 @@ No person touches each report. `releaseAutomatically` runs the gates (`autoRelea
 
 ## State
 - 662 tests, typecheck and CI green.
-- Knowledge library: 56 draft entries. Reviewed by Cory in the review page: 40 accepted, 8 parked (commercial and document types other than assessments), 8 waiting on wording. Needs a second licensed reviewer plus owner approval and four passing fixtures per entry before any entry is live. Nothing is live yet.
+- Knowledge library: 56 draft entries. Reviewed by Cory in the review page: 44 accepted, 8 parked (commercial and document types other than assessments), 4 waiting on wording (K-034, 037, 045, 055). Needs a second licensed reviewer plus owner approval and four passing fixtures per entry before any entry is live. Nothing is live yet.
 
 ## Not built (in order)
 1. Storage and access (Brick 19): saved cases, customer isolation, locked releases, deletion schedules. See `docs/decisions/STACK_BEFORE_BRICK_19.md`.
