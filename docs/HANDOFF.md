@@ -1,0 +1,49 @@
+# Handoff for engineering (Johnathan)
+
+Written 2026-11-05. Owner and decision-maker: Cory. This is the working base: a tested core with no web app, no storage, no payments. Everything below is synthetic-data only.
+
+## What this is
+An independent, flat-fee, AI-assisted second look at a residential mold or moisture inspection report. The homeowner gets what the report did well, questions to ask the inspector, and what could not be checked. No pass/fail, no scores, no upsells, no referrals, no license or legal-compliance checks. Decisions C01-C10 (`docs/spec/DECISIONS.md`) are fixed; technical defaults change only through an ADR in `docs/decisions/`.
+
+## The one rule that shapes the code
+The AI proposes. Plain code decides. Every quote is checked word for word against its page, every customer sentence passes the wording filter and the no-citation rule, and rules live in data files (`data/rules/`), not in logic. Silent when a page could not be read.
+
+## Release is automatic (ADR-006)
+No person touches each report. `releaseAutomatically` runs the gates (`autoReleaseGates`): wording, no standards named in our words, contract valid, integrity, quotes verbatim, source file unchanged, entitlement, a readable page exists, held-back count under a limit. Any failure sends the case to `needs_attention` and releases nothing. Findings that need a person (departures from a reference) are left out. The person-reviewed path (`releaseCase`) still exists and is unchanged; release mode is a per-case choice.
+
+## Map
+| Where | What |
+|---|---|
+| `packages/contracts` | Review contract v0.1, v0.2, v0.3 (JSON Schema + types). v0.3 adds `release_mode` and the `automatic` status. |
+| `packages/domain/src/caseStateMachine.ts` | Case states and guards. Spec in `docs/spec/workflow_transitions.json`. Automatic guards are separate. |
+| `packages/domain/src/ingest` | PDF reading, anchors (exact page and box), OCR on our own machine. |
+| `packages/domain/src/engine` | The AI slot (extract, propose). Model is behind a port; tests use a scripted fake. |
+| `packages/domain/src/inspection` | Checklist, evidence map, contradiction checks, gap questions, done-well, scope-aware quiet. |
+| `packages/domain/src/pipeline` | Intake, analysis, human release, automatic release. In-memory repository (access-enforcing). |
+| `packages/domain/src/render` | Red-ink markup on the homeowner's own report, closing pages, read-back verification (pinned Typst). |
+| `packages/domain/src/knowledge` | Guideline library (56 entries): loader, status engine, append-only decision logs. |
+| `data/rules` | All thresholds, wording and lists. Tune here. |
+| `data/knowledge` | Library seed, mapping to code, and the review decisions so far. |
+| `docs/superpowers/plans` | One plan per brick. |
+
+## State
+- 662 tests, typecheck and CI green.
+- Knowledge library: 56 draft entries. Reviewed by Cory in the review page: 40 accepted, 8 parked (commercial and document types other than assessments), 8 waiting on wording. Needs a second licensed reviewer plus owner approval and four passing fixtures per entry before any entry is live. Nothing is live yet.
+
+## Not built (in order)
+1. Storage and access (Brick 19): saved cases, customer isolation, locked releases, deletion schedules. See `docs/decisions/STACK_BEFORE_BRICK_19.md`.
+2. Client screens and email intake. Until these exist, customers could read unapproved library drafts: close this when the screens are built.
+3. Payments (deferred by Cory; only a yes/no entitlement fact exists, ADR-001).
+4. Reading real reports: tables, scans, hidden-text detection, an isolated parsing worker.
+5. Remaining checks: five contradiction checks (cover count vs sections, "confirmed" next to "needs a lab", rating rule needing a reading, instrument not in the equipment list, number vs its own stated standard); the citation-question check ("which edition and section?", no verdict); second-reader fallback for lab numbers read from images; instruction-like-text flag; source-rights gate.
+6. Needs-attention message and alert (draft: "Your review needs extra time"; alert to Cory). Cory has not approved wording.
+7. Reviewer console (optional now).
+
+## Open with Cory (not engineering)
+Attorney list L1-L26 and the packet in `docs/legal`; fee and terms; the 104 checklist items and word lists; a scanned sample report; correction of `data/rules/scope_effects.json`; insurance.
+
+## Hard limits (CLAUDE.md)
+No contacting inspectors, publishing findings, deploying, connecting payments, ingesting protected standards, or training on customer documents. Types check and tests pass before each next step. Requirement IDs in `docs/spec/requirements.csv` stay stable.
+
+## Run it
+`npm install`, `npm run setup:typst` (pinned Typst for the markup), `npm run check` (typecheck, tests, scorecard).

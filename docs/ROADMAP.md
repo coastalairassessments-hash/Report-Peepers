@@ -74,3 +74,8 @@ The review now lists what the report did well (`done_well`): fully shown checkli
 ## Automatic release and samples-alone rule (2026-11-05)
 Decision ADR-006: no person per report; release mode becomes a setting (next brick). Built: "work recommended on sample results alone" rule, at room level (evidence map) and report level (consistency): the recommendation rests on lab results and no visual finding or reading appears. 583 tests pass.
 Next: release_mode setting with all gates automatic; citation question check; guideline database plan.
+
+## Brick 18a and library review (2026-11-05)
+Built: contract v0.3 (automatic release mode), `needs_attention` state, automatic guards and mode-aware integrity rules, `autoReleaseGates`, `releaseAutomatically`, and the review pages (done well, more questions, not expected, not checked) in the released PDF and text. Knowledge library: first review decisions synced from the review page (`data/knowledge/decisions`, `edits`, `family_decisions.json`); 40 accepted, 8 parked, 8 waiting on wording; none approved or live. 662 tests pass.
+Open: needs-attention message and alert (wording not approved); the released review lists every question on a thin report (about 50): decide a cap or grouping.
+See `docs/HANDOFF.md` and `docs/decisions/STACK_BEFORE_BRICK_19.md`.
