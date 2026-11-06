@@ -197,7 +197,7 @@ export function planMarkup(view: ApprovedView, doc: ExtractedDocument, documentV
       leading_questions: view.leading_questions.slice(0, cfg.leading_questions_max),
       groups: groups.filter(([, ls]) => ls.length > 0).map(([heading, ls]) => ({ heading, items: ls.map(item) })),
       limits: [...view.coverage_limitations],
-      items_to_clarify_statement: view.findings.length === 0 ? cfg.labels.nothing_to_clarify : null,
+      items_to_clarify_statement: view.findings.length === 0 && !(review && review.questions.length > 0) ? cfg.labels.nothing_to_clarify : null,
       method_statement: view.method.statement,
       ...(review && (review.done_well.length || review.questions.length || review.not_expected.length || review.not_checked.length) ? { review: structuredClone(review) } : {}),
     },

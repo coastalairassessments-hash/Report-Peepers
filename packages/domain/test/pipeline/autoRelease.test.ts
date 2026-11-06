@@ -116,6 +116,7 @@ describe("releaseAutomatically (ADR-006)", () => {
     const out = (await svc.repo.get(sys, id))!;
     const text = (await extractDocument(out.released!.markup_pdf)).pages.map((p) => p.text).join("\n");
     expect(text).toContain("More questions you may want to ask the inspector");
+    expect(text).not.toContain("no items to clarify were raised");
     for (const q of out.inspection_review!.questions.slice(0, 3)) expect(text.replace(/\s+/g, "")).toContain(q.text.replace(/\s+/g, "").slice(0, 40));
     expect(out.released!.text).toContain("More questions you may want to ask the inspector");
   });
