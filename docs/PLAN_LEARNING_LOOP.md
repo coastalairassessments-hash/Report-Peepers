@@ -1,6 +1,6 @@
 # Plan: the learning loop (Bricks 20a-20c)
 
-Status: proposed, waiting for Cory's approval. No code yet. Synthetic data only.
+Status: approved by Cory 2026-11-06. 20a, 20b, 20c built (synthetic data only). Not yet wired to storage or to the release step (Brick 19).
 
 ## Already built (ADR-005, Brick 14)
 - Summary record builder with allow-listed fields and a fail-closed scrub.
