@@ -120,7 +120,7 @@ export function checkIntegrity(s: Snap): Issue[] {
     add("scope_conflict_unrecorded", "scope", "A conflicting scope account must appear in unresolved_discrepancies");
 
   // v0.2 only: rules that read the stored fields. A v0.1 snapshot has none of them, so it is judged as before.
-  if (s.schema_version === "0.2") {
+  if (s.schema_version !== "0.1") {
     const timings = timingsFromReferences(s.references);
     s.findings.forEach((f) => out.push(...checkReferenceUse(f, s.references, timings, s.report_issued_on ?? null)));
     if (s.expected_area_names)
@@ -190,7 +190,7 @@ export function checkIntegrity(s: Snap): Issue[] {
     // cause and duration claims need a hypothesis with competing explanations
     for (const cid of f.claim_ids) {
       const cl = claimById.get(cid);
-      if (s.schema_version === "0.2" && cl && (cl.claim_type === "cause" || cl.claim_type === "duration") && (f.assumptions ?? []).length === 0)
+      if (s.schema_version !== "0.1" && cl && (cl.claim_type === "cause" || cl.claim_type === "duration") && (f.assumptions ?? []).length === 0)
         add("cause_finding_without_assumptions", `${p}.assumptions`, `Claim ${cid} is a ${cl.claim_type} claim; list the assumptions it depends on`);
       if (cl && (cl.claim_type === "cause" || cl.claim_type === "duration") && !(hypByClaim.get(cid)?.length))
         add("cause_finding_without_hypothesis", `${p}.claim_ids`, `Claim ${cid} is a ${cl.claim_type} claim and needs a hypothesis with competing explanations`);
@@ -204,13 +204,16 @@ export function checkIntegrity(s: Snap): Issue[] {
   for (const re of PROHIBITED) if (re.test(r.overview)) add("prohibited_language", "release.overview", `Wording not allowed: ${re.source}`);
   for (const re of OVERCERTAIN) if (re.test(stripQuoted(r.overview))) add("overcertain_language", "release.overview", "State evidence strength, not certainty or a numeric confidence");
   if (r.status === "published") {
-    if (r.human_review_status !== "approved") add("publish_without_human_approval", "release", "Pilot releases need recorded human approval");
-    if (s.schema_version === "0.2" && !r.reviewer_conflict_disclosure?.trim())
+    const automatic = r.release_mode === "automatic" && r.human_review_status === "automatic" && s.schema_version === "0.3";
+    if (r.human_review_status === "automatic" && !automatic) add("automatic_status_misused", "release", "Automatic status is only valid in a version 0.3 release whose mode is automatic");
+    else if (r.release_mode === "automatic" && !automatic) add("automatic_status_misused", "release", "An automatic release must carry the automatic status");
+    else if (!automatic && r.human_review_status !== "approved") add("publish_without_human_approval", "release", "A person-reviewed release needs recorded human approval");
+    if (s.schema_version !== "0.1" && !r.reviewer_conflict_disclosure?.trim())
       add("publish_missing_conflict_disclosure", "release.reviewer_conflict_disclosure", "Published release needs a reviewer conflict disclosure, even if it says none");
     if (!r.reviewer_id) add("publish_without_reviewer", "release.reviewer_id", "Published release needs a reviewer");
     if (!r.published_at) add("publish_without_date", "release.published_at", "Published release needs a date");
     const listed = new Set([...r.supported_finding_ids, ...r.attention_finding_ids]);
-    s.findings.forEach((f, i) => { if (listed.has(f.id) && !f.human_approved) add("published_finding_unapproved", `findings[${i}]`, `Finding ${f.id} is in a published release without approval`); });
+    s.findings.forEach((f, i) => { if (automatic && listed.has(f.id) && f.finding_type === "verified_reference_departure") add("departure_in_automatic_release", `findings[${i}]`, `Finding ${f.id} needs a person and cannot be in an automatic release`); if (!automatic && listed.has(f.id) && !f.human_approved) add("published_finding_unapproved", `findings[${i}]`, `Finding ${f.id} is in a published release without approval`); });
     if (s.scope.confirmation_status === "unconfirmed") add("publish_without_scope", "scope", "Scope must be confirmed or conditional before release");
   }
   return out;

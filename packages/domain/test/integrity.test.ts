@@ -299,3 +299,35 @@ describe("evidence and finding integrity", () => {
     });
   });
 });
+
+describe("automatic release mode (ADR-006, contract 0.3)", () => {
+  const auto = () => {
+    const c = clone(); c.schema_version = "0.3"; c.scope.confirmation_status = "confirmed"; c.findings.forEach((f: any) => { f.assumptions = ["Stated by the report."]; });
+    Object.assign(c.release, { status: "published", human_review_status: "automatic", release_mode: "automatic", reviewer_id: "automatic", reviewer_scope: "Automated checks", published_at: "2026-11-05T00:00:00Z", reviewer_conflict_disclosure: "No person reviewed this release." });
+    return c;
+  };
+  it("a properly formed automatic release passes with no person's approval", () => {
+    expect(checkIntegrity(auto())).toEqual([]);
+  });
+  it("automatic status is only valid in a 0.3 automatic release", () => {
+    const a = auto(); a.schema_version = "0.2"; expect(codes(a)).toContain("automatic_status_misused");
+    const b = auto(); b.release.release_mode = "human"; expect(codes(b)).toContain("automatic_status_misused");
+    const c = auto(); delete c.release.release_mode; expect(codes(c)).toContain("automatic_status_misused");
+  });
+  it("an automatic release cannot carry a departure from a reference", () => {
+    const c = auto(); c.findings[0].finding_type = "verified_reference_departure";
+    expect(codes(c)).toContain("departure_in_automatic_release");
+  });
+  it("human mode on 0.3 still needs a person's approval", () => {
+    const c = auto(); c.release.release_mode = "human"; c.release.human_review_status = "pending";
+    expect(codes(c)).toContain("publish_without_human_approval");
+  });
+  it("automatic still needs a date, a conflict disclosure and confirmed scope", () => {
+    const c = auto(); c.release.published_at = null; c.release.reviewer_conflict_disclosure = ""; c.scope.confirmation_status = "unconfirmed";
+    for (const x of ["publish_without_date", "publish_missing_conflict_disclosure", "publish_without_scope"]) expect(codes(c)).toContain(x);
+  });
+  it("wording rules apply to the automatic overview just as to a person's", () => {
+    const c = auto(); c.release.overview = "The report fails inspection.";
+    expect(codes(c)).toContain("prohibited_language");
+  });
+});

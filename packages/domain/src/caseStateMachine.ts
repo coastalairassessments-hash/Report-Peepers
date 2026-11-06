@@ -12,6 +12,10 @@ export interface Facts {
   referencesVerified?: boolean;
   prohibitedClaimsAbsent?: boolean;
   humanApprovalRecorded?: boolean;
+  /** ADR-006: set only by autoReleaseGates, when every gate passed. */
+  automaticGatesPassed?: boolean;
+  /** Which release path is being taken. Absent means the person-reviewed path. */
+  releaseMode?: "human" | "automatic";
   activeRevisionUnchanged?: boolean;
   rightsRechecked?: boolean;
   releaseImmutableAligned?: boolean;
@@ -28,7 +32,7 @@ export interface Facts {
   tombstoneStored?: boolean;
   onlyMinimizedTransactionData?: boolean;
 }
-type FactKey = keyof Facts;
+type FactKey = Exclude<keyof Facts, "releaseMode">;
 
 /** Guard table: transition -> facts that must all be true. Mirrors spec "guards". */
 export const GUARDS: Record<string, FactKey[]> = {
@@ -38,6 +42,11 @@ export const GUARDS: Record<string, FactKey[]> = {
   "revision_pending -> ready_for_analysis": ["newScopeConfirmed", "clarificationEntitlementValid", "newDocsPreflighted", "oldRunsSuperseded"],
   "failed -> analysis": ["retryable", "sameSnapshotOrNewRun", "entitlementVerified", "attemptCapOk"],
   "deletion_pending -> deleted": ["queuedWorkCancelled", "derivedDataDeleted", "grantsInvalidated", "tombstoneStored", "onlyMinimizedTransactionData"],
+};
+
+/** Automatic mode (ADR-006): the gates stand in for the person. Human approval never counts here. */
+export const AUTOMATIC_GUARDS: Record<string, FactKey[]> = {
+  "awaiting_reviewer -> released": ["automaticGatesPassed", "activeRevisionUnchanged", "entitlementVerified", "rightsRechecked", "releaseImmutableAligned"],
 };
 
 export type TransitionResult =
@@ -54,7 +63,8 @@ export function allowedNext(from: CaseState): string[] {
 export function transition(from: string, to: string, facts: Facts = {}): TransitionResult {
   if (!(from in table) || !(to in table)) return { ok: false, reason: "unknown_state" };
   if (!table[from]!.includes(to)) return { ok: false, reason: "not_allowed" };
-  const required = GUARDS[`${from} -> ${to}`];
+  const key = `${from} -> ${to}`;
+  const required = facts.releaseMode === "automatic" && AUTOMATIC_GUARDS[key] ? AUTOMATIC_GUARDS[key] : GUARDS[key];
   if (required) {
     const missing = required.filter((k) => facts[k] !== true);
     if (missing.length) return { ok: false, reason: "guard_failed", missing };

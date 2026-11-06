@@ -48,6 +48,13 @@
       "released",
       "failed",
       "revision_pending",
+      "deletion_pending",
+      "needs_attention"
+    ],
+    "needs_attention": [
+      "awaiting_reviewer",
+      "analysis",
+      "revision_pending",
       "deletion_pending"
     ],
     "released": [
@@ -158,6 +165,19 @@
     "Only server-side guards authorize transitions.",
     "Case deletion is irreversible in the customer workflow; retention of backups is separately disclosed.",
     "Refused publication stays blocked or failed; no direct analysis-to-released path exists in the pilot.",
-    "Unattended release requires a future explicit state-policy revision and validated category approval."
+    "Unattended release requires a future explicit state-policy revision and validated category approval.",
+    "ADR-006: in automatic release mode the awaiting_reviewer -> released guard uses automatic_guards instead of human approval. If any gate fails the case moves to needs_attention and nothing is released."
+  ],
+  "automatic_guards": [
+    {
+      "transition": "awaiting_reviewer -> released",
+      "requires": [
+        "automatic release gates all passed (ADR-006)",
+        "active case revision unchanged",
+        "payment entitlement valid",
+        "rights rechecked",
+        "release immutable and export source aligned"
+      ]
+    }
   ]
 }
