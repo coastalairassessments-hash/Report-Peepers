@@ -68,7 +68,7 @@ export type AutoReleaseResult =
 
 /** The review pages in plain strings, from the inspection review the checks built. */
 export const reviewPagesOf = (r: import("../inspection/gaps.js").InspectionReview | null | undefined): ReviewPages | undefined =>
-  r ? { done_well: r.done_well.map((d) => d.text), questions: r.questions.map((q) => (q.request ? `${q.text} ${q.request}` : q.text)), not_expected: [...r.not_expected], not_checked: [...r.not_checked] } : undefined;
+  r ? { done_well: r.done_well.map((d) => d.text), questions: [...r.questions].sort((a, b) => Number(b.placement === "page_one") - Number(a.placement === "page_one")).map((q) => (q.request ? `${q.text} ${q.request}` : q.text)), not_expected: [...r.not_expected], not_checked: [...r.not_checked] } : undefined;
 
 const sentencesOf = (snap: CaseSnapshot, rec: { inspection_review?: import("../inspection/gaps.js").InspectionReview | null }): string[] => {
   const out: string[] = [snap.release.overview, ...snap.release.coverage_limitations, ...snap.questions.map((q) => q.text)];
