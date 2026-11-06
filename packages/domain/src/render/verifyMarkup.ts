@@ -89,7 +89,7 @@ export function verifyMarkup(source: ExtractedDocument, output: ExtractedDocumen
     return true;
   };
   const sm = plan.summary;
-  const expected = [sm.title, ...sm.leading_questions, ...sm.groups.flatMap((g) => [g.heading, ...g.items.map((i) => i.title)]), ...sm.limits, sm.method_statement, ...plan.overflow.map((o) => o.text), ...(sm.items_to_clarify_statement ? [sm.items_to_clarify_statement] : []), ...(sm.review ? [...sm.review.done_well, ...sm.review.questions, ...sm.review.not_expected, ...sm.review.not_checked] : [])];
+  const expected = [sm.title, ...sm.leading_questions, ...sm.groups.flatMap((g) => [g.heading, ...g.items.map((i) => i.title)]), ...sm.limits, sm.method_statement, ...plan.overflow.map((o) => o.text), ...(sm.items_to_clarify_statement ? [sm.items_to_clarify_statement] : []), ...(sm.review ? [...sm.review.done_well, ...sm.review.questions, ...sm.review.not_expected, ...sm.review.not_checked, ...(sm.review.questions_note ? [sm.review.questions_note] : [])] : [])];
   for (const e of expected) if (!need(e)) add("summary_content_missing", `The closing pages do not contain: ${e.slice(0, 60)}`);
 
   // 5. The same wording rules as the findings, on every string the plan wrote.

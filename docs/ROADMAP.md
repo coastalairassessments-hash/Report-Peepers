@@ -77,5 +77,5 @@ Next: release_mode setting with all gates automatic; citation question check; gu
 
 ## Brick 18a and library review (2026-11-05)
 Built: contract v0.3 (automatic release mode), `needs_attention` state, automatic guards and mode-aware integrity rules, `autoReleaseGates`, `releaseAutomatically`, and the review pages (done well, more questions, not expected, not checked) in the released PDF and text. Knowledge library: first review decisions synced from the review page (`data/knowledge/decisions`, `edits`, `family_decisions.json`); 44 accepted, 8 parked, 4 waiting on wording; none approved or live. 662 tests pass.
-Open: needs-attention message and alert (wording not approved); the released review lists every question on a thin report (about 50): decide a cap or grouping.
+Decision 2026-11-05: the released review lists at most 15 questions (data/rules/markup.json review_questions_max), page-one first, with a note of how many were left out. Open: needs-attention message and alert (wording not approved).
 See `docs/HANDOFF.md` and `docs/decisions/STACK_BEFORE_BRICK_19.md`.

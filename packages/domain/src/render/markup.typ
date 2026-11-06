@@ -75,6 +75,7 @@
     #if rv.questions.len() > 0 [
       #heading(level: 2)[#L.review_questions_heading]
       #for x in rv.questions [- #x]
+      #if "questions_note" in rv [#text(size: 10pt, style: "italic")[#rv.questions_note]]
     ]
     #if rv.not_expected.len() > 0 [
       #heading(level: 2)[#L.not_expected_heading]

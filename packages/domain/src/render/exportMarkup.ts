@@ -29,7 +29,7 @@ export function markupText(plan: MarkupPlan): string {
   const rv = s.review;
   if (rv) {
     const sec = (h: string, xs: string[]) => { if (xs.length) { L.push(h); xs.forEach((x) => L.push(`- ${x}`)); L.push(""); } };
-    sec(plan.labels.done_well_heading, rv.done_well); sec(plan.labels.review_questions_heading, rv.questions); sec(plan.labels.not_expected_heading, rv.not_expected); sec(plan.labels.not_checked_heading, rv.not_checked);
+    sec(plan.labels.done_well_heading, rv.done_well); sec(plan.labels.review_questions_heading, [...rv.questions, ...(rv.questions_note ? [rv.questions_note] : [])]); sec(plan.labels.not_expected_heading, rv.not_expected); sec(plan.labels.not_checked_heading, rv.not_checked);
   }
   if (plan.overflow.length) { L.push(plan.labels.notes_sheet_title); for (const o of plan.overflow) L.push(`${o.number}.${o.page === null ? "" : ` (report page ${o.page})`} ${o.text}`); L.push(""); }
   if (s.limits.length) { L.push(plan.labels.limits_heading); s.limits.forEach((x) => L.push(`- ${x}`)); L.push(""); }

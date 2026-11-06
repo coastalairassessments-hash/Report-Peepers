@@ -129,4 +129,17 @@ describe("releaseAutomatically (ADR-006)", () => {
     const out = (await svc.repo.get(sys, id))!;
     expect(out.released!.text).toContain("Done correctly, as customary practice calls for");
   });
+
+  it("a thin report lists at most 15 questions, page-one ones first, and says how many were left out", async () => {
+    const { svc, id, rec } = await run(THIN, thinScript);
+    const total = rec.inspection_review!.questions.length;
+    expect(total).toBeGreaterThan(15);
+    expect(await releaseAutomatically(svc, id)).toMatchObject({ ok: true });
+    const out = (await svc.repo.get(sys, id))!;
+    const listed = out.released!.text.split("More questions you may want to ask the inspector")[1]!.split("\n\n")[0]!.split("\n").filter((l) => l.startsWith("- "));
+    expect(listed).toHaveLength(16);
+    expect(listed[15]).toContain(`Showing the 15 most important questions. ${total - 15} more were left out`);
+    const first = out.inspection_review!.questions.filter((q) => q.placement === "page_one").map((q) => q.text.slice(0, 30));
+    for (const f of first) expect(listed.slice(0, 15).join(" ")).toContain(f);
+  });
 });

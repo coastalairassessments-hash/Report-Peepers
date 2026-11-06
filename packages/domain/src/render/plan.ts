@@ -12,15 +12,15 @@ export type MarkKind = "circle" | "underline" | "bracket";
 export interface MarkupConfig {
   note_font_pt: number; note_char_width_em: number; note_line_height_em: number; note_width_pt: number; min_note_width_pt: number;
   note_max_chars: number; note_pad_pt: number; edge_inset_pt: number; obstacle_pad_pt: number; tag_diameter_pt: number;
-  mark_pad_pt: number; mark_pad_step_pt: number; search_step_pt: number; max_shift_pt: number; leading_questions_max: number;
+  mark_pad_pt: number; mark_pad_step_pt: number; search_step_pt: number; max_shift_pt: number; leading_questions_max: number; review_questions_max: number;
   default_mark: MarkKind; mark_by_finding_type: Record<string, MarkKind>;
-  labels: Record<"summary_title" | "questions_heading" | "material_heading" | "contextual_heading" | "supported_heading" | "limits_heading" | "nothing_to_clarify" | "notes_sheet_title" | "page_one_pointer" | "page_level_suffix" | "column_number" | "column_item" | "column_page" | "column_strength" | "column_next" | "done_well_heading" | "review_questions_heading" | "not_expected_heading" | "not_checked_heading", string>;
+  labels: Record<"summary_title" | "questions_heading" | "material_heading" | "contextual_heading" | "supported_heading" | "limits_heading" | "nothing_to_clarify" | "notes_sheet_title" | "page_one_pointer" | "page_level_suffix" | "column_number" | "column_item" | "column_page" | "column_strength" | "column_next" | "done_well_heading" | "review_questions_heading" | "not_expected_heading" | "not_checked_heading" | "questions_left_out", string>;
 }
 
 /** Layout and wording defaults live in data/rules/markup.json, never in logic. */
 export function loadMarkupConfig(path = resolve(import.meta.dirname, "../../../../data/rules/markup.json")): MarkupConfig {
   const raw = JSON.parse(readFileSync(path, "utf8")) as MarkupConfig;
-  for (const k of ["note_font_pt", "note_char_width_em", "note_line_height_em", "note_width_pt", "min_note_width_pt", "note_max_chars", "note_pad_pt", "edge_inset_pt", "obstacle_pad_pt", "mark_pad_pt", "mark_pad_step_pt", "search_step_pt", "max_shift_pt", "leading_questions_max"] as const) {
+  for (const k of ["note_font_pt", "note_char_width_em", "note_line_height_em", "note_width_pt", "min_note_width_pt", "note_max_chars", "note_pad_pt", "edge_inset_pt", "obstacle_pad_pt", "mark_pad_pt", "mark_pad_step_pt", "search_step_pt", "max_shift_pt", "leading_questions_max", "review_questions_max"] as const) {
     if (typeof raw[k] !== "number" || !(raw[k] >= 0)) throw new Error(`markup.json: ${k} must be a number of zero or more.`);
   }
   if (raw.search_step_pt <= 0) throw new Error("markup.json: search_step_pt must be above zero.");
@@ -29,7 +29,7 @@ export function loadMarkupConfig(path = resolve(import.meta.dirname, "../../../.
 }
 
 /** What the report does well, more questions to ask, what the stated limits explain, and what could not be checked. Plain strings. */
-export interface ReviewPages { done_well: string[]; questions: string[]; not_expected: string[]; not_checked: string[] }
+export interface ReviewPages { done_well: string[]; questions: string[]; not_expected: string[]; not_checked: string[]; questions_note?: string }
 
 export interface PlanMark { number: number; finding_id: string; kind: MarkKind; box: Box }
 /** `number` is null for the page-one pointer. `page_level` marks a note about a whole page (no words to mark). */
@@ -102,6 +102,13 @@ function placeNote(text: string, targetCx: number, targetCy: number, W: number, 
  * Only anchors that verify against the document are marked. Notes never cover the report's text. What cannot be placed
  * is listed (overflow, issues), never forced.
  */
+/** Keeps the first N questions (the caller orders them, most important first) and says how many were left out. */
+function capQuestions(review: ReviewPages, cfg: MarkupConfig): ReviewPages {
+  const r = structuredClone(review); const max = cfg.review_questions_max;
+  if (r.questions.length > max) { const n = r.questions.length - max; r.questions = r.questions.slice(0, max); r.questions_note = cfg.labels.questions_left_out.replace("{shown}", String(max)).replace("{n}", String(n)); }
+  return r;
+}
+
 export function planMarkup(view: ApprovedView, doc: ExtractedDocument, documentVersionId: string, cfg: MarkupConfig, review?: ReviewPages): MarkupPlan {
   const issues: PlanIssue[] = [];
   const pageOf = (i: number) => doc.pages[i - 1]!;
@@ -199,7 +206,7 @@ export function planMarkup(view: ApprovedView, doc: ExtractedDocument, documentV
       limits: [...view.coverage_limitations],
       items_to_clarify_statement: view.findings.length === 0 && !(review && review.questions.length > 0) ? cfg.labels.nothing_to_clarify : null,
       method_statement: view.method.statement,
-      ...(review && (review.done_well.length || review.questions.length || review.not_expected.length || review.not_checked.length) ? { review: structuredClone(review) } : {}),
+      ...(review && (review.done_well.length || review.questions.length || review.not_expected.length || review.not_checked.length) ? { review: capQuestions(review, cfg) } : {}),
     },
   };
 }
