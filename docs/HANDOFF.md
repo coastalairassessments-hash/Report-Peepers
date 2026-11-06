@@ -36,7 +36,7 @@ No person touches each report. `releaseAutomatically` runs the gates (`autoRelea
 3. Payments (deferred by Cory; only a yes/no entitlement fact exists, ADR-001).
 4. Reading real reports: tables, scans, hidden-text detection, an isolated parsing worker.
 5. Remaining checks: five contradiction checks (cover count vs sections, "confirmed" next to "needs a lab", rating rule needing a reading, instrument not in the equipment list, number vs its own stated standard); the citation-question check ("which edition and section?", no verdict); second-reader fallback for lab numbers read from images; instruction-like-text flag; source-rights gate.
-6. Needs-attention message and alert (draft: "Your review needs extra time"; alert to Cory). Cory has not approved wording.
+6. Needs-attention message, approved by Cory 2026-11-05: "Your review needs a little extra time. We'll send it as soon as it's ready." Still to build: where it shows, and the alert to Cory.
 7. Reviewer console (optional now).
 
 ## Open with Cory (not engineering)
