@@ -33,7 +33,7 @@ export function factsFrom(s: Pick<CaseSnapshot, "release" | "scope" | "documents
  */
 export function buildSummaryRecord(view: ApprovedView, facts: RecordFacts, tags: ReviewerTags, blockedNames: string[], patterns: PatternList, newId: () => string = randomUUID): BuildResult {
   if (view.status !== "published") return { ok: false, reason: "not_published" };
-  if (view.human_review.status !== "approved") return { ok: false, reason: "not_approved" };
+  if (view.human_review.status !== "approved" && view.human_review.status !== "automatic") return { ok: false, reason: "not_approved" };
   if (!/^\d{4}-\d{2}$/.test(facts.release_month)) return { ok: false, reason: "bad_facts" };
 
   const notices: BuildNotice[] = [];

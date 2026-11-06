@@ -28,6 +28,8 @@ describe("buildSummaryRecord", () => {
     const unapproved = { ...two(), human_review: { ...two().human_review, status: "not_reviewed" as const } };
     expect(buildSummaryRecord(unapproved, facts, tags, [], patterns)).toEqual({ ok: false, reason: "not_approved" });
     expect(buildSummaryRecord(two(), { ...facts, release_month: "2026-11-03" }, tags, [], patterns)).toEqual({ ok: false, reason: "bad_facts" });
+    const automatic = { ...two(), human_review: { ...two().human_review, status: "automatic" as const } };
+    expect(buildSummaryRecord(automatic, facts, tags, [], patterns).ok).toBe(true);
   });
 
   it("a title with a listed name, email, phone, or address loses its wording and keeps its codes, and the reviewer is told", () => {

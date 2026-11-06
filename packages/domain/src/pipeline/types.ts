@@ -76,6 +76,8 @@ export interface PipelineConfig {
   rule_pack_version: string;
   reference_snapshot_id: string;
   whole_report_area: { id: string; name: string };
+  /** ADR-006. Held-back items above this number send the case to needs attention instead of releasing. */
+  auto_release?: { max_held_back: number };
 }
 
 export interface Services {
