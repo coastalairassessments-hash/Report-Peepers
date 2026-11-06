@@ -4,6 +4,7 @@ import { extractDocument } from "../ingest/extract.js";
 import { ocrDocument } from "../ingest/ocr.js";
 import { checkIntegrity, stripQuoted, wordingProblems } from "../integrity.js";
 import { exportMarkup } from "../render/exportMarkup.js";
+import type { ReviewPages } from "../render/plan.js";
 import { buildSummaryRecord, factsFrom } from "../analysis/record.js";
 import { blockedNamesFrom } from "../analysis/scrub.js";
 import { validateCaseSnapshot } from "@report-peepers/contracts";
@@ -64,6 +65,10 @@ const DEFAULT_MAX_HELD_BACK = 25;
 export type AutoReleaseResult =
   | { ok: true; record_saved: boolean; excluded_finding_ids: string[]; notices: { finding_id: string; kind: string }[] }
   | (StepFailure & { failed_gates?: GateFailure[] });
+
+/** The review pages in plain strings, from the inspection review the checks built. */
+export const reviewPagesOf = (r: import("../inspection/gaps.js").InspectionReview | null | undefined): ReviewPages | undefined =>
+  r ? { done_well: r.done_well.map((d) => d.text), questions: r.questions.map((q) => (q.request ? `${q.text} ${q.request}` : q.text)), not_expected: [...r.not_expected], not_checked: [...r.not_checked] } : undefined;
 
 const sentencesOf = (snap: CaseSnapshot, rec: { inspection_review?: import("../inspection/gaps.js").InspectionReview | null }): string[] => {
   const out: string[] = [snap.release.overview, ...snap.release.coverage_limitations, ...snap.questions.map((q) => q.text)];
@@ -131,7 +136,7 @@ export async function releaseAutomatically(svc: Services, caseId: string): Promi
   if (!gates.ok) return toAttention(gates.failed);
 
   const fp = fingerprint(snap as never);
-  const out = await exportMarkup(snap, fp, bytes!, DOCUMENT_VERSION_ID, svc.markup);
+  const out = await exportMarkup(snap, fp, bytes!, DOCUMENT_VERSION_ID, svc.markup, reviewPagesOf(rec.inspection_review));
   if (!out.ok) return toAttention([{ gate: `markup_${out.reason}`, detail: out.detail ?? "The marked-up copy could not be built and verified." }]);
   const exp = exportRelease(snap as never, fp);
   const facts = factsFrom(snap);

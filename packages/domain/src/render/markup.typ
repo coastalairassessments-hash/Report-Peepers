@@ -66,6 +66,25 @@
       )).flatten()
     )
   ]
+  #if "review" in plan.summary [
+    #let rv = plan.summary.review
+    #if rv.done_well.len() > 0 [
+      #heading(level: 2)[#L.done_well_heading]
+      #for x in rv.done_well [- #x]
+    ]
+    #if rv.questions.len() > 0 [
+      #heading(level: 2)[#L.review_questions_heading]
+      #for x in rv.questions [- #x]
+    ]
+    #if rv.not_expected.len() > 0 [
+      #heading(level: 2)[#L.not_expected_heading]
+      #for x in rv.not_expected [- #x]
+    ]
+    #if rv.not_checked.len() > 0 [
+      #heading(level: 2)[#L.not_checked_heading]
+      #for x in rv.not_checked [- #x]
+    ]
+  ]
   #if plan.summary.limits.len() > 0 [
     #heading(level: 2)[#L.limits_heading]
     #for x in plan.summary.limits [- #x]

@@ -14,7 +14,7 @@ export interface MarkupConfig {
   note_max_chars: number; note_pad_pt: number; edge_inset_pt: number; obstacle_pad_pt: number; tag_diameter_pt: number;
   mark_pad_pt: number; mark_pad_step_pt: number; search_step_pt: number; max_shift_pt: number; leading_questions_max: number;
   default_mark: MarkKind; mark_by_finding_type: Record<string, MarkKind>;
-  labels: Record<"summary_title" | "questions_heading" | "material_heading" | "contextual_heading" | "supported_heading" | "limits_heading" | "nothing_to_clarify" | "notes_sheet_title" | "page_one_pointer" | "page_level_suffix" | "column_number" | "column_item" | "column_page" | "column_strength" | "column_next", string>;
+  labels: Record<"summary_title" | "questions_heading" | "material_heading" | "contextual_heading" | "supported_heading" | "limits_heading" | "nothing_to_clarify" | "notes_sheet_title" | "page_one_pointer" | "page_level_suffix" | "column_number" | "column_item" | "column_page" | "column_strength" | "column_next" | "done_well_heading" | "review_questions_heading" | "not_expected_heading" | "not_checked_heading", string>;
 }
 
 /** Layout and wording defaults live in data/rules/markup.json, never in logic. */
@@ -27,6 +27,9 @@ export function loadMarkupConfig(path = resolve(import.meta.dirname, "../../../.
   for (const m of [raw.default_mark, ...Object.values(raw.mark_by_finding_type)]) if (!["circle", "underline", "bracket"].includes(m)) throw new Error(`markup.json: unknown mark "${m}".`);
   return raw;
 }
+
+/** What the report does well, more questions to ask, what the stated limits explain, and what could not be checked. Plain strings. */
+export interface ReviewPages { done_well: string[]; questions: string[]; not_expected: string[]; not_checked: string[] }
 
 export interface PlanMark { number: number; finding_id: string; kind: MarkKind; box: Box }
 /** `number` is null for the page-one pointer. `page_level` marks a note about a whole page (no words to mark). */
@@ -48,6 +51,8 @@ export interface MarkupPlan {
     title: string; leading_questions: string[];
     groups: { heading: string; items: SummaryItem[] }[];
     limits: string[]; items_to_clarify_statement: string | null; method_statement: string;
+    /** ADR-006: the review pages. Absent when no inspection review ran. */
+    review?: ReviewPages;
   };
 }
 
@@ -97,7 +102,7 @@ function placeNote(text: string, targetCx: number, targetCy: number, W: number, 
  * Only anchors that verify against the document are marked. Notes never cover the report's text. What cannot be placed
  * is listed (overflow, issues), never forced.
  */
-export function planMarkup(view: ApprovedView, doc: ExtractedDocument, documentVersionId: string, cfg: MarkupConfig): MarkupPlan {
+export function planMarkup(view: ApprovedView, doc: ExtractedDocument, documentVersionId: string, cfg: MarkupConfig, review?: ReviewPages): MarkupPlan {
   const issues: PlanIssue[] = [];
   const pageOf = (i: number) => doc.pages[i - 1]!;
 
@@ -194,6 +199,7 @@ export function planMarkup(view: ApprovedView, doc: ExtractedDocument, documentV
       limits: [...view.coverage_limitations],
       items_to_clarify_statement: view.findings.length === 0 ? cfg.labels.nothing_to_clarify : null,
       method_statement: view.method.statement,
+      ...(review && (review.done_well.length || review.questions.length || review.not_expected.length || review.not_checked.length) ? { review: structuredClone(review) } : {}),
     },
   };
 }

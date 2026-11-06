@@ -3,7 +3,7 @@ import type { CaseSnapshot } from "@report-peepers/contracts";
 import { extractDocument } from "../ingest/extract.js";
 import { exportRelease, type ApprovedView } from "../release.js";
 import { canon } from "../revision.js";
-import { planMarkup, loadMarkupConfig, type MarkupConfig, type MarkupPlan, type PlanIssue } from "./plan.js";
+import { planMarkup, loadMarkupConfig, type MarkupConfig, type MarkupPlan, type PlanIssue, type ReviewPages } from "./plan.js";
 import { renderMarkup } from "./renderMarkup.js";
 import { verifyMarkup, type VerifyProblem } from "./verifyMarkup.js";
 
@@ -26,6 +26,11 @@ export function markupText(plan: MarkupPlan): string {
   }
   const notes = plan.pages.flatMap((p) => p.notes.map((n) => ({ page: p.index, n })));
   if (notes.length) { L.push("Notes written in the margins"); for (const { page, n } of notes) L.push(`${n.number === null ? "-" : `${n.number}.`} (page ${page}) ${n.text}`); L.push(""); }
+  const rv = s.review;
+  if (rv) {
+    const sec = (h: string, xs: string[]) => { if (xs.length) { L.push(h); xs.forEach((x) => L.push(`- ${x}`)); L.push(""); } };
+    sec(plan.labels.done_well_heading, rv.done_well); sec(plan.labels.review_questions_heading, rv.questions); sec(plan.labels.not_expected_heading, rv.not_expected); sec(plan.labels.not_checked_heading, rv.not_checked);
+  }
   if (plan.overflow.length) { L.push(plan.labels.notes_sheet_title); for (const o of plan.overflow) L.push(`${o.number}.${o.page === null ? "" : ` (report page ${o.page})`} ${o.text}`); L.push(""); }
   if (s.limits.length) { L.push(plan.labels.limits_heading); s.limits.forEach((x) => L.push(`- ${x}`)); L.push(""); }
   L.push(s.method_statement);
@@ -36,7 +41,7 @@ export function markupText(plan: MarkupPlan): string {
  * Release gates, then plan, draw, read back, and verify. Any failure returns a reason and no files.
  * The source must be the exact file the release was written against (content hash).
  */
-export async function exportMarkup(snapshot: CaseSnapshot, publishedFingerprint: string, sourcePdf: Uint8Array, documentVersionId: string, cfg: MarkupConfig = loadMarkupConfig()): Promise<MarkupExport> {
+export async function exportMarkup(snapshot: CaseSnapshot, publishedFingerprint: string, sourcePdf: Uint8Array, documentVersionId: string, cfg: MarkupConfig = loadMarkupConfig(), review?: ReviewPages): Promise<MarkupExport> {
   const rel = exportRelease(snapshot as never, publishedFingerprint);
   if (!rel.ok) return { ok: false, reason: rel.reason, ...(rel.notice ? { notice: rel.notice } : {}) };
   const document = snapshot.documents.find((d) => d.id === documentVersionId);
@@ -47,7 +52,7 @@ export async function exportMarkup(snapshot: CaseSnapshot, publishedFingerprint:
   let source;
   try { source = await extractDocument(sourcePdf); } catch (e) { return { ok: false, reason: "unreadable_source", detail: e instanceof Error ? e.message : String(e) }; }
 
-  const plan = planMarkup(rel.view as ApprovedView, source, documentVersionId, cfg);
+  const plan = planMarkup(rel.view as ApprovedView, source, documentVersionId, cfg, review);
   const drawn = await renderMarkup(sourcePdf, plan);
   if (!drawn.ok) return { ok: false, reason: "render_failed", detail: `${drawn.reason}: ${drawn.diagnostics}` };
 

@@ -5,6 +5,7 @@ import { releaseAutomatically } from "../../src/pipeline/autoRelease.js";
 import { downloadRelease } from "../../src/pipeline/release.js";
 import { reviewReady, P1 } from "./slice-fixtures.js";
 import { alice, sys } from "./helpers.js";
+import { run, THIN, thinScript, COMPLETE, completeScript } from "./inspection-fixtures.js";
 
 describe("releaseAutomatically (ADR-006)", () => {
   it("releases with no person: automatic status, a verified marked-up PDF, the text, and one anonymous record", async () => {
@@ -103,5 +104,28 @@ describe("releaseAutomatically (ADR-006)", () => {
     expect(r).toMatchObject({ ok: true });
     const rec = (await svc.repo.get(sys, id))!;
     expect(rec.snapshot!.release.coverage_limitations.join(" ")).toMatch(/Page 2/);
+  });
+
+  it("the released PDF carries the review pages: what is done well, the questions, and what could not be checked", async () => {
+    const { svc, id, rec } = await run(THIN, thinScript);
+    await svc.repo.save(sys, rec);
+    const { assignReviewer } = await import("../../src/pipeline/analyze.js");
+    await assignReviewer(svc, id, "rev1");
+    const r = await releaseAutomatically(svc, id);
+    expect(r).toMatchObject({ ok: true });
+    const out = (await svc.repo.get(sys, id))!;
+    const text = (await extractDocument(out.released!.markup_pdf)).pages.map((p) => p.text).join("\n");
+    expect(text).toContain("More questions you may want to ask the inspector");
+    for (const q of out.inspection_review!.questions.slice(0, 3)) expect(text.replace(/\s+/g, "")).toContain(q.text.replace(/\s+/g, "").slice(0, 40));
+    expect(out.released!.text).toContain("More questions you may want to ask the inspector");
+  });
+
+  it("a complete report gets its good points listed, with the heading", async () => {
+    const { svc, id, rec } = await run(COMPLETE, completeScript);
+    expect(rec.inspection_review!.done_well.length).toBeGreaterThan(0);
+    const r = await releaseAutomatically(svc, id);
+    expect(r).toMatchObject({ ok: true });
+    const out = (await svc.repo.get(sys, id))!;
+    expect(out.released!.text).toContain("Done correctly, as customary practice calls for");
   });
 });

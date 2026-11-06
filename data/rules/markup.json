@@ -38,6 +38,10 @@
     "column_item": "Item",
     "column_page": "Report page",
     "column_strength": "Evidence",
-    "column_next": "Possible next step"
+    "column_next": "Possible next step",
+    "done_well_heading": "Done correctly, as customary practice calls for",
+    "review_questions_heading": "More questions you may want to ask the inspector",
+    "not_expected_heading": "Not expected, given the limits you described",
+    "not_checked_heading": "Not checked"
   }
 }
