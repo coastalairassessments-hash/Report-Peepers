@@ -1,0 +1,11 @@
+[
+ {
+  "at": "2026-11-06T00:28:00.000Z",
+  "author": "Cory",
+  "entry_id": "IEP-K-012",
+  "fields": {
+   "principle": "On multi-visit reports, tie each observation, reading, and sample to the visit that produced it. On a single-visit report, one report date is enough, unless a conclusion depends on timing."
+  },
+  "note": "Softened: dates required only on multi-visit reports or when a conclusion depends on timing."
+ }
+]

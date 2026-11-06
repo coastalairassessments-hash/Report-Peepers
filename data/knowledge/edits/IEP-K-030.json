@@ -1,0 +1,12 @@
+[
+ {
+  "at": "2026-11-06T01:27:00.000Z",
+  "author": "Cory",
+  "entry_id": "IEP-K-030",
+  "fields": {
+   "homeowner_question": "The report says the leak was repaired. Was the repair seen during the visit, and was the area rechecked afterward?",
+   "principle": "When a report says a source was repaired, note whether the repair was seen or only reported, and whether the area was rechecked afterward. Never ask who made the repair or when."
+  },
+  "note": "Aligned with the cause-and-repair rule: never ask who repaired it or when; only whether the repair was seen and whether the area was rechecked."
+ }
+]

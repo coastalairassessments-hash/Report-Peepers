@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "",
+  "at": "2026-11-06T01:17:00.000Z",
+  "comment": "Bulk accept of Claude's recommendation, per Cory's 'yes' on 2026-11-05. Not reviewed one by one.",
+  "decision": "accept",
+  "entry_id": "IEP-K-032",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 0,
+  "version": "0.2.1"
+ }
+]

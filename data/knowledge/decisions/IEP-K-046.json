@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "",
+  "at": "2026-11-06T01:22:00.000Z",
+  "comment": "Keep parked. Exception: when a drying log, protocol or verification is inside an assessment package, use those pages as context, but do not judge them by their own rules. A standalone non-assessment document still gets the 'not an assessment' note.",
+  "decision": "discuss",
+  "entry_id": "IEP-K-046",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 60,
+  "version": "0.2.1"
+ }
+]

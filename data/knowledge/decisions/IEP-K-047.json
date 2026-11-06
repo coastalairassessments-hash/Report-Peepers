@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "Later release.",
+  "at": "2026-11-06T01:24:00.000Z",
+  "comment": "Keep parked; good candidate for a second release. Inside an assessment package, drying pages are used as context only (see K-046).",
+  "decision": "discuss",
+  "entry_id": "IEP-K-047",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 20,
+  "version": "0.2.1"
+ }
+]

@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "",
+  "at": "2026-11-06T00:22:00.000Z",
+  "comment": "Accepted. Product boundary: record author and role, never check licenses.",
+  "decision": "accept",
+  "entry_id": "IEP-K-009",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 15,
+  "version": "0.2.1"
+ }
+]

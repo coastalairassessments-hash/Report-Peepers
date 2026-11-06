@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "Same room only when sure; otherwise ask once, kindly.",
+  "at": "2026-11-06T00:23:00.000Z",
+  "comment": "Accepted. Treat differing room names as the same room only when sure; otherwise ask once.",
+  "decision": "accept",
+  "entry_id": "IEP-K-010",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 20,
+  "version": "0.2.1"
+ }
+]

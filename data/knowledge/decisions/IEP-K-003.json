@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "Area-specific limits count as scope; generic boilerplate does not.",
+  "at": "2026-11-05T00:14:00.000Z",
+  "comment": "Accepted with split: limits tied to a named area or material count as scope; generic boilerplate does not excuse silence.",
+  "decision": "accept",
+  "entry_id": "IEP-K-003",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 30,
+  "version": "0.2.1"
+ }
+]

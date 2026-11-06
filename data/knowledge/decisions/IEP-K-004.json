@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "Add mold screening and indoor air quality to the fixed list.",
+  "at": "2026-11-06T00:15:00.000Z",
+  "comment": "Accepted. Fixed objective list: hidden moisture, find the source, visible growth, mold screening, indoor air quality, buying or selling, insurance claim, clearance after cleanup, other.",
+  "decision": "accept",
+  "entry_id": "IEP-K-004",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 40,
+  "version": "0.2.1"
+ }
+]

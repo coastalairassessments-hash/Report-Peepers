@@ -1,0 +1,11 @@
+[
+ {
+  "at": "2026-11-06T01:33:00.000Z",
+  "author": "Cory",
+  "entry_id": "IEP-K-028",
+  "fields": {
+   "principle": "When a report names condensation as the cause, it should be supported by surface temperature, air conditions, or direct observation. Ask for the basis only when condensation is named as the cause and nothing supports it. Condensation can happen anywhere, so no region is treated differently."
+  },
+  "note": "No regional treatment: condensation can happen anywhere. Ask for a basis only when the report names condensation as the cause and gives nothing to support it."
+ }
+]

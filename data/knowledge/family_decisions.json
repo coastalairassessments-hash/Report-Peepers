@@ -1,0 +1,23 @@
+[
+ {
+  "at": "2026-11-05T21:15:00.000Z",
+  "choice": "keep",
+  "family": "F01",
+  "note": "Keep as written. Pause only 'was something left out' questions; self-contradiction checks keep running. Decided in chat.",
+  "reviewer": "Cory"
+ },
+ {
+  "at": "2026-11-06T00:20:00.000Z",
+  "choice": "keep",
+  "family": "F02",
+  "note": "Keep as written. A referenced item missing from the file is always a request for the missing document, never evidence the work was not done.",
+  "reviewer": "Cory"
+ },
+ {
+  "at": "2026-11-06T00:27:00.000Z",
+  "choice": "exception",
+  "family": "F03",
+  "note": "Keep, with softening: dates required on multi-visit reports or when a conclusion depends on timing; one visit with one report date is fine. Never use current-day conditions to confirm or rule out past conditions.",
+  "reviewer": "Cory"
+ }
+]

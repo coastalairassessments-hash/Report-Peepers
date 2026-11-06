@@ -1,0 +1,11 @@
+[
+ {
+  "at": "2026-11-06T01:31:00.000Z",
+  "author": "Cory",
+  "entry_id": "IEP-K-026",
+  "fields": {
+   "principle": "Classify the stated source as observed, likely (supported), possible, not determined, or historical-reportedly-repaired. 'Observed' means the active source was seen or moisture was measured at it; a stain alone is 'likely'. The wording should match the evidence."
+  },
+  "note": "Defined 'observed': the active source was seen or moisture was measured at it. A stain alone is 'likely'."
+ }
+]

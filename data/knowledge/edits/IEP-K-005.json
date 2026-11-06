@@ -1,0 +1,11 @@
+[
+ {
+  "at": "2026-11-06T00:16:00.000Z",
+  "author": "Cory",
+  "entry_id": "IEP-K-005",
+  "fields": {
+   "principle": "Record whether the work was visual only, instrument-assisted, limited intrusive (for example a borescope hole, one pulled baseboard, or a small cut), intrusive, or unspecified, and limit expectations to that level."
+  },
+  "note": "Added 'limited intrusive' as a fifth access level (borescope hole, one pulled baseboard, small cut)."
+ }
+]

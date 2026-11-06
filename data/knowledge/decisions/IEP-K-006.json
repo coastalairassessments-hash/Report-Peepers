@@ -1,0 +1,14 @@
+[
+ {
+  "answer": "No different tone and no specialist routing for insurer-prepared reports.",
+  "at": "2026-11-06T00:18:00.000Z",
+  "comment": "Accepted. Same tone for everyone; no special routing for insurer-prepared reports.",
+  "decision": "accept",
+  "entry_id": "IEP-K-006",
+  "reason_code": null,
+  "reviewer": "Cory",
+  "role": "iep",
+  "seconds": 20,
+  "version": "0.2.1"
+ }
+]
