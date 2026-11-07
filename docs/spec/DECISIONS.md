@@ -61,3 +61,6 @@ Keep requirement IDs stable. Retain original source context. Record a spec versi
 ## Standing design principles (added 2026-11-07, Cory)
 
 P01 Build as if every released conclusion may be examined by an expert witness: traceable to evidence, method and rule versions recorded, limits stated, reproducible from retained results. Never accuse any person or company, including an inspector, of bad intent, motive, concealment or careless effort. Questions only. Enforced in code by the wording filter (`wordingProblems`: prohibited accusations, motive and intent wording, over-certain wording). C01-C10 are unchanged. No software guarantees an outcome in court, and neutral wording does not by itself remove liability; the attorney list covers exposure.
+
+## Cory-approved engineering settings (audit 2026-11-07, docs/ENGINEER_DEFAULTS_AUDIT.md)
+E01 (2026-11-07) Review shows at most 15 questions, at most 5 on the first page; questions past the cap are dropped without a notice. Approved as is.
