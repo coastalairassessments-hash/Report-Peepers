@@ -37,3 +37,8 @@ Status key: open / with attorney / answered (add the answer and date).
 - L25: Remedy promised for software error (correction or refund) and its trigger.
 - L26: Whether Cory, as a licensed assessor, should be named anywhere on the product. Drafts for counsel are in docs/legal/.
 
+- L27 (2026-11-06): Access by emailed private link plus a one-time code to the same address, with no accounts. Is this adequate security and consent for consumer documents? Link lifetime (14 days proposed), code lifetime (10 minutes), lock after 5 wrong codes. Faked or shared email addresses: what we must say.
+- L28: Email as the delivery channel. We never attach reviews to email; we send a link. Any notice or consent needed for emailing a link to the address the report came from?
+- L29: Retention is decided as 90 days after delivery, then permanent deletion of the report, the review and the links. Reports that were never delivered (abandoned, failed, held) have no rule yet: what period and what notice?
+- L30: Anonymous summary records are kept after deletion (L18). Confirm that keeping them, with a minimum group size, fits the 90-day promise and the optional consent line (Acknowledgments B).
+
