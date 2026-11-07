@@ -66,3 +66,8 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 - S4 `knowledge/packRun.ts`, `data/rules/knowledge_flags.json` (mode `off`), `Services.pack/packMode`, `CaseRecord.pack_hash/pack_shadow` (system-only). A pack with problems is ignored and a `pack_unusable` issue is recorded.
 - S5 `test/pipeline/vaultSlice.test.ts`: off identical to today, shadow logs only, on adds the question with the report's own quote; source/claim ids never reach output.
 - Not done (held): S6 (IEP-K-001 T2 text fix, needs Cory), private repo creation, bulk import of the research folder (received 2026-11-07; unpacked privately, nothing committed), pack hash on the snapshot (schema v0.4).
+
+## 2026-11-07 later: vault imported (private repo)
+- Research received, deduplicated and converted to draft records in the private repo `report-peepers-vault` (never make it public). Counts match the original handoff (158 claims, 173 sources, 111 checks, 579 relationships). Nothing is cleared for AI use or approved. See that repo's `READINESS.md`.
+- Fact check for held item 1: "common practice" appears in no customer-facing data file today (only in rules/docs/comments). No conflict in current output.
+- Cory's list: `docs/CORY_TODO.md`.
