@@ -20,6 +20,8 @@ export interface InterviewOutcomes { told_text: string; gaps: Map<string, GapOut
 
 export interface ResultGap {
   key: string; gap_id: string; area_id: string | null; status: "answered" | "unknown" | "open";
+  /** The question as asked, and the homeowner's own answer, to show side by side. The answer is theirs, labeled as such, and is shown whether or not the notes are approved. */
+  question: string; your_answer: { choices: string[]; how_known: "saw" | "told" | "unknown" } | null;
   needs: Exclude<Need, "nothing_further">[]; notes: string[]; pending_wording: boolean;
   /** Always false. An answer never edits the report. */
   report_changed: false;
@@ -72,7 +74,7 @@ const shown = (needs: Iterable<Need>): ResultGap["needs"] => { const s = new Set
 export function interviewResult(gaps: readonly Gap[], state: InterviewState, outcomes: InterviewOutcomes): InterviewResult {
   const out: ResultGap[] = summaryOf(gaps, state).map((s) => {
     const gap = gaps.find((g) => g.key === s.key)!;
-    const base = { key: s.key, gap_id: s.gap_id, area_id: s.area_id, status: s.status, report_changed: false as const };
+    const base = { key: s.key, gap_id: s.gap_id, area_id: s.area_id, status: s.status, question: gap.question, your_answer: s.tag ? { choices: [...s.choices], how_known: s.tag } : null, report_changed: false as const };
     const o = outcomes.gaps.get(s.gap_id);
     // Fail closed: no entry, or wording not yet approved, shows nothing.
     if (!o || o.status !== "approved") return { ...base, needs: [], notes: [], pending_wording: true };

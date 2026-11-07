@@ -71,3 +71,9 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 - Research received, deduplicated and converted to draft records in the private repo `report-peepers-vault` (never make it public). Counts match the original handoff (158 claims, 173 sources, 111 checks, 579 relationships). Nothing is cleared for AI use or approved. See that repo's `READINESS.md`.
 - Fact check for held item 1: "common practice" appears in no customer-facing data file today (only in rules/docs/comments). No conflict in current output.
 - Cory's list: `docs/CORY_TODO.md`.
+
+## 2026-11-07 Cory's decisions (questions 1-4)
+- Inspector-answers mode stays parked.
+- IEP-K-001 T2 test case fixed (it now expects one completeness question).
+- Never ask who made a repair or when (A). Guarded by `test/noRepairWhoWhen.test.ts`; the K-030 CONFLICT flag is cleared.
+- A homeowner's answer appears in the review next to its question, labeled as their own (`interviewResult` now returns `question` and `your_answer`). The inspector's report is never changed. Johnathan: client screens must show `your_answer` beside `question`.

@@ -94,3 +94,23 @@ describe("the outcomes file is checked when loaded", () => {
     for (const r of rules.gaps) expect(real.gaps.get(r.id)?.status, r.id).toBe("ai_draft");
   });
 });
+
+describe("the homeowner's own answer is shown next to the question", () => {
+  const gaps = [gapOf(one)];
+  it("carries the question and the answer, labeled as the homeowner's, even while notes are still draft", () => {
+    const out = parse(outcomesFor(one, "ai_draft"));
+    const st = ans(gaps, emptyState(), one.id, [one.options[0]!], "told");
+    const g = interviewResult(gaps, st, out).gaps[0]!;
+    expect(g.question).toBe(one.question);
+    expect(g.your_answer).toEqual({ choices: [one.options[0]], how_known: "told" });
+    expect(g.notes).toEqual([]);
+    expect(g.report_changed).toBe(false);
+  });
+  it("an open question has no answer and an unknown one says so", () => {
+    const out = parse(outcomesFor(one));
+    expect(interviewResult(gaps, emptyState(), out).gaps[0]!.your_answer).toBeNull();
+    const st = ans(gaps, emptyState(), one.id, [], "unknown");
+    expect(interviewResult(gaps, st, out).gaps[0]!.your_answer).toEqual({ choices: [], how_known: "unknown" });
+  });
+});
+

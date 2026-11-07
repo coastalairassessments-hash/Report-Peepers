@@ -9,9 +9,7 @@ Only things that need your hand, judgment or license. Everything else is built.
 4. Say whether the 185-row and 253-row Building Enclosure lists stay as two lists or become one main list.
 
 ## Report Peepers decisions
-5. Inspector-answers mode: keep parked?
-6. IEP-K-001 T2 test case: OK to reword through the edit log?
-7. IEP-K-030: two entries conflict about asking who repaired it and when. Which wins?
+5. (done 2026-11-07) Inspector-answers mode parked; IEP-K-001 T2 fixed; IEP-K-030 settled; answers shown beside questions.
 8. Only registered reviewers' decisions count: confirm (built that way).
 9. Edit and approve the draft notes in `data/rules/interview_outcomes.json`.
 10. Tune the draft patterns in `data/rules/cross_checks.json` and the question wording in `gap_wording.json`.
