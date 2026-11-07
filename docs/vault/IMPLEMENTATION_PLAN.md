@@ -7,6 +7,9 @@ source passage -> claim -> approved check -> evidence anchors on a synthetic rep
 
 Use claim CLM-0007 (humidity or dew point alone does not show a wet surface) as the worked example. No real vault content enters this repo: the slice uses a clearly labeled synthetic source and claim.
 
+## Order against the handoff's phases
+The handoff's Phase 1 is a local draft vault (read-only import, hashed manifest, search). That needs the research folder, which I do not have. The blockers I found (R1-R4: no consumer, no fixture runner, results not version-bound, reviewer authority) do not depend on any corpus. So the slice below proves the export boundary on synthetic data first (the handoff's Phases 2 and 3 mechanics), and the Phase 1 importer follows when the folder arrives. Doing it this order means the import can never become a way around activation.
+
 ## Steps (test first, typecheck and tests green before each next step)
 | Step | What | Files (new unless marked) |
 |---|---|---|

@@ -16,6 +16,17 @@ Date: 2026-11-07. Status: PROPOSED, waiting for Cory. Nothing is built from it y
 11. **Failure behavior:** if the pack is missing or invalid, use the last valid compatible approved pack if allowed, else abstain or `needs_attention`. Never fall back to drafts.
 12. **Separation from customer cases:** customer reports never enter the vault and are never used for training. Vault records never contain case text. The learning loop (ADR-005) stays counts-only.
 
+## Added after reading the full handoff package (02_SYSTEM_DESIGN)
+- **More record types:** besides Source, Passage, Claim and Check: `Method` (inputs, units, instrument and mode, calibration, limits, what the result cannot support), `Relationship`, `Approval`, `FixtureRun` (fixture and check hashes, engine/rule/prompt version, actual result; `executed=true` alone is not proof), `ReleaseManifest`.
+- **Link predicates:** `supports`, `qualifies`, `contradicts`, `alternative_explanation`, `evaluated_by_method`, `applies_to_assembly`, `supersedes`. "Related to" is not allowed to mean causation. Suggested links stay `proposed` until reviewed.
+- **First index:** local SQLite with lexical search and typed links, disposable and rebuildable. No graph database, no embeddings, no autonomous agents, no fine-tuning, no second review engine at the start.
+- **Markdown is the authority for content; events are the authority for decisions.** No competing editable database rows. Editing content changes its hash and ends its activation eligibility.
+- **Status values stay as they are:** ai_draft, in_review, revise, discussion, rejected, iep_accepted, approved, parked. Import quarantine and source-access states are separate dimensions and never bypass Entry activation.
+- **Separate dimensions:** extraction, rights, source verification, applicability, technical review, test execution, release eligibility.
+- **Roles:** owner, author, technical reviewer, read-only. An invitation or edit access is not approval authority. Authenticated identity before any shared access.
+- **Revocation:** blocks new use, lists affected packs and cases, queues an impact review, never rewrites a released review.
+- **Evidence lineage:** ten summaries of one paper are one lineage. Repetition and agreement by another AI are not authority. Customer documents are never training data.
+
 ## Why
 R1-R6 in `docs/vault/REPOSITORY_AUDIT.md`: today approving an entry changes nothing, results are not bound to a version, reviewer authority is a free-text name, and entries carry no provenance.
 
