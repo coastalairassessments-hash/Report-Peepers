@@ -27,3 +27,4 @@ Payments (deferred), vendor accounts, and package versions.
 ## Decisions recorded with Cory (2026-11-06)
 1. Hosting and region: Cory delegates the provider to Johnathan. Fixed constraints for Johnathan: US-only data, private storage, no public access to customer files. Johnathan reports his pick back as a written decision record.
 2. Homeowner access: no accounts or passwords. The homeowner emails the report in. We email back a private, unguessable, expiring link, and the page then asks for a one-time code sent to the same address (two steps). Reviews are never attached to email. The reply goes only to the verified sender address. Link lifetime and code rules go to Johnathan's security review.
+3. Email provider (in and out): Cory delegates to Johnathan, to be chosen together with hosting. It must pass inbound email to our program, send reliably, and support sender verification (SPF, DKIM, DMARC). Written decision record from Johnathan.
