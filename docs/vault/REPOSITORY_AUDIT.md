@@ -46,10 +46,14 @@ Read-only. Date 2026-11-07. Nothing in application code was changed.
 
 **R11. Release controls hold.** ADR-006 automatic release with optional human mode, the gates above, anchor checks, wording, rights and markup are intact and tested. Nothing in the vault plan touches them.
 
+**R13. Mapping conflict (IEP-K-030).** See Documentation conflicts. The exporter must refuse a mapped entry whose row still says CONFLICT.
+
 **R12. Retrieval before AI.** Today the model sees only case material plus fixed instructions. It never receives library text. That must stay true: the vault never feeds a customer run except through an approved, pinned pack.
 
 ## Documentation conflicts
 - Handoff prompt "Cory King" vs repository records: no effect.
 - Stars: ADR-004 forbids grading marks. Preserved. No symbol change proposed.
 - `MASTER_SPEC` D05 (human review of every pilot release) is replaced by ADR-006. Preserved.
-- Handoff package files 02-05 and the research archive were not provided, so nothing here relies on them.
+- The full handoff package (01-05) was read. The research archive (Sections 12-29) and the desktop folder were not provided.
+- `mapping.json` calls itself an engineer's draft. Row IEP-K-030 carries an unresolved conflict: Cory's cause-and-repair rule says never ask who repaired it or when, but the mapped checks CK-080 and CK-068 may. Confirmed in the file. Needs Cory's decision before that entry is mapped or exported (R13).
+- Older README/HANDOFF text lags the interview work. Real interfaces and accepted decisions win.
