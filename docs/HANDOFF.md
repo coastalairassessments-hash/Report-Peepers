@@ -27,14 +27,14 @@ No person touches each report. `releaseAutomatically` runs the gates (`autoRelea
 | `docs/superpowers/plans` | One plan per brick. |
 
 ## State
-- 662 tests, typecheck and CI green.
+- 781 tests, typecheck and CI green (2026-11-06).
 - Knowledge library: 56 draft entries. Reviewed by Cory in the review page: 44 accepted, 8 parked (commercial and document types other than assessments), 4 waiting on wording (K-034, 037, 045, 055). Needs a second licensed reviewer plus owner approval and four passing fixtures per entry before any entry is live. Nothing is live yet.
 
 ## Not built (in order)
 1. Storage and access (Brick 19): built vendor-neutral on 2026-11-06 (link plus one-time code access, 90-day retention purge, customer view). Still needed: real database and file storage adapters, email sending, hosting (Johnathan). See `docs/PLAN_BRICK_19.md` and `docs/decisions/STACK_BEFORE_BRICK_19.md`.
 2. Client screens and email intake. The draft-visibility gap is closed in code (`customerViewOf`); the screens must use it and never read the repository directly.
 3. Payments (deferred by Cory; only a yes/no entitlement fact exists, ADR-001).
-4. Reading real reports: tables, scans, hidden-text detection, an isolated parsing worker.
+4. Reading real reports: done 2026-11-06 (Step 2): hidden-text and instruction-like-text flag with a release gate, isolated reading process, source-rights rules. Still needed: tables and scans (needs a sample scanned report from Cory); hosting must cut the reading process off from the network and add the build step; text in the page's own color is not caught.
 5. Remaining checks: five contradiction checks (cover count vs sections, "confirmed" next to "needs a lab", rating rule needing a reading, instrument not in the equipment list, number vs its own stated standard); the citation-question check ("which edition and section?", no verdict); second-reader fallback for lab numbers read from images; instruction-like-text flag; source-rights gate.
 6. Needs-attention message, approved by Cory 2026-11-05: "Your review needs a little extra time. We'll send it as soon as it's ready." Still to build: where it shows, and the alert to Cory.
 7. Reviewer console (optional now).

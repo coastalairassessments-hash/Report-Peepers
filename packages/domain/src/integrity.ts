@@ -1,4 +1,5 @@
 import { checkReferenceUse, timingsFromReferences } from "./referenceTiming.js";
+import { sourceRightsProblems } from "./references/rights.js";
 import { unaddressedAreas } from "./areas.js";
 import type { CaseSnapshot as Snap } from "@report-peepers/contracts";
 
@@ -138,6 +139,7 @@ export function checkIntegrity(s: Snap): Issue[] {
     if (h.time_compatible === "no" && h.status === "supported_with_limits") add("hypothesis_supported_but_time_incompatible", p, "A hypothesis whose timing does not fit cannot be supported");
   });
 
+  for (const p of sourceRightsProblems(s.references)) add(`source_rights_${p.code}`, `references[${s.references.findIndex((r) => r.id === p.reference_id)}]`, p.detail);
   const refById = new Map(s.references.map((r) => [r.id, r]));
   const evById = new Map(s.evidence.map((e) => [e.id, e]));
 

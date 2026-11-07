@@ -66,7 +66,8 @@ Wired: answers live on the case (`context`), and unmet expectations become quest
 
 ## Brick 17b (2026-11-05): scope-aware questions and quiet tests
 Built: gaps a client-described limit explains are not asked (listed as "not expected"; one scoped question if conclusions lean on them); "referenced but not supplied" check for an attached lab report that is not in the file; a must-stay-quiet sample for every rule, with a meta-test that fails when a new rule has none. Data: data/rules/scope_effects.json (draft topic mapping, for Cory to correct). 559 tests pass.
-Next candidates: reviewer keep/reword/remove marks per question; source-rights gate; draft-read fix; instruction-like-text flag; five remaining contradiction checks.
+Built 2026-11-06 (Step 2, Bricks 21a-21c): hidden-text and instruction-like-text flag with a `suspicious_content` release gate; isolated reading process (needs hosting to cut the network and a build step); source-rights rules in the integrity check. See docs/PLAN_STEP2_SAFE_READING.md.
+Next candidates: reviewer keep/reword/remove marks per question; draft-read fix; five remaining contradiction checks (Step 3).
 
 ## Done well (2026-11-05)
 The review now lists what the report did well (`done_well`): fully shown checklist items with page and the report's own words, up to 8, material topics first. No quote, no star; never from image-read text; never for "silence is fine" items; never where we also ask. Not a score. Not yet placed on the released PDF summary page (layout pending with the page-one list).
