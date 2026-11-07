@@ -2,6 +2,8 @@ import type { OutcomeStore } from "../analysis/weaknessReport.js";
 import type { Checklist } from "../inspection/checklist.js";
 import type { ConsistencyConfig } from "../inspection/consistency.js";
 import type { SelfConsistencyConfig } from "../inspection/selfConsistency.js";
+import type { Pack } from "../knowledge/pack.js";
+import type { PackMode } from "../knowledge/packRun.js";
 import type { CrossChecksConfig } from "../inspection/crossChecks.js";
 import type { EvidenceMapConfig } from "../inspection/evidenceMap.js";
 import type { GapWording, InspectionReview } from "../inspection/gaps.js";
@@ -59,6 +61,9 @@ export interface CaseRecord {
   released: ReleasedOutputs | null;
   /** Written only by the system. The completeness list, the questions to ask, and the evidence map. */
   inspection_review?: InspectionReview | null;
+  /** Written only by the system: the fingerprint of the knowledge pack used (shadow or on), and what shadow mode would have asked. */
+  pack_hash?: string | null;
+  pack_shadow?: { hash: string; questions: { id: string; topic: string; text: string }[] } | null;
 }
 
 export interface CaseRepository {
@@ -110,6 +115,8 @@ export interface Services {
   interviews?: import("../interview/flow.js").InterviewStore;
   suspicious: import("../ingest/suspicious.js").SuspiciousConfig;
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
+  /** The approved knowledge pack and its mode. Missing or off: ignored. A pack that fails its checks is ignored and a case issue is recorded. */
+  pack?: Pack; packMode?: PackMode;
   ocr?: { port: OcrPort; renderer: PageRenderer; second?: OcrPort };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */
   inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; crossChecks?: CrossChecksConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations; scopeEffects?: ScopeEffects };

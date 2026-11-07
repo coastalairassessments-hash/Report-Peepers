@@ -15,7 +15,7 @@ export interface ScopeEffects { labels: Record<string, string>; order: string[];
 export const loadScopeEffects = (path = resolve(import.meta.dirname, "../../../../data/rules/scope_effects.json")): ScopeEffects => JSON.parse(readFileSync(path, "utf8")) as ScopeEffects;
 
 export interface ReviewQuestion {
-  id: string; kind: "checklist" | "consistency" | "contradiction" | "map" | "context" | "scope"; topic: string;
+  id: string; kind: "checklist" | "consistency" | "contradiction" | "map" | "context" | "scope" | "pack"; topic: string;
   /** True when a conclusion or recommendation leans on the gap, or the item is always material. Material questions go to page 1. */
   material: boolean;
   text: string; why: string;
@@ -40,7 +40,7 @@ const CONCLUDING = new Set(["remediation", "cause", "health", "extent", "verific
  * One materiality rule: an item is material when the report draws a conclusion or recommends work that could lean on it, or when it is always material;
  * always-minor items never are. Questions are drafts for the reviewer. Text that breaks a wording rule is held back and listed.
  */
-export function buildInspectionReview(inp: { checklist: Checklist; review: ReviewResult; flags: ConsistencyFlag[]; contradictions: Contradiction[]; map: AreaMap[]; recordsReceived?: string[] | null; doneWellMax?: number; scope?: { restrictions: { kind: string; status: string }[] } | null; scopeEffects?: ScopeEffects; contextQuestions?: { id: string; topic: string; text: string; why: string }[]; leadingMax?: number; claims: Pick<CaseSnapshot["claims"][number], "claim_type">[]; imagePages: Set<number>; wording: GapWording }): InspectionReview {
+export function buildInspectionReview(inp: { packQuestions?: { id: string; topic: string; text: string; why: string; quotes: { page: number; text: string }[] }[]; checklist: Checklist; review: ReviewResult; flags: ConsistencyFlag[]; contradictions: Contradiction[]; map: AreaMap[]; recordsReceived?: string[] | null; doneWellMax?: number; scope?: { restrictions: { kind: string; status: string }[] } | null; scopeEffects?: ScopeEffects; contextQuestions?: { id: string; topic: string; text: string; why: string }[]; leadingMax?: number; claims: Pick<CaseSnapshot["claims"][number], "claim_type">[]; imagePages: Set<number>; wording: GapWording }): InspectionReview {
   const { checklist, review, wording } = inp;
   const concluding = inp.claims.some((c) => CONCLUDING.has(c.claim_type));
   const byId = new Map(checklist.items.map((i) => [i.id, i]));
@@ -120,6 +120,9 @@ export function buildInspectionReview(inp: { checklist: Checklist; review: Revie
 
   // What the client said led up to the inspection, where the report is silent. The client's account is context, not proof.
   for (const c of inp.contextQuestions ?? []) push({ kind: "context", topic: c.topic, material: true, text: c.text, why: c.why, request: null, page: null, quotes: [] }, 1.5);
+
+  // Questions from an approved knowledge pack, when the pack is switched on.
+  for (const c of inp.packQuestions ?? []) push({ kind: "pack", topic: c.topic, material: true, text: c.text, why: c.why, request: null, page: c.quotes[0]?.page ?? null, quotes: c.quotes }, 1.2);
 
   // A question from a specific check replaces the general checklist question on the same topic.
   const specific = new Set(out.filter((q) => q.kind !== "checklist").map((q) => q.topic));

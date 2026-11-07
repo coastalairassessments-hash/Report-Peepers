@@ -17,9 +17,10 @@ export const NOTHING = j({ evidence: [], claims: [] });
 export const NO_PROPOSAL = j({ questions: [], hypotheses: [], findings: [] });
 export const ev = (local_id: string, exact_text: string, area_text?: string, origin = "report_author") => ({ local_id, origin, exact_text, ...(area_text ? { area_text } : {}) });
 export const cl = (local_id: string, claim_type: string, exact_text: string, basis: string[], area_text?: string) => ({ local_id, claim_type, text: "Restated.", exact_text, strength_in_report: "categorical", basis_local_ids: basis, ...(area_text ? { area_text } : {}) });
-export async function run(pages: PageSpec[], script: string[]) {
+export async function run(pages: PageSpec[], script: string[], tweak?: (svc: ReturnType<typeof makeServices>) => void) {
   const svc = makeServices(script);
   svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), crossChecks: loadCrossChecksConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), expectations: loadExpectations(), scopeEffects: loadScopeEffects() };
+  tweak?.(svc);
   const id = await readyCase(svc, await makePdf(pages));
   const r = await runAnalysis(svc, id);
   return { svc, id, r, rec: (await svc.repo.get(sys, id))! };

@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "status": "off means the approved knowledge pack is ignored. shadow means it is checked and logged but changes nothing the customer sees. on means its questions join the review. Anything wrong with the pack means off.",
+  "mode": "off"
+}

@@ -58,3 +58,11 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 - Six new cross-checks in `src/inspection/crossChecks.ts`, rules in `data/rules/cross_checks.json` (draft, Cory tunes), wording in `gap_wording.json`. Plan: `docs/PLAN_STEP3_BETTER_QUESTIONS.md`.
 - Second reader for numbers read from images: `ocrDocument(..., { second })`; `svc.ocr.second` is optional. Johnathan: wire a second, different reader (a different OCR setting or engine) when hosting is chosen. Without it, behavior is unchanged.
 - Page issue `numbers_not_confirmed` appears when a number was left out.
+
+## 2026-11-07 Vault slice S1-S5 - done (synthetic data only)
+- S1 `knowledge/reviewers.ts` + `data/knowledge/reviewers.json` (only Cory listed, so nothing can be approved until a second licensed reviewer is added). `statusOf(..., registry?)`.
+- S2 `knowledge/fixtureRunner.ts`: results tied to content hash, rule hash and engine version; `isLiveBound`.
+- S3 `knowledge/pack.ts`: `buildPack`, `validatePack`, `loadPack` (rights, wording, pattern, hash; refuses the whole pack on any problem).
+- S4 `knowledge/packRun.ts`, `data/rules/knowledge_flags.json` (mode `off`), `Services.pack/packMode`, `CaseRecord.pack_hash/pack_shadow` (system-only). A pack with problems is ignored and a `pack_unusable` issue is recorded.
+- S5 `test/pipeline/vaultSlice.test.ts`: off identical to today, shadow logs only, on adds the question with the report's own quote; source/claim ids never reach output.
+- Not done (held): S6 (IEP-K-001 T2 text fix, needs Cory), private repo creation, bulk import of the research folder (received 2026-11-07; unpacked privately, nothing committed), pack hash on the snapshot (schema v0.4).

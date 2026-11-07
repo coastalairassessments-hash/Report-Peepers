@@ -4,6 +4,8 @@ import { buildAreas } from "../inspection/areas.js";
 import { reviewInspection } from "../inspection/reviewItems.js";
 import { checkConsistency } from "../inspection/consistency.js";
 import { checkSelfConsistency } from "../inspection/selfConsistency.js";
+import { validatePack } from "../knowledge/pack.js";
+import { runPack, type PackQuestion } from "../knowledge/packRun.js";
 import { checkCrossChecks } from "../inspection/crossChecks.js";
 import { buildEvidenceMap } from "../inspection/evidenceMap.js";
 import { recordsReceived } from "../intake.js";
@@ -105,6 +107,16 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
   const next = prop.result.snapshot;
   for (const h of prop.result.held_back) found.push(issue(svc, "proposal", `held_back_${h.kind}`, `A proposed ${h.kind} (${h.id}) was held back by the checks: ${[...new Set(h.issues.map((i) => i.code))].join(", ")}.`));
 
+  // The approved knowledge pack. Off by default; a pack with any problem is ignored, never partly used.
+  let packQs: PackQuestion[] = [];
+  let packUsed: string | null = null;
+  const mode = svc.packMode ?? "off";
+  if (svc.pack && mode !== "off") {
+    const problems = validatePack(svc.pack);
+    if (problems.length) found.push(issue(svc, "inspection_review", "pack_unusable", `The knowledge pack was not used (${problems.slice(0, 3).join(", ")}).`));
+    else { packUsed = svc.pack.hash; packQs = runPack(svc.pack, doc); }
+  }
+
   let inspectionReview = null;
   const reviewAudit = [];
   if (svc.inspection) {
@@ -115,6 +127,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
     for (const h of rv.held_back) found.push(issue(svc, "inspection_review", `held_back_${h.reason}`, `A proposed ${h.kind} (${h.id}) was not accepted: ${h.reason.replace(/_/g, " ")}.`, h.page));
     const imagePages = new Set(doc.pages.filter((p) => p.quality_flags.includes("read_from_image")).map((p) => p.index));
     inspectionReview = buildInspectionReview({
+      packQuestions: mode === "on" ? packQs : [],
       checklist: i.checklist, review: rv, flags: checkConsistency(next, doc, i.consistency, rv.page_issues.length === 0), contradictions: [...checkSelfConsistency(doc, i.selfConsistency), ...(i.crossChecks ? checkCrossChecks(doc, i.crossChecks, i.selfConsistency) : [])],
       map: buildEvidenceMap(next, i.evidenceMap), recordsReceived: recordsReceived(rec.answers), scope: rec.scope, scopeEffects: i.scopeEffects, contextQuestions: i.expectations && rec.context ? contextExpectations(i.expectations, rec.context, doc.pages.map((p) => p.text).join("\n"), rv.page_issues.length === 0) : [], leadingMax: svc.markup.leading_questions_max, claims: next.claims, imagePages, wording: i.wording,
     });
@@ -135,6 +148,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
 
   rec.snapshot = next;
   if (inspectionReview) rec.inspection_review = inspectionReview;
+  if (packUsed) { rec.pack_hash = packUsed; rec.pack_shadow = mode === "shadow" ? { hash: packUsed, questions: packQs.map((q) => ({ id: q.id, topic: q.topic, text: q.text })) } : null; }
   rec.issues = [...rec.issues, ...found];
   const m = move(rec, "awaiting_reviewer", { typedOutputValidated: true, ambiguitiesAddressed: true, referencesVerified: next.references.length === 0, prohibitedClaimsAbsent: true });
   if (!m.ok) return fail(svc, rec, m.reason, (m.missing ?? []).join(", "));
