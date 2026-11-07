@@ -4,11 +4,12 @@ import { autoReleaseGates, type GateInput } from "../../src/pipeline/autoRelease
 const ok = (): GateInput => ({
   sentences: ["The report says the crawlspace was dry (page 4). What reading showed that?"],
   contractValid: true, integrityIssues: 0, anchorProblems: 0, sourceIntact: true, entitled: true,
-  pagesTotal: 10, unreadablePages: 0, heldBack: 2, maxHeldBack: 25,
+  pagesTotal: 10, unreadablePages: 0, heldBack: 2, maxHeldBack: 25, suspiciousPages: 0,
 });
 const failed = (g: GateInput) => autoReleaseGates(g).failed.map((x) => x.gate);
 
 describe("autoReleaseGates: fail closed", () => {
+  it("any page with hidden or program-aimed text fails", () => { expect(failed({ ...ok(), suspiciousPages: 1 })).toEqual(["suspicious_content"]); });
   it("passes when every gate passes", () => { expect(autoReleaseGates(ok())).toEqual({ ok: true, failed: [] }); });
   it("accusing or certain wording in any customer sentence fails", () => {
     for (const bad of ["The inspector was negligent.", "This report fails inspection."]) expect(failed({ ...ok(), sentences: [...ok().sentences, bad] }), bad).toContain("wording");

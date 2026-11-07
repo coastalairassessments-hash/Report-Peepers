@@ -102,6 +102,8 @@ export interface Services {
   limits: Limits;
   patterns: PatternList;
   extraction: ExtractionConfig;
+  /** Required. Limits and phrases for hidden text and text aimed at the program. Leaving it out is a compile error, so the scan cannot be forgotten. */
+  suspicious: import("../ingest/suspicious.js").SuspiciousConfig;
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
   ocr?: { port: OcrPort; renderer: PageRenderer };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */

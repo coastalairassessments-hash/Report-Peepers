@@ -17,6 +17,7 @@ import { checkAnchors } from "../ingest/checkAnchors.js";
 import { checkIntegrity } from "../integrity.js";
 import { fingerprint } from "../revision.js";
 import { move, type StepFailure } from "./intake.js";
+import { scanDocument } from "../ingest/suspicious.js";
 import type { CaseRecord, ProcessingIssue, Services } from "./types.js";
 
 export const DOCUMENT_VERSION_ID = "DOC-001-v1";
@@ -72,8 +73,11 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
   try { doc = await extractDocument(bytes); } catch (e) { return fail(svc, rec, "unreadable", e instanceof Error ? e.message : "The file could not be read."); }
   if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer);
 
+  const sus = scanDocument(doc, svc.suspicious);
   const ex = await extractEvidenceFromDocument(svc.model, doc, DOCUMENT_VERSION_ID, svc.extraction, svc.now);
   const found: ProcessingIssue[] = [
+    ...sus.hidden.map((h) => issue(svc, "extraction", "hidden_text", `Text that a reader cannot see (${h.kind === "tiny" ? "too small to read" : "outside the page"}) was found on this page.`, h.page)),
+    ...sus.instruction_like.map((h) => issue(svc, "extraction", "instruction_like_text", `Text on this page reads like an instruction to a program (rule ${h.rule}).`, h.page)),
     ...ex.page_issues.map((p) => issue(svc, "extraction", p.issue, p.detail, p.page)),
     ...ex.held_back.map((h) => issue(svc, "extraction", `held_back_${h.reason}`, `A proposed ${h.kind} (${h.local_id}) was not accepted: ${h.reason.replace(/_/g, " ")}.`, h.page)),
   ];

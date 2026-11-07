@@ -1,3 +1,4 @@
+import { loadSuspiciousConfig } from "../../src/ingest/suspicious.js";
 import { fakeModel, type FakeModel, type ScriptItem } from "../../src/engine/fakeModel.js";
 import { InMemoryCaseRepository, InMemoryFileStore } from "../../src/pipeline/repository.js";
 import { InMemoryRecordStore } from "../../src/analysis/store.js";
@@ -25,7 +26,7 @@ export function makeServices(script: ScriptItem[] = [], over: Partial<Services> 
     model: fakeModel(script), records: new InMemoryRecordStore(),
     now: () => new Date(Date.UTC(2026, 10, 3, 14, ticks.n++)).toISOString(),
     newId: (p) => { const n = (counters.get(p) ?? 0) + 1; counters.set(p, n); return `${p}-${String(n).padStart(3, "0")}`; },
-    limits: loadLimits(), patterns: loadPatterns(), extraction: loadExtractionConfig(), markup: loadMarkupConfig(), pipeline: loadPipelineConfig(),
+    limits: loadLimits(), patterns: loadPatterns(), extraction: loadExtractionConfig(), suspicious: loadSuspiciousConfig(), markup: loadMarkupConfig(), pipeline: loadPipelineConfig(),
     ...over, entitled, ticks,
   } as TestServices;
 }

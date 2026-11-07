@@ -1,0 +1,14 @@
+{
+  "_note": "Limits for hidden text, and phrases that address an AI instead of a reader. Matched on lowercase text with spaces collapsed. Reports name the page and the rule id only, never the words.",
+  "min_height_pt": 2,
+  "off_page_margin": 0.02,
+  "min_chars": 3,
+  "instruction_phrases": [
+    { "id": "ignore_previous", "pattern": "\\b(ignore|disregard|forget)\\s+(all\\s+|any\\s+|the\\s+|your\\s+)?(previous|prior|above|earlier|preceding)\\s+(instructions?|prompts?|rules?|directions?)" },
+    { "id": "role_reassign", "pattern": "\\byou\\s+are\\s+(now\\s+)?(an?\\s+)?(ai|a\\.i\\.|assistant|language\\s+model|chatbot|llm)\\b" },
+    { "id": "system_prompt", "pattern": "\\b(system\\s+prompt|developer\\s+message|new\\s+instructions?\\s*:)" },
+    { "id": "address_the_model", "pattern": "\\b(note\\s+to|message\\s+to|attention)\\s+(the\\s+)?(ai|assistant|model|llm|reviewer\\s+software)\\b" },
+    { "id": "output_directive", "pattern": "\\b(do\\s+not|don'?t|never)\\s+(mention|reveal|flag|report)\\s+(this|any|these)\\b.{0,40}\\b(issues?|problems?|concerns?|findings?|instructions?)" },
+    { "id": "verdict_directive", "pattern": "\\b(rate|mark|score|report|state|say)\\s+(this|the)\\s+report\\s+(as\\s+)?(perfect|excellent|complete|fully\\s+accepted|flawless|without\\s+issues)" }
+  ]
+}

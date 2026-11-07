@@ -31,6 +31,8 @@ export interface GateInput {
   unreadablePages: number;
   heldBack: number;
   maxHeldBack: number;
+  /** Pages flagged for hidden text or text aimed at the program. Any at all sends the case to a person. */
+  suspiciousPages: number;
 }
 export interface GateFailure { gate: string; detail: string }
 export interface GateResult { ok: boolean; failed: GateFailure[] }
@@ -55,6 +57,7 @@ export function autoReleaseGates(i: GateInput): GateResult {
   if (!i.entitled) no("entitlement", "Entitlement was not verified.");
   if (i.pagesTotal <= 0 || i.unreadablePages >= i.pagesTotal) no("readable", "No page of the report could be read.");
   if (i.heldBack > i.maxHeldBack) no("held_back_limit", `${i.heldBack} items were held back, above the limit of ${i.maxHeldBack}.`);
+  if (i.suspiciousPages > 0) no("suspicious_content", `${i.suspiciousPages} page${i.suspiciousPages === 1 ? "" : "s"} hold hidden text or text aimed at the program.`);
   return { ok: failed.length === 0, failed };
 }
 
@@ -129,6 +132,7 @@ export async function releaseAutomatically(svc: Services, caseId: string): Promi
   const gates = autoReleaseGates({
     sentences: sentencesOf(snap, rec), contractValid: validateCaseSnapshot(snap).ok, integrityIssues: checkIntegrity(snap).length, anchorProblems,
     sourceIntact, entitled, pagesTotal: rec.source.page_count, unreadablePages: pagesUnread.size,
+    suspiciousPages: new Set(rec.issues.filter((i) => i.code === "hidden_text" || i.code === "instruction_like_text").map((i) => i.page ?? 0)).size,
     heldBack: rec.issues.filter((i) => i.code.startsWith("held_back_")).length, maxHeldBack: svc.pipeline.auto_release?.max_held_back ?? DEFAULT_MAX_HELD_BACK,
   });
 
