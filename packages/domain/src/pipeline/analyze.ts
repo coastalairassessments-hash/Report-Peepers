@@ -4,6 +4,7 @@ import { buildAreas } from "../inspection/areas.js";
 import { reviewInspection } from "../inspection/reviewItems.js";
 import { checkConsistency } from "../inspection/consistency.js";
 import { checkSelfConsistency } from "../inspection/selfConsistency.js";
+import { checkCrossChecks } from "../inspection/crossChecks.js";
 import { buildEvidenceMap } from "../inspection/evidenceMap.js";
 import { recordsReceived } from "../intake.js";
 import { contextExpectations } from "../context.js";
@@ -113,7 +114,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
     for (const h of rv.held_back) found.push(issue(svc, "inspection_review", `held_back_${h.reason}`, `A proposed ${h.kind} (${h.id}) was not accepted: ${h.reason.replace(/_/g, " ")}.`, h.page));
     const imagePages = new Set(doc.pages.filter((p) => p.quality_flags.includes("read_from_image")).map((p) => p.index));
     inspectionReview = buildInspectionReview({
-      checklist: i.checklist, review: rv, flags: checkConsistency(next, doc, i.consistency, rv.page_issues.length === 0), contradictions: checkSelfConsistency(doc, i.selfConsistency),
+      checklist: i.checklist, review: rv, flags: checkConsistency(next, doc, i.consistency, rv.page_issues.length === 0), contradictions: [...checkSelfConsistency(doc, i.selfConsistency), ...(i.crossChecks ? checkCrossChecks(doc, i.crossChecks, i.selfConsistency) : [])],
       map: buildEvidenceMap(next, i.evidenceMap), recordsReceived: recordsReceived(rec.answers), scope: rec.scope, scopeEffects: i.scopeEffects, contextQuestions: i.expectations && rec.context ? contextExpectations(i.expectations, rec.context, doc.pages.map((p) => p.text).join("\n"), rv.page_issues.length === 0) : [], leadingMax: svc.markup.leading_questions_max, claims: next.claims, imagePages, wording: i.wording,
     });
     for (const h of inspectionReview.held_back) found.push(issue(svc, "inspection_review", "held_back_question", `A question (${h.id}) was held back by the wording rules: ${h.problems.join(", ")}.`));

@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { checkConsistency, loadConsistencyConfig } from "../../src/inspection/consistency.js";
 import { checkSelfConsistency, loadSelfConsistencyConfig } from "../../src/inspection/selfConsistency.js";
+import { checkCrossChecks, loadCrossChecksConfig } from "../../src/inspection/crossChecks.js";
 import { buildEvidenceMap, loadEvidenceMapConfig } from "../../src/inspection/evidenceMap.js";
 import { loadGapWording } from "../../src/inspection/gaps.js";
 import { read } from "../render/helpers.js";
@@ -24,6 +25,8 @@ const SOUND = [page([
 const soundEvidence = [E("E1", "Visible growth was noted on the north wall."), E("E2", "Moisture meter reading of 28 percent on the north wall."), E("E3", "A dry reference reading was taken in the hall."), E("E4", "Air sample taken in the master suite."), E("E5", "Outside control sample result for Cladosporium was 773 spores/m3.")];
 const flagsOnSound = () => checkConsistency({ evidence: soundEvidence, claims: [C("C1", "Remove the drywall on the north wall.", "remediation", ["E1"])] }, null, consistency, true).map((f) => f.check);
 const selfOnSound = async () => { const { doc } = await read(SOUND); return checkSelfConsistency(doc, self).map((c) => c.check); };
+const crossCfg = loadCrossChecksConfig();
+const crossOnSound = async () => { const { doc } = await read(SOUND); return checkCrossChecks(doc, crossCfg, self).map((c) => c.check); };
 const mapOn = (evidenceIds: string[]) => {
   const A = (id: string, name: string) => ({ id, name, kind: id === "AREA-ALL" ? "whole" : "room", condition_status: "unclear_documentation" }) as any;
   const ev = (id: string, statement: string, origin = "report_author") => ({ ...E(id, statement), origin, area_ids: ["R1"] });
@@ -36,6 +39,7 @@ const mapOnSound = () => mapOn(["e1", "e2", "e4"]);
 const QUIET: Record<string, () => string[] | Promise<string[]>> = {};
 for (const id of ["air_without_outdoor_comparison", "enclosed_air_read_as_room_air", "firmer_than_evidence", "health_statement", "number_used_as_standard", "reading_without_dry_standard", "recommendation_without_support", "surface_sample_without_control", "remediation_on_samples_alone", "thermal_without_meter", "treatment_without_removal", "value_under_other_location", "wet_without_reading"]) QUIET[id] = flagsOnSound;
 for (const id of ["dates_disagree", "two_lab_names", "defined_never_used", "time_spans_differ", "result_contradicts_threshold", "baseline_labeled_elevated", "narrative_material_without_reading", "referenced_not_supplied"]) QUIET[id] = selfOnSound;
+for (const id of ["cover_count_vs_sections", "confirmed_vs_needs_lab", "rating_without_reading", "instrument_not_listed", "number_vs_standard", "citation_without_edition"]) QUIET[id] = crossOnSound;
 for (const id of ["recommendation_without_measure_or_sample", "recommendation_on_samples_alone", "cause_without_measure", "conclusion_without_anything_behind_it"]) QUIET[id] = mapOnSound;
 
 describe("every rule has a sample where it must stay quiet", () => {

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "status": "draft - patterns for Cory to tune; matched case-insensitively against the report's own text",
+  "count_claims": [
+    { "name": "samples", "claim": "\\b(\\d{1,3})\\s+(?:air\\s+|surface\\s+|tape\\s+)?samples?\\b", "counted": "^\\s*sample\\s*(?:no\\.?|number|#)?\\s*\\d+\\b" }
+  ],
+  "confirmed": "\\bconfirmed\\b",
+  "needs_lab": "\\b(?:requires?|needs?|pending|awaiting|subject to)\\s+(?:further\\s+)?(?:laboratory|lab)\\s+(?:analysis|confirmation|testing|results?)",
+  "rating_word": "\\b(Not Elevated|Elevated)\\b",
+  "rating_rule": "(?:equal to or in excess of|in excess of|greater than|exceed(?:s|ing)?|above)\\s+(\\d+(?:\\.\\d+)?)\\s*%",
+  "equipment_header": "^\\s*(?:equipment|instruments?|equipment used|instruments used)\\s*:?\\s*$",
+  "instruments": {
+    "thermal camera": "thermal\\s+(?:imaging\\s+)?camera|infrared\\s+camera",
+    "moisture meter": "moisture\\s+meter",
+    "hygrometer": "hygrometer|thermo-?hygrometer",
+    "borescope": "borescope|boroscope"
+  },
+  "instrument_use": "\\b(?:using|with|via|by|measured)\\b",
+  "limit_sentence": "(\\d+(?:\\.\\d+)?)\\s*%[^.\\n]{0,40}?\\b(below|under|less than|within|above|over|exceeds?|greater than)\\b[^.\\n]{0,30}?(\\d+(?:\\.\\d+)?)\\s*%",
+  "standards": ["ANSI/IICRC\\s+S\\d{3}", "IICRC\\s+S\\d{3}", "ASTM\\s+[DE]\\d{3,5}", "AIHA\\s+\\w+", "ACGIH"],
+  "edition_or_section": "\\b(?:19|20)\\d{2}\\b|\\bedition\\b|\\b(?:section|sec\\.)\\s*\\d|§\\s*\\d"
+}

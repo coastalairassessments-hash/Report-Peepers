@@ -2,6 +2,7 @@ import type { OutcomeStore } from "../analysis/weaknessReport.js";
 import type { Checklist } from "../inspection/checklist.js";
 import type { ConsistencyConfig } from "../inspection/consistency.js";
 import type { SelfConsistencyConfig } from "../inspection/selfConsistency.js";
+import type { CrossChecksConfig } from "../inspection/crossChecks.js";
 import type { EvidenceMapConfig } from "../inspection/evidenceMap.js";
 import type { GapWording, InspectionReview } from "../inspection/gaps.js";
 import type { OcrPort, PageRenderer } from "../ingest/ocr.js";
@@ -111,7 +112,7 @@ export interface Services {
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
   ocr?: { port: OcrPort; renderer: PageRenderer };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */
-  inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations; scopeEffects?: ScopeEffects };
+  inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; crossChecks?: CrossChecksConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations; scopeEffects?: ScopeEffects };
   markup: MarkupConfig;
   pipeline: PipelineConfig;
 }

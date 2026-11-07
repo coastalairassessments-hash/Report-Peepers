@@ -25,7 +25,7 @@ export function loadSelfConsistencyConfig(path = resolve(import.meta.dirname, ".
 
 /** A contradiction found inside the report itself. Both sides are quoted word for word, each with its page, so the reviewer can see and verify them. */
 export interface Contradiction {
-  check: "result_contradicts_threshold" | "baseline_labeled_elevated" | "narrative_material_without_reading" | "dates_disagree" | "two_lab_names" | "defined_never_used" | "time_spans_differ" | "referenced_not_supplied";
+  check: "result_contradicts_threshold" | "cover_count_vs_sections" | "confirmed_vs_needs_lab" | "rating_without_reading" | "instrument_not_listed" | "number_vs_standard" | "citation_without_edition" | "baseline_labeled_elevated" | "narrative_material_without_reading" | "dates_disagree" | "two_lab_names" | "defined_never_used" | "time_spans_differ" | "referenced_not_supplied";
   item_topics: string[];
   quotes: { page: number; text: string; role: "report_says" | "but_also_says" }[];
   detail: string;
@@ -33,7 +33,7 @@ export interface Contradiction {
 
 const lineOf = (text: string, index: number): string => { const s = text.lastIndexOf("\n", index) + 1; const e = text.indexOf("\n", index); return text.slice(s, e < 0 ? undefined : e).trim(); };
 /** "Ceiling wallboard" is a ceiling, not a wall. Everything else is matched by the lexicon. */
-const materialsIn = (text: string, c: SelfConsistencyConfig): string[] => { const t = text.replace(/ceiling\s*wall\s*board/gi, "ceiling"); return c.materials.filter(([, re]) => re.test(t)).map(([n]) => n); };
+export const materialsIn = (text: string, c: SelfConsistencyConfig): string[] => { const t = text.replace(/ceiling\s*wall\s*board/gi, "ceiling"); return c.materials.filter(([, re]) => re.test(t)).map(([n]) => n); };
 const norm = (room: string): string => room.replace(/\([^)]*\)/g, " ").replace(/[’']/g, "'").replace(/\s+/g, " ").trim().toUpperCase().replace(/^THE /, "");
 const ROOM_PREFIX = /(?:^|\n)\s*([A-Z][A-Z'’ ]{3,}?)\s*(?:\([^)]*\))?\s+-\s+/g;
 
