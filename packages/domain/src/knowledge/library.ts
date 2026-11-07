@@ -24,7 +24,7 @@ export const PARKED_FAMILIES = ["F10", "F11"];
 export const loadLibrary = (path = resolve(import.meta.dirname, "../../../../data/knowledge/seed_v2.1.json")): Library => JSON.parse(readFileSync(path, "utf8")) as Library;
 
 export const NAMES_STANDARD = /\b(ASTM|IICRC|ANSI|ASHRAE|ACGIH|AIHA|OSHA|NIOSH|EPA|ISO ?\d|S500|S520|S530|D7338)\b|complian|conform(s|ity|ance)\b|meets? (the )?(industry )?standard|industry (guideline|standard)s?/i;
-export const NUMERIC_LIMIT = /\b\d+(?:\.\d+)?\s*(?:%|percent|ppm|spores|hours?|days?|°|µg|ug|mg|pg|rh)\b/i;
+export const NUMERIC_LIMIT = /\b\d+(?:\.\d+)?\s*(?:%|(?:percent|ppm|spores|hours?|days?|µg|ug|mg|pg|rh)\b|°)/i;
 
 /** Every check the library must pass on import and after any edit. */
 export function validateLibrary(lib: Library): Problem[] {

@@ -1,5 +1,6 @@
 import type { Entry } from "./library.js";
 import { PARKED_FAMILIES } from "./library.js";
+import { registered, type ReviewerRegistry } from "./reviewers.js";
 
 export type DecisionKind = "accept" | "revise" | "reject" | "discuss" | "approve";
 export interface Decision {
@@ -17,7 +18,8 @@ export const currentVersion = (base: Entry, edits: Edit[]): string => (edits.len
 export const currentEntry = (base: Entry, edits: Edit[]): Entry => edits.reduce<Entry>((e, ed) => ({ ...e, ...(ed.fields as Partial<Entry>) }), structuredClone(base));
 
 /** Status from the decisions made on the CURRENT version only. Approvals for an older version no longer count. */
-export function statusOf(base: Entry, edits: Edit[], decisions: Decision[]): Status {
+export function statusOf(base: Entry, edits: Edit[], decisions: Decision[], registry?: ReviewerRegistry): Status {
+  if (registry) decisions = registered(registry, decisions);
   if (PARKED_FAMILIES.includes(base.family)) return "parked";
   const ver = currentVersion(base, edits);
   const mine = decisions.filter((d) => d.entry_id === base.id);

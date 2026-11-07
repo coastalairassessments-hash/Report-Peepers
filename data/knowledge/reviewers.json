@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "status": "draft - only people listed here, for the role listed, have their decisions counted. A second licensed reviewer is still needed before any entry can be approved.",
+  "reviewers": [
+    { "name": "Cory", "roles": ["iep", "owner"], "active": true }
+  ]
+}
