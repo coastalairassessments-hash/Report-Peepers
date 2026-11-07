@@ -1,0 +1,57 @@
+{
+  "_note": "DRAFT wording by Claude, for Cory to edit. Nothing here is shown to a client until a gap's status is changed from ai_draft to approved. 'needs' is what the report may need: amendment, attachment, narrower_conclusion, or nothing_further. An answer never changes the report.",
+  "told_text": "You were told this rather than shown it, so a copy of the record would make it stronger.",
+  "gaps": [
+    {
+      "gap_id": "condensation_without_temperatures",
+      "status": "ai_draft",
+      "open": { "needs": "attachment", "text": "This question was not answered. The report's statement about condensation still has no temperatures behind it in the report itself." },
+      "unknown": { "needs": "attachment", "text": "Ask the inspector whether temperatures were recorded, and for a copy of those records if they were." },
+      "choices": {
+        "Yes, and I have those records": { "needs": "attachment", "text": "Ask the inspector to attach those temperature records to the report, so the statement about condensation has its support in writing." },
+        "Yes, but I do not have the records": { "needs": "attachment", "text": "Ask the inspector for the temperature records and to attach them to the report." },
+        "No temperatures were recorded": { "needs": "narrower_conclusion", "text": "With no temperatures recorded, the statement about condensation has no measurements behind it. Ask the inspector to describe it as a possibility, or to add measurements." },
+        "I am not sure": { "needs": "attachment", "text": "Ask the inspector whether temperatures were recorded, and for a copy of those records if they were." }
+      }
+    },
+    {
+      "gap_id": "readings_without_reference",
+      "status": "ai_draft",
+      "open": { "needs": "attachment", "text": "This question was not answered. The report's moisture readings still have no comparison readings in the report itself." },
+      "unknown": { "needs": "attachment", "text": "Ask the inspector whether comparison readings were taken on similar materials, and for a copy if they were." },
+      "choices": {
+        "Yes, comparison readings were taken": { "needs": "attachment", "text": "Ask the inspector to add those comparison readings to the report, with the materials and places they came from." },
+        "No comparison readings were taken": { "needs": "narrower_conclusion", "text": "Without comparison readings, the moisture readings show what was measured, not how it differs from similar dry material. Ask the inspector to word conclusions about them more narrowly, or to add comparison readings." },
+        "I am not sure": { "needs": "attachment", "text": "Ask the inspector whether comparison readings were taken on similar materials, and for a copy if they were." }
+      }
+    },
+    {
+      "gap_id": "excluded_room",
+      "status": "ai_draft",
+      "open": { "needs": "amendment", "text": "This question was not answered. The report still does not explain why this room was left out." },
+      "unknown": { "needs": "amendment", "text": "Ask the inspector why this room was not assessed, and to say so in the report." },
+      "choices": {
+        "It was locked or no key was available": { "needs": "amendment", "text": "The report can state that this room was not assessed because it could not be opened, and that its conclusions do not cover it." },
+        "Stored belongings or furniture blocked it": { "needs": "amendment", "text": "The report can state that this room was not assessed because belongings blocked access, and that its conclusions do not cover it." },
+        "It was unsafe to enter": { "needs": "amendment", "text": "The report can state that this room was not assessed for safety reasons, and that its conclusions do not cover it." },
+        "The client or occupant asked that it be left out": { "needs": "amendment", "text": "The report can record that this room was left out at the request of the client or occupant, and that its conclusions do not cover it." },
+        "Something else": { "needs": "amendment", "text": "Ask the inspector to state in the report why this room was not assessed, and that its conclusions do not cover it." },
+        "I am not sure": { "needs": "amendment", "text": "Ask the inspector why this room was not assessed, and to say so in the report." }
+      }
+    },
+    {
+      "gap_id": "sampling_only",
+      "status": "ai_draft",
+      "open": { "needs": "attachment", "text": "This question was not answered. The report still does not show what was done besides sampling." },
+      "unknown": { "needs": "attachment", "text": "Ask the inspector what was done besides sampling, and for any notes or photographs from it." },
+      "choices": {
+        "A visual walk-through": { "needs": "attachment", "text": "Ask the inspector for the notes or photographs from the walk-through, and to add them to the report." },
+        "Moisture meter readings": { "needs": "attachment", "text": "Ask the inspector to add the moisture meter readings to the report, with where each was taken." },
+        "Thermal imaging": { "needs": "attachment", "text": "Ask the inspector to add the thermal images to the report, with where each was taken." },
+        "Temperature and humidity readings": { "needs": "attachment", "text": "Ask the inspector to add the temperature and humidity readings to the report, with where and when each was taken." },
+        "Nothing else that I know of": { "needs": "narrower_conclusion", "text": "If sampling was the only work done, the report's conclusions reach only as far as the samples show. Ask the inspector to word them that way." },
+        "I am not sure": { "needs": "attachment", "text": "Ask the inspector what was done besides sampling, and for any notes or photographs from it." }
+      }
+    }
+  ]
+}
