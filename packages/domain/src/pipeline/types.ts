@@ -103,6 +103,8 @@ export interface Services {
   patterns: PatternList;
   extraction: ExtractionConfig;
   /** Required. Limits and phrases for hidden text and text aimed at the program. Leaving it out is a compile error, so the scan cannot be forgotten. */
+  /** Optional. When present, files are read in a separate locked-down process (ingest/worker.ts); a failure there is a failure to read, never a fallback to reading in this process. */
+  worker?: import("../ingest/worker.js").ExtractionWorker;
   suspicious: import("../ingest/suspicious.js").SuspiciousConfig;
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
   ocr?: { port: OcrPort; renderer: PageRenderer };

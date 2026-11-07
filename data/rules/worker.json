@@ -1,0 +1,8 @@
+{
+  "_note": "Limits for the isolated reading worker. Anything over a limit is refused, never trimmed.",
+  "timeout_ms": 60000,
+  "max_output_bytes": 50000000,
+  "max_pages": 500,
+  "max_spans_per_page": 20000,
+  "max_text_chars_per_page": 500000
+}

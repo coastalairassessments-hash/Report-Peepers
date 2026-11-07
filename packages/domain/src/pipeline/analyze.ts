@@ -70,7 +70,7 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
   if (sha256Hex(bytes) !== rec.source!.sha256) return fail(svc, rec, "source_changed", "The stored file no longer matches the file that was checked at upload.");
 
   let doc;
-  try { doc = await extractDocument(bytes); } catch (e) { return fail(svc, rec, "unreadable", e instanceof Error ? e.message : "The file could not be read."); }
+  try { doc = svc.worker ? await svc.worker.extract(bytes) : await extractDocument(bytes); } catch (e) { return fail(svc, rec, "unreadable", e instanceof Error ? e.message : "The file could not be read."); }
   if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer);
 
   const sus = scanDocument(doc, svc.suspicious);
