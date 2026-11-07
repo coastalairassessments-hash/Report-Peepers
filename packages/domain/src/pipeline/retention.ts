@@ -32,6 +32,7 @@ export async function purgeExpired(svc: Services, opts: PurgeOptions): Promise<P
     const ref = c.source?.file_ref;
     await svc.repo.purge({ role: "system" }, c.id);
     if (opts.access) await opts.access.revokeCase(c.id);
+    if (svc.interviews) await svc.interviews.delete(c.id);
     result.purged++;
     if (ref && !seen.has(ref)) {
       seen.add(ref);

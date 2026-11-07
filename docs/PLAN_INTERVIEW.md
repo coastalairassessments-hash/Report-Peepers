@@ -1,6 +1,6 @@
 # Plan: the client interview (Bricks 22a-22c)
 
-Status: approved by Cory 2026-11-07. 22a built (gap detectors + rules file). 22b, 22c next.
+Status: approved by Cory 2026-11-07. 22a (gap detectors + rules file) and 22b (question flow, answer store, deleted with the case) built. 22c next. Decided: a skipped question comes back when the client asks; no free text in answers.
 
 Decided by Cory 2026-11-07:
 - We talk only to the client. Never the inspector or an occupant.
