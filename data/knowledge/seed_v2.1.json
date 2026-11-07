@@ -306,9 +306,9 @@
     },
     {
      "id": "IEP-K-001-T2",
-     "type": "negative",
+     "type": "positive",
      "given": "Report scope says 'whole-home visual assessment including attic' but the attic is never mentioned. That is an internal gap; a completeness question is appropriate.",
-     "expect": "No question; suppression reason recorded.",
+     "expect": "Asks one completeness question that quotes the report's own scope line and notes the attic is never mentioned; no suppression.",
      "executed": false
     },
     {
