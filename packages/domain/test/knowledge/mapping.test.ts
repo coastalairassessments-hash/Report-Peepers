@@ -18,5 +18,5 @@ describe("library to checklist mapping", () => {
     for (const r of mapping.rows) expect(r.coverage === "parked").toBe(PARKED_FAMILIES.includes(lib.entries.find((e) => e.id === r.entry)!.family));
   });
   it("covered and partial rows point at something we built", () => { for (const r of mapping.rows.filter((x) => x.coverage === "covered" || x.coverage === "partial")) expect(r.checklist.length > 0 || r.code_rules.length > 0, r.entry).toBe(true); });
-  it("a conflict with a decision of Cory is written down", () => { expect(mapping.rows.find((r) => r.entry === "IEP-K-030")!.note).toMatch(/CONFLICT/); });
+  it("no row still says CONFLICT, and the K-030 decision is written down", () => { expect(mapping.rows.filter((r) => /CONFLICT/.test(r.note))).toEqual([]); expect(mapping.rows.find((r) => r.entry === "IEP-K-030")!.note).toMatch(/Resolved 2026-11-07/); });
 });
