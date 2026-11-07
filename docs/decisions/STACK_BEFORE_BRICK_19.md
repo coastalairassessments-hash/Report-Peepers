@@ -23,3 +23,6 @@ Stay in TypeScript end to end for the MVP.
 
 ## Not decided here
 Payments (deferred), vendor accounts, and package versions.
+
+## Decisions recorded with Cory (2026-11-06)
+1. Hosting and region: Cory delegates the provider to Johnathan. Fixed constraints for Johnathan: US-only data, private storage, no public access to customer files. Johnathan reports his pick back as a written decision record.
