@@ -6,7 +6,7 @@ import type { Actor, CaseRecord, CaseRepository, FileStore } from "./types.js";
 /** States in which a customer may still change their own case. */
 const CUSTOMER_STATES = ["draft", "preflight", "scope_intake", "scope_confirmation", "awaiting_payment"];
 /** Fields only the system or the release step may change. A customer's save must leave them as stored. */
-const SYSTEM_FIELDS = ["created_at", "reviewer_id", "snapshot", "issues", "attempts", "published_fingerprint", "released", "source", "inspection_review", "pack_hash", "pack_shadow"] as const;
+const SYSTEM_FIELDS = ["created_at", "reviewer_id", "snapshot", "issues", "attempts", "published_fingerprint", "released", "source", "inspection_review", "pack_hash", "pack_shadow", "document_kind", "first_look"] as const;
 const REVIEWER_FIELDS = ["answers", "scope", "source", "attempts"] as const;
 /** A reviewer may tick issues off as acknowledged and change nothing else about them. */
 const issuesIgnoringAck = (r: CaseRecord) => r.issues.map((i) => ({ ...i, acknowledged: false }));

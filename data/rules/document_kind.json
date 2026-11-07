@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "status": "draft - marker words for Cory to tune. Matched case-insensitively as whole words or phrases. Counted once each per document.",
+  "lab_markers": ["chain of custody", "chain-of-custody", "analytical results", "laboratory report", "laboratory results", "lab results", "analyst", "spores/m3", "spores/m³", "raw count", "detection limit", "sample receipt", "date received", "date analyzed", "analysis method", "direct microscopic examination"],
+  "inspection_markers": ["scope of work", "scope of assessment", "scope of inspection", "observations", "visual inspection", "visual observations", "moisture readings", "moisture meter", "thermal imaging", "recommendations", "limitations", "conclusions", "site visit", "inspection date", "areas inspected", "findings", "remediation protocol", "protocol"],
+  "min_lab_markers": 2,
+  "max_inspection_markers_for_lab_only": 1,
+  "min_inspection_markers": 3,
+  "unreadable_share_for_unclear": 0.5
+}

@@ -62,6 +62,9 @@ export interface CaseRecord {
   /** Written only by the system. The completeness list, the questions to ask, and the evidence map. */
   inspection_review?: InspectionReview | null;
   /** Written only by the system: the fingerprint of the knowledge pack used (shadow or on), and what shadow mode would have asked. */
+  document_kind?: import("../ingest/documentKind.js").DocumentKind | null;
+  /** The customer's answer to the first-look question and what followed. Written only by the first-look step. */
+  first_look?: { answer: import("../ingest/firstLook.js").Answer; outcome: import("../ingest/firstLook.js").Outcome } | null;
   pack_hash?: string | null;
   pack_shadow?: { hash: string; questions: { id: string; topic: string; text: string }[] } | null;
 }
@@ -117,6 +120,8 @@ export interface Services {
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
   /** The approved knowledge pack and its mode. Missing or off: ignored. A pack that fails its checks is ignored and a case issue is recorded. */
   pack?: Pack; packMode?: PackMode;
+  /** The free first look at upload. Missing: the step is skipped and nothing changes. */
+  firstLook?: { kind: import("../ingest/documentKind.js").DocumentKindConfig; rules: import("../ingest/firstLook.js").FirstLookRules };
   ocr?: { port: OcrPort; renderer: PageRenderer; second?: OcrPort };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */
   inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; crossChecks?: CrossChecksConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations; scopeEffects?: ScopeEffects };

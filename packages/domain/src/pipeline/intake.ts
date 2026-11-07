@@ -1,5 +1,8 @@
 import { transition, type CaseState, type Facts } from "../caseStateMachine.js";
 import { preflight } from "../ingest/preflight.js";
+import { extractDocument } from "../ingest/extract.js";
+import { classifyDocument } from "../ingest/documentKind.js";
+import { messageFor, nextStep, type Answer as FlAnswer, type Outcome } from "../ingest/firstLook.js";
 import { buildScope, confirmScope, nextQuestion, recordScopeConflict, resolveScopeConflict, type Answer, type QuestionDef, type RestrictionKind } from "../intake.js";
 import type { Actor, CaseRecord, ProcessingIssue, Services } from "./types.js";
 
@@ -19,6 +22,26 @@ const asCustomer = (a: Actor) => (a.role === "customer" ? a : null);
  * Accepts an upload. A file that fails the preflight never enters a case and is never stored.
  * Scripts, launch actions, and embedded files are noticed and listed, never run.
  */
+/** May this case be charged and sent on? A file that looks like lab results only, or is unclear, must be asked first; only "continue" proceeds. */
+export function canCharge(svc: Pick<Services, "firstLook">, rec: Pick<CaseRecord, "document_kind" | "first_look">): boolean {
+  if (!svc.firstLook) return true;
+  const kind = rec.document_kind ?? "unclear";
+  return nextStep(kind, rec.first_look?.answer ?? null).outcome === "continue";
+}
+
+export async function answerFirstLookStep(svc: Services, actor: Actor, caseId: string, answer: FlAnswer): Promise<{ ok: true; outcome: Outcome; message: string | null } | StepFailure> {
+  if (!svc.firstLook) return { ok: false, reason: "not_enabled" };
+  if (!["yes", "no", "unsure"].includes(answer)) return { ok: false, reason: "bad_answer" };
+  const rec = await svc.repo.get(actor, caseId);
+  if (!rec) return { ok: false, reason: "not_found" };
+  if (rec.state === "draft" || rec.state === "ready_for_analysis" || rec.state === "analysis") return { ok: false, reason: "wrong_state", detail: rec.state };
+  const step = nextStep(rec.document_kind ?? "unclear", answer);
+  if (!step.outcome) return { ok: false, reason: "not_asked" };
+  rec.first_look = { answer, outcome: step.outcome };
+  await svc.repo.save({ role: "system" }, rec); // the customer proved ownership by reading the case; only the system writes this field
+  return { ok: true, outcome: step.outcome, message: messageFor(svc.firstLook.rules, step.outcome) };
+}
+
 export async function startCase(svc: Services, actor: Actor, file: { name: string; bytes: Uint8Array }): Promise<{ ok: true; case_id: string } | StepFailure> {
   const c = asCustomer(actor);
   if (!c) return { ok: false, reason: "customers_only" };
@@ -31,6 +54,13 @@ export async function startCase(svc: Services, actor: Actor, file: { name: strin
     source: { file_ref, sha256: pf.content_sha256, byte_size: pf.byte_size, page_count: pf.page_count, display_name: file.name },
     snapshot: null, issues, attempts: 0, published_fingerprint: null, released: null,
   };
+  // A free first look: what kind of document is this? Any trouble reading means "unclear", never a guess.
+  if (svc.firstLook) {
+    try {
+      const doc = svc.worker ? await svc.worker.extract(file.bytes) : await extractDocument(file.bytes);
+      rec.document_kind = classifyDocument(doc, svc.firstLook.kind).kind;
+    } catch { rec.document_kind = "unclear"; }
+  }
   await svc.repo.create(actor, rec);
   for (const to of ["preflight", "scope_intake"] as const) {
     const m = move(rec, to);
@@ -95,6 +125,7 @@ export async function verifyEntitlementStep(svc: Services, actor: Actor, caseId:
   const rec = await svc.repo.get(actor, caseId);
   if (!rec) return { ok: false, reason: "not_found" };
   if (rec.state !== "awaiting_payment") return { ok: false, reason: "wrong_state", detail: rec.state };
+  if (!canCharge(svc, rec)) return { ok: false, reason: "first_look_not_cleared" };
   const facts: Facts = {
     entitlementVerified: await svc.entitlement.verified(rec.id, rec.owner_id),
     scopeConfirmedOrConditional: !!rec.scope && ["confirmed", "conditional"].includes(rec.scope.confirmation_status) && !openConflict(rec),

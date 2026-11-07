@@ -77,3 +77,8 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 - IEP-K-001 T2 test case fixed (it now expects one completeness question).
 - Never ask who made a repair or when (A). Guarded by `test/noRepairWhoWhen.test.ts`; the K-030 CONFLICT flag is cleared.
 - A homeowner's answer appears in the review next to its question, labeled as their own (`interviewResult` now returns `question` and `your_answer`). The inspector's report is never changed. Johnathan: client screens must show `your_answer` beside `question`.
+
+## 2026-11-07 First look at upload - built (plan approved by Cory)
+- `ingest/documentKind.ts` + `data/rules/document_kind.json` (draft marker words), `ingest/firstLook.ts` + `data/rules/first_look_messages.json` (3 messages, all `approved:false` until Cory approves), `pipeline/intake.ts`: `startCase` classifies when `svc.firstLook` is set; `answerFirstLookStep`; `canCharge(svc, rec)`; `verifyEntitlementStep` refuses with `first_look_not_cleared`.
+- Johnathan: the payment link must be created only when `canCharge` is true; screens show the question when `document_kind` is `lab_only` or `unclear` and `first_look` is empty, and show the message returned by `answerFirstLookStep`.
+- Still open: what happens to a case held after payment (audit item 2).
