@@ -15,6 +15,19 @@ export function outcomeOf(facts: { release_month: string; service_type: string }
   return { release_month: facts.release_month, service_type: facts.service_type, outcome: gates.ok && ids.length === 0 ? "released" : "needs_attention", failed_gates: ids };
 }
 
+export interface OutcomeStore { save(o: OutcomeRecord): Promise<void>; all(): Promise<readonly OutcomeRecord[]> }
+
+/** Keeps outcome records. Refuses anything but the four allowed fields, so no free text can be stored. */
+export class InMemoryOutcomeStore implements OutcomeStore {
+  private rows: OutcomeRecord[] = [];
+  async save(o: OutcomeRecord): Promise<void> {
+    const keys = Object.keys(o).sort().join(",");
+    if (keys !== "failed_gates,outcome,release_month,service_type" || !MONTH.test(o.release_month) || o.failed_gates.some((g) => !GATE_ID.test(g))) throw new Error("Outcome refused: it holds a field or value that is not allowed.");
+    this.rows.push(structuredClone(o));
+  }
+  async all(): Promise<readonly OutcomeRecord[]> { return structuredClone(this.rows); }
+}
+
 export type WeaknessReport =
   | { suppressed: true; min_group_size: number }
   | {
@@ -24,7 +37,7 @@ export type WeaknessReport =
       items_wording_withheld: number; items_tagged_other: number;
     };
 
-/** One month, one service type. Shows where the software is weak: what stops cases, what the scrub withholds, what fits no flaw pattern. Counts only. */
+/** One month, one service type. Counts automatic runs: a case that is held and later released counts twice. Shows where the software is weak: what stops cases, what the scrub withholds, what fits no flaw pattern. Counts only. */
 export function weaknessReport(outcomes: readonly OutcomeRecord[], records: readonly SummaryRecord[], minGroupSize: number, cut: MonthlyCut): WeaknessReport {
   if (!Number.isInteger(minGroupSize) || minGroupSize < 2) throw new Error("A minimum group size of 2 or more is required.");
   if (!MONTH.test(cut.month)) throw new Error("The month must look like 2026-11 (month only, never a date).");
@@ -46,7 +59,7 @@ export function weaknessReportMarkdown(r: WeaknessReport, month: string, service
   const head = `# Software weakness report: ${month}, ${serviceType}`;
   if (r.suppressed) return `${head}\n\nToo few cases this month to show anything (minimum ${r.min_group_size}).\n`;
   return [
-    head, "", `Cases: ${r.cases}`, `Released: ${r.released}`, `Needs attention: ${r.needs_attention}`, "",
+    head, "", `Automatic runs: ${r.cases}`, `Released: ${r.released}`, `Needs attention: ${r.needs_attention}`, "",
     "## What stopped cases", ...(r.gates.length ? r.gates.map((g) => `- ${g.gate}: ${g.cases === null ? "hidden (few)" : g.cases}`) : ["- none"]), "",
     "## Where the wording or pattern list fell short",
     `- Items whose wording the scrub withheld: ${r.items_wording_withheld}`,

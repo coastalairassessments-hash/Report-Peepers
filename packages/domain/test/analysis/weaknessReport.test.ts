@@ -61,3 +61,45 @@ describe("software weakness report", () => {
     expect(weaknessReportMarkdown({ suppressed: true, min_group_size: 3 }, "2026-11", "x")).toMatch(/too few/i);
   });
 });
+
+import { InMemoryOutcomeStore } from "../../src/analysis/weaknessReport.js";
+import { releaseAutomatically } from "../../src/pipeline/autoRelease.js";
+import { reviewReady } from "../pipeline/slice-fixtures.js";
+import { sys } from "../pipeline/helpers.js";
+
+describe("outcomes recorded by the automatic release step", () => {
+  it("records 'released' with no gates when a case releases", async () => {
+    const outcomes = new InMemoryOutcomeStore();
+    const { svc, id } = await reviewReady();
+    svc.outcomes = outcomes;
+    await releaseAutomatically(svc, id);
+    expect(await outcomes.all()).toEqual([{ release_month: "2026-11", service_type: expect.any(String), outcome: "released", failed_gates: [] }]);
+  });
+
+  it("records 'needs_attention' with gate ids only, and again when the retry releases", async () => {
+    const outcomes = new InMemoryOutcomeStore();
+    const { svc, id } = await reviewReady();
+    svc.outcomes = outcomes;
+    svc.entitled.value = false;
+    await releaseAutomatically(svc, id);
+    svc.entitled.value = true;
+    await releaseAutomatically(svc, id);
+    const all = await outcomes.all();
+    expect(all.map((o) => o.outcome)).toEqual(["needs_attention", "released"]);
+    expect(all[0]!.failed_gates).toEqual(["entitlement"]);
+    expect(JSON.stringify(all)).not.toContain(id);
+    expect(await svc.repo.get(sys, id)).not.toBeNull();
+  });
+
+  it("a failure to save an outcome never blocks the release", async () => {
+    const { svc, id } = await reviewReady();
+    svc.outcomes = { save: async () => { throw new Error("down"); }, all: async () => [] };
+    expect(await releaseAutomatically(svc, id)).toMatchObject({ ok: true });
+  });
+
+  it("nothing is recorded when no outcome store is set", async () => {
+    const { svc, id } = await reviewReady();
+    expect(svc.outcomes).toBeUndefined();
+    expect(await releaseAutomatically(svc, id)).toMatchObject({ ok: true });
+  });
+});

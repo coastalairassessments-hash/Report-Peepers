@@ -11,9 +11,8 @@ export interface PurgeOptions {
 export interface PurgeResult { purged: number; files_deleted: number; files_kept_shared: number }
 
 /**
- * Deletes delivered cases whose retention time has passed: the case content, the released copy, and the uploaded file.
+ * Deletes cases whose retention time has passed: delivered cases 90 days after delivery, never-delivered cases 90 days after they were started (decided with Cory 2026-11-06): the case content, the released copy, and the uploaded file.
  * Files are shared by content hash, so a file goes only when no other live case still points at it.
- * Cases that were never delivered are not touched (the abandoned-case rule is not decided yet).
  * The anonymous summary records are a separate store and are not touched.
  */
 export async function purgeExpired(svc: Services, opts: PurgeOptions): Promise<PurgeResult> {
@@ -22,7 +21,7 @@ export async function purgeExpired(svc: Services, opts: PurgeOptions): Promise<P
   if (Number.isNaN(nowMs)) throw new Error("now must be an ISO date and time.");
   const cases = await svc.repo.list({ role: "system" });
   const expired = cases.filter((c) => {
-    const at = c.released?.delivered_at;
+    const at = c.released?.delivered_at ?? c.created_at;
     return at !== undefined && nowMs - Date.parse(at) >= opts.days * 86_400_000;
   });
   const expiredIds = new Set(expired.map((c) => c.id));

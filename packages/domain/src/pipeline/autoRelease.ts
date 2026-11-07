@@ -3,6 +3,7 @@ import { checkAnchors } from "../ingest/checkAnchors.js";
 import { extractDocument } from "../ingest/extract.js";
 import { ocrDocument } from "../ingest/ocr.js";
 import { checkIntegrity, stripQuoted, wordingProblems } from "../integrity.js";
+import { outcomeOf } from "../analysis/weaknessReport.js";
 import { exportMarkup } from "../render/exportMarkup.js";
 import type { ReviewPages } from "../render/plan.js";
 import { buildSummaryRecord, factsFrom } from "../analysis/record.js";
@@ -106,6 +107,11 @@ export async function releaseAutomatically(svc: Services, caseId: string): Promi
     leading_question_ids: snap.questions.map((q) => q.id).slice(0, svc.markup.leading_questions_max),
   };
 
+  const facts0 = factsFrom(snap);
+  const recordOutcome = async (gates: { ok: boolean; failed: readonly { gate: string }[] }) => {
+    if (!svc.outcomes || !facts0) return;
+    try { await svc.outcomes.save(outcomeOf(facts0, gates)); } catch { /* A failure to count never blocks a release. */ }
+  };
   const entitled = await svc.entitlement.verified(rec.id, rec.owner_id);
   let bytes: Uint8Array | null = null;
   try { bytes = await svc.files.get(rec.source.file_ref); } catch { bytes = null; }
@@ -131,6 +137,7 @@ export async function releaseAutomatically(svc: Services, caseId: string): Promi
     const mk = (g: GateFailure): ProcessingIssue => ({ id: svc.newId("ISS"), stage: "integrity", code: `auto_release_${g.gate}`, detail: g.detail, acknowledged: false });
     rec.issues = [...rec.issues.filter((i) => !i.code.startsWith("auto_release_")), ...failed.map(mk)];
     await svc.repo.save(actor, rec);
+    await recordOutcome({ ok: false, failed });
     return { ok: false as const, reason: "needs_attention", ...(extra ? { detail: extra } : {}), failed_gates: failed };
   };
   if (!gates.ok) return toAttention(gates.failed);
@@ -154,5 +161,6 @@ export async function releaseAutomatically(svc: Services, caseId: string): Promi
   await svc.repo.save(actor, rec);
   let saved = true;
   try { await svc.records.save(built.record); } catch { saved = false; }
+  await recordOutcome({ ok: true, failed: [] });
   return { ok: true, record_saved: saved, excluded_finding_ids: excluded, notices: built.notices.map((n) => ({ finding_id: n.finding_id, kind: n.kind })) };
 }

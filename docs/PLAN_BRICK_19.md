@@ -10,7 +10,7 @@ Access-enforcing case repository (customer isolation, locked releases), file sto
 ## What this brick adds
 **19a. Access by link and code.** A private link token (256-bit random, only its hash is stored) bound to one case and the verified sender address. Opening it asks for a one-time code sent to that address. Rules: link expires (default 14 days), code expires (10 minutes), a code works once, 5 wrong codes lock the link, compare in constant time, a session is read-only and covers only that case's released outputs. Time, randomness and hashing are injected so tests are exact.
 
-**19b. Retention.** Stamp `delivered_at` when a case is released. `purgeExpired` deletes the uploaded file, the released copy and the case content 90 days after delivery, leaving only a tombstone (id, deleted_at). Files are shared by content hash, so a file is deleted only when no live case still points at it. Anonymous summary records are untouched. Undelivered (abandoned) cases are not covered by the decided rule: flagged as an open question, not guessed.
+**19b. Retention.** Stamp `delivered_at` when a case is released. `purgeExpired` deletes the uploaded file, the released copy and the case content 90 days after delivery, leaving only a tombstone (id, deleted_at). Files are shared by content hash, so a file is deleted only when no live case still points at it. Anonymous summary records are untouched. Never-delivered cases are deleted 90 days after they were started (decided and built 2026-11-06).
 
 **19c. Customer view.** A customer sees only released material. Before release, the draft review, issues and inspection review are hidden. Closes the "customers can read unapproved drafts" gap in the code, not only in the screens.
 

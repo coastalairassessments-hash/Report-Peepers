@@ -1,3 +1,4 @@
+import type { OutcomeStore } from "../analysis/weaknessReport.js";
 import type { Checklist } from "../inspection/checklist.js";
 import type { ConsistencyConfig } from "../inspection/consistency.js";
 import type { SelfConsistencyConfig } from "../inspection/selfConsistency.js";
@@ -41,6 +42,8 @@ export interface ReleasedOutputs {
 export interface CaseRecord {
   id: string;
   owner_id: string;
+  /** When the case was started. Only the system sets it. Cases never delivered are deleted this long after (retention). */
+  created_at?: string;
   reviewer_id: string | null;
   state: CaseState;
   answers: Answers;
@@ -92,6 +95,8 @@ export interface Services {
   entitlement: Entitlement;
   model: ModelPort;
   records: RecordStore;
+  /** Optional. When present, each automatic release run saves its outcome (released or needs attention, with gate ids only). */
+  outcomes?: OutcomeStore;
   now: () => string;
   newId: (prefix: string) => string;
   limits: Limits;

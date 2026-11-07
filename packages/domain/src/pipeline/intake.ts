@@ -27,7 +27,7 @@ export async function startCase(svc: Services, actor: Actor, file: { name: strin
   const file_ref = await svc.files.put(file.bytes);
   const issues: ProcessingIssue[] = pf.flags.map((f) => ({ id: svc.newId("ISS"), stage: "upload", code: f, detail: `The file contains ${f.replace("has_", "").replace(/_/g, " ")}. It was noticed and not run.`, acknowledged: false }));
   const rec: CaseRecord = {
-    id: svc.newId("CASE"), owner_id: c.id, reviewer_id: null, state: "draft", answers: {}, scope: null,
+    id: svc.newId("CASE"), owner_id: c.id, created_at: svc.now(), reviewer_id: null, state: "draft", answers: {}, scope: null,
     source: { file_ref, sha256: pf.content_sha256, byte_size: pf.byte_size, page_count: pf.page_count, display_name: file.name },
     snapshot: null, issues, attempts: 0, published_fingerprint: null, released: null,
   };

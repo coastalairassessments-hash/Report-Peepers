@@ -44,11 +44,33 @@ describe("retention: delete 90 days after delivery", () => {
     expect((await purgeExpired(svc, { days: 90, now: after(at, 90) })).purged).toBe(1);
   });
 
-  it("never touches a case that was not delivered", async () => {
+  it("stamps created_at when a case starts, and a customer cannot change it", async () => {
     const { svc, id } = await reviewReady();
-    const r = await purgeExpired(svc, { days: 90, now: after("2026-11-03T00:00:00.000Z", 500) });
-    expect(r.purged).toBe(0);
+    const rec = (await svc.repo.get(sys, id))!;
+    expect(rec.created_at).toMatch(/^2026-11-03T/);
+    const mine = (await svc.repo.get(alice, id))!;
+    await expect(svc.repo.save(alice, { ...mine, created_at: "2020-01-01T00:00:00.000Z" })).rejects.toThrow(/refused/i);
+  });
+
+  it("deletes a case that was never delivered 90 days after it was started, and not before", async () => {
+    const { svc, id } = await reviewReady();
+    const made = (await svc.repo.get(sys, id))!.created_at!;
+    expect((await purgeExpired(svc, { days: 90, now: after(made, 89) })).purged).toBe(0);
     expect(await svc.repo.get(sys, id)).not.toBeNull();
+    const r = await purgeExpired(svc, { days: 90, now: after(made, 91) });
+    expect(r).toEqual({ purged: 1, files_deleted: 1, files_kept_shared: 0 });
+    expect(await svc.repo.get(sys, id)).toBeNull();
+  });
+
+  it("a delivered case is timed from delivery, not from when it was started", async () => {
+    const { svc, id } = await reviewReady();
+    await releaseAutomatically(svc, id);
+    const rec = (await svc.repo.get(sys, id))!;
+    // Pretend it was started long ago but delivered recently.
+    rec.created_at = "2026-01-01T00:00:00.000Z";
+    (svc.repo as any).rows.set(id, structuredClone(rec));
+    expect((await purgeExpired(svc, { days: 90, now: after(rec.released!.delivered_at!, 30) })).purged).toBe(0);
+    expect((await purgeExpired(svc, { days: 90, now: after(rec.released!.delivered_at!, 91) })).purged).toBe(1);
   });
 
   it("keeps a file that another live case still uses", async () => {
@@ -58,6 +80,9 @@ describe("retention: delete 90 days after delivery", () => {
     const ref = (await svc.repo.get(sys, id))!.source!.file_ref;
     expect((await svc.repo.get(sys, other))!.source!.file_ref).toBe(ref);
     const at = (await svc.repo.get(sys, id))!.released!.delivered_at!;
+    // The second customer started their case recently, so it is still live at day 91.
+    const o = (await svc.repo.get(sys, other))!; o.created_at = after(at, 60);
+    (svc.repo as any).rows.set(other, structuredClone(o));
     const r = await purgeExpired(svc, { days: 90, now: after(at, 91) });
     expect(r).toEqual({ purged: 1, files_deleted: 0, files_kept_shared: 1 });
     expect((await svc.files.get(ref)).length).toBeGreaterThan(0);
