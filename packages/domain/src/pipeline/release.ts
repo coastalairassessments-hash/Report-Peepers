@@ -111,7 +111,7 @@ export async function releaseCase(svc: Services, caseId: string, d: ReviewerDeci
   const t = move(rec, "released", { humanApprovalRecorded: true, activeRevisionUnchanged: true, entitlementVerified: entitled, rightsRechecked: sourceIntact, releaseImmutableAligned: true });
   if (!t.ok) return { ok: false, reason: t.reason, ...(t.missing ? { missing: t.missing } : {}) };
 
-  const outputs: ReleasedOutputs = { markup_pdf: out.pdf, text: out.text, hashes: out.hashes, record_id: built.record.record_id };
+  const outputs: ReleasedOutputs = { markup_pdf: out.pdf, text: out.text, hashes: out.hashes, record_id: built.record.record_id, delivered_at: svc.now() };
   rec.snapshot = snap; rec.published_fingerprint = fp; rec.released = outputs;
   rec.issues = rec.issues.map((i) => ({ ...i, acknowledged: true }));
   await svc.repo.save(actor, rec);

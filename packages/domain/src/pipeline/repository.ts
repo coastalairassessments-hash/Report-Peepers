@@ -51,6 +51,11 @@ export class InMemoryCaseRepository implements CaseRepository {
     }
     this.rows.set(next.id, structuredClone(next));
   }
+
+  async purge(actor: Actor, id: string): Promise<void> {
+    if (actor.role !== "system") throw new Error("Access refused: only the system can delete a case.");
+    this.rows.delete(id);
+  }
 }
 
 export class InMemoryFileStore implements FileStore {
@@ -65,4 +70,5 @@ export class InMemoryFileStore implements FileStore {
     if (!b) throw new Error("No such file.");
     return new Uint8Array(b);
   }
+  async delete(ref: string): Promise<void> { this.blobs.delete(ref); }
 }

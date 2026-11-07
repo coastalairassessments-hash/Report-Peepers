@@ -22,7 +22,7 @@ Rules: plan first, no code without Cory's approval, typecheck and tests green be
 | 3d | Brick 18: corrections to OUR own errors only: supersede a release, corrected marked-up copy, change notice. Decision 2026-11-04: no paid or free re-check when an inspector supplies a missing record; the questions are the product | Planned | none |
 | 4 | Reading real reports: tables, photo captions, scans (OCR), hidden-text detection, isolated parsing worker | Planned | Sample reports (input I1) |
 | 5 | Expert rule packs loaded from files | Planned | IH rules (input I2) |
-| 6 | Brick 19+: storage and access: saved cases, customer isolation, locked releases, deletion | Planned | none |
+| 6 | Brick 19: storage and access: link plus code access, 90-day retention purge, customer view | Done vendor-neutral (in-memory adapters, tests); real storage and email adapters wait on Johnathan's hosting pick | hosting and email provider |
 | 7 | Reviewer console, then homeowner screens | Planned | Reviewer process (input I3) |
 | 8 | Payments (credits model, ADR-001) | Deferred by Cory | Fee and terms (input I5) |
 | 9 | Pilot: every release human-approved | Later | Attorney review (L-list), insurer, reviewers |

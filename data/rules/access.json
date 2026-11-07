@@ -1,0 +1,7 @@
+{
+  "_note": "Private-link access (STACK_BEFORE_BRICK_19 decision 2). Proposed defaults for Johnathan's security review: tune here, not in code.",
+  "link_days": 14,
+  "code_minutes": 10,
+  "max_wrong_codes": 5,
+  "session_minutes": 60
+}

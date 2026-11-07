@@ -34,6 +34,8 @@ export interface ReleasedOutputs {
   text: string;
   hashes: { source_sha256: string; view_sha256: string; plan_sha256: string; output_sha256: string };
   record_id: string;
+  /** When the review was delivered. The retention clock starts here (90 days, then deletion). */
+  delivered_at?: string;
 }
 
 export interface CaseRecord {
@@ -61,11 +63,15 @@ export interface CaseRepository {
   get(actor: Actor, id: string): Promise<CaseRecord | null>;
   list(actor: Actor): Promise<CaseRecord[]>;
   save(actor: Actor, record: CaseRecord): Promise<void>;
+  /** System only. Removes the case entirely (retention). */
+  purge(actor: Actor, id: string): Promise<void>;
 }
 
 export interface FileStore {
   put(bytes: Uint8Array): Promise<string>;
   get(ref: string): Promise<Uint8Array>;
+  /** Removes the file for good. Callers check that no live case still uses the reference. */
+  delete(ref: string): Promise<void>;
 }
 
 /** Payment is deferred. This is only the yes/no fact the state machine already expects (ADR-001). */
