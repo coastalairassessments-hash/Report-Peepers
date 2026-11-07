@@ -110,7 +110,7 @@ export interface Services {
   interviews?: import("../interview/flow.js").InterviewStore;
   suspicious: import("../ingest/suspicious.js").SuspiciousConfig;
   /** Optional. When present, pages with little or no text are also read from their images, on our own machine. */
-  ocr?: { port: OcrPort; renderer: PageRenderer };
+  ocr?: { port: OcrPort; renderer: PageRenderer; second?: OcrPort };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */
   inspection?: { checklist: Checklist; consistency: ConsistencyConfig; selfConsistency: SelfConsistencyConfig; crossChecks?: CrossChecksConfig; evidenceMap: EvidenceMapConfig; wording: GapWording; expectations?: Expectations; scopeEffects?: ScopeEffects };
   markup: MarkupConfig;

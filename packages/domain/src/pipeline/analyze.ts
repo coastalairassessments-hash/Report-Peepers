@@ -72,13 +72,14 @@ export async function runAnalysis(svc: Services, caseId: string): Promise<{ ok: 
 
   let doc;
   try { doc = svc.worker ? await svc.worker.extract(bytes) : await extractDocument(bytes); } catch (e) { return fail(svc, rec, "unreadable", e instanceof Error ? e.message : "The file could not be read."); }
-  if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer);
+  if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer, { second: svc.ocr.second });
 
   const sus = scanDocument(doc, svc.suspicious);
   const ex = await extractEvidenceFromDocument(svc.model, doc, DOCUMENT_VERSION_ID, svc.extraction, svc.now);
   const found: ProcessingIssue[] = [
     ...sus.hidden.map((h) => issue(svc, "extraction", "hidden_text", `Text that a reader cannot see (${h.kind === "tiny" ? "too small to read" : "outside the page"}) was found on this page.`, h.page)),
     ...sus.instruction_like.map((h) => issue(svc, "extraction", "instruction_like_text", `Text on this page reads like an instruction to a program (rule ${h.rule}).`, h.page)),
+    ...doc.pages.filter((p) => p.quality_flags.includes("ocr_numbers_unconfirmed")).map((p) => issue(svc, "extraction", "numbers_not_confirmed", "Some numbers on this page, read from an image, were not confirmed by a second reading and were left out. Please check them against the original.", p.index)),
     ...ex.page_issues.map((p) => issue(svc, "extraction", p.issue, p.detail, p.page)),
     ...ex.held_back.map((h) => issue(svc, "extraction", `held_back_${h.reason}`, `A proposed ${h.kind} (${h.local_id}) was not accepted: ${h.reason.replace(/_/g, " ")}.`, h.page)),
   ];

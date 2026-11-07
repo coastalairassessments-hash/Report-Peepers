@@ -51,6 +51,16 @@ describe("runAnalysis", () => {
     expect(rec.issues.some((i) => i.code === "no_text_layer")).toBe(false);
   });
 
+  it("with a second reader that disagrees on a number, the case lists the page and the number is left out", async () => {
+    const svc = makeServices([extraction, j({ evidence: [], claims: [] }), proposal]);
+    const lines = (n: string) => [{ text: "Aspergillus/Penicillium-Like 85 1,267", confidence: 90, box: [0.1, 0.2, 0.9, 0.22] as [number, number, number, number] }, { text: `Chaetomium 9 ${n} Total Spores 97 1,293`, confidence: 90, box: [0.1, 0.3, 0.9, 0.32] as [number, number, number, number] }];
+    svc.ocr = { port: { async recognize() { return lines("120"); } }, second: { async recognize() { return lines("720"); } }, renderer: { async render() { return new Uint8Array([1]); } } };
+    const id = await readyCase(svc, await makePdf([P1, { puts: [] }]));
+    expect(await runAnalysis(svc, id)).toMatchObject({ ok: true });
+    const rec = (await svc.repo.get(sys, id))!;
+    expect(rec.issues.some((i) => i.code === "numbers_not_confirmed" && i.page === 2)).toBe(true);
+  });
+
   it("with the inspection review switched on, the case carries the questions, the covered list and the map, and a customer cannot change them", async () => {
     const svc = makeServices([extraction, proposal, j({ items: [], conditions: [] })]);
     svc.inspection = { checklist: loadChecklist(), consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording() };

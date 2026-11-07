@@ -93,3 +93,34 @@ describe("reading text that sits in images", () => {
     expect(JSON.stringify(doc)).toBe(before);
   });
 });
+
+describe("second reader for numbers read from images", () => {
+  it("keeps a line whose numbers a second read agrees with", async () => {
+    const { bytes, doc } = await read([page(["LAB RESULTS:"])]);
+    const out = await ocrDocument(doc, bytes, portOf([TABLE]), renderer, { second: portOf([TABLE]) });
+    expect(out.pages[0]!.text).toContain("Chaetomium 9 120");
+    expect(out.pages[0]!.quality_flags).not.toContain("ocr_numbers_unconfirmed");
+  });
+  it("drops a line whose numbers the second read does not match, and flags the page", async () => {
+    const { bytes, doc } = await read([page(["LAB RESULTS:"])]);
+    const other = TABLE.map((l) => (l.text.startsWith("Chaetomium") ? { ...l, text: "Chaetomium 9 720" } : l));
+    const out = await ocrDocument(doc, bytes, portOf([TABLE]), renderer, { second: portOf([other]) });
+    const p = out.pages[0]!;
+    expect(p.text).not.toContain("Chaetomium");
+    expect(p.text).toContain("Total Spores 97 1,293");
+    expect(p.quality_flags).toContain("ocr_numbers_unconfirmed");
+  });
+  it("fails closed when the second reader breaks", async () => {
+    const { bytes, doc } = await read([page(["LAB RESULTS:"])]);
+    const broken: OcrPort = { async recognize() { throw new Error("down"); } };
+    const out = await ocrDocument(doc, bytes, portOf([TABLE]), renderer, { second: broken });
+    expect(out.pages[0]!.text).not.toContain("1,267");
+    expect(out.pages[0]!.text).toContain("Spore Types Raw Count Count/m3");
+    expect(out.pages[0]!.quality_flags).toContain("ocr_numbers_unconfirmed");
+  });
+  it("reads as before when no second reader is given", async () => {
+    const { bytes, doc } = await read([page(["LAB RESULTS:"])]);
+    const out = await ocrDocument(doc, bytes, portOf([TABLE]), renderer);
+    expect(out.pages[0]!.text).toContain("Chaetomium 9 120");
+  });
+});

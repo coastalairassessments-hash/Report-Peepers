@@ -17,6 +17,7 @@ export function loadOcrConfig(path = resolve(import.meta.dirname, "../../../../d
 }
 
 const wordsIn = (s: string): number => s.split(/\s+/).filter(Boolean).length;
+const numbersIn = (s: string): string[] => (s.match(/(?<![A-Za-z])\d[\d,]*(?:\.\d+)?/g) ?? []).map((x) => x.replace(/,$/, ""));
 const usable = (l: OcrLine, minConf: number): boolean => l.confidence >= minConf && /[A-Za-z0-9]{2,}/.test(l.text) && l.text.trim().length > 0;
 
 /**
@@ -25,7 +26,7 @@ const usable = (l: OcrLine, minConf: number): boolean => l.confidence >= minConf
  * from an image. Low-confidence reads (a photo of a room, say) are thrown away. A page that has no text and gives nothing readable
  * stays flagged as unreadable, so the review still says so. Returns a new document; the original is untouched.
  */
-export async function ocrDocument(doc: ExtractedDocument, pdf: Uint8Array, port: OcrPort, renderer: PageRenderer, opts: { maxPages?: number; config?: OcrConfig } = {}): Promise<ExtractedDocument> {
+export async function ocrDocument(doc: ExtractedDocument, pdf: Uint8Array, port: OcrPort, renderer: PageRenderer, opts: { maxPages?: number; config?: OcrConfig; second?: OcrPort } = {}): Promise<ExtractedDocument> {
   const cfg = opts.config ?? loadOcrConfig();
   const cap = opts.maxPages ?? cfg.max_pages;
   let used = 0;
@@ -39,9 +40,17 @@ export async function ocrDocument(doc: ExtractedDocument, pdf: Uint8Array, port:
     catch { pages.push({ ...p, quality_flags: [...p.quality_flags, "ocr_failed"] }); continue; }
     const good = lines.filter((l) => usable(l, cfg.min_line_confidence));
     if (good.reduce((n, l) => n + wordsIn(l.text), 0) < cfg.min_accepted_words_per_page) { pages.push(p); continue; }
+    // Numbers are only used when a second, separate read of the same page agrees. A line with a number the second read does not show is left out and the page is flagged.
+    let kept = good, unconfirmed = false;
+    if (opts.second) {
+      let seen: Set<string> | null = null;
+      try { seen = new Set((await opts.second.recognize(await renderer.render(pdf, p.index, cfg.render_dpi))).filter((l) => usable(l, cfg.min_line_confidence)).flatMap((l) => numbersIn(l.text))); } catch { seen = null; }
+      kept = good.filter((l) => { const n = numbersIn(l.text); return n.length === 0 || (seen !== null && n.every((x) => seen.has(x))); });
+      unconfirmed = kept.length < good.length;
+    }
     let text = p.text;
     const spans: Span[] = [...p.spans];
-    for (const l of good) {
+    for (const l of kept) {
       if (text.length > 0) text += "\n";
       const start = text.length;
       text += l.text.trim();
@@ -50,6 +59,7 @@ export async function ocrDocument(doc: ExtractedDocument, pdf: Uint8Array, port:
     }
     const flags = p.quality_flags.filter((f) => f !== "no_text_layer");
     flags.push("read_from_image");
+    if (unconfirmed) flags.push("ocr_numbers_unconfirmed");
     if (good.some((l) => l.confidence < cfg.low_confidence_below)) flags.push("low_ocr_confidence");
     pages.push({ ...p, text, spans, quality_flags: flags });
   }

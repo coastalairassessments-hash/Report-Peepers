@@ -124,7 +124,7 @@ export async function releaseAutomatically(svc: Services, caseId: string): Promi
   if (bytes && sourceIntact) {
     try {
       let doc = svc.worker ? await svc.worker.extract(bytes) : await extractDocument(bytes);
-      if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer);
+      if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer, { second: svc.ocr.second });
       anchorProblems = checkAnchors(snap, { [DOCUMENT_VERSION_ID]: doc }).length;
     } catch { anchorProblems = Number.MAX_SAFE_INTEGER; }
   }

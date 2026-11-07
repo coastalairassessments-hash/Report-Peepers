@@ -28,7 +28,7 @@ export function checkStatements(doc: ExtractedDocument, c: SelfConsistencyConfig
   if (insp && samp && insp.d !== samp.d) out.push({ check: "dates_disagree", item_topics: ["Numbers and units checked"], quotes: [{ page: insp.page, text: insp.text, role: "report_says" }, { page: samp.page, text: samp.text, role: "but_also_says" }], detail: `The inspection date is ${insp.d} and the sampling date is ${samp.d}.` });
 
   // A pointer to an attached lab report when no page in the file looks like one. Silent if any page could not be read.
-  const unread = doc.pages.some((p) => p.quality_flags.some((f) => f === "ocr_failed" || f === "ocr_skipped_page_limit" || f === "low_ocr_confidence"));
+  const unread = doc.pages.some((p) => p.quality_flags.some((f) => f === "ocr_failed" || f === "ocr_skipped_page_limit" || f === "low_ocr_confidence" || f === "ocr_numbers_unconfirmed"));
   if (!unread && c.attachmentRefs.length && !doc.pages.some((p) => c.labMarkers.some((re) => re.test(p.text)))) {
     for (const p of doc.pages) {
       const re = c.attachmentRefs.find((r) => r.test(p.text));

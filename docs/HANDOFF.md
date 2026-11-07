@@ -53,3 +53,8 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 - Phase 0 for the private knowledge vault is design only, in `docs/vault/` and `docs/decisions/ADR-007-PROPOSED-private-knowledge-vault.md`. No vault code exists. Start with `docs/vault/REPOSITORY_AUDIT.md`.
 - Held for Cory before anything changes: (1) the customer wording "common practice"; (2) inspector-answers mode stays parked; (3) rewording the IEP-K-001 T2 test case; (4) the IEP-K-030 mapping conflict; (5) the star symbol (no change proposed); (6) the reviewer list check; plus approval of the vault slice S1-S5.
 - For Johnathan: hosting and email decisions, cutting the reading process off from the network, the build step for the reading worker, security review of access and the worker, real storage adapters. Nothing from the private vault goes in this public repository.
+
+## 2026-11-07 Step 3 (better questions) - done
+- Six new cross-checks in `src/inspection/crossChecks.ts`, rules in `data/rules/cross_checks.json` (draft, Cory tunes), wording in `gap_wording.json`. Plan: `docs/PLAN_STEP3_BETTER_QUESTIONS.md`.
+- Second reader for numbers read from images: `ocrDocument(..., { second })`; `svc.ocr.second` is optional. Johnathan: wire a second, different reader (a different OCR setting or engine) when hosting is chosen. Without it, behavior is unchanged.
+- Page issue `numbers_not_confirmed` appears when a number was left out.
