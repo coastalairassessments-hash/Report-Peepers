@@ -16,6 +16,20 @@ const PROHIBITED = [
 ];
 
 /**
+ * Wording that suggests motive or intent, or attacks quality of effort, about a person or company (spec sections 2 and 13; the expert-witness rule:
+ * never accuse anyone of bad intent). Applies to our own words only. Text inside double quotes is the inspector's and stays exempt.
+ * Plain building terms stay allowed: "hidden moisture", "to avoid disturbing the area", "convenient access".
+ */
+const MOTIVE = [
+  /\bconveniently\b/i, /\b(?:deliberately|intentionally|knowingly|purposely|purposefully|on purpose)\b/i,
+  /\bcover(?:ed|ing|s)?[\s-]up\b/i, /\b(?:to|in order to) (?:hide|conceal|mislead|deceive)\b/i,
+  /\bto avoid (?:detection|disclos\w*|reporting|liability|responsibility|blame|scrutiny)\b/i,
+  /\b(?:mislead(?:ing|s)?|misled|deceiv\w*|deceptive|lied|lying|liar|cheat\w*|bad faith|misrepresent\w*|whitewash\w*|sloppy|careless\w*|lazy|shoddy)\b/i,
+  /\b(?:failed|neglected|refused|chose|decided|omitted) to (?:disclose|report|mention|include|test|check|document)\b/i,
+  /\b(?:motive[sd]?|motivated by|hidden agenda|ulterior)\b/i,
+];
+
+/**
  * Words that claim certainty. An opinion states evidence strength, never certainty (spec 11.3, 13).
  * Text inside double quotes is exempt, so a finding can quote what a report says. Accusation wording is not quote-exempt.
  */
@@ -32,6 +46,7 @@ export function wordingProblems(text: string): string[] {
   const out: string[] = [];
   for (const re of PROHIBITED) if (re.test(text)) out.push(`prohibited:${re.source}`);
   const unquoted = stripQuoted(text);
+  for (const re of MOTIVE) if (re.test(unquoted)) out.push(`motive:${re.source}`);
   for (const re of OVERCERTAIN) if (re.test(unquoted)) out.push(`overcertain:${re.source}`);
   return out;
 }

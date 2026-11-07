@@ -47,3 +47,9 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 
 ## Run it
 `npm install`, `npm run setup:typst` (pinned Typst for the markup), `npm run check` (typecheck, tests, scorecard).
+
+## 2026-11-07 state (read this first)
+- 855 tests, typecheck clean. Built today: Step 2 safe reading (hidden text, instruction-like text, isolated reading process, source-rights rules), client interview (22a-22c, draft notes need Cory's approval), motive-and-intent wording check (P01).
+- Phase 0 for the private knowledge vault is design only, in `docs/vault/` and `docs/decisions/ADR-007-PROPOSED-private-knowledge-vault.md`. No vault code exists. Start with `docs/vault/REPOSITORY_AUDIT.md`.
+- Held for Cory before anything changes: (1) the customer wording "common practice"; (2) inspector-answers mode stays parked; (3) rewording the IEP-K-001 T2 test case; (4) the IEP-K-030 mapping conflict; (5) the star symbol (no change proposed); (6) the reviewer list check; plus approval of the vault slice S1-S5.
+- For Johnathan: hosting and email decisions, cutting the reading process off from the network, the build step for the reading worker, security review of access and the worker, real storage adapters. Nothing from the private vault goes in this public repository.
