@@ -297,7 +297,7 @@
     "CK-068"
    ],
    "code_rules": "",
-   "note": "CONFLICT: Cory's cause-and-repair rule says never ask who repaired it or when. Decide in review."
+   "note": "Resolved 2026-11-07 (Cory): the software never asks who made a repair or when; it asks only whether the repair was seen and whether the area was rechecked. Guarded by test/noRepairWhoWhen.test.ts."
   },
   {
    "entry": "IEP-K-031",
