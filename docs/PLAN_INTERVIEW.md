@@ -1,6 +1,6 @@
 # Plan: the client interview (Bricks 22a-22c)
 
-Status: PROPOSED 2026-11-07. Waiting for Cory's approval. No code until approved.
+Status: approved by Cory 2026-11-07. 22a built (gap detectors + rules file). 22b, 22c next.
 
 Decided by Cory 2026-11-07:
 - We talk only to the client. Never the inspector or an occupant.

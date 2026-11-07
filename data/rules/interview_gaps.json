@@ -1,0 +1,39 @@
+{
+  "_note": "Gaps the client interview can ask about. A gap's question is fixed wording written here, never made up by the AI. Detectors are plain code in interview/gaps.ts; this file picks which ones run and holds the wording and limits.",
+  "max_gaps": 12,
+  "leading_phrases": ["should have", "failed to", "why didn't", "why did not", "obviously", "clearly", "surely", "don't you agree", "isn't it", "wasn't it", "correct?"],
+  "gaps": [
+    {
+      "id": "condensation_without_temperatures",
+      "detector": "condensation_without_temperatures",
+      "params": { "keywords": ["condensation", "condensing"], "quantities": ["air_temperature", "surface_temperature", "dew_point"] },
+      "question": "Were air and surface temperatures recorded during the inspection?",
+      "select": "one",
+      "options": ["Yes, and I have those records", "Yes, but I do not have the records", "No temperatures were recorded", "I am not sure"]
+    },
+    {
+      "id": "readings_without_reference",
+      "detector": "readings_without_reference",
+      "params": { "quantities": ["material_moisture", "comparative_meter_response"] },
+      "question": "Were any readings taken on comparable materials in other places, to compare against?",
+      "select": "one",
+      "options": ["Yes, comparison readings were taken", "No comparison readings were taken", "I am not sure"]
+    },
+    {
+      "id": "excluded_room",
+      "detector": "excluded_room",
+      "params": { "kinds": ["room"] },
+      "question": "What prevented access to {area}?",
+      "select": "one",
+      "options": ["It was locked or no key was available", "Stored belongings or furniture blocked it", "It was unsafe to enter", "The client or occupant asked that it be left out", "Something else", "I am not sure"]
+    },
+    {
+      "id": "sampling_only",
+      "detector": "sampling_only",
+      "params": {},
+      "question": "Besides taking samples, what else was done during the inspection?",
+      "select": "multi",
+      "options": ["A visual walk-through", "Moisture meter readings", "Thermal imaging", "Temperature and humidity readings", "Nothing else that I know of", "I am not sure"]
+    }
+  ]
+}
