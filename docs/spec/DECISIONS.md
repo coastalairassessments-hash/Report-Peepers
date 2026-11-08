@@ -97,3 +97,6 @@ Cory: all five remaining limits (areas, access, samples, methods, equipment_mate
 
 ## E12. New cross-check patterns run now (Cory, 2026-11-07)
 Audit item 7. Cory chose to run the six cross-check patterns (`cross_checks.json`) now and check them on real reports as they come in. No code change. A misfire is fixed by editing the data file. Audit items 1-7 are closed.
+
+## E13. Cory alone approves a library rule (Cory, 2026-11-07)
+Cory chose his approval alone. `statusOf` now returns approved on the owner's approval of the current version; accepts by other reviewers are optional. An edit still makes a new version that needs a fresh approval. A rule still goes live only when approved, all its tests passed, and the knowledge mode is switched on (it is off). The "second reviewer name" question is closed.

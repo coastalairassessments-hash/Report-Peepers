@@ -17,17 +17,17 @@ describe("only registered reviewers count", () => {
     expect(countsFor(reg, d({ reviewer: "Second", role: "owner", decision: "approve" }))).toBe(false);
     expect(countsFor(reg, d({ reviewer: "Cory", role: "owner", decision: "approve" }))).toBe(true);
   });
-  it("two accepts from one registered reviewer count once", () => {
-    expect(statusOf(base, [], [d({}), d({ at: "2026-11-07T13:00:00Z" }), d({ role: "owner", decision: "approve" })], reg)).not.toBe("approved");
+  it("two accepts from one registered reviewer count once, and without the owner are not approved", () => {
+    expect(statusOf(base, [], [d({}), d({ at: "2026-11-07T13:00:00Z" })], reg)).toBe("iep_accepted");
   });
-  it("one IEP accept plus the owner's approval is not approved", () => {
-    expect(statusOf(base, [], [d({}), d({ role: "owner", decision: "approve" })], reg)).toBe("iep_accepted");
+  it("the owner's approval is enough, with or without a second reviewer (E13)", () => {
+    expect(statusOf(base, [], [d({}), d({ role: "owner", decision: "approve" })], reg)).toBe("approved");
   });
   it("two registered accepts plus the owner's approval is approved", () => {
     expect(statusOf(base, [], [d({}), d({ reviewer: "Second" }), d({ role: "owner", decision: "approve" })], reg)).toBe("approved");
   });
-  it("a fake second reviewer cannot complete an approval", () => {
-    expect(statusOf(base, [], [d({}), d({ reviewer: "Made Up" }), d({ role: "owner", decision: "approve" })], reg)).toBe("iep_accepted");
+  it("an owner approval from someone not listed as owner does not count", () => {
+    expect(statusOf(base, [], [d({}), d({ reviewer: "Second", role: "owner", decision: "approve" })], reg)).toBe("iep_accepted");
   });
   it("without a registry the older behavior is unchanged", () => {
     expect(statusOf(base, [], [d({}), d({ reviewer: "Anyone" }), d({ role: "owner", decision: "approve" })])).toBe("approved");
@@ -35,9 +35,9 @@ describe("only registered reviewers count", () => {
 });
 
 describe("the committed registry", () => {
-  it("loads and lists only the owner for now, so nothing can be approved", () => {
+  it("loads and lists the owner, whose approval alone approves an entry (E13)", () => {
     const r = loadReviewers();
     expect(r.reviewers.map((x) => x.name)).toEqual(["Cory"]);
-    expect(statusOf(base, [], [d({}), d({ reviewer: "Second" }), d({ role: "owner", decision: "approve" })], r)).not.toBe("approved");
+    expect(statusOf(base, [], [d({}), d({ reviewer: "Second" }), d({ role: "owner", decision: "approve" })], r)).toBe("approved");
   });
 });

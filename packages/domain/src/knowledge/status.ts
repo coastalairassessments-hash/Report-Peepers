@@ -32,7 +32,8 @@ export function statusOf(base: Entry, edits: Edit[], decisions: Decision[], regi
   };
   const iep = latest("iep"), owner = latest("owner");
   const accepts = new Set(iep.filter((d) => d.decision === "accept").map((d) => d.reviewer));
-  if (accepts.size >= 2 && owner.some((d) => d.decision === "approve")) return "approved";
+  // E13: the owner's approval of the current version is enough. A second reviewer is optional.
+  if (owner.some((d) => d.decision === "approve")) return "approved";
   if (iep.some((d) => d.decision === "reject")) return "rejected";
   if (iep.some((d) => d.decision === "revise")) return "revise";
   if (iep.some((d) => d.decision === "discuss")) return "discussion";

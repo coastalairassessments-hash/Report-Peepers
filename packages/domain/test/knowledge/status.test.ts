@@ -15,13 +15,17 @@ describe("status of an entry", () => {
   });
   it("one accept is iep_accepted", () => { expect(statusOf(base, [], [d({})])).toBe("iep_accepted"); });
   it("the same person accepting twice is still one accept", () => { expect(statusOf(base, [], [d({}), d({ at: "2026-11-05T13:00:00Z" })])).toBe("iep_accepted"); });
-  it("two different people accepting is not yet approved without the owner", () => {
+  it("two different people accepting is still not approved without the owner (E13)", () => {
     expect(statusOf(base, [], [d({}), d({ reviewer: "Second", at: "2026-11-05T13:00:00Z" })])).toBe("iep_accepted");
   });
   it("two different accepts plus the owner's approval is approved", () => {
     expect(statusOf(base, [], [d({}), d({ reviewer: "Second" }), d({ reviewer: "Cory", role: "owner", decision: "approve" })])).toBe("approved");
   });
-  it("the owner's approval alone does not approve", () => { expect(statusOf(base, [], [d({ role: "owner", decision: "approve" })])).not.toBe("approved"); });
+  it("the owner's approval alone approves (E13)", () => { expect(statusOf(base, [], [d({ role: "owner", decision: "approve" })])).toBe("approved"); });
+  it("an approval for an older version does not carry over to an edited one (E13)", () => {
+    const edit = { entry_id: base.id, author: "Cory", at: "2026-11-06T00:00:00Z", note: "x", fields: { title: "New title" } } as Edit;
+    expect(statusOf(base, [edit], [d({ role: "owner", decision: "approve" })])).not.toBe("approved");
+  });
   it("a later revise from the same person replaces their earlier accept", () => {
     expect(statusOf(base, [], [d({}), d({ decision: "revise", at: "2026-11-05T14:00:00Z" })])).toBe("revise");
   });
