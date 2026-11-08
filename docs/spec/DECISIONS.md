@@ -79,3 +79,6 @@ Cory chose: read every page of a long report. Page limits raised from 150 (file 
 
 ## E06. Extra pages are charged (Cory, 2026-11-07)
 Cory: "anything over 150 pages we charge for additional pages." The flat fee covers the first 150 pages; each page past 150 is charged. Amount per page: $0.26 (Cory, 2026-11-07; the $39 flat fee divided by 150 pages). Example: 219 pages = $39 + 69 x $0.26 = $56.94. Page ceiling stays 500 (E05). Not built yet: needs the amount and the quote-at-upload step (customer sees the total before paying). Related to C-series flat-fee decision: this is an exception to be recorded with the attorney list.
+
+## E07. Drafted wording is used as written (Cory, 2026-11-07)
+Audit item 4. Cory chose: use the customer wording as written now and edit it later. First-look messages, the outline, and the interview notes are switched on. Setting a message or the outline to approved:false (or a gap to ai_draft) still switches it off. Attorney review of the outline (E03) and of the first-look messages remains on Cory's list.

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "status": "DRAFT wording for Cory to edit and approve. An outline with approved:false is never produced.",
-  "approved": false,
+  "status": "Wording written by Claude and in use as written (Cory, E07). Set approved:false to switch the outline off.",
+  "approved": true,
   "fee_share": 0.5,
   "title": "What a full inspection report of this kind commonly covers",
   "intro": "This is a general list of topics that reports of this kind commonly cover. It is not about your laboratory report or any other document you have. You are welcome to ask your inspector whether these topics are included in your report.",

@@ -1,10 +1,10 @@
 {
-  "_note": "DRAFT wording by Claude, for Cory to edit. Nothing here is shown to a client until a gap's status is changed from ai_draft to approved. 'needs' is what the report may need: amendment, attachment, narrower_conclusion, or nothing_further. An answer never changes the report.",
+  "_note": "DRAFT wording by Claude, for Cory to edit. Wording is in use as written (Cory, E07); set a gap to ai_draft to switch it off. 'needs' is what the report may need: amendment, attachment, narrower_conclusion, or nothing_further. An answer never changes the report.",
   "told_text": "You were told this rather than shown it, so a copy of the record would make it stronger.",
   "gaps": [
     {
       "gap_id": "condensation_without_temperatures",
-      "status": "ai_draft",
+      "status": "approved",
       "open": { "needs": "attachment", "text": "This question was not answered. The report's statement about condensation still has no temperatures behind it in the report itself." },
       "unknown": { "needs": "attachment", "text": "Ask the inspector whether temperatures were recorded, and for a copy of those records if they were." },
       "choices": {
@@ -16,7 +16,7 @@
     },
     {
       "gap_id": "readings_without_reference",
-      "status": "ai_draft",
+      "status": "approved",
       "open": { "needs": "attachment", "text": "This question was not answered. The report's moisture readings still have no comparison readings in the report itself." },
       "unknown": { "needs": "attachment", "text": "Ask the inspector whether comparison readings were taken on similar materials, and for a copy if they were." },
       "choices": {
@@ -27,7 +27,7 @@
     },
     {
       "gap_id": "excluded_room",
-      "status": "ai_draft",
+      "status": "approved",
       "open": { "needs": "amendment", "text": "This question was not answered. The report still does not explain why this room was left out." },
       "unknown": { "needs": "amendment", "text": "Ask the inspector why this room was not assessed, and to say so in the report." },
       "choices": {
@@ -41,7 +41,7 @@
     },
     {
       "gap_id": "sampling_only",
-      "status": "ai_draft",
+      "status": "approved",
       "open": { "needs": "attachment", "text": "This question was not answered. The report still does not show what was done besides sampling." },
       "unknown": { "needs": "attachment", "text": "Ask the inspector what was done besides sampling, and for any notes or photographs from it." },
       "choices": {

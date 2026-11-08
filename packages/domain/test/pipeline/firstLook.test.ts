@@ -62,8 +62,9 @@ describe("first look at upload", () => {
     expect(rec.document_kind ?? null).toBeNull();
     expect(canCharge(svc, rec)).toBe(true);
   });
-  it("draft messages are never shown, but the case is still not charged", async () => {
-    const svc = makeServices([], { firstLook: { kind: loadDocumentKindConfig(), rules: parseFirstLook(raw) } });
+  it("a message switched off is never shown, but the case is still not charged", async () => {
+    const off = { ...raw, messages: Object.fromEntries(Object.entries(raw.messages).map(([k, m]) => [k, { ...(m as object), approved: false }])) };
+    const svc = makeServices([], { firstLook: { kind: loadDocumentKindConfig(), rules: parseFirstLook(off) } });
     const id = await start(svc, LAB);
     const r = await answerFirstLookStep(svc, alice, id, "yes");
     expect(r).toMatchObject({ ok: true, outcome: "offer_choice", message: null });

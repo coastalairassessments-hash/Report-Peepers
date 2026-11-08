@@ -10,7 +10,10 @@ const checklist = loadChecklist();
 const approved = parseOutlineRules({ ...raw, approved: true });
 
 describe("outline: what a full report commonly covers", () => {
-  it("the committed draft is not approved, so nothing is produced", () => { expect(buildOutline(loadOutlineRules(), checklist)).toBeNull(); });
+  it("the committed wording is in use (E07), and switching it off produces nothing", () => {
+    expect(buildOutline(loadOutlineRules(), checklist)).not.toBeNull();
+    expect(buildOutline({ ...loadOutlineRules(), approved: false }, checklist)).toBeNull();
+  });
   it("once approved it lists the topics that apply to every report, grouped", () => {
     const o = buildOutline(approved, checklist)!;
     expect(o.sections.length).toBeGreaterThan(5);

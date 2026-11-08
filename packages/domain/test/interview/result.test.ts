@@ -89,9 +89,9 @@ describe("the outcomes file is checked when loaded", () => {
       const x = outcomesFor(one); x.gaps[0]!.open.text = bad; expect(() => parse(x), bad).toThrow();
     }
   });
-  it("the real file loads, and every real gap has notes (all still drafts)", () => {
+  it("the real file loads, and every real gap has notes (in use as written, E07)", () => {
     const real = loadInterviewOutcomes(rules);
-    for (const r of rules.gaps) expect(real.gaps.get(r.id)?.status, r.id).toBe("ai_draft");
+    for (const r of rules.gaps) expect(real.gaps.get(r.id)?.status, r.id).toBe("approved");
   });
 });
 

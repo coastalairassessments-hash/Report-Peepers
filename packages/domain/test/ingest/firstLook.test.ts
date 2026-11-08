@@ -30,8 +30,9 @@ describe("first look: what happens next", () => {
 });
 
 describe("first look: the fixed messages", () => {
-  it("draft messages are never shown", () => {
-    for (const o of ["ask_more", "offer_choice", "close_lab_only", "outline_purchase", "unsure"] as const) expect(messageFor(rules, o)).toBeNull();
+  it("a message switched off (approved:false) is never shown", () => {
+    const off = { ...rules, messages: Object.fromEntries(Object.entries(rules.messages).map(([k, m]) => [k, { ...m, approved: false }])) } as typeof rules;
+    for (const o of ["ask_more", "offer_choice", "close_lab_only", "outline_purchase", "unsure"] as const) expect(messageFor(off, o)).toBeNull();
   });
   it("approved messages are shown, and continue has none", () => {
     const a = approvedRules();
