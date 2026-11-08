@@ -33,4 +33,3 @@ Only things that need your hand, judgment or license. Everything else is built.
 20. Plug in a second image reader; 35-day backups.
 
 Then: your final finishing pass, and share with Johnathan.
-- Set the price per page over 150 (E06), then the upload screen shows the total before payment.
