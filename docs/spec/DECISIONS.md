@@ -85,3 +85,6 @@ Audit item 4. Cory chose: use the customer wording as written now and edit it la
 
 ## E08. Automatic-release line stays as written (Cory, 2026-11-07)
 Audit item 5. Cory chose to keep: "No person reviewed this release. It was produced and checked by the program." Attorney review of the line stays on Cory's list.
+
+## E09. A budget limit silences nothing (Cory, 2026-11-07)
+Audit item 6, first rule. `scope_effects.json`: effects.budget is now empty, so every gap is still asked about. Other limits (areas, access, time, samples, methods, equipment_materials) unchanged and still to be walked through.

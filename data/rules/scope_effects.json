@@ -12,7 +12,7 @@
   "samples": ["Why each sample", "Why not the room center", "Control for surface samples", "Outdoor comparison", "Cavity and cabinet samples kept apart", "Real-time instruments", "Dust or ERMI-type samples", "Field blanks", "Reason for no sampling"],
   "methods": ["Hidden areas", "Beyond the visible spot", "Thermal imaging used properly", "Measured, with what", "Real-time instruments", "Method fits the question", "Dust or ERMI-type samples", "Source, path and material"],
   "equipment_materials": ["Measured, with what", "Thermal imaging used properly", "Pump calibration", "Real-time instruments", "Field blanks", "Control for surface samples", "Duration, flow and volume"],
-  "budget": ["Hidden areas", "Hidden conditions follow-up", "Dust or ERMI-type samples", "Thermal imaging used properly", "Reason for no sampling", "Real-time instruments", "Beyond the visible spot"],
+  "budget": [],
   "other": []
  },
  "wording": {
