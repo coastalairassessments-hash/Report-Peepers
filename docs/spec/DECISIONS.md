@@ -82,3 +82,6 @@ Cory: "anything over 150 pages we charge for additional pages." The flat fee cov
 
 ## E07. Drafted wording is used as written (Cory, 2026-11-07)
 Audit item 4. Cory chose: use the customer wording as written now and edit it later. First-look messages, the outline, and the interview notes are switched on. Setting a message or the outline to approved:false (or a gap to ai_draft) still switches it off. Attorney review of the outline (E03) and of the first-look messages remains on Cory's list.
+
+## E08. Automatic-release line stays as written (Cory, 2026-11-07)
+Audit item 5. Cory chose to keep: "No person reviewed this release. It was produced and checked by the program." Attorney review of the line stays on Cory's list.
