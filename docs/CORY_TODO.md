@@ -15,7 +15,8 @@ Only things that need your hand, judgment or license. Everything else is built.
 10. Tune the draft patterns in `data/rules/cross_checks.json` and the question wording in `gap_wording.json`.
 11. Customer wording "common practice": no customer text uses it today. Decide only if you want it added anywhere.
 
-12a. Approve or edit the three first-look messages in `data/rules/first_look_messages.json` and tune `data/rules/document_kind.json`.
+12a. Approve or edit the five first-look messages in `data/rules/first_look_messages.json` and tune `data/rules/document_kind.json`.
+12c. Approve or edit the outline wording in `data/rules/outline.json`; ask your attorney about E03 (half-price outline) before launch.
 12b. Audit items 2 to 7 in `docs/ENGINEER_DEFAULTS_AUDIT.md` (one at a time with Claude).
 
 ## Needs you or a third party

@@ -2,7 +2,8 @@ import { transition, type CaseState, type Facts } from "../caseStateMachine.js";
 import { preflight } from "../ingest/preflight.js";
 import { extractDocument } from "../ingest/extract.js";
 import { classifyDocument } from "../ingest/documentKind.js";
-import { messageFor, nextStep, type Answer as FlAnswer, type Outcome } from "../ingest/firstLook.js";
+import { afterChoice, messageFor, nextStep, type Answer as FlAnswer, type LabOnlyChoice, type Outcome } from "../ingest/firstLook.js";
+import { buildOutline, type Outline } from "../ingest/outline.js";
 import { buildScope, confirmScope, nextQuestion, recordScopeConflict, resolveScopeConflict, type Answer, type QuestionDef, type RestrictionKind } from "../intake.js";
 import type { Actor, CaseRecord, ProcessingIssue, Services } from "./types.js";
 
@@ -40,6 +41,29 @@ export async function answerFirstLookStep(svc: Services, actor: Actor, caseId: s
   rec.first_look = { answer, outcome: step.outcome };
   await svc.repo.save({ role: "system" }, rec); // the customer proved ownership by reading the case; only the system writes this field
   return { ok: true, outcome: step.outcome, message: messageFor(svc.firstLook.rules, step.outcome) };
+}
+
+export async function chooseLabOnlyStep(svc: Services, actor: Actor, caseId: string, choice: LabOnlyChoice): Promise<{ ok: true; outcome: Outcome; message: string | null } | StepFailure> {
+  if (!svc.firstLook) return { ok: false, reason: "not_enabled" };
+  if (choice !== "take_back" && choice !== "buy_outline") return { ok: false, reason: "bad_choice" };
+  const rec = await svc.repo.get(actor, caseId);
+  if (!rec) return { ok: false, reason: "not_found" };
+  if (rec.document_kind !== "lab_only" || rec.first_look?.outcome !== "offer_choice") return { ok: false, reason: "not_offered" };
+  const outcome = afterChoice(choice);
+  rec.first_look = { ...rec.first_look, outcome, choice };
+  await svc.repo.save({ role: "system" }, rec);
+  return { ok: true, outcome, message: messageFor(svc.firstLook.rules, outcome) };
+}
+
+/** The general outline, only for a customer who chose it, only once the outline fee is paid, and only once its wording is approved. */
+export async function deliverOutlineStep(svc: Services, actor: Actor, caseId: string): Promise<{ ok: true; outline: Outline } | StepFailure> {
+  if (!svc.outline) return { ok: false, reason: "not_enabled" };
+  const rec = await svc.repo.get(actor, caseId);
+  if (!rec) return { ok: false, reason: "not_found" };
+  if (rec.first_look?.choice !== "buy_outline") return { ok: false, reason: "not_chosen" };
+  if (!(await svc.outline.paid(rec.id, rec.owner_id))) return { ok: false, reason: "not_paid" };
+  const outline = buildOutline(svc.outline.rules, svc.outline.checklist);
+  return outline ? { ok: true, outline } : { ok: false, reason: "wording_not_approved" };
 }
 
 export async function startCase(svc: Services, actor: Actor, file: { name: string; bytes: Uint8Array }): Promise<{ ok: true; case_id: string } | StepFailure> {

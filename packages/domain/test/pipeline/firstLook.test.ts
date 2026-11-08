@@ -1,10 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { startCase, answerFirstLookStep, canCharge, verifyEntitlementStep, confirmScopeStep } from "../../src/pipeline/intake.js";
+import { startCase, answerFirstLookStep, chooseLabOnlyStep, deliverOutlineStep, canCharge, verifyEntitlementStep, confirmScopeStep } from "../../src/pipeline/intake.js";
 import { makeServices, answerAll, alice, bob, sys } from "./helpers.js";
 import { makePdf } from "../ingest/fixtures.js";
 import { loadDocumentKindConfig } from "../../src/ingest/documentKind.js";
 import { parseFirstLook } from "../../src/ingest/firstLook.js";
 import { readFileSync } from "node:fs";
+import { parseOutlineRules } from "../../src/ingest/outline.js";
+import { loadChecklist } from "../../src/inspection/checklist.js";
 import type { PageSpec } from "../ingest/fixtures.js";
 
 const raw = JSON.parse(readFileSync(new URL("../../../../data/rules/first_look_messages.json", import.meta.url), "utf8"));
@@ -28,11 +30,11 @@ describe("first look at upload", () => {
     expect(rec.document_kind).toBe("lab_only");
     expect(canCharge(svc, rec)).toBe(false);
   });
-  it("'this is all I have' closes it with the approved message and no charge", async () => {
+  it("'this is all I have' offers the choice, and the review cannot be charged", async () => {
     const svc = withLook(); const id = await start(svc, LAB);
     const r = await answerFirstLookStep(svc, alice, id, "yes");
-    expect(r).toMatchObject({ ok: true, outcome: "close_lab_only" });
-    expect((r as { message: string }).message).toMatch(/not been charged/i);
+    expect(r).toMatchObject({ ok: true, outcome: "offer_choice" });
+    expect((r as { message: string }).message).toMatch(/half the review fee/i);
     await answerAll(svc, alice, id);
     await confirmScopeStep(svc, alice, id);
     const v = await verifyEntitlementStep(svc, alice, id);
@@ -64,6 +66,45 @@ describe("first look at upload", () => {
     const svc = makeServices([], { firstLook: { kind: loadDocumentKindConfig(), rules: parseFirstLook(raw) } });
     const id = await start(svc, LAB);
     const r = await answerFirstLookStep(svc, alice, id, "yes");
-    expect(r).toMatchObject({ ok: true, outcome: "close_lab_only", message: null });
+    expect(r).toMatchObject({ ok: true, outcome: "offer_choice", message: null });
+  });
+});
+
+describe("lab-only choice: take it back, or buy the general outline", () => {
+  const oraw = JSON.parse(readFileSync(new URL("../../../../data/rules/outline.json", import.meta.url), "utf8"));
+  const withOutline = (paid: boolean, ok = true) => makeServices([], { firstLook: { kind: loadDocumentKindConfig(), rules: approved }, outline: { rules: parseOutlineRules({ ...oraw, approved: ok }), checklist: loadChecklist(), paid: async () => paid } });
+  const toChoice = async (svc: ReturnType<typeof withOutline>) => { const id = await start(svc as never, LAB); await answerFirstLookStep(svc, alice, id, "yes"); return id; };
+
+  it("taking the file back closes with the approved message and no charge", async () => {
+    const svc = withOutline(false); const id = await toChoice(svc);
+    expect(await chooseLabOnlyStep(svc, alice, id, "take_back")).toMatchObject({ ok: true, outcome: "close_lab_only" });
+    expect(canCharge(svc, (await svc.repo.get(sys, id))!)).toBe(false);
+    expect(await deliverOutlineStep(svc, alice, id)).toMatchObject({ ok: false });
+  });
+  it("buying the outline: nothing is delivered until it is paid, and the review is still never charged", async () => {
+    const svc = withOutline(false); const id = await toChoice(svc);
+    expect(await chooseLabOnlyStep(svc, alice, id, "buy_outline")).toMatchObject({ ok: true, outcome: "outline_purchase" });
+    expect(await deliverOutlineStep(svc, alice, id)).toMatchObject({ ok: false, reason: "not_paid" });
+    expect(canCharge(svc, (await svc.repo.get(sys, id))!)).toBe(false);
+  });
+  it("once paid, the general outline is delivered, and it never mentions the file", async () => {
+    const svc = withOutline(true); const id = await toChoice(svc);
+    await chooseLabOnlyStep(svc, alice, id, "buy_outline");
+    const r = await deliverOutlineStep(svc, alice, id);
+    expect(r.ok).toBe(true);
+    if (r.ok) { expect(r.outline.sections.length).toBeGreaterThan(5); expect(JSON.stringify(r.outline)).not.toMatch(/Aspergillus|85 spores|Smith/); }
+  });
+  it("draft outline wording is never delivered, even when paid", async () => {
+    const svc = withOutline(true, false); const id = await toChoice(svc);
+    await chooseLabOnlyStep(svc, alice, id, "buy_outline");
+    expect(await deliverOutlineStep(svc, alice, id)).toMatchObject({ ok: false, reason: "wording_not_approved" });
+  });
+  it("the choice can only be made after the offer, only by the owner, and only for a lab-only file", async () => {
+    const svc = withOutline(true); const id = await start(svc as never, LAB);
+    expect((await chooseLabOnlyStep(svc, alice, id, "buy_outline")).ok).toBe(false);
+    await answerFirstLookStep(svc, alice, id, "yes");
+    expect((await chooseLabOnlyStep(svc, bob, id, "buy_outline")).ok).toBe(false);
+    const full = await start(svc as never, INSP);
+    expect((await chooseLabOnlyStep(svc, alice, full, "buy_outline")).ok).toBe(false);
   });
 });

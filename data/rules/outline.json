@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "status": "DRAFT wording for Cory to edit and approve. An outline with approved:false is never produced.",
+  "approved": false,
+  "fee_share": 0.5,
+  "title": "What a full inspection report of this kind commonly covers",
+  "intro": "This is a general list of topics that reports of this kind commonly cover. It is not about your laboratory report or any other document you have. You are welcome to ask your inspector whether these topics are included in your report.",
+  "footer": "This list is a starting point for a conversation. Each situation is different, and not every topic applies to every property.",
+  "group_labels": {
+    "scope": "Scope and purpose", "background": "Background and history", "visual": "What was seen", "moisture": "Moisture", "sampling": "Sampling",
+    "lab": "Laboratory results", "interpretation": "How results are explained", "conclusions": "Conclusions", "recommendations": "Recommendations",
+    "limitations": "Limits of the work", "admin": "Report details", "documentation": "Records and photographs", "quality": "Consistency"
+  }
+}

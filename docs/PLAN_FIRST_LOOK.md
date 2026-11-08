@@ -27,3 +27,6 @@ Why: a customer may upload only part of a report, for example a lab results repo
 
 ## Not in this plan
 Charging rules, refunds and held cases after payment. Screens. Any AI step.
+
+## Addendum 2026-11-07: the lab-only choice (approved by Cory, decision E03)
+When a lab-only file is answered "this is all I have", the customer chooses: (1) take the file back, no charge; or (2) pay half the review fee (`fee_share` in `data/rules/outline.json`) for a general outline of what a full report of this kind commonly covers, to ask their inspector about. The outline is built from the checklist items that apply to every report, says nothing about their file, names no standards, and is never produced until its wording is approved. Neither choice starts a review. Steps: `chooseLabOnlyStep`, `deliverOutlineStep` (needs `svc.outline.paid`, the outline payment fact; Johnathan connects the payment).

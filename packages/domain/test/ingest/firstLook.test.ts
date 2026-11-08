@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { loadFirstLook, messageFor, nextStep, parseFirstLook, chargesCustomer } from "../../src/ingest/firstLook.js";
+import { loadFirstLook, messageFor, nextStep, parseFirstLook, chargesCustomer, afterChoice } from "../../src/ingest/firstLook.js";
 import { readFileSync } from "node:fs";
 
 const rules = loadFirstLook();
@@ -16,24 +16,27 @@ describe("first look: what happens next", () => {
     expect(nextStep("lab_only", "no").outcome).toBe("ask_more");
     expect(nextStep("lab_only", "unsure").outcome).toBe("unsure");
   });
-  it("'this is all I have' closes a lab-only file without charge", () => {
-    expect(nextStep("lab_only", "yes").outcome).toBe("close_lab_only");
-    expect(chargesCustomer("close_lab_only")).toBe(false);
+  it("'this is all I have' offers a lab-only file a choice, and neither choice starts a review", () => {
+    expect(nextStep("lab_only", "yes").outcome).toBe("offer_choice");
+    expect(afterChoice("take_back")).toBe("close_lab_only");
+    expect(afterChoice("buy_outline")).toBe("outline_purchase");
+    for (const o of ["offer_choice", "close_lab_only", "outline_purchase"] as const) expect(chargesCustomer(o)).toBe(false);
   });
   it("an unclear file is not turned away because the program was unsure", () => { expect(nextStep("unclear", "yes").outcome).toBe("continue"); });
   it("only 'continue' leads to a charge", () => {
-    for (const o of ["ask_more", "close_lab_only", "unsure"] as const) expect(chargesCustomer(o)).toBe(false);
+    for (const o of ["ask_more", "offer_choice", "close_lab_only", "outline_purchase", "unsure"] as const) expect(chargesCustomer(o)).toBe(false);
     expect(chargesCustomer("continue")).toBe(true);
   });
 });
 
 describe("first look: the fixed messages", () => {
   it("draft messages are never shown", () => {
-    for (const o of ["ask_more", "close_lab_only", "unsure"] as const) expect(messageFor(rules, o)).toBeNull();
+    for (const o of ["ask_more", "offer_choice", "close_lab_only", "outline_purchase", "unsure"] as const) expect(messageFor(rules, o)).toBeNull();
   });
   it("approved messages are shown, and continue has none", () => {
     const a = approvedRules();
     expect(messageFor(a, "close_lab_only")).toMatch(/not been charged/i);
+    expect(messageFor(a, "offer_choice")).toMatch(/half the review fee/i);
     expect(messageFor(a, "continue")).toBeNull();
     expect(messageFor(a, null)).toBeNull();
   });

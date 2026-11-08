@@ -64,7 +64,7 @@ export interface CaseRecord {
   /** Written only by the system: the fingerprint of the knowledge pack used (shadow or on), and what shadow mode would have asked. */
   document_kind?: import("../ingest/documentKind.js").DocumentKind | null;
   /** The customer's answer to the first-look question and what followed. Written only by the first-look step. */
-  first_look?: { answer: import("../ingest/firstLook.js").Answer; outcome: import("../ingest/firstLook.js").Outcome } | null;
+  first_look?: { answer: import("../ingest/firstLook.js").Answer; outcome: import("../ingest/firstLook.js").Outcome; choice?: import("../ingest/firstLook.js").LabOnlyChoice } | null;
   pack_hash?: string | null;
   pack_shadow?: { hash: string; questions: { id: string; topic: string; text: string }[] } | null;
 }
@@ -121,6 +121,8 @@ export interface Services {
   /** The approved knowledge pack and its mode. Missing or off: ignored. A pack that fails its checks is ignored and a case issue is recorded. */
   pack?: Pack; packMode?: PackMode;
   /** The free first look at upload. Missing: the step is skipped and nothing changes. */
+  /** The general outline sold to a lab-only customer. `paid` is the payment fact for the outline fee, separate from the review fee. */
+  outline?: { rules: import("../ingest/outline.js").OutlineRules; checklist: import("../inspection/checklist.js").Checklist; paid(caseId: string, ownerId: string): Promise<boolean> };
   firstLook?: { kind: import("../ingest/documentKind.js").DocumentKindConfig; rules: import("../ingest/firstLook.js").FirstLookRules };
   ocr?: { port: OcrPort; renderer: PageRenderer; second?: OcrPort };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */

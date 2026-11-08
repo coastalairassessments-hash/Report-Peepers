@@ -4,7 +4,9 @@
   "question": { "id": "FL1", "text": "Is this the only part of the report you have?", "why": "This file looks like it may be only one part of a report, such as a laboratory results report.", "options": ["yes", "no", "unsure"] },
   "messages": {
     "ask_more": { "approved": false, "text": "Thank you. Please add the rest of the report, and we will continue from there. Nothing is charged until the full report is here." },
-    "close_lab_only": { "approved": false, "text": "Thank you for sharing this. The file looks like a laboratory results report. Our review is for the full inspection or assessment report, so we are not able to review this file on its own. You have not been charged. If you are able to get the full report, you are welcome to upload it." },
+    "offer_choice": { "approved": false, "text": "Thank you for letting us know. Our review is for the full inspection or assessment report, so we are not able to review this file on its own. You can take your file back with no charge. Or, for half the review fee, we can give you a general outline of what a full inspection report of this kind commonly covers, which you can use to ask your inspector whether those topics are included." },
+    "close_lab_only": { "approved": false, "text": "Thank you for sharing this. You have not been charged. If you are able to get the full inspection or assessment report, you are welcome to upload it." },
+    "outline_purchase": { "approved": false, "text": "Thank you. Your outline will be ready once the half-price fee is received. It is a general list and is not about your file." },
     "unsure": { "approved": false, "text": "That is fine. If you have the full inspection or assessment report, please add it. If this file is all you have, our review is not able to start, and you will not be charged." }
   }
 }
