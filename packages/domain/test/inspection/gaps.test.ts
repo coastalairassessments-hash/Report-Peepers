@@ -139,12 +139,17 @@ describe("limits the client described change what is asked", () => {
     expect(r.questions.some((q) => q.topic === "Dry standard")).toBe(true);
   });
   it("when the report draws conclusions, one scoped question goes to the notes, in the warm voice", () => {
-    const r = buildInspectionReview({ ...base, claims: concluding, scope: lim("time"), scopeEffects: effects, review: review([gap("Hidden areas"), gap("Beyond the visible spot")]) });
+    const r = buildInspectionReview({ ...base, claims: concluding, scope: lim("access"), scopeEffects: effects, review: review([gap("Hidden areas"), gap("Beyond the visible spot")]) });
     const scoped = r.questions.filter((q) => q.kind === "scope");
     expect(scoped).toHaveLength(1);
     expect(scoped[0]).toMatchObject({ placement: "notes", material: false });
-    expect(scoped[0]!.text).toContain("the time limit");
+    expect(scoped[0]!.text).toContain("the access limit");
     expect(wordingProblems(scoped[0]!.text)).toEqual([]);
+  });
+  it("a time limit silences nothing (E10), so its gaps are asked in full and no scoped question is added", () => {
+    const r = buildInspectionReview({ ...base, claims: concluding, scope: lim("time"), scopeEffects: effects, review: review([gap("Hidden areas")]) });
+    expect(r.questions.filter((q) => q.kind === "scope")).toHaveLength(0);
+    expect(r.questions.some((q) => q.topic === "Hidden areas")).toBe(true);
   });
   it("no conclusions, no scoped question", () => {
     const r = buildInspectionReview({ ...base, claims: [], scope: lim("time"), scopeEffects: effects, review: review([gap("Hidden areas")]) });
