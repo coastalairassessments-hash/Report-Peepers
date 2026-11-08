@@ -94,3 +94,6 @@ Cory: "We want to know as much as possible for the sake of the report." `scope_e
 
 ## E11. No limit silences any question (Cory, 2026-11-07)
 Cory: all five remaining limits (areas, access, samples, methods, equipment_materials) silence nothing, same as budget (E09) and time (E10). `scope_effects.json` effects are all empty. The silencing mechanism stays in code, so a later decision can switch an entry on; tests use a sample map (`test/inspection/sampleScopeEffects.ts`). Audit item 6 is closed.
+
+## E12. New cross-check patterns run now (Cory, 2026-11-07)
+Audit item 7. Cory chose to run the six cross-check patterns (`cross_checks.json`) now and check them on real reports as they come in. No code change. A misfire is fixed by editing the data file. Audit items 1-7 are closed.

@@ -33,3 +33,4 @@ Only things that need your hand, judgment or license. Everything else is built.
 20. Plug in a second image reader; 35-day backups.
 
 Then: your final finishing pass, and share with Johnathan.
+- As real reports arrive, check the six cross-check questions (data/rules/cross_checks.json) for wrong or odd questions (E12).
