@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { sampleScopeEffects } from "../inspection/sampleScopeEffects.js";
 import { makePdf, type PageSpec } from "../ingest/fixtures.js";
 import { lines, j } from "./slice-fixtures.js";
 import { makeServices, readyCase, sys } from "./helpers.js";
@@ -100,7 +101,7 @@ describe("client context in the review", () => {
 describe("described limits in the pipeline", () => {
   it("a stated access limit moves a hidden-areas gap to the not-expected list", async () => {
     const svc = makeServices(thinScript);
-    svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), scopeEffects: loadScopeEffects() };
+    svc.inspection = { checklist, consistency: loadConsistencyConfig(), selfConsistency: loadSelfConsistencyConfig(), evidenceMap: loadEvidenceMapConfig(), wording: loadGapWording(), scopeEffects: sampleScopeEffects() };
     const id = await readyCase(svc, await makePdf(THIN));
     const rec0 = (await svc.repo.get(sys, id))!;
     for (const r of rec0.scope!.restrictions) if (r.kind === "access") r.status = "present";

@@ -6,12 +6,12 @@
  },
  "order": ["areas", "access", "time", "samples", "methods", "equipment_materials", "budget", "other"],
  "effects": {
-  "areas": ["Areas included and left out", "Rooms not entered", "What was seen per area", "Areas with nothing found", "Outside of the building", "HVAC looked at", "Hidden areas"],
-  "access": ["Rooms not entered", "Hidden areas", "HVAC looked at", "Outside of the building", "Beyond the visible spot", "Moisture source", "Cavity and cabinet samples kept apart"],
+  "areas": [],
+  "access": [],
   "time": [],
-  "samples": ["Why each sample", "Why not the room center", "Control for surface samples", "Outdoor comparison", "Cavity and cabinet samples kept apart", "Real-time instruments", "Dust or ERMI-type samples", "Field blanks", "Reason for no sampling"],
-  "methods": ["Hidden areas", "Beyond the visible spot", "Thermal imaging used properly", "Measured, with what", "Real-time instruments", "Method fits the question", "Dust or ERMI-type samples", "Source, path and material"],
-  "equipment_materials": ["Measured, with what", "Thermal imaging used properly", "Pump calibration", "Real-time instruments", "Field blanks", "Control for surface samples", "Duration, flow and volume"],
+  "samples": [],
+  "methods": [],
+  "equipment_materials": [],
   "budget": [],
   "other": []
  },

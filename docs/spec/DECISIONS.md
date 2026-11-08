@@ -91,3 +91,6 @@ Audit item 6, first rule. `scope_effects.json`: effects.budget is now empty, so 
 
 ## E10. A time limit silences nothing (Cory, 2026-11-07)
 Cory: "We want to know as much as possible for the sake of the report." `scope_effects.json` effects.time is now empty. Remaining limits (areas, access, samples, methods, equipment_materials) still silence topics; being walked through.
+
+## E11. No limit silences any question (Cory, 2026-11-07)
+Cory: all five remaining limits (areas, access, samples, methods, equipment_materials) silence nothing, same as budget (E09) and time (E10). `scope_effects.json` effects are all empty. The silencing mechanism stays in code, so a later decision can switch an entry on; tests use a sample map (`test/inspection/sampleScopeEffects.ts`). Audit item 6 is closed.

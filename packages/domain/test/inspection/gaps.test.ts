@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { sampleScopeEffects } from "./sampleScopeEffects.js";
 import { buildInspectionReview, loadGapWording, loadScopeEffects } from "../../src/inspection/gaps.js";
 import { loadChecklist } from "../../src/inspection/checklist.js";
 import { wordingProblems } from "../../src/integrity.js";
@@ -112,7 +113,8 @@ describe("gaps become questions in the warm voice", () => {
 });
 
 describe("limits the client described change what is asked", () => {
-  const effects = loadScopeEffects();
+  const effects = sampleScopeEffects();
+  const realEffects = loadScopeEffects();
   const lim = (kind: string, status = "present") => ({ restrictions: [{ kind, status }] });
   const gap = (topic: string) => result(topic, "not_shown");
   const concluding = [{ claim_type: "remediation" }];
@@ -146,8 +148,8 @@ describe("limits the client described change what is asked", () => {
     expect(scoped[0]!.text).toContain("the access limit");
     expect(wordingProblems(scoped[0]!.text)).toEqual([]);
   });
-  it("a time limit silences nothing (E10), so its gaps are asked in full and no scoped question is added", () => {
-    const r = buildInspectionReview({ ...base, claims: concluding, scope: lim("time"), scopeEffects: effects, review: review([gap("Hidden areas")]) });
+  it("no limit in the real file silences anything (E09-E11), so gaps are asked in full and no scoped question is added", () => {
+    const r = buildInspectionReview({ ...base, claims: concluding, scope: lim("time"), scopeEffects: realEffects, review: review([gap("Hidden areas")]) });
     expect(r.questions.filter((q) => q.kind === "scope")).toHaveLength(0);
     expect(r.questions.some((q) => q.topic === "Hidden areas")).toBe(true);
   });
