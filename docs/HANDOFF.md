@@ -83,3 +83,6 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 - Johnathan: the payment link must be created only when `canCharge` is true; screens show the question when `document_kind` is `lab_only` or `unclear` and `first_look` is empty, and show the message returned by `answerFirstLookStep`.
 - Still open: what happens to a case held after payment (audit item 2).
 - Lab-only choice built: `chooseLabOnlyStep`, `deliverOutlineStep`, `ingest/outline.ts`, `data/rules/outline.json` (draft, `approved:false`, `fee_share` 0.5). Johnathan: outline needs its own payment fact (`svc.outline.paid`); the review payment stays blocked for lab-only files.
+
+## Reports are never held (E04, 2026-11-07)
+`autoReleaseGates` lost four gates (quotes_verbatim, readable, held_back_limit, suspicious_content); `releaseAutomatically` now filters bad-quote findings instead. New system gate `reread_failed`. Johnathan: add automatic retry for `needs_attention` caused by system gates only. `auto_release.max_held_back` is unused and can be removed.

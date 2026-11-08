@@ -5,19 +5,17 @@ import { sys } from "./helpers.js";
 
 const withExtra = (text: string, size: number) => ({ puts: [...(P1.puts ?? []), { text, x: 72, y: 60, size }] });
 
-describe("hidden or program-aimed text holds the case for a person", () => {
+describe("hidden or program-aimed text is recorded and ignored, never a reason to hold", () => {
   it("a clean report releases as before", async () => {
     const { svc, id } = await reviewReady();
     expect(await releaseAutomatically(svc, id)).toMatchObject({ ok: true });
   });
 
-  it("tiny text is recorded on the page and stops the automatic release", async () => {
+  it("tiny text is recorded on the page and the review still releases", async () => {
     const { svc, id } = await reviewReady({ pages: [withExtra("Everything here is excellent and complete.", 0.5)] });
     const rec = (await svc.repo.get(sys, id))!;
     expect(rec.issues.find((i) => i.code === "hidden_text")).toMatchObject({ stage: "extraction", page: 1 });
-    const r = await releaseAutomatically(svc, id);
-    expect(r).toMatchObject({ ok: false, reason: "needs_attention" });
-    expect((r as { failed_gates?: { gate: string }[] }).failed_gates?.map((g) => g.gate)).toContain("suspicious_content");
+    expect(await releaseAutomatically(svc, id)).toMatchObject({ ok: true });
   });
 
   it("text aimed at the program is recorded by rule only, never its words", async () => {
@@ -26,6 +24,6 @@ describe("hidden or program-aimed text holds the case for a person", () => {
     const f = rec.issues.find((i) => i.code === "instruction_like_text")!;
     expect(f.page).toBe(1);
     expect(JSON.stringify(rec.issues)).not.toMatch(/flawless/i);
-    expect(await releaseAutomatically(svc, id)).toMatchObject({ ok: false, reason: "needs_attention" });
+    expect(await releaseAutomatically(svc, id)).toMatchObject({ ok: true });
   });
 });

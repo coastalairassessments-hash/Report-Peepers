@@ -60,14 +60,17 @@ describe("releaseAutomatically (ADR-006)", () => {
     expect((await svc.repo.get(sys, id))!.released).toBeNull();
   });
 
-  it("a quote that is not on the page word for word is stopped", async () => {
+  it("a quote that is not on the page word for word drops only what rests on it; the review still releases", async () => {
     const { svc, id } = await reviewReady();
     const rec = (await svc.repo.get(sys, id))!;
+    const badId = rec.snapshot!.evidence[0]!.id;
     rec.snapshot!.evidence[0]!.anchor.exact_text = "words that are not anywhere on the page";
     await svc.repo.save(sys, rec);
     const r = await releaseAutomatically(svc, id);
-    expect((r as any).failed_gates.map((g: any) => g.gate)).toContain("quotes_verbatim");
-    expect((await svc.repo.get(sys, id))!.state).toBe("needs_attention");
+    expect(r).toMatchObject({ ok: true });
+    const after = (await svc.repo.get(sys, id))!;
+    expect(after.state).toBe("released");
+    expect(after.snapshot!.findings.some((f) => [...f.support_evidence_ids, ...f.counter_evidence_ids].includes(badId))).toBe(false);
   });
 
   it("a stored file that no longer matches what was received is stopped", async () => {

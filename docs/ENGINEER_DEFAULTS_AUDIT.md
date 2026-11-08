@@ -26,3 +26,6 @@ Cory's confirmed decisions are C01-C10 (docs/spec/DECISIONS.md) plus ADR-001 to 
 
 ## Switched off or hidden
 17. Knowledge pack mode is `off`. Interview outcome notes are hidden until Cory approves each.
+
+## Update 2026-11-07
+Whole-review hold gates were removed per Cory (E04). Remaining stops are system-integrity only.

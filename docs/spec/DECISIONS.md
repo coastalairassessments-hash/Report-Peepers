@@ -66,3 +66,10 @@ P01 Build as if every released conclusion may be examined by an expert witness: 
 E01 (2026-11-07) Review shows at most 15 questions, at most 5 on the first page; questions past the cap are dropped without a notice. Approved as is.
 E02 (2026-11-07) A free first look at upload (docs/PLAN_FIRST_LOOK.md): the program classifies the file; a lab-only or unclear file is asked "Is this the only part of the report you have?"; a lab-only file where that is all they have closes with a polite fixed message and no charge. Fully automatic, no person per report (ADR-006).
 E03 (2026-11-07) For a lab-only upload where the customer says it is all they have: offer a choice of taking the file back with no charge, or a general outline of what a full report commonly covers at half the review fee. This is an exception to C01's "no upsells" decided by Cory; the attorney should review it before launch.
+
+## E04. Reports are never held (Cory, 2026-11-07)
+Cory: "no fails so no reason to hold reports we review and use insightful questions." / "i never had to hold back reports ever."
+- Content problems are filters, not gates: a quote not found on its page drops only the findings resting on it; unreadable pages are listed as not checked; hidden or instruction-like text is recorded and ignored; the held-back count no longer blocks (config `auto_release.max_held_back` is now unused).
+- A file with no readable page is handled at the first look (no charge), not at release.
+- Still stops, with automatic retry: file altered since receipt, payment not verified, review data corrupt or off-contract, program could not re-read the file, our own text breaking the wording or no-citation rules (a program fault).
+- Code: `packages/domain/src/pipeline/autoRelease.ts`; tests `autoReleaseGates`, `autoRelease`, `suspiciousFlow`.

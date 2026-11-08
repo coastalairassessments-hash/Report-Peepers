@@ -3,13 +3,11 @@ import { autoReleaseGates, type GateInput } from "../../src/pipeline/autoRelease
 
 const ok = (): GateInput => ({
   sentences: ["The report says the crawlspace was dry (page 4). What reading showed that?"],
-  contractValid: true, integrityIssues: 0, anchorProblems: 0, sourceIntact: true, entitled: true,
-  pagesTotal: 10, unreadablePages: 0, heldBack: 2, maxHeldBack: 25, suspiciousPages: 0,
+  contractValid: true, integrityIssues: 0, sourceIntact: true, rereadOk: true, entitled: true,
 });
 const failed = (g: GateInput) => autoReleaseGates(g).failed.map((x) => x.gate);
 
 describe("autoReleaseGates: fail closed", () => {
-  it("any page with hidden or program-aimed text fails", () => { expect(failed({ ...ok(), suspiciousPages: 1 })).toEqual(["suspicious_content"]); });
   it("passes when every gate passes", () => { expect(autoReleaseGates(ok())).toEqual({ ok: true, failed: [] }); });
   it("accusing or certain wording in any customer sentence fails", () => {
     for (const bad of ["The inspector was negligent.", "This report fails inspection."]) expect(failed({ ...ok(), sentences: [...ok().sentences, bad] }), bad).toContain("wording");
@@ -21,23 +19,18 @@ describe("autoReleaseGates: fail closed", () => {
   it("each yes/no gate fails on its own", () => {
     expect(failed({ ...ok(), contractValid: false })).toEqual(["contract_valid"]);
     expect(failed({ ...ok(), integrityIssues: 1 })).toEqual(["integrity"]);
-    expect(failed({ ...ok(), anchorProblems: 1 })).toEqual(["quotes_verbatim"]);
     expect(failed({ ...ok(), sourceIntact: false })).toEqual(["source_intact"]);
     expect(failed({ ...ok(), entitled: false })).toEqual(["entitlement"]);
+    expect(failed({ ...ok(), rereadOk: false })).toEqual(["reread_failed"]);
   });
-  it("a report with no readable page is blocked, one unreadable page is not", () => {
-    expect(failed({ ...ok(), unreadablePages: 10 })).toEqual(["readable"]);
-    expect(failed({ ...ok(), unreadablePages: 1 })).toEqual([]);
-  });
-  it("too many held-back items blocks the release", () => {
-    expect(failed({ ...ok(), heldBack: 26 })).toEqual(["held_back_limit"]);
-    expect(failed({ ...ok(), heldBack: 25 })).toEqual([]);
+  it("content problems are never gates: they are filtered before the gates run", () => {
+    const g = ok() as unknown as Record<string, unknown>;
+    for (const k of ["anchorProblems", "suspiciousPages", "heldBack", "maxHeldBack", "pagesTotal", "unreadablePages"]) expect(k in g, k).toBe(false);
   });
   it("reports every failure, not just the first", () => {
     expect(failed({ ...ok(), entitled: false, sourceIntact: false }).sort()).toEqual(["entitlement", "source_intact"]);
   });
-  it("an empty sentence list or zero pages fails closed", () => {
+  it("an empty sentence list fails closed", () => {
     expect(failed({ ...ok(), sentences: [] })).toContain("nothing_to_release");
-    expect(failed({ ...ok(), pagesTotal: 0 })).toContain("readable");
   });
 });

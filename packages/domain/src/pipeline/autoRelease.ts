@@ -23,23 +23,18 @@ export interface GateInput {
   sentences: string[];
   contractValid: boolean;
   integrityIssues: number;
-  /** Quotes that were not found word for word on their page in the source file. */
-  anchorProblems: number;
   sourceIntact: boolean;
+  /** False when the program itself could not re-read the file to check quotes (a system fault, not a content problem). */
+  rereadOk: boolean;
   entitled: boolean;
-  pagesTotal: number;
-  unreadablePages: number;
-  heldBack: number;
-  maxHeldBack: number;
-  /** Pages flagged for hidden text or text aimed at the program. Any at all sends the case to a person. */
-  suspiciousPages: number;
 }
 export interface GateFailure { gate: string; detail: string }
 export interface GateResult { ok: boolean; failed: GateFailure[] }
 
 /**
- * ADR-006. The checks stand in for the reviewer: every gate must pass or nothing is released.
- * Findings that need a person (departures from a reference) are removed before this runs, not blocked here.
+ * ADR-006 and E04. Only the program's own integrity can stop a release. Content problems (quotes not on the page,
+ * unreadable pages, hidden text, many held-back items) are filtered out item by item before this runs, never gates.
+ * Findings that need a person (departures from a reference) are likewise removed before this runs.
  */
 export function autoReleaseGates(i: GateInput): GateResult {
   const failed: GateFailure[] = [];
@@ -52,19 +47,14 @@ export function autoReleaseGates(i: GateInput): GateResult {
   if (c.length) no("no_citations", `${c.length} sentence${c.length === 1 ? "" : "s"} name a standard or claim compliance`);
   if (!i.contractValid) no("contract_valid", "The snapshot does not match the contract.");
   if (i.integrityIssues > 0) no("integrity", `${i.integrityIssues} integrity issue${i.integrityIssues === 1 ? "" : "s"}`);
-  if (i.anchorProblems > 0) no("quotes_verbatim", `${i.anchorProblems} quote${i.anchorProblems === 1 ? "" : "s"} not found word for word on the page`);
   if (!i.sourceIntact) no("source_intact", "The stored file no longer matches the file received.");
+  if (!i.rereadOk) no("reread_failed", "The program could not re-read the file to check the quotes. It will retry.");
   if (!i.entitled) no("entitlement", "Entitlement was not verified.");
-  if (i.pagesTotal <= 0 || i.unreadablePages >= i.pagesTotal) no("readable", "No page of the report could be read.");
-  if (i.heldBack > i.maxHeldBack) no("held_back_limit", `${i.heldBack} items were held back, above the limit of ${i.maxHeldBack}.`);
-  if (i.suspiciousPages > 0) no("suspicious_content", `${i.suspiciousPages} page${i.suspiciousPages === 1 ? "" : "s"} hold hidden text or text aimed at the program.`);
   return { ok: failed.length === 0, failed };
 }
 
 const AUTO_OVERVIEW = "This is an automated second look at the report you supplied. It lists what the report does well and questions you may want to ask the inspector. It is not an inspection of the building and not an expert opinion.";
 const AUTO_DISCLOSURE = "No person reviewed this release. It was produced and checked by the program.";
-const UNREADABLE = new Set(["no_text_layer", "too_large", "model_error", "invalid_output", "ocr_failed", "ocr_skipped_page_limit"]);
-const DEFAULT_MAX_HELD_BACK = 25;
 
 export type AutoReleaseResult =
   | { ok: true; record_saved: boolean; excluded_finding_ids: string[]; notices: { finding_id: string; kind: string }[] }
@@ -120,20 +110,33 @@ export async function releaseAutomatically(svc: Services, caseId: string): Promi
   try { bytes = await svc.files.get(rec.source.file_ref); } catch { bytes = null; }
   const sourceIntact = bytes !== null && sha256Hex(bytes) === rec.source.sha256;
 
-  let anchorProblems = 0;
+  // E04: a quote that is not on its page costs only the findings that rest on it. The review is still released.
+  let badEvidence = new Set<string>();
+  let rereadOk = true;
   if (bytes && sourceIntact) {
     try {
       let doc = svc.worker ? await svc.worker.extract(bytes) : await extractDocument(bytes);
       if (svc.ocr) doc = await ocrDocument(doc, bytes, svc.ocr.port, svc.ocr.renderer, { second: svc.ocr.second });
-      anchorProblems = checkAnchors(snap, { [DOCUMENT_VERSION_ID]: doc }).length;
-    } catch { anchorProblems = Number.MAX_SAFE_INTEGER; }
+      const bad = checkAnchors(snap, { [DOCUMENT_VERSION_ID]: doc }).filter((x) => x.code === "anchor_text_not_on_page" || x.code === "anchor_document_unread");
+      const claimEv = new Set<string>();
+      for (const x of bad) {
+        const e = /^evidence\[(\d+)\]/.exec(x.path ?? ""); if (e) badEvidence.add(snap.evidence[Number(e[1])]!.id);
+        const c = /^claims\[(\d+)\]/.exec(x.path ?? ""); if (c) claimEv.add(snap.claims[Number(c[1])]!.id);
+      }
+      if (claimEv.size) snap.findings = snap.findings.filter((f) => !f.claim_ids.some((id) => claimEv.has(id)));
+    } catch { rereadOk = false; }
   }
-  const pagesUnread = new Set(rec.issues.filter((i) => UNREADABLE.has(i.code) && i.page !== undefined).map((i) => i.page));
+  if (badEvidence.size) {
+    snap.findings = snap.findings.filter((f) => ![...f.support_evidence_ids, ...f.counter_evidence_ids].some((id) => badEvidence.has(id)));
+    const usedQ2 = new Set(snap.findings.flatMap((f) => f.question_ids));
+    snap.questions = snap.questions.filter((q) => usedQ2.has(q.id));
+    snap.release.attention_finding_ids = snap.release.attention_finding_ids.filter((id) => snap.findings.some((f) => f.id === id));
+    snap.release.supported_finding_ids = snap.release.supported_finding_ids.filter((id) => snap.findings.some((f) => f.id === id));
+    snap.release.leading_question_ids = snap.release.leading_question_ids.filter((id) => snap.questions.some((q) => q.id === id));
+  }
   const gates = autoReleaseGates({
-    sentences: sentencesOf(snap, rec), contractValid: validateCaseSnapshot(snap).ok, integrityIssues: checkIntegrity(snap).length, anchorProblems,
-    sourceIntact, entitled, pagesTotal: rec.source.page_count, unreadablePages: pagesUnread.size,
-    suspiciousPages: new Set(rec.issues.filter((i) => i.code === "hidden_text" || i.code === "instruction_like_text").map((i) => i.page ?? 0)).size,
-    heldBack: rec.issues.filter((i) => i.code.startsWith("held_back_")).length, maxHeldBack: svc.pipeline.auto_release?.max_held_back ?? DEFAULT_MAX_HELD_BACK,
+    sentences: sentencesOf(snap, rec), contractValid: validateCaseSnapshot(snap).ok, integrityIssues: checkIntegrity(snap).length,
+    sourceIntact, entitled, rereadOk,
   });
 
   const toAttention = async (failed: GateFailure[], extra?: string) => {
