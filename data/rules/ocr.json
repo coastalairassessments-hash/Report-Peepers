@@ -4,7 +4,7 @@
   "ocr_when_native_words_below": 40,
   "min_line_confidence": 60,
   "min_accepted_words_per_page": 8,
-  "max_pages": 80,
+  "max_pages": 500,
   "render_dpi": 400,
   "low_confidence_below": 75
 }

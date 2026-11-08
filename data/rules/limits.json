@@ -1,6 +1,6 @@
 {
   "_note": "Proposed targets from spec section 8 and decision D06, pending load tests. Change here, not in code. Preflight shows these to the customer before purchase.",
-  "max_pages": 150,
+  "max_pages": 500,
   "max_documents": 10,
   "max_images": 50,
   "max_bytes_per_document": 26214400,

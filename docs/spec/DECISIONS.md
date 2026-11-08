@@ -73,3 +73,6 @@ Cory: "no fails so no reason to hold reports we review and use insightful questi
 - A file with no readable page is handled at the first look (no charge), not at release.
 - Still stops, with automatic retry: file altered since receipt, payment not verified, review data corrupt or off-contract, program could not re-read the file, our own text breaking the wording or no-citation rules (a program fault).
 - Code: `packages/domain/src/pipeline/autoRelease.ts`; tests `autoReleaseGates`, `autoRelease`, `suspiciousFlow`.
+
+## E05. Read every page (Cory, 2026-11-07)
+Cory chose: read every page of a long report. Page limits raised from 150 (file refused) and 80 (scanned pages read) to 500, the reader's own ceiling (`data/rules/limits.json`, `ocr.json`). The 500 is a safety ceiling, not a product rule: a file over it is refused with a plain message. Johnathan: check reading time and cost on a 300+ page scan.
