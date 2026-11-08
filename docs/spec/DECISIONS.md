@@ -88,3 +88,6 @@ Audit item 5. Cory chose to keep: "No person reviewed this release. It was produ
 
 ## E09. A budget limit silences nothing (Cory, 2026-11-07)
 Audit item 6, first rule. `scope_effects.json`: effects.budget is now empty, so every gap is still asked about. Other limits (areas, access, time, samples, methods, equipment_materials) unchanged and still to be walked through.
+
+## E10. A time limit silences nothing (Cory, 2026-11-07)
+Cory: "We want to know as much as possible for the sake of the report." `scope_effects.json` effects.time is now empty. Remaining limits (areas, access, samples, methods, equipment_materials) still silence topics; being walked through.
