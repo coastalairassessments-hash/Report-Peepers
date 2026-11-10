@@ -106,3 +106,6 @@ Cory: "Looky Lou is the name." The character is Lou, the friendly man with glass
 
 ## E15. Red-marker rules for the site and marked-up report (Cory, 2026-11-10)
 Cory: the red marks are how someone would review a report. Allowed marks: circles, underlines, question notes in the margin, and stars for what the report does well. Not used: X marks and check marks. A star marks one passage the report did well (it matches the "done well" list). Stars are never counted, totalled or shown as a rating, because the product gives no score (C01-C02).
+
+## E16. Spelling: Looky Lou (Cory, 2026-11-10)
+Cory chose the spelling "Looky Lou" (the most common way people spell it), subject to the trademark attorney's clearance search. Lookey Lou and Lookee Lou stay as fallbacks. The GitHub repo is to be renamed Looky-Lou by Cory (settings changes are not allowed from this session).
