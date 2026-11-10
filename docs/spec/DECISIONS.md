@@ -103,3 +103,6 @@ Cory chose his approval alone. `statusOf` now returns approved on the owner's ap
 
 ## E14. Customer-facing name: Looky Lou (Cory, 2026-11-10)
 Cory: "Looky Lou is the name." The character is Lou, the friendly man with glasses and a red marker; look is 1950s, friendly. "Report Peepers" stays only as the internal project and repo name (no code rename). Subject to the attorney's trademark and domain search ("Looky Loo" is a common phrase; "looky-loo" can also mean a nosy onlooker). Site copy uses "look" and not "review" (the product gives no verdict). Red-marker rule (circles, underlines, question notes only; no X or check marks) proposed, not yet decided.
+
+## E15. Red-marker rules for the site and marked-up report (Cory, 2026-11-10)
+Cory: the red marks are how someone would review a report. Allowed marks: circles, underlines, question notes in the margin, and stars for what the report does well. Not used: X marks and check marks. A star marks one passage the report did well (it matches the "done well" list). Stars are never counted, totalled or shown as a rating, because the product gives no score (C01-C02).
