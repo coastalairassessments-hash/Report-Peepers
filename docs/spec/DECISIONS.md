@@ -100,3 +100,6 @@ Audit item 7. Cory chose to run the six cross-check patterns (`cross_checks.json
 
 ## E13. Cory alone approves a library rule (Cory, 2026-11-07)
 Cory chose his approval alone. `statusOf` now returns approved on the owner's approval of the current version; accepts by other reviewers are optional. An edit still makes a new version that needs a fresh approval. A rule still goes live only when approved, all its tests passed, and the knowledge mode is switched on (it is off). The "second reviewer name" question is closed.
+
+## E14. Customer-facing name: Looky Lou (Cory, 2026-11-10)
+Cory: "Looky Lou is the name." The character is Lou, the friendly man with glasses and a red marker; look is 1950s, friendly. "Report Peepers" stays only as the internal project and repo name (no code rename). Subject to the attorney's trademark and domain search ("Looky Loo" is a common phrase; "looky-loo" can also mean a nosy onlooker). Site copy uses "look" and not "review" (the product gives no verdict). Red-marker rule (circles, underlines, question notes only; no X or check marks) proposed, not yet decided.
