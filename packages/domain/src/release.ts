@@ -23,7 +23,7 @@ export interface ApprovedView {
   };
 }
 
-const METHOD_STATEMENT = "Document review within the supplied evidence. This is not an inspection of the building and not an expert opinion.";
+const METHOD_STATEMENT = "This is a document review by software, based only on the files and answers you provided. It is not an inspection of the building, and it is not an expert, legal, insurance or medical opinion. It does not say whether a building is safe or whether anyone's work was proper. Questions are suggestions for a conversation. Where words came from an image, please check them against your original. Customary practice, not any specific published standard, is the reference. This marked-up copy is for your own use in talking with the report's author or your advisers.";
 
 /** The single approved result. The screen, PDF, and text export must all come from this and nothing else. */
 export function buildApprovedView(s: Snap): ApprovedView {

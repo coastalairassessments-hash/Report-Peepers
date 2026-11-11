@@ -20,7 +20,7 @@ describe("approved view and export", () => {
 
   it("the text states this is a document review, not an inspection or expert opinion", () => {
     const t = renderText(buildApprovedView(published()));
-    expect(t).toContain("not an inspection of the building and not an expert opinion");
+    expect(t).toContain("It is not an inspection of the building, and it is not an expert, legal, insurance or medical opinion");
   });
 
   it("the document-review statement is in every export of a published release", () => {
@@ -28,7 +28,7 @@ describe("approved view and export", () => {
       const s = published(); edit(s);
       const ex = exportRelease(s, fingerprint(s));
       expect(ex.ok).toBe(true);
-      expect(ex.ok && ex.text).toContain("not an inspection of the building and not an expert opinion");
+      expect(ex.ok && ex.text).toContain("It is not an inspection of the building, and it is not an expert, legal, insurance or medical opinion");
     }
   });
 

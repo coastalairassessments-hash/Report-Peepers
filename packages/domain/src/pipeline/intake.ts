@@ -66,9 +66,15 @@ export async function deliverOutlineStep(svc: Services, actor: Actor, caseId: st
   return outline ? { ok: true, outline } : { ok: false, reason: "wording_not_approved" };
 }
 
-export async function startCase(svc: Services, actor: Actor, file: { name: string; bytes: Uint8Array }): Promise<{ ok: true; case_id: string } | StepFailure> {
+export async function startCase(svc: Services, actor: Actor, file: { name: string; bytes: Uint8Array; acknowledged?: string[] }): Promise<{ ok: true; case_id: string } | StepFailure> {
   const c = asCustomer(actor);
   if (!c) return { ok: false, reason: "customers_only" };
+  // E17: every acknowledgment must be accepted before anything is stored.
+  if (svc.acknowledgments) {
+    const have = new Set(file.acknowledged ?? []);
+    const missing = svc.acknowledgments.items.map((i) => i.id).filter((id) => !have.has(id));
+    if (missing.length) return { ok: false, reason: "acknowledgments_required", missing };
+  }
   const pf = await preflight(file.bytes, file.name, svc.limits);
   if (!pf.ok) return { ok: false, reason: `file_${pf.reason}` };
   const file_ref = await svc.files.put(file.bytes);
@@ -77,6 +83,7 @@ export async function startCase(svc: Services, actor: Actor, file: { name: strin
     id: svc.newId("CASE"), owner_id: c.id, created_at: svc.now(), reviewer_id: null, state: "draft", answers: {}, scope: null,
     source: { file_ref, sha256: pf.content_sha256, byte_size: pf.byte_size, page_count: pf.page_count, display_name: file.name },
     snapshot: null, issues, attempts: 0, published_fingerprint: null, released: null,
+    ...(svc.acknowledgments ? { acknowledged: { version: svc.acknowledgments.version, ids: svc.acknowledgments.items.map((i) => i.id), at: svc.now() } } : {}),
   };
   // A free first look: what kind of document is this? Any trouble reading means "unclear", never a guess.
   if (svc.firstLook) {

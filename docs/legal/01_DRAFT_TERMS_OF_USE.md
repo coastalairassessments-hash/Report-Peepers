@@ -1,7 +1,7 @@
-# Report Peepers Terms of Use (DRAFT for attorney)
+# Looky Lou Terms of Use (DRAFT for attorney; working name, pending trademark clearance)
 [ATTORNEY: rewrite as needed. Entity name, governing law, venue, arbitration, consumer-law carve-outs, and effective date are open.]
 
-1. Who we are. Report Peepers is operated by [entity]. It is an independent document-review service. [ATTORNEY: confirm "independent" wording given the IndoorIQ relationship; add disclosure.]
+1. Who we are. Looky Lou is operated by [entity]. It is a document-review service. [ATTORNEY: confirm "independent" wording given the IndoorIQ relationship; add disclosure.]
 
 2. What the service is. You upload a mold or moisture inspection report and background information. Our software reviews the document and returns a marked-up copy and a list of questions you may wish to ask the report's author. The review covers what the document says and how it supports its own statements. It is based only on the files and answers you give us.
 
@@ -13,13 +13,13 @@
 
 6. Your content and your rights. You confirm that you received the report lawfully, that you may upload it for this purpose, and that doing so does not breach a confidentiality term you agreed to. [ATTORNEY: report copyright and inspection-contract terms.] You give us a limited license to read, copy, mark up and process the files only to deliver your review, to keep it for the retention period in our Privacy and Retention Notice, and to make the anonymous counts described there.
 
-7. The marked-up copy. It is your copy for your own use in understanding your report and talking with the report's author or your advisers. [ATTORNEY: redistribution and use in disputes.] It is not an expert report.
+7. The marked-up copy. It is your copy for your own use in understanding your report and talking with the report's author or your advisers. It is not an expert report. Its marks and notes are questions, and a question is not a statement that anything is wrong. You agree not to post or publish the marked-up copy or its questions (for example on review sites or social media), not to present it as an inspection, an expert report, or a finding about anyone's work, and not to use our name to say that a person or company did something wrong. [ATTORNEY: whether and how these limits can be imposed on a consumer, remedies if they are broken, and use of the copy in disputes. We never publish a review ourselves.]
 
 8. No guarantee. We try to be accurate and to say plainly when we cannot read something. We do not guarantee that a review finds every issue, that every question is relevant, or that it is free of errors.
 
 9. Limitation of liability. [ATTORNEY: enforceable consumer wording.] Draft intent: our liability for any claim about the service is limited to the fee you paid; we are not liable for indirect or consequential loss, or for decisions you make about buying, selling, repairing, remediating, insuring or occupying a property. Nothing here limits liability that cannot lawfully be limited.
 
-10. Corrections and refunds. If the software misread your report or produced a question that is plainly mistaken, tell us within [period]. We will [correct it / refund the fee]. [ATTORNEY: terms; refund policy; consumer-protection rules.]
+10. Corrections and refunds. [Added 2026-11-11: a questionable quote or wrong page number counts as a mistake we correct.] If the software misread your report or produced a question that is plainly mistaken, tell us within [period]. We will [correct it / refund the fee]. [ATTORNEY: terms; refund policy; consumer-protection rules.]
 
 11. Who may use it. You must be at least [18] and able to enter a contract. [ATTORNEY: states accepted.]
 

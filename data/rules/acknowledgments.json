@@ -1,0 +1,10 @@
+{
+  "version": "2026-11-11-draft",
+  "status": "Wording by Claude from docs/legal/02_DRAFT_ACKNOWLEDGMENTS_AND_NOTICES.md section A. The attorney will rewrite the text; the ids stay. A case cannot start until every item is accepted.",
+  "items": [
+    { "id": "lawful_copy", "text": "I received this report lawfully, and I may upload it for this review." },
+    { "id": "software_review", "text": "I understand this is a document review by software. It is not an inspection, an expert opinion, or legal, insurance or medical advice." },
+    { "id": "no_person_review", "text": "I understand no person reviews my report before it is delivered, and the software can make mistakes." },
+    { "id": "terms_read", "text": "I have read the Terms of Use and the Privacy and Retention Notice, including that I will not post the marked-up copy or its questions publicly or send them to anyone other than the report's author or my advisers." }
+  ]
+}

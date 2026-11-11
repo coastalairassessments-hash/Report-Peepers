@@ -36,3 +36,4 @@ Then: your final finishing pass, and share with Johnathan.
 - As real reports arrive, check the six cross-check questions (data/rules/cross_checks.json) for wrong or odd questions (E12).
 - Attorney: trademark and domain search for "Looky Lou" (E14); ask about the banner subtitle words "Independent" and "Review" (C01).
 - Designer: clean up garbled sample text in the banner; decide whether the picture's X and check marks stay (E14).
+- Decide who can place a legal hold on a case and what the customer is told (E17); review the legal drafts in 5 Legal before they go to the attorney.

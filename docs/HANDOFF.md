@@ -86,3 +86,6 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 
 ## Reports are never held (E04, 2026-11-07)
 `autoReleaseGates` lost four gates (quotes_verbatim, readable, held_back_limit, suspicious_content); `releaseAutomatically` now filters bad-quote findings instead. New system gate `reread_failed`. Johnathan: add automatic retry for `needs_attention` caused by system gates only. `auto_release.max_held_back` is unused and can be removed.
+
+## Legal-safety pass (E17, 2026-11-11)
+Johnathan: the upload screen must show the items in `data/rules/acknowledgments.json` and pass the accepted ids as `acknowledged` to `startCase` (the service refuses without them; wire `svc.acknowledgments = loadAcknowledgments()`). Add an owner-only admin action that calls `placeLegalHold` / `liftLegalHold`. The marked-up copy's headings and notice changed; check page layout with the longer notice on real reports.

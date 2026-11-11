@@ -65,6 +65,10 @@ export interface CaseRecord {
   document_kind?: import("../ingest/documentKind.js").DocumentKind | null;
   /** The customer's answer to the first-look question and what followed. Written only by the first-look step. */
   first_look?: { answer: import("../ingest/firstLook.js").Answer; outcome: import("../ingest/firstLook.js").Outcome; choice?: import("../ingest/firstLook.js").LabOnlyChoice } | null;
+  /** What the customer accepted at upload: the list version, the item ids and the time. Written only by the system. */
+  acknowledged?: { version: string; ids: string[]; at: string } | null;
+  /** Set by the system while a dispute or legal notice is open. Deletion skips a held case. */
+  legal_hold?: { at: string; reason: string } | null;
   pack_hash?: string | null;
   pack_shadow?: { hash: string; questions: { id: string; topic: string; text: string }[] } | null;
 }
@@ -123,6 +127,8 @@ export interface Services {
   /** The free first look at upload. Missing: the step is skipped and nothing changes. */
   /** The general outline sold to a lab-only customer. `paid` is the payment fact for the outline fee, separate from the review fee. */
   outline?: { rules: import("../ingest/outline.js").OutlineRules; checklist: import("../inspection/checklist.js").Checklist; paid(caseId: string, ownerId: string): Promise<boolean> };
+  /** The required upload acknowledgments. Missing: the check is skipped. */
+  acknowledgments?: import("./acknowledgments.js").Acknowledgments;
   firstLook?: { kind: import("../ingest/documentKind.js").DocumentKindConfig; rules: import("../ingest/firstLook.js").FirstLookRules };
   ocr?: { port: OcrPort; renderer: PageRenderer; second?: OcrPort };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */

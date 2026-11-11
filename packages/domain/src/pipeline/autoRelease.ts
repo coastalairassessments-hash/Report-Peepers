@@ -53,7 +53,7 @@ export function autoReleaseGates(i: GateInput): GateResult {
   return { ok: failed.length === 0, failed };
 }
 
-const AUTO_OVERVIEW = "This is an automated second look at the report you supplied. It lists what the report does well and questions you may want to ask the inspector. It is not an inspection of the building and not an expert opinion.";
+const AUTO_OVERVIEW = "This is an automated second look at the report you supplied. It points out what the report states clearly and lists questions you may want to ask the inspector. It is not an inspection of the building, not an expert opinion, and not a judgment of anyone's work.";
 const AUTO_DISCLOSURE = "No person reviewed this release. It was produced and checked by the program.";
 
 export type AutoReleaseResult =

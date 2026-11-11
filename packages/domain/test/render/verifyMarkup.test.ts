@@ -103,7 +103,7 @@ describe("exportMarkup", () => {
     for (const h of Object.values(r.hashes)) expect(h).toMatch(/^[0-9a-f]{64}$/);
     for (const p of r.plan.pages) for (const n of p.notes) { expect(r.text).toContain(n.text); if (n.number !== null) expect(r.text).toContain(`${n.number}. (page ${p.index}) ${n.text}`); }
     expect(r.text).toBe(markupText(r.plan));
-    expect(r.text).toContain("not an inspection of the building and not an expert opinion");
+    expect(r.text).toContain("It is not an inspection of the building, and it is not an expert, legal, insurance or medical opinion");
     expect(r.pdf.length).toBeGreaterThan(1000);
   });
 

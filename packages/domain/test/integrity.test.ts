@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import example from "../../../docs/spec/example_case.json" with { type: "json" };
-import { checkIntegrity } from "../src/integrity.js";
+import { checkIntegrity, wordingProblems } from "../src/integrity.js";
 
 const clone = () => structuredClone(example) as any;
 const codes = (s: any) => checkIntegrity(s).map((i) => i.code);
@@ -329,5 +329,13 @@ describe("automatic release mode (ADR-006, contract 0.3)", () => {
   it("wording rules apply to the automatic overview just as to a person's", () => {
     const c = auto(); c.release.overview = "The report fails inspection.";
     expect(codes(c)).toContain("prohibited_language");
+  });
+});
+
+describe("praise or approval of someone's work is a verdict too (E17)", () => {
+  const bad = ["Done correctly, as customary practice calls for", "The inspector did a thorough job.", "The sampling was done properly.", "This meets the requirements.", "A well-documented inspection.", "The report is up to standard.", "Excellent work on the readings."];
+  for (const t of bad) it(`flags: ${t}`, () => { expect(wordingProblems(t).some((p) => p.startsWith("verdict:")), t).toBe(true); });
+  it("allows plain clarity wording and the inspector's own quoted words", () => {
+    for (const t of ["What the report states clearly", "The report lists the instrument used (page 4).", "The report says \u201Cdone properly\u201D (page 3). Which readings show that?"]) expect(wordingProblems(t), t).toEqual([]);
   });
 });

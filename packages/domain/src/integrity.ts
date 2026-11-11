@@ -30,6 +30,18 @@ const MOTIVE = [
 ];
 
 /**
+ * Praise or approval of someone's work is a verdict, the same as criticism is (E17). The product states what a report says and asks questions.
+ * Our own words only; the inspector's quoted words stay exempt.
+ */
+const VERDICT = [
+  /\b(?:done|performed|carried out|completed|handled|documented|tested|sampled|measured|written) (?:correctly|properly|right|well|thoroughly|adequately)\b/i,
+  /\b(?:well|properly|thoroughly|correctly)[- ](?:done|performed|documented|written|executed|handled)\b/i,
+  /\b(?:good|great|excellent|outstanding|exemplary|solid|thorough|comprehensive|professional) (?:job|work|report|inspection|assessment|documentation)\b/i,
+  /\bmeets? (?:the )?(?:requirements?|expectations|criteria|bar)\b/i, /\bup to (?:standard|code|par)\b/i,
+  /\bexcellent\b/i, /\boutstanding\b/i, /\bexemplary\b/i,
+];
+
+/**
  * Words that claim certainty. An opinion states evidence strength, never certainty (spec 11.3, 13).
  * Text inside double quotes is exempt, so a finding can quote what a report says. Accusation wording is not quote-exempt.
  */
@@ -48,6 +60,7 @@ export function wordingProblems(text: string): string[] {
   const unquoted = stripQuoted(text);
   for (const re of MOTIVE) if (re.test(unquoted)) out.push(`motive:${re.source}`);
   for (const re of OVERCERTAIN) if (re.test(unquoted)) out.push(`overcertain:${re.source}`);
+  for (const re of VERDICT) if (re.test(unquoted)) out.push(`verdict:${re.source}`);
   return out;
 }
 
@@ -197,6 +210,7 @@ export function checkIntegrity(s: Snap): Issue[] {
       for (const re of PROHIBITED) if (re.test(f[field])) add("prohibited_language", `${p}.${field}`, `Wording not allowed: ${re.source}`);
       const unquoted = stripQuoted(f[field]);
       for (const re of OVERCERTAIN) if (re.test(unquoted)) add("overcertain_language", `${p}.${field}`, "State evidence strength, not certainty or a numeric confidence");
+      for (const re of VERDICT) if (re.test(unquoted)) add("verdict_language", `${p}.${field}`, "Do not praise or approve anyone's work; state what the report says and ask");
     }
 
     // client recollection alone cannot carry a strong or moderate finding
@@ -220,6 +234,7 @@ export function checkIntegrity(s: Snap): Issue[] {
   need(sets.questions, r.leading_question_ids, "release.leading_question_ids", "Question");
   for (const re of PROHIBITED) if (re.test(r.overview)) add("prohibited_language", "release.overview", `Wording not allowed: ${re.source}`);
   for (const re of OVERCERTAIN) if (re.test(stripQuoted(r.overview))) add("overcertain_language", "release.overview", "State evidence strength, not certainty or a numeric confidence");
+  for (const re of VERDICT) if (re.test(stripQuoted(r.overview))) add("verdict_language", "release.overview", "Do not praise or approve anyone's work; state what the report says and ask");
   if (r.status === "published") {
     const automatic = r.release_mode === "automatic" && r.human_review_status === "automatic" && s.schema_version === "0.3";
     if (r.human_review_status === "automatic" && !automatic) add("automatic_status_misused", "release", "Automatic status is only valid in a version 0.3 release whose mode is automatic");

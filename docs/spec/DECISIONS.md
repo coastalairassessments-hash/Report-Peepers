@@ -109,3 +109,13 @@ Cory: the red marks are how someone would review a report. Allowed marks: circle
 
 ## E16. Spelling: Looky Lou (Cory, 2026-11-10)
 Cory chose the spelling "Looky Lou" (the most common way people spell it), subject to the trademark attorney's clearance search. Lookey Lou and Lookee Lou stay as fallbacks. The GitHub repo is to be renamed Looky-Lou by Cory (settings changes are not allowed from this session).
+
+## E17. Legal-safety pass before the attorney (Cory, 2026-11-11)
+Cory asked Claude to act as a legal professional, not an attorney, and tighten what is flagged so the software stays non-accusatory while still giving homeowners enough. Every item is a proposal for the attorney (L31-L35).
+- Praise is a verdict too: wording guard blocks "done correctly", "thorough job", "meets requirements" and similar in our own words (quoted words exempt), in review text and in finding text.
+- Headings: "Done correctly, as customary practice calls for" is now "What the report states clearly"; "What the report supports" is now "Where the report explains its reasoning"; "Not expected, given the limits you described" is now "Not asked about, because of the limits you described"; "Limits of this review" is now "Limits of this second look". The overview no longer says "does well".
+- Notice: the full short-form notice is the method statement on every export, and adds "for your own use in talking with the report's author or your advisers."
+- Upload acknowledgments are enforced (`data/rules/acknowledgments.json`, `startCase` refuses with the missing items) and recorded on the case.
+- Legal hold: `placeLegalHold` / `liftLegalHold` pause the 90-day purge. Only the system sets it; a released case accepts only that change.
+- Drafts updated: terms (no public posting, questions are not statements, "independent" removed pending L22), privacy (hold exception), notice F for report authors, attorney brief, renamed to Looky Lou.
+- Open for Cory: who decides a legal hold, and the customer notice when one is placed.

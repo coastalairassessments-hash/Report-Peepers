@@ -130,7 +130,7 @@ describe("releaseAutomatically (ADR-006)", () => {
     const r = await releaseAutomatically(svc, id);
     expect(r).toMatchObject({ ok: true });
     const out = (await svc.repo.get(sys, id))!;
-    expect(out.released!.text).toContain("Done correctly, as customary practice calls for");
+    expect(out.released!.text).toContain("What the report states clearly");
   });
 
   it("a thin report lists at most 15 questions, page-one ones first, and says how many were left out", async () => {

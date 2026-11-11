@@ -6,7 +6,7 @@ import type { Actor, CaseRecord, CaseRepository, FileStore } from "./types.js";
 /** States in which a customer may still change their own case. */
 const CUSTOMER_STATES = ["draft", "preflight", "scope_intake", "scope_confirmation", "awaiting_payment"];
 /** Fields only the system or the release step may change. A customer's save must leave them as stored. */
-const SYSTEM_FIELDS = ["created_at", "reviewer_id", "snapshot", "issues", "attempts", "published_fingerprint", "released", "source", "inspection_review", "pack_hash", "pack_shadow", "document_kind", "first_look"] as const;
+const SYSTEM_FIELDS = ["created_at", "reviewer_id", "snapshot", "issues", "attempts", "published_fingerprint", "released", "source", "inspection_review", "pack_hash", "pack_shadow", "document_kind", "first_look", "acknowledged", "legal_hold"] as const;
 const REVIEWER_FIELDS = ["answers", "scope", "source", "attempts"] as const;
 /** A reviewer may tick issues off as acknowledged and change nothing else about them. */
 const issuesIgnoringAck = (r: CaseRecord) => r.issues.map((i) => ({ ...i, acknowledged: false }));
@@ -36,7 +36,12 @@ export class InMemoryCaseRepository implements CaseRepository {
   async save(actor: Actor, next: CaseRecord): Promise<void> {
     const stored = this.rows.get(next.id);
     if (!stored || !canSee(actor, stored)) throw new Error("Access refused.");
-    if (stored.state === "released") throw new Error("A released case is read-only.");
+    if (stored.state === "released") {
+      // E17: the one change a released case accepts is a legal hold placed or lifted by the system. Everything else stays read-only.
+      const bare = (r: CaseRecord) => ({ ...r, legal_hold: null });
+      if (actor.role === "system" && same(bare(next), bare(stored)) && !same(next.legal_hold ?? null, stored.legal_hold ?? null)) { this.rows.set(next.id, structuredClone(next)); return; }
+      throw new Error("A released case is read-only.");
+    }
     if (next.owner_id !== stored.owner_id) throw new Error("The owner of a case cannot change.");
     if (next.state !== stored.state && !allowedNext(stored.state).includes(next.state)) throw new Error(`Refused: a case cannot go from ${stored.state} to ${next.state}.`);
     if (actor.role === "customer") {

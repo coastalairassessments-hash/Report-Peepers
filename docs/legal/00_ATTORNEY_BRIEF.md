@@ -1,4 +1,4 @@
-# Report Peepers: attorney briefing
+# Looky Lou: attorney briefing (working name; pending trademark clearance)
 Prepared 2026-11-05 for review by counsel. Not legal advice. Every draft in this folder is a starting point for the attorney to rewrite, not a document to use as written. Items in [brackets] are open.
 
 ## 1. What the service is, in one paragraph
@@ -50,3 +50,13 @@ Cory's own questions: [ADD HERE]
 - 02_DRAFT_ACKNOWLEDGMENTS_AND_NOTICES.md (click-through checkboxes and the notice printed on every released review)
 - 03_DRAFT_PRIVACY_AND_RETENTION.md
 - Product record for reference: docs/spec/DECISIONS.md, docs/decisions/ADR-001 to ADR-006, docs/expert/VOICE_RULE.md, docs/proofs/inspection/README.md (sample output, synthetic data)
+
+
+## Safeguards added 2026-11-11 before your review (all are proposals for you to confirm or change)
+1. No praise or approval of anyone's work, and no grading. The software blocks accusation, motive, certainty, and now praise ("done correctly," "thorough job," "meets requirements") in its own words. The marked-up copy's heading changed from "Done correctly, as customary practice calls for" to "What the report states clearly." Stars on the marked-up copy mean "stated clearly," are never counted, and are not a rating. [Q: is "states clearly" safe, or should it go further?]
+2. Notice. Every marked-up copy and release now carries the full short-form notice: document review by software, no inspection or expert, legal, insurance or medical opinion, no view on safety or whether anyone's work was proper, questions are suggestions, check image-read words, customary practice not a published standard, for your own use.
+3. Upload acknowledgments are enforced in the software, not only drafted: a case cannot start until four items are accepted (lawful copy, software review, no person reviews before delivery, terms and privacy read, including no public posting). The version, items and time are recorded per case. Draft text in `data/rules/acknowledgments.json`.
+4. Legal hold. A case under a dispute or legal notice can be marked so the 90-day deletion skips it. Only the system can set it. [Q: when must we hold, who decides, what do we tell the customer, and does this fit the 90-day promise?]
+5. Public posting by a homeowner is the main spite risk we see. Draft term 7 forbids it. [Q: enforceable? remedies?]
+6. Report authors. Draft notice F offers a way to point out a misquote. We never contact authors and never publish. [Q: is any author notice wise?]
+7. Still open from before: no-person release (L21), "independent" claim (L22), limit of liability and arbitration (L23), insurance (L11), copyright in marking up a report (L16).

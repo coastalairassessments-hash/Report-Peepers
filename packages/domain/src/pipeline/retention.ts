@@ -21,6 +21,7 @@ export async function purgeExpired(svc: Services, opts: PurgeOptions): Promise<P
   if (Number.isNaN(nowMs)) throw new Error("now must be an ISO date and time.");
   const cases = await svc.repo.list({ role: "system" });
   const expired = cases.filter((c) => {
+    if (c.legal_hold) return false; // E17: a dispute is open, so nothing is deleted
     const at = c.released?.delivered_at ?? c.created_at;
     return at !== undefined && nowMs - Date.parse(at) >= opts.days * 86_400_000;
   });

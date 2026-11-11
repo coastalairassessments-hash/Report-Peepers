@@ -163,7 +163,7 @@ describe("planMarkup: the summary page", () => {
     const s = planMarkup(viewOf(fs, ["Q one?", "Q two?"]), d, DOC, cfg).summary;
     expect(s.title).toBe("Summary of items to clarify");
     expect(s.leading_questions).toEqual(["Q one?", "Q two?"]);
-    expect(s.groups.map((g) => g.heading)).toEqual(["Items that bear on your decision", "Other items worth knowing", "What the report supports"]);
+    expect(s.groups.map((g) => g.heading)).toEqual(["Items that bear on your decision", "Other items worth knowing", "Where the report explains its reasoning"]);
     expect(s.groups[0]!.items.map((i) => i.number)).toEqual([1]);
     expect(s.groups[2]!.items[0]!.title).toBe("Reading is documented");
     expect(s.limits).toEqual(["This is a document review within the supplied evidence."]);

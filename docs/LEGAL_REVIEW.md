@@ -42,3 +42,9 @@ Status key: open / with attorney / answered (add the answer and date).
 - L29: Retention is decided as 90 days after delivery, then permanent deletion of the report, the review and the links. Reports never delivered (abandoned, failed, held) are deleted 90 days after they were started (owner's decision, built): is that period right and what notice is needed?
 - L30: Anonymous summary records are kept after deletion (L18). Confirm that keeping them, with a minimum group size, fits the 90-day promise and the optional consent line (Acknowledgments B).
 
+
+- L31 (2026-11-11): Praise wording. We removed "done correctly" style headings; marked-up copy now says "What the report states clearly," with stars meaning "stated clearly." Confirm this cannot be read as an opinion that the work was proper.
+- L32: A homeowner posting the marked-up copy publicly naming an inspector (draft term 7 forbids it). Enforceability and remedies.
+- L33: Notice for report authors (draft F): whether to offer any author route, and its limits.
+- L34: Legal hold: pausing the 90-day deletion during a dispute. Trigger, decision-maker, customer notice, and how it fits the retention promise.
+- L35: Upload acknowledgments are now enforced in code. Final text, and whether recording acceptance (version, time) meets consent needs.
