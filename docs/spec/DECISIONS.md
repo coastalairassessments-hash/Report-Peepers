@@ -122,3 +122,6 @@ Cory asked Claude to act as a legal professional, not an attorney, and tighten w
 
 ## E18. Keep delivered reports two years (Cory, 2026-11-11)
 Cory: "2 years I guess." Retention changes from 90 days to 730 days (supersedes the 90 in ADR-002 and the 2026-11-06 note). The number now lives in `data/rules/retention.json`. A legal hold still pauses deletion for a disputed case. Backups roll off within 35 days of a deletion (unchanged). Trade-off noted to Cory: homeowners' documents are held about eight times longer, so the privacy notice, the breach plan and storage cost must match. Attorney to confirm (L34). Johnathan: call `purgeExpired` with `loadRetentionDays()`.
+
+## E19. Legal hold: Cory decides after talking with the attorney (Cory, 2026-11-11)
+Cory chose: a legal hold on a case is placed by Cory after consulting the attorney. Johnathan: the admin action for `placeLegalHold` / `liftLegalHold` is owner-only (Cory's login), never automatic and never available to staff or customers. The customer notice when a hold is placed is still open (L34).
