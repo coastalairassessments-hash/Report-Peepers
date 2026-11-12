@@ -163,3 +163,6 @@ Cory: the key to this working is that Lou reads the room, the report is never he
 
 ## E31. After the questions, everyone sees a "close this, we'll email you" screen (Cory, 2026-11-12)
 Cory chose option B: when the questions end, every client sees the same screen, with no waiting screen and no progress bar. His words: "I'm still looking it over, thank you and I'll send it over when I finished." Draft screen text: "I'm still looking it over. Thank you, and I'll send it over when I'm finished." The email carries the link to the review and to reopen Lou's questions (30 days proposed). Johnathan: the client's email address must be confirmed before payment, and the email must be sent for every case.
+
+## E32. Lou asks how much time the client has (Cory, 2026-11-12)
+Cory chose: right after the greeting Lou asks how much time the client has, with buttons that each carry a short explanation. Draft wording is in the review page (Start here tab) for Cory to edit: "A few minutes" (only the most important questions, about 5, can come back later), "About 10 minutes" (key questions plus a few more), "Take your time" (everything that fits). Which questions belong to each path (the tiers) is not yet decided.
