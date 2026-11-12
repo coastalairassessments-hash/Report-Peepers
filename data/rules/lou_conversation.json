@@ -1,0 +1,405 @@
+{
+ "version": "2026-11-12-draft",
+ "status": "Lou's conversation, drafted by Claude from docs/INTERVIEW_DRAFT.md for Cory to review (E25). Asked after payment while the report is read. Plain code walks this list; typed answers are stored exactly as written and never sent to a model.",
+ "nodes": [
+  {
+   "id": "C01",
+   "group": "said_out_loud",
+   "kind": "yes_no_unsure",
+   "text": "Did the inspector tell you anything out loud, in person or on the phone, about what they would or wouldn't check? Even a small comment helps.",
+   "why": "Things said out loud can matter as much as what is written.",
+   "bone": "agreement"
+  },
+  {
+   "id": "C02",
+   "group": "said_out_loud",
+   "kind": "multi",
+   "text": "What did they tell you? Tap everything that fits.",
+   "why": "Each answer helps us ask the right follow-up.",
+   "options": [
+    "They told me what they would check",
+    "They told me what they would not check",
+    "They told me how long the visit would be",
+    "They told me about a cost or package limit",
+    "They told me some areas could not be reached",
+    "They told me their findings out loud",
+    "Something else (I'll type it)",
+    "I don't remember"
+   ],
+   "when": {
+    "id": "C01",
+    "equals": "yes"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C03",
+   "group": "said_out_loud",
+   "kind": "text",
+   "text": "What did they say they would look at?",
+   "why": "So we know what you were expecting.",
+   "when": {
+    "id": "C02",
+    "includes": "They told me what they would check"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C04",
+   "group": "said_out_loud",
+   "kind": "text",
+   "text": "What did they say they wouldn't look at? Tell it the way you remember it.",
+   "why": "So we know what was set aside, in your words.",
+   "when": {
+    "id": "C02",
+    "includes": "They told me what they would not check"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C05",
+   "group": "said_out_loud",
+   "kind": "text",
+   "text": "How long did they say it would take, and about how long were they there?",
+   "why": "Time on site shapes what could be checked.",
+   "when": {
+    "id": "C02",
+    "includes": "They told me how long the visit would be"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C06",
+   "group": "said_out_loud",
+   "kind": "text",
+   "text": "What did they say the price or package included, and what was left out?",
+   "why": "A package can explain why some steps were not taken.",
+   "when": {
+    "id": "C02",
+    "includes": "They told me about a cost or package limit"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C07",
+   "group": "said_out_loud",
+   "kind": "text",
+   "text": "Which areas did they say they couldn't get to, and what was the reason they gave?",
+   "why": "Places that could not be reached are unknown, not clear or affected.",
+   "when": {
+    "id": "C02",
+    "includes": "They told me some areas could not be reached"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C08",
+   "group": "said_out_loud",
+   "kind": "text",
+   "text": "What did they tell you they saw or found? Even a rough memory helps.",
+   "why": "It helps us compare what you heard with what the report says.",
+   "when": {
+    "id": "C02",
+    "includes": "They told me their findings out loud"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C09",
+   "group": "said_out_loud",
+   "kind": "text",
+   "text": "Tell us what you remember.",
+   "why": "So nothing you remember gets lost.",
+   "when": {
+    "id": "C02",
+    "includes": "Something else (I'll type it)"
+   },
+   "bone": "agreement"
+  },
+  {
+   "id": "C10",
+   "group": "why_inspected",
+   "kind": "multi",
+   "text": "What made you get this inspection? Tap everything that fits.",
+   "why": "Your reason helps us see what the report was meant to answer.",
+   "options": [
+    "Buying a home",
+    "Selling a home",
+    "A smell",
+    "A leak or water damage",
+    "Insurance",
+    "A concern about health or comfort",
+    "A lender or landlord asked",
+    "Something else (I'll type it)",
+    "Not sure"
+   ],
+   "bone": "reason"
+  },
+  {
+   "id": "C11",
+   "group": "why_inspected",
+   "kind": "text",
+   "text": "Tell us a little about why.",
+   "why": "In your own words.",
+   "when": {
+    "id": "C10",
+    "includes": "Something else (I'll type it)"
+   },
+   "bone": "reason"
+  },
+  {
+   "id": "C12",
+   "group": "why_inspected",
+   "kind": "yes_no_unsure",
+   "text": "Is there an insurance claim open for this?",
+   "why": "A claim can change what records matter.",
+   "when": {
+    "id": "C10",
+    "includes": "Insurance"
+   },
+   "bone": "reason"
+  },
+  {
+   "id": "C13",
+   "group": "why_inspected",
+   "kind": "text",
+   "text": "About when did you first notice it?",
+   "why": "Timing helps us read the report in context.",
+   "when": {
+    "id": "C10",
+    "includes_any": [
+     "A smell",
+     "A leak or water damage"
+    ]
+   },
+   "bone": "conditions"
+  },
+  {
+   "id": "C14",
+   "group": "why_inspected",
+   "kind": "yes_no_unsure",
+   "text": "Is there a closing date or deadline coming up?",
+   "why": "A deadline can explain why some steps were rushed or skipped.",
+   "when": {
+    "id": "C10",
+    "includes_any": [
+     "Buying a home",
+     "Selling a home"
+    ]
+   },
+   "bone": "reason"
+  },
+  {
+   "id": "C15",
+   "group": "the_visit",
+   "kind": "yes_no_unsure",
+   "text": "Were you there for the visit?",
+   "why": "Being there changes what you saw and heard.",
+   "bone": "people"
+  },
+  {
+   "id": "C16",
+   "group": "the_visit",
+   "kind": "text",
+   "text": "About what date was the visit?",
+   "why": "Dates help line up the report with what happened.",
+   "max_chars": 60,
+   "bone": "people"
+  },
+  {
+   "id": "C17",
+   "group": "the_visit",
+   "kind": "yes_no_unsure",
+   "text": "Was anyone else there, like an agent, a seller, or a contractor?",
+   "why": "Others at the visit may have seen or said something too.",
+   "bone": "people"
+  },
+  {
+   "id": "C18",
+   "group": "the_visit",
+   "kind": "text",
+   "text": "Who was there? First names or roles are fine.",
+   "why": "So the record is complete.",
+   "when": {
+    "id": "C17",
+    "equals": "yes"
+   },
+   "bone": "people"
+  },
+  {
+   "id": "C19",
+   "group": "the_visit",
+   "kind": "yes_no_unsure",
+   "text": "Did the inspector show you anything during the visit, like a moisture reading or a photo?",
+   "why": "What you were shown may not be in the report.",
+   "bone": "methods"
+  },
+  {
+   "id": "C20",
+   "group": "the_visit",
+   "kind": "text",
+   "text": "What did they show you?",
+   "why": "So we can compare it with the report.",
+   "when": {
+    "id": "C19",
+    "equals": "yes"
+   },
+   "bone": "methods"
+  },
+  {
+   "id": "C21",
+   "group": "samples",
+   "kind": "yes_no_unsure",
+   "text": "Did the inspector take any samples?",
+   "why": "Samples lead to lab results that belong with the report.",
+   "bone": "methods"
+  },
+  {
+   "id": "C22",
+   "group": "samples",
+   "kind": "text",
+   "text": "Do you know which lab the samples went to, or when you got the results?",
+   "why": "So we know where the lab results come from.",
+   "when": {
+    "id": "C21",
+    "equals": "yes"
+   },
+   "bone": "methods"
+  },
+  {
+   "id": "C30",
+   "group": "samples",
+   "bone": "methods",
+   "kind": "yes_no_unsure",
+   "text": "Did you see the inspector use any tools or instruments, like a moisture meter or a thermal camera?",
+   "why": "Tools and readings are what a report's findings rest on."
+  },
+  {
+   "id": "C31",
+   "group": "samples",
+   "bone": "methods",
+   "kind": "text",
+   "text": "Which ones do you remember?",
+   "why": "So we can look for them in the report.",
+   "when": {
+    "id": "C30",
+    "equals": "yes"
+   }
+  },
+  {
+   "id": "C32",
+   "group": "conditions_of_visit",
+   "bone": "conditions",
+   "kind": "multi",
+   "text": "What were the conditions at the time of the visit? Tap everything that fits.",
+   "why": "Weather and the home's condition can change what a visit finds.",
+   "options": [
+    "It had rained recently",
+    "The air conditioning or heat was off",
+    "Windows or doors were open",
+    "The home was empty or unoccupied",
+    "Nothing unusual",
+    "Not sure"
+   ]
+  },
+  {
+   "id": "C23",
+   "group": "report_vs_visit",
+   "kind": "yes_no_unsure",
+   "text": "Did the report match what the inspector told you at the visit?",
+   "why": "A difference is worth a friendly question, and a match is good to know.",
+   "when": {
+    "id": "C01",
+    "equals": "yes"
+   },
+   "bone": "afterward"
+  },
+  {
+   "id": "C24",
+   "group": "report_vs_visit",
+   "kind": "text",
+   "text": "What was different?",
+   "why": "So the question for the inspector can be specific.",
+   "when": {
+    "id": "C23",
+    "equals": "no"
+   },
+   "bone": "afterward"
+  },
+  {
+   "id": "C25",
+   "group": "history",
+   "kind": "yes_no_unsure",
+   "text": "Has this home had mold, water damage, or another inspection before?",
+   "why": "Earlier events can explain what a report finds.",
+   "bone": "conditions"
+  },
+  {
+   "id": "C26",
+   "group": "history",
+   "kind": "text",
+   "text": "What do you know about it?",
+   "why": "Even a rough idea helps.",
+   "when": {
+    "id": "C25",
+    "equals": "yes"
+   },
+   "bone": "conditions"
+  },
+  {
+   "id": "C27",
+   "group": "since",
+   "kind": "yes_no_unsure",
+   "text": "Have you talked with the inspector since you got the report?",
+   "why": "Later conversations may already answer a question.",
+   "bone": "afterward"
+  },
+  {
+   "id": "C28",
+   "group": "since",
+   "kind": "text",
+   "text": "What did they say?",
+   "why": "So we don't ask you to ask something already answered.",
+   "when": {
+    "id": "C27",
+    "equals": "yes"
+   },
+   "bone": "afterward"
+  },
+  {
+   "id": "C29",
+   "group": "closing",
+   "kind": "text",
+   "text": "Is there anything else you think we should know?",
+   "why": "Last chance to add anything in your own words.",
+   "optional": true,
+   "bone": "afterward"
+  }
+ ],
+ "bones": [
+  {
+   "id": "agreement",
+   "label": "What was agreed and said"
+  },
+  {
+   "id": "reason",
+   "label": "Why you got the inspection"
+  },
+  {
+   "id": "people",
+   "label": "Who was involved"
+  },
+  {
+   "id": "methods",
+   "label": "What was done"
+  },
+  {
+   "id": "conditions",
+   "label": "The building and the day"
+  },
+  {
+   "id": "afterward",
+   "label": "What happened since"
+  }
+ ]
+}

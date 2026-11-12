@@ -37,3 +37,5 @@ Then: your final finishing pass, and share with Johnathan.
 - Attorney: trademark and domain search for "Looky Lou" (E14); ask about the banner subtitle words "Independent" and "Review" (C01).
 - Designer: clean up garbled sample text in the banner; decide whether the picture's X and check marks stay (E14).
 - Decide who can place a legal hold on a case and what the customer is told (E17); review the legal drafts in 5 Legal before they go to the attorney.
+
+- Decide whether Lou's conversation answers should show anywhere in the review or PDF (today they do not). (E25)

@@ -10,8 +10,8 @@ const walk = (answers: Answers, fill: (id: string) => Answers[string]) => {
 };
 
 describe("scope intake", () => {
-  it("has Q01-Q17 and the first questions are about goal, then limits", () => {
-    expect(QUESTION_BANK.map((q) => q.id)).toEqual(["Q01","Q02","Q03","Q15","Q16","Q17","Q04","Q05","Q06","Q07","Q08","Q09","Q14","Q10","Q11","Q12","Q13"]);
+  it("has Q01-Q15 and the first questions are about goal, then limits", () => {
+    expect(QUESTION_BANK.map((q) => q.id)).toEqual(["Q01","Q02","Q03","Q15","Q04","Q05","Q06","Q07","Q08","Q09","Q14","Q10","Q11","Q12","Q13"]);
     expect(nextQuestion({})!.id).toBe("Q01");
     expect(nextQuestion({ Q01: { text: "x" } })!.id).toBe("Q02");
   });
@@ -25,7 +25,7 @@ describe("scope intake", () => {
   it("'no limits' skips the limit questions, Q14 and Q10", () => {
     const a: Answers = {};
     const asked = walk(a, (id) => id === "Q02" ? { choice: "no" } : id === "Q03" ? { service: "Screening" } : { text: "t", choice: "no" });
-    expect(asked).toEqual(["Q01", "Q02", "Q03", "Q15", "Q16", "Q11", "Q12", "Q13"]);
+    expect(asked).toEqual(["Q01", "Q02", "Q03", "Q15", "Q11", "Q12", "Q13"]);
     const s = buildScope(a);
     expect(s.restrictions.every((r) => r.status === "explicitly_none")).toBe(true);
   });
@@ -38,7 +38,7 @@ describe("scope intake", () => {
   });
 
   it("captures a one-hour time cap and asks Q10 only when a limit exists", () => {
-    const a: Answers = { Q01: { text: "g" }, Q02: { choice: "yes" }, Q03: { service: "Limited assessment" }, Q15: { choice: "yes" }, Q16: { choice: "no" },
+    const a: Answers = { Q01: { text: "g" }, Q02: { choice: "yes" }, Q03: { service: "Limited assessment" }, Q15: { choice: "yes" },
       Q04: { choice: "yes", value: 1, unit: "hour", proposedBy: "package", text: "One hour visit" },
       Q05: { choice: "no" }, Q06: { choice: "no" }, Q07: { choice: "no" }, Q08: { choice: "no" }, Q09: { choice: "no" } };
     expect(nextQuestion(a)!.id).toBe("Q14");
@@ -147,19 +147,4 @@ describe("which records the homeowner received", () => {
     expect(recordsReceived({ Q13: { records: ["Full lab report", "None of these"] } })).toEqual(["lab_report"]);
   });
   it("unanswered is null, never 'none received'", () => { expect(recordsReceived({})).toBeNull(); });
-});
-
-describe("what the inspector said out loud (Q16, Q17; E23)", () => {
-  const base: Answers = { Q01: { text: "g" }, Q02: { choice: "no" }, Q03: { service: "Screening" }, Q15: { choice: "no" } };
-  it("asks the buttons question only when the inspector said something", () => {
-    expect(nextQuestion(base)!.id).toBe("Q16");
-    expect(nextQuestion({ ...base, Q16: { choice: "no" } })!.id).toBe("Q11");
-    expect(nextQuestion({ ...base, Q16: { choice: "unsure" } })!.id).toBe("Q11");
-    expect(nextQuestion({ ...base, Q16: { choice: "yes" } })!.id).toBe("Q17");
-  });
-  it("the buttons are the eight approved choices, and any subset (or none) is an answer", () => {
-    const q = QUESTION_BANK.find((x) => x.id === "Q17")!;
-    expect(q.options).toHaveLength(8);
-    expect(nextQuestion({ ...base, Q16: { choice: "yes" }, Q17: { records: ["I don't remember"] } })!.id).toBe("Q11");
-  });
 });

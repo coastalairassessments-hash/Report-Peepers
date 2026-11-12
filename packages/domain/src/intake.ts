@@ -19,9 +19,6 @@ export const QUESTION_BANK: QuestionDef[] = [
   { id: "Q03", kind: "service", text: "What service were you sold?", why: "Labels vary, so we read what was actually agreed.",
     options: ["Sampling only", "Screening", "Limited assessment", "Broader assessment", "Review of a remediation protocol", "Not sure"] },
   { id: "Q15", kind: "yes_no_unsure", text: "Before the inspection, did you get anything in writing about what the inspector would do, like a contract, an estimate, or even an email? If you have it, that helps a lot.", why: "What was agreed in writing shows what the visit was meant to cover." },
-  { id: "Q16", kind: "yes_no_unsure", text: "Did the inspector tell you anything out loud, in person or on the phone, about what they would or wouldn't check? Even a small comment helps.", why: "Things said out loud can matter as much as what is written." },
-  { id: "Q17", kind: "multi", text: "What did they tell you? Tap everything that fits.", why: "Each answer helps us ask the right follow-up.",
-    options: ["They told me what they would check", "They told me what they would not check", "They told me how long the visit would be", "They told me about a cost or package limit", "They told me some areas could not be reached", "They told me their findings out loud", "Something else (I'll type it)", "I don't remember"] },
   { id: "Q04", kind: "yes_no_unsure", text: "Was the visit time capped (for example, one hour)?", why: "Time limits shape how much could be checked.", restriction: ["time"] },
   { id: "Q05", kind: "yes_no_unsure", text: "Was the number or type of samples capped (for example, three air samples)?", why: "A sampling package is different from a decision not to sample more.", restriction: ["samples"] },
   { id: "Q06", kind: "yes_no_unsure", text: "Did a budget limit what was done?", why: "Budget can explain why certain steps were not taken.", restriction: ["budget"] },
@@ -63,10 +60,9 @@ const byId = (id: string) => QUESTION_BANK.find((q) => q.id === id)!;
 const RESTRICTION_Q = ["Q04", "Q05", "Q06", "Q07", "Q08", "Q09"];
 const isAnswered = (a?: Answer) => !!a && (a.choice !== undefined || !!a.text?.trim() || a.service !== undefined || a.records !== undefined);
 
-/** Skip rules. Q17 only if the inspector said something out loud (Q16 yes). Q02 = "no" skips the restriction questions. Q10 and Q14 only if some limit was reported. */
+/** Skip rules. Q02 = "no" skips the restriction questions. Q10 and Q14 only if some limit was reported. */
 export function isApplicable(id: string, answers: Answers): boolean {
   if (RESTRICTION_Q.includes(id)) return answers["Q02"]?.choice !== "no";
-  if (id === "Q17") return answers["Q16"]?.choice === "yes";
   if (id === "Q10" || id === "Q14") return RESTRICTION_Q.some((q) => answers[q]?.choice === "yes");
   return true;
 }

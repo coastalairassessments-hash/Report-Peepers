@@ -129,6 +129,8 @@ export interface Services {
   outline?: { rules: import("../ingest/outline.js").OutlineRules; checklist: import("../inspection/checklist.js").Checklist; paid(caseId: string, ownerId: string): Promise<boolean> };
   /** The required upload acknowledgments. Missing: the check is skipped. */
   acknowledgments?: import("./acknowledgments.js").Acknowledgments;
+  /** Lou's conversation (E25). Missing: the conversation is off. */
+  conversations?: import("./conversationStore.js").ConversationStore;
   firstLook?: { kind: import("../ingest/documentKind.js").DocumentKindConfig; rules: import("../ingest/firstLook.js").FirstLookRules };
   ocr?: { port: OcrPort; renderer: PageRenderer; second?: OcrPort };
   /** Optional. When present, the inspection review runs: checklist, consistency checks, the evidence map, and the questions for the homeowner. */

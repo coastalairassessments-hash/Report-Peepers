@@ -89,3 +89,7 @@ No contacting inspectors, publishing findings, deploying, connecting payments, i
 
 ## Legal-safety pass (E17, 2026-11-11)
 Johnathan: the upload screen must show the items in `data/rules/acknowledgments.json` and pass the accepted ids as `acknowledged` to `startCase` (the service refuses without them; wire `svc.acknowledgments = loadAcknowledgments()`). Add an owner-only admin action that calls `placeLegalHold` / `liftLegalHold`. The marked-up copy's headings and notice changed; check page layout with the longer notice on real reports.
+
+
+## Lou's conversation (E25)
+Engine: `packages/domain/src/interview/conversation.ts`, questions in `data/rules/lou_conversation.json`, pipeline steps in `src/pipeline/conversation.ts` (`conversationStep`, `answerConversationStep`, `stopConversationStep`, `conversationRecord`), store interface `conversationStore.ts`. Wire `svc.conversations` (in-memory store exists; a real one is needed). Open after payment until delivery, owner only. Typed text never goes to a model. Deleted by `purgeExpired`, kept during a legal hold.
