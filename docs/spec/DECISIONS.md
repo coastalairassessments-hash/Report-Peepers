@@ -166,3 +166,6 @@ Cory chose option B: when the questions end, every client sees the same screen, 
 
 ## E32. Lou asks how much time the client has (Cory, 2026-11-12)
 Cory chose: right after the greeting Lou asks how much time the client has, with buttons that each carry a short explanation. Draft wording is in the review page (Start here tab) for Cory to edit: "A few minutes" (only the most important questions, about 5, can come back later), "About 10 minutes" (key questions plus a few more), "Take your time" (everything that fits). Which questions belong to each path (the tiers) is not yet decided.
+
+## E28 progress (Cory approving one item at a time, each with a recommended answer)
+- Item 1 approved 2026-11-12 ("Y"): Lou says plainly at the start that he is a computer program. Opening line updated: "Hi, I'm Lou, a computer program that reads your report. Thanks for letting me help you with this. I'd like to hear your side too. Skip anything you'd rather not answer."
