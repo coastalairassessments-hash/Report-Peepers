@@ -128,3 +128,6 @@ Cory chose: a legal hold on a case is placed by Cory after consulting the attorn
 
 ## E20. Reading starts after payment (Cory, 2026-11-11)
 Cory chose: the full reading starts after payment, as in the existing state machine (scope confirmation, payment, then analysis). Lou's interview stays before payment. No code change. We never pay for an unpaid reading.
+
+## E21. Interview records who set each limit and what led to it (Cory, 2026-11-11)
+Cory: keep asking every question when work was limited; also ask who limited the scope and what made it limited; "we ask all the questions a legal professional would ask, but in a friendly way." Done: new interview question Q14 ("For each limit, who set it, and what led to it?"), asked before Q10 and only when a limit was reported; its answer is saved with the case and shown in the scope summary. Library rule IEP-K-001 edited (new version) to drop the step that held back questions and to record who set each limit. K-001 still needs Cory's approval. Next: draft the fuller set of friendly, legal-minded interview questions for Cory to approve one at a time.

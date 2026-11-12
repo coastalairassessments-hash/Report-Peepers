@@ -24,6 +24,7 @@ export const QUESTION_BANK: QuestionDef[] = [
   { id: "Q07", kind: "yes_no_unsure", text: "Were specific rooms, surfaces, systems, or concerns included or left out?", why: "We only judge areas the work covered.", restriction: ["areas"] },
   { id: "Q08", kind: "yes_no_unsure", text: "Were any methods, equipment, test materials, moving of belongings, or opening of walls limited or declined?", why: "Some questions can only be answered with certain methods.", restriction: ["methods", "equipment_materials"] },
   { id: "Q09", kind: "yes_no_unsure", text: "Were any areas hard or impossible to reach, for reasons other than your own choice?", why: "Unreachable areas are unknown, not clean or affected.", restriction: ["access"] },
+  { id: "Q14", kind: "text", text: "For each limit, who set it, and what led to it?", why: "So the record shows the full picture, including where each limit came from." },
   { id: "Q10", kind: "text", text: "For each limit, who proposed it, and what did you understand the effect to be?", why: "Keeps the review fair to everyone involved." },
   { id: "Q11", kind: "yes_no_unsure", text: "Were you given other written records or verbal findings by the inspector?", why: "Existing records may already answer open questions." },
   { id: "Q12", kind: "text", text: "What question was still unanswered after you read the report?", why: "So we focus on what matters to you." },
@@ -58,10 +59,10 @@ const byId = (id: string) => QUESTION_BANK.find((q) => q.id === id)!;
 const RESTRICTION_Q = ["Q04", "Q05", "Q06", "Q07", "Q08", "Q09"];
 const isAnswered = (a?: Answer) => !!a && (a.choice !== undefined || !!a.text?.trim() || a.service !== undefined || a.records !== undefined);
 
-/** Skip rules. Q02 = "no" skips the restriction questions. Q10 only if some limit was reported. */
+/** Skip rules. Q02 = "no" skips the restriction questions. Q10 and Q14 only if some limit was reported. */
 export function isApplicable(id: string, answers: Answers): boolean {
   if (RESTRICTION_Q.includes(id)) return answers["Q02"]?.choice !== "no";
-  if (id === "Q10") return RESTRICTION_Q.some((q) => answers[q]?.choice === "yes");
+  if (id === "Q10" || id === "Q14") return RESTRICTION_Q.some((q) => answers[q]?.choice === "yes");
   return true;
 }
 
@@ -107,7 +108,7 @@ export function buildScope(answers: Answers): Scope {
     restrictions,
     confirmation_status: "unconfirmed", confirmed_at: null,
     unresolved_discrepancies: [],
-    client_understanding: answers["Q10"]?.text?.trim() || "Not yet stated by client.",
+    client_understanding: [answers["Q14"]?.text?.trim() && `Who set the limits and what led to them: ${answers["Q14"]!.text!.trim()}`, answers["Q10"]?.text?.trim() && `Effect as the client understood it: ${answers["Q10"]!.text!.trim()}`].filter(Boolean).join(" ") || "Not yet stated by client.",
   };
 }
 

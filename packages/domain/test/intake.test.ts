@@ -10,19 +10,19 @@ const walk = (answers: Answers, fill: (id: string) => Answers[string]) => {
 };
 
 describe("scope intake", () => {
-  it("has Q01-Q12 and the first questions are about goal, then limits", () => {
-    expect(QUESTION_BANK.map((q) => q.id)).toEqual(["Q01","Q02","Q03","Q04","Q05","Q06","Q07","Q08","Q09","Q10","Q11","Q12","Q13"]);
+  it("has Q01-Q14 and the first questions are about goal, then limits", () => {
+    expect(QUESTION_BANK.map((q) => q.id)).toEqual(["Q01","Q02","Q03","Q04","Q05","Q06","Q07","Q08","Q09","Q14","Q10","Q11","Q12","Q13"]);
     expect(nextQuestion({})!.id).toBe("Q01");
     expect(nextQuestion({ Q01: { text: "x" } })!.id).toBe("Q02");
   });
 
   it("asks exactly one question at a time and never repeats", () => {
     const a: Answers = {};
-    const asked = walk(a, (id) => id === "Q01" || id === "Q10" || id === "Q12" ? { text: "t" } : id === "Q03" ? { service: "Screening" } : { choice: "no" });
+    const asked = walk(a, (id) => id === "Q01" || id === "Q10" || id === "Q12" || id === "Q14" ? { text: "t" } : id === "Q03" ? { service: "Screening" } : { choice: "no" });
     expect(new Set(asked).size).toBe(asked.length);
   });
 
-  it("'no limits' skips the limit questions and Q10", () => {
+  it("'no limits' skips the limit questions, Q14 and Q10", () => {
     const a: Answers = {};
     const asked = walk(a, (id) => id === "Q02" ? { choice: "no" } : id === "Q03" ? { service: "Screening" } : { text: "t", choice: "no" });
     expect(asked).toEqual(["Q01", "Q02", "Q03", "Q11", "Q12", "Q13"]);
@@ -41,7 +41,8 @@ describe("scope intake", () => {
     const a: Answers = { Q01: { text: "g" }, Q02: { choice: "yes" }, Q03: { service: "Limited assessment" },
       Q04: { choice: "yes", value: 1, unit: "hour", proposedBy: "package", text: "One hour visit" },
       Q05: { choice: "no" }, Q06: { choice: "no" }, Q07: { choice: "no" }, Q08: { choice: "no" }, Q09: { choice: "no" } };
-    expect(nextQuestion(a)!.id).toBe("Q10");
+    expect(nextQuestion(a)!.id).toBe("Q14");
+    expect(nextQuestion({ ...a, Q14: { text: "The package" } })!.id).toBe("Q10");
     const t = buildScope(a).restrictions.find((r) => r.kind === "time")!;
     expect(t).toMatchObject({ status: "present", limit_value: 1, limit_unit: "hour", proposed_by: "package" });
   });

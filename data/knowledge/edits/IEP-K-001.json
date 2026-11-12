@@ -1,0 +1,16 @@
+[
+ {
+  "at": "2026-11-12T03:35:00.000Z",
+  "author": "Cory",
+  "entry_id": "IEP-K-001",
+  "fields": {
+   "decision_steps": [
+    "Record each of the three facts with its source.",
+    "If agreement is missing and expectation differs from the report scope, set evidence state to 'scope unconfirmed'.",
+    "Also release one neutral scope-clarification question.",
+    "Record who set each limit and what led to it, from the client's answers, so the file shows the whole picture."
+   ]
+  },
+  "note": "Removed the step that held back completeness questions in a disputed scope (E11: limits silence nothing). Added recording who set each limit and what led to it (E21)."
+ }
+]

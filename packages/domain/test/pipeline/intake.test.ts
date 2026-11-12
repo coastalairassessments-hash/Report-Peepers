@@ -103,7 +103,7 @@ describe("from upload to ready for analysis", () => {
     const svc = makeServices();
     const s = await startCase(svc, alice, { name: "r.pdf", bytes: await pdf() });
     if (!s.ok) throw new Error("setup");
-    await answerAll(svc, alice, s.case_id, { ...NO_LIMITS, Q02: { choice: "yes" }, Q04: { choice: "yes", text: "About one hour", value: 1, unit: "hour", proposedBy: "package" }, Q05: { choice: "no" }, Q06: { choice: "no" }, Q07: { choice: "no" }, Q08: { choice: "no" }, Q09: { choice: "no" }, Q10: { text: "I thought it was two hours." } });
+    await answerAll(svc, alice, s.case_id, { ...NO_LIMITS, Q02: { choice: "yes" }, Q04: { choice: "yes", text: "About one hour", value: 1, unit: "hour", proposedBy: "package" }, Q05: { choice: "no" }, Q06: { choice: "no" }, Q07: { choice: "no" }, Q08: { choice: "no" }, Q09: { choice: "no" }, Q14: { text: "The package set it." }, Q10: { text: "I thought it was two hours." } });
     expect(await confirmScopeStep(svc, alice, s.case_id)).toEqual({ ok: true, status: "confirmed" });
     expect(await reportScopeConflict(svc, alice, s.case_id, "time", { agreement: "One hour visit", client: "Two hours promised" })).toEqual({ ok: true });
     expect(await verifyEntitlementStep(svc, alice, s.case_id)).toEqual({ ok: false, reason: "guard_failed", missing: ["scopeConfirmedOrConditional"] });
