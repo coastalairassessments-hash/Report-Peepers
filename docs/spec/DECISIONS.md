@@ -125,3 +125,6 @@ Cory: "2 years I guess." Retention changes from 90 days to 730 days (supersedes 
 
 ## E19. Legal hold: Cory decides after talking with the attorney (Cory, 2026-11-11)
 Cory chose: a legal hold on a case is placed by Cory after consulting the attorney. Johnathan: the admin action for `placeLegalHold` / `liftLegalHold` is owner-only (Cory's login), never automatic and never available to staff or customers. The customer notice when a hold is placed is still open (L34).
+
+## E20. Reading starts after payment (Cory, 2026-11-11)
+Cory chose: the full reading starts after payment, as in the existing state machine (scope confirmation, payment, then analysis). Lou's interview stays before payment. No code change. We never pay for an unpaid reading.
