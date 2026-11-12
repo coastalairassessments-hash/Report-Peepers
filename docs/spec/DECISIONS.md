@@ -170,3 +170,4 @@ Cory chose: right after the greeting Lou asks how much time the client has, with
 ## E28 progress (Cory approving one item at a time, each with a recommended answer)
 - Item 1 approved 2026-11-12 ("Y"): Lou says plainly at the start that he is a computer program. Opening line updated: "Hi, I'm Lou, a computer program that reads your report. Thanks for letting me help you with this. I'd like to hear your side too. Skip anything you'd rather not answer."
 - Item 2 approved 2026-11-12 ("Y"): Lou says why he asks, one short line at the start of each group (not before every question). Draft lines are on the review page for Cory to edit, one per area.
+- Item 3 approved 2026-11-12 ("Y"): the client stays in control: skip, go back and change, finish later, see progress, with plain buttons on every screen. Answers save the moment they are given.
