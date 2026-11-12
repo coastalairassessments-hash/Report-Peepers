@@ -134,3 +134,6 @@ Cory: keep asking every question when work was limited; also ask who limited the
 
 ## E22. Interview question Q15: anything in writing before the visit (Cory, 2026-11-11)
 First of the friendly, legal-minded interview questions. Cory approved the wording: "Before the inspection, did you get anything in writing about what the inspector would do, like a contract, an estimate, or even an email? If you have it, that helps a lot." Yes / no / not sure. Asked right after "What service were you sold?" The answer is saved with the case. Next ones to be drafted and approved one at a time.
+
+## E23. Interview Q16 and Q17: what the inspector said out loud (Cory, 2026-11-11)
+Cory approved the wording and the eight buttons. Q16 (yes / no / not sure): "Did the inspector tell you anything out loud, in person or on the phone, about what they would or wouldn't check? Even a small comment helps." If yes, Q17 shows the buttons (tap all that fit): told me what they would check; what they would not check; how long the visit would be; about a cost or package limit; some areas could not be reached; their findings out loud; something else (I'll type it); I don't remember. Cory: each button opens more questions. The follow-ups are being drafted and approved one at a time; none is built yet.
