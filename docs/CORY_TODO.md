@@ -39,3 +39,4 @@ Then: your final finishing pass, and share with Johnathan.
 - Decide who can place a legal hold on a case and what the customer is told (E17); review the legal drafts in 5 Legal before they go to the attorney.
 
 - Decide whether Lou's conversation answers should show anywhere in the review or PDF (today they do not). (E25)
+- Attorney: E26 anonymous counts wording, checkbox or not, and industry-wide-only reporting.
