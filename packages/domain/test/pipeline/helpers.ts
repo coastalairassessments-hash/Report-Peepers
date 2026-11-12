@@ -36,6 +36,7 @@ export const NO_LIMITS: Record<string, Answer> = {
   Q01: { text: "I want to know if the cause stated in the report is supported." },
   Q02: { choice: "no" },
   Q03: { service: "Limited assessment" },
+  Q15: { choice: "no" },
   Q11: { choice: "no" },
   Q12: { text: "Is the duration estimate supported?" },
   Q13: { records: [] },

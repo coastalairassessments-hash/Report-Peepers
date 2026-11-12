@@ -18,6 +18,7 @@ export const QUESTION_BANK: QuestionDef[] = [
   { id: "Q02", kind: "yes_no_unsure", text: "Was the inspection limited in any way?", why: "Limits change what a report can reasonably conclude." },
   { id: "Q03", kind: "service", text: "What service were you sold?", why: "Labels vary, so we read what was actually agreed.",
     options: ["Sampling only", "Screening", "Limited assessment", "Broader assessment", "Review of a remediation protocol", "Not sure"] },
+  { id: "Q15", kind: "yes_no_unsure", text: "Before the inspection, did you get anything in writing about what the inspector would do, like a contract, an estimate, or even an email? If you have it, that helps a lot.", why: "What was agreed in writing shows what the visit was meant to cover." },
   { id: "Q04", kind: "yes_no_unsure", text: "Was the visit time capped (for example, one hour)?", why: "Time limits shape how much could be checked.", restriction: ["time"] },
   { id: "Q05", kind: "yes_no_unsure", text: "Was the number or type of samples capped (for example, three air samples)?", why: "A sampling package is different from a decision not to sample more.", restriction: ["samples"] },
   { id: "Q06", kind: "yes_no_unsure", text: "Did a budget limit what was done?", why: "Budget can explain why certain steps were not taken.", restriction: ["budget"] },

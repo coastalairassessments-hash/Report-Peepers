@@ -131,3 +131,6 @@ Cory chose: the full reading starts after payment, as in the existing state mach
 
 ## E21. Interview records who set each limit and what led to it (Cory, 2026-11-11)
 Cory: keep asking every question when work was limited; also ask who limited the scope and what made it limited; "we ask all the questions a legal professional would ask, but in a friendly way." Done: new interview question Q14 ("For each limit, who set it, and what led to it?"), asked before Q10 and only when a limit was reported; its answer is saved with the case and shown in the scope summary. Library rule IEP-K-001 edited (new version) to drop the step that held back questions and to record who set each limit. K-001 still needs Cory's approval. Next: draft the fuller set of friendly, legal-minded interview questions for Cory to approve one at a time.
+
+## E22. Interview question Q15: anything in writing before the visit (Cory, 2026-11-11)
+First of the friendly, legal-minded interview questions. Cory approved the wording: "Before the inspection, did you get anything in writing about what the inspector would do, like a contract, an estimate, or even an email? If you have it, that helps a lot." Yes / no / not sure. Asked right after "What service were you sold?" The answer is saved with the case. Next ones to be drafted and approved one at a time.
