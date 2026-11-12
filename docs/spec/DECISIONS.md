@@ -119,3 +119,6 @@ Cory asked Claude to act as a legal professional, not an attorney, and tighten w
 - Legal hold: `placeLegalHold` / `liftLegalHold` pause the 90-day purge. Only the system sets it; a released case accepts only that change.
 - Drafts updated: terms (no public posting, questions are not statements, "independent" removed pending L22), privacy (hold exception), notice F for report authors, attorney brief, renamed to Looky Lou.
 - Open for Cory: who decides a legal hold, and the customer notice when one is placed.
+
+## E18. Keep delivered reports two years (Cory, 2026-11-11)
+Cory: "2 years I guess." Retention changes from 90 days to 730 days (supersedes the 90 in ADR-002 and the 2026-11-06 note). The number now lives in `data/rules/retention.json`. A legal hold still pauses deletion for a disputed case. Backups roll off within 35 days of a deletion (unchanged). Trade-off noted to Cory: homeowners' documents are held about eight times longer, so the privacy notice, the breach plan and storage cost must match. Attorney to confirm (L34). Johnathan: call `purgeExpired` with `loadRetentionDays()`.

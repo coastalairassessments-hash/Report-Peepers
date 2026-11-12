@@ -1,7 +1,16 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import type { Services } from "./types.js";
 
+/** The retention period, in days, from the data file. A bad file stops the program. */
+export function loadRetentionDays(path = resolve(import.meta.dirname, "../../../../data/rules/retention.json")): number {
+  const d = (JSON.parse(readFileSync(path, "utf8")) as { days?: unknown }).days;
+  if (!Number.isInteger(d) || (d as number) < 1) throw new Error("retention.json: days must be a whole number of 1 or more.");
+  return d as number;
+}
+
 export interface PurgeOptions {
-  /** Days after delivery. Decided with Cory: 90. */
+  /** Days after delivery. Read it from `data/rules/retention.json` with `loadRetentionDays()`; 730 since E18 (it was 90). */
   days: number;
   /** The current time, as an ISO string. */
   now: string;
@@ -11,7 +20,7 @@ export interface PurgeOptions {
 export interface PurgeResult { purged: number; files_deleted: number; files_kept_shared: number }
 
 /**
- * Deletes cases whose retention time has passed: delivered cases 90 days after delivery, never-delivered cases 90 days after they were started (decided with Cory 2026-11-06): the case content, the released copy, and the uploaded file.
+ * Deletes cases whose retention time has passed: delivered cases after the retention period from delivery, never-delivered cases after the same period from when they were started (E18: 730 days): the case content, the released copy, and the uploaded file.
  * Files are shared by content hash, so a file goes only when no other live case still points at it.
  * The anonymous summary records are a separate store and are not touched.
  */

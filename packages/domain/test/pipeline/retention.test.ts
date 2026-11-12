@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { releaseAutomatically } from "../../src/pipeline/autoRelease.js";
-import { purgeExpired } from "../../src/pipeline/retention.js";
+import { purgeExpired, loadRetentionDays } from "../../src/pipeline/retention.js";
 import { InMemoryGrantStore, createAccess, loadAccessConfig } from "../../src/access/access.js";
 import { reviewReady } from "./slice-fixtures.js";
 import { readyCase, alice, bob, sys } from "./helpers.js";
@@ -94,5 +94,16 @@ describe("retention: delete 90 days after delivery", () => {
     await expect(svc.repo.purge(alice, id)).rejects.toThrow(/refused/i);
     await expect(purgeExpired(svc, { days: 0, now: "2026-11-03T00:00:00.000Z" })).rejects.toThrow(/days/);
     await expect(purgeExpired(svc, { days: 90, now: "not a date" })).rejects.toThrow(/now/);
+  });
+});
+
+describe("the retention period is data, not code (E18)", () => {
+  it("is two years", () => { expect(loadRetentionDays()).toBe(730); });
+  it("a case is kept at 729 days and deleted at 730", async () => {
+    const { svc, id } = await reviewReady();
+    await releaseAutomatically(svc, id);
+    const at = (await svc.repo.get(sys, id))!.released!.delivered_at!;
+    expect(await purgeExpired(svc, { days: loadRetentionDays(), now: after(at, 729) })).toMatchObject({ purged: 0 });
+    expect(await purgeExpired(svc, { days: loadRetentionDays(), now: after(at, 730) })).toMatchObject({ purged: 1 });
   });
 });

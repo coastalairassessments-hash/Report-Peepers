@@ -1,0 +1,4 @@
+{
+  "days": 730,
+  "status": "Delivered cases, and never-delivered cases, are deleted this many days after delivery (or after upload). 730 = 2 years (Cory, 2026-11-11, E18). A legal hold pauses deletion for one case."
+}

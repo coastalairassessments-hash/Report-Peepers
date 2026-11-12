@@ -38,7 +38,7 @@ export interface ReleasedOutputs {
   text: string;
   hashes: { source_sha256: string; view_sha256: string; plan_sha256: string; output_sha256: string };
   record_id: string;
-  /** When the review was delivered. The retention clock starts here (90 days, then deletion). */
+  /** When the review was delivered. The retention clock starts here (730 days, then deletion; see data/rules/retention.json). */
   delivered_at?: string;
 }
 
