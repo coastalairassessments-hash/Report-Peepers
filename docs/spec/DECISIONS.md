@@ -185,3 +185,6 @@ E28 is now fully approved (items 1 to 12). Still to draft for Cory: the common-t
 
 ## E33. Questions that come from the report (Cory, 2026-11-16)
 Cory approved: the number depends on what the report leaves out and ties back to what the client said they expected. (1) Gaps that touch something the client expected, hoped for, or was promised come first. (2) Lou never calls the report good or bad; he only says what it does not state (C01, C02). (3) Many gaps go on one tap screen ("Which of these matter most to you?"). (4) The cap follows the client's time choice (E32): up to 3 for a few minutes, up to 6 for about 10 minutes, up to 10 for take your time. This replaces the flat cap of 5. (5) Every gap not asked still appears in the review as a question for the inspector.
+
+## E34. The email link stays open 30 days, and clients are told (Cory, 2026-11-16)
+Cory approved: the link in the delivery email reopens Lou's questions for 30 days after delivery, and the client is told. The close screen and the delivery email both say the date, for example "You can add more answers until Dec 16." After that the link closes; the review and the answers given stay on file for the retention period (E18). Johnathan: store the closing date with the case and make it a data-file setting.
