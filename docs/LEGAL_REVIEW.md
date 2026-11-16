@@ -48,3 +48,6 @@ Status key: open / with attorney / answered (add the answer and date).
 - L33: Notice for report authors (draft F): whether to offer any author route, and its limits.
 - L34: Legal hold: pausing the retention deletion (2 years) during a dispute. Trigger, decision-maker, customer notice, and how it fits the retention promise.
 - L35: Upload acknowledgments are now enforced in code. Final text, and whether recording acceptance (version, time) meets consent needs.
+
+## L36. "What you told me" section (E35)
+Section of the review that restates the client's confirmed points as their recollection. Ask: wording that keeps us from asserting anything about the inspector, label wording, and whether sharing the PDF with an inspector changes the risk.

@@ -188,3 +188,6 @@ Cory approved: the number depends on what the report leaves out and ties back to
 
 ## E34. The email link stays open 30 days, and clients are told (Cory, 2026-11-16)
 Cory approved: the link in the delivery email reopens Lou's questions for 30 days after delivery, and the client is told. The close screen and the delivery email both say the date, for example "You can add more answers until Dec 16." After that the link closes; the review and the answers given stay on file for the retention period (E18). Johnathan: store the closing date with the case and make it a data-file setting.
+
+## E35. The review includes "What you told me" (Cory, 2026-11-16)
+Cory approved: after "Your top questions to ask your inspector", the review has a short section "What you told me" with only the points the client confirmed in the read-back (E28 item 4). Each point is worded as theirs ("You told me the attic was not checked") and the section is labeled as the client's recollection. Typed text is never copied in word for word. The wording goes to the attorney with the other drafts (new item for docs/LEGAL_REVIEW.md). Nothing is built yet.
