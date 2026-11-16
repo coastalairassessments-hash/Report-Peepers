@@ -51,3 +51,6 @@ Status key: open / with attorney / answered (add the answer and date).
 
 ## L36. "What you told me" section (E35)
 Section of the review that restates the client's confirmed points as their recollection. Ask: wording that keeps us from asserting anything about the inspector, label wording, and whether sharing the PDF with an inspector changes the risk.
+
+## L37. Delivery depends on client answering (E38)
+Terms and pre-payment text saying delivery time depends on the client answering Lou's questions; delivery at day 30 with a limited-review notice; fee to reopen after 30 days; refund terms if a client never answers. Ask: wording and consumer-law check (Florida).
