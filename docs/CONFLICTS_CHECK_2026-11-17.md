@@ -10,6 +10,6 @@ Read C01-C10, D01-D07, P01, E01-E41. Items below need Cory's decision, one at a 
 5. (RESOLVED by E45, 2026-11-17) E33 (match report gaps to the client's expectations) vs E25 (typed text is never read by a model). Matching can use tap answers only; typed answers cannot feed it.
 
 ## Clarifications
-6. E28 item 7 estimate ("within 2 hours") must say it starts when the client finishes Lou's questions (E38).
+6. (RESOLVED 2026-11-17) E28 item 7 estimate ("within 2 hours") must say it starts when the client finishes Lou's questions (E38).
 7. E28 item 11 (one check-in a week after delivery, opt-in) and E40 (reminders before delivery) are different emails; the check-in's "nothing else is sent" must say after delivery.
 8. E24 (5 to 8 minutes) is replaced by E27 (10 to 15); E23 (Q16/Q17 before payment) is replaced by E25 (in Lou's conversation).
