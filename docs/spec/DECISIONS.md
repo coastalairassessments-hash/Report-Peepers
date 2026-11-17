@@ -214,3 +214,6 @@ Cory approved a $9 fee to reopen Lou's questions for another 30 days after the f
 
 ## E42. Review question cap raised; nothing dropped without a notice (Cory, 2026-11-17)
 Cory approved: the review's first page shows the top 5 questions to ask the inspector ("Your top questions to ask your inspector"), followed by a section "More questions you may want to ask", up to 25 questions in total, ordered by importance. Nothing is dropped without a notice; if there are more than 25 gaps, the review says how many more exist. This supersedes E01 (15 total, 5 on the first page, rest dropped without a notice) and delivers E33 point 5 and E28 item 8. The numbers (5 and 25) are data-file settings.
+
+## E43. Fees are not upsells; C01 stands (Cory, 2026-11-17)
+Cory confirmed: C01 stands as written. There are no upsells. The extra-page charge over 150 pages (E06), the $9 reopen fee after the 30-day wait (E41), and the half-price lab-only outline (E03) are charges for the same review service, not sales of other products. The $9 fee covers restarting work for a client who did not answer within the 30 days after paying the initial fee. Cory's written clarification here is the explicit owner decision our change rules require. The attorney reviews the fee wording.
