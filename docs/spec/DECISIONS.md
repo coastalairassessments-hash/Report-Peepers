@@ -217,3 +217,4 @@ Cory approved: the review's first page shows the top 5 questions to ask the insp
 
 ## E43. Fees are not upsells; C01 stands (Cory, 2026-11-17)
 Cory confirmed: C01 stands as written. There are no upsells. The extra-page charge over 150 pages (E06), the $9 reopen fee after the 30-day wait (E41), and the half-price lab-only outline (E03) are charges for the same review service, not sales of other products. The $9 fee covers restarting work for a client who did not answer within the 30 days after paying the initial fee. Cory's written clarification here is the explicit owner decision our change rules require. The attorney reviews the fee wording.
+- E29 addendum 2026-11-17 (Cory, "Yes"): before the professional network is built, C01 (no referral or lead-generation) must be changed by an explicit owner decision, with the attorney's advice on referral fees. Until then it stays shelved.
